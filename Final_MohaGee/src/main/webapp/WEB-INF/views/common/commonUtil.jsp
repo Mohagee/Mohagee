@@ -13,6 +13,12 @@
 <link href="${ pageContext.request.contextPath }/resources/css/responsive.css" rel="stylesheet"> 
 <link rel="shortcut icon" href="${ pageContext.request.contextPath }/resources/images/favicon.png">
 
+<script type="text/javascript" src="${ pageContext.request.contextPath }/resources/js/jquery-3.4.1.min.js"></script>
+
+<script>
+	var JQ = $.noConflict();
+</script>
+
 <script type="text/javascript" src="${ pageContext.request.contextPath }/resources/js/jquery.js"></script>
 <script type="text/javascript" src="${ pageContext.request.contextPath }/resources/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${ pageContext.request.contextPath }/resources/js/lightbox.min.js"></script>

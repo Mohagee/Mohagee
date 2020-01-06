@@ -36,7 +36,24 @@ public class MovePageController {
 	public String gotoPortfolio() {
 		return "portfolio";
 	}
+	
+	@RequestMapping("/gotoshowList.do")
+	public String gotoshowList() {
+		return "showList";
+	}
+	
+	@RequestMapping("/gotoshowDetail.do")
+	public String gotoshowDetail() {
+		return "showDetail";
+	}
+	
+	@RequestMapping("/gotoboardInsertForm.do")
+	public String gotoboardInsertForm() {
+		return "boardInsertForm";
+	}
+	
 }
+
 
 
 

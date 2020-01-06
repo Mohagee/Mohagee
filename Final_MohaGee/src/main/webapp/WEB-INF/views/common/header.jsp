@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+
 <!-- 로그인 버튼 부분 헤더 -->
    <header id="header">
         <div class="container">
@@ -10,9 +12,21 @@
                 <div class="col-sm-12 overflow">
                    <div class="social-icons pull-right">
                     <div class="text-center">
-                        <a href="" class="btn btn-info btn-rounded mb-4" data-toggle="modal" data-target="#modalJoinForm">
+
+
+                <!--  검색 버튼  -->
+                <div class="search">
+                     <form role="form"> 
+                    	<button type="button" class="btn btn-success" ></button>
+                      <input type="text" class="search-form" autocomplete="off" placeholder="Search">
+                     </form>
+                </div>
+               <!--  검색 버튼 끝  -->
+
+						<a href="" class="btn btn-info btn-rounded mb-4" data-toggle="modal" data-target="#modalJoinForm">
                             Join
                         </a>
+                        &nbsp;&nbsp;
                         <a href="" class="btn btn-warning btn-rounded mb-4" data-toggle="modal" data-target="#modalLoginForm">
                             Login
                         </a>
@@ -118,27 +132,47 @@
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <!-- <li class="active"><a href="index.html">홈</a></li> -->
-                        <li class=""><a href="${ pageContext.request.contextPath }/gotoBlogdetails.do">blogdetails</a>
-                        </li>                    
-                        <li class="dropdown"><a href="${ pageContext.request.contextPath }/gotoComingSoon.do">coming-soon</a>
+                        <li class="category">
+                        	<a href="${ pageContext.request.contextPath }/gotoshowList.do">공연</a>
+                        </li>                                                                 
+                        <li class="category">
+                        	<a href="${ pageContext.request.contextPath }/gotoPortfolio.do">운동</a>
+                        </li>                  
+                        <li class="category">
+                        	<a href="${ pageContext.request.contextPath }/gotoPortfolio.do">여행</a>
+                        </li> 
+                        <li class="category">
+                        	<a href="${ pageContext.request.contextPath }/gotoPortfolio.do">수다방</a>
                         </li>
-                        <li class="dropdown"><a href="${ pageContext.request.contextPath }/gotoPortfolioDetails.do">portfolio-details</a>
-                        </li>
-                        <li class="dropdown"><a href="${ pageContext.request.contextPath }/gotoPortfolio.do">portfolio</a>
-                        </li>                         
-                        <li class="dropdown"><a href="${ pageContext.request.contextPath }/goto404.do">404</a>
+                        <li class="category">
+                        	<a href="${ pageContext.request.contextPath }/gotoPortfolio.do">공지사항</a>
+                        </li>                                             
+                        <li class="dropdown">
+                        <a href="${ pageContext.request.contextPath }/goto404.do">404</a>
                         </li>                   
+                        <li class="dropdown">
+                        <a href="${ pageContext.request.contextPath }/gotoComingSoon.do">coming-soon</a>
+                        </li>
+<%--                         <a href="${ pageContext.request.contextPath }/gotoBlogdetails.do">blogdetails</a>
+                        </li>                    
+                        <li class="dropdown">
+                        <a href="${ pageContext.request.contextPath }/gotoPortfolioDetails.do">portfolio-details</a>
+                        </li> --%>
                     </ul>
                 </div>
-                <div class="search">
+                
+         
+                <!--  검색 버튼  -->
+ <!--                <div class="search">
                     <form role="form">
-                        <i class="fa fa-search"></i>
-                        <div class="field-toggle">
-                            <input type="text" class="search-form" autocomplete="off" placeholder="Search">
-                        </div>
+                    	<button type="button" class="btn btn-success" ></button>
+                      <input type="text" class="search-form" autocomplete="off" placeholder="Search">
+					  <div class="field-toggle">
+                        </div> 
                     </form>
-                </div>
+                </div>  -->
+               <!--  검색 버튼 끝  -->
+               
             </div>
         </div>
     </header>
