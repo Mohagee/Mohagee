@@ -10,12 +10,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog Details | Triangle</title>
     
-    <c:import url="common/commonUtil.jsp"/>
+    <c:import url="../common/commonUtil.jsp"/>
 </head><!--/head-->
 
 <body>
 	
-	<c:import url="common/header.jsp"/>
+	<c:import url="../common/header.jsp"/>
 
     <section id="page-breadcrumb">
         <div class="vertical-center sun">
@@ -23,8 +23,7 @@
                 <div class="row">
                     <div class="action">
                         <div class="col-sm-12">
-                            <h1 class="title">블로그 상세페이지</h1>
-                            <p>블로그 소제목</p>
+                            <h1 class="title">공연 정보 상세보기</h1>
                         </div>                                                                                
                     </div>
                 </div>
@@ -47,7 +46,7 @@
                                     </div>
                                 </div>
                                 <div class="post-content overflow">
-                                    <h2 class="post-title bold"><a href="#">여기에 블로그 제목</a></h2>
+                                    <h2 class="post-title bold"><a href="#">연극 아마데우스</a></h2>
                                     <h3 class="post-author"><a href="#">소제목 or 카테고리 or 태그</a></h3>
                                     <p>여기에 블로그 내용을 적으면 될거같습니다~~~</p>
                                     <div class="post-bottom overflow">
@@ -208,6 +207,6 @@
         </div>
     </section>
     
-    <c:import url="common/footer.jsp"/>
+    <c:import url="../common/footer.jsp"/>
 </body>
 </html>

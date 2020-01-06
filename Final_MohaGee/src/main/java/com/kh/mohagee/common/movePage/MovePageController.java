@@ -39,17 +39,17 @@ public class MovePageController {
 	
 	@RequestMapping("/gotoshowList.do")
 	public String gotoshowList() {
-		return "showList";
+		return "board/showList";
 	}
 	
 	@RequestMapping("/gotoshowDetail.do")
 	public String gotoshowDetail() {
-		return "showDetail";
+		return "board/showDetail";
 	}
 	
 	@RequestMapping("/gotoboardInsertForm.do")
 	public String gotoboardInsertForm() {
-		return "boardInsertForm";
+		return "board/common/boardInsertForm";
 	}
 	
 }
