@@ -9,14 +9,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <c:import url="common/commonUtil.jsp"/>
+    <c:import url="../common/commonUtil.jsp"/>
 
 </head>
 
-
 <body>
 	
-	<c:import url="common/header.jsp"/>
+	<c:import url="../common/header.jsp"/>
 	
     <section id="page-breadcrumb">
         <div class="vertical-center sun">
@@ -47,9 +46,8 @@
                     <li><a class="btn btn-default" href="#" data-filter=".design">소극장</a></li>
                     <li><a class="btn btn-default" href="#" data-filter=".folio">창작뮤지컬</a></li>
                     <li><a class="btn btn-default" href="#" data-filter=".logos">오리지널 내한</a></li>
-                  <!--   <li><a class="btn btn-default" href="#" data-filter=".mobile">그거</a></li>
-                    <li><a class="btn btn-default" href="#" data-filter=".mockup">참고하심되요</a></li> -->
-                </ul><!--/#portfolio-filter-->
+
+                
                 <div class="masonery-items masonery_area">
                         <div class="col-md-3 col-sm-4 masonery-item branded mobile">
                             <div class="single-blog two-column">
@@ -77,6 +75,7 @@
                                 </div>
                             </div>
                         </div>
+                        
                         <div class="col-md-3 col-sm-4 masonery-item branded mobile logos">
                             <div class="single-blog two-column">
                                 <div class="post-thumb">
@@ -279,6 +278,6 @@
             </div>
         </div>
     </section>
-    <c:import url="common/footer.jsp"/>
+    <c:import url="../common/footer.jsp"/>
 </body>
 </html>
