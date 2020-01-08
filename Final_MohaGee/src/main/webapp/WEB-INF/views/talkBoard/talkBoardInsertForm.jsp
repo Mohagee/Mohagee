@@ -9,13 +9,15 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">   
 	<c:import url="../common/commonUtil.jsp"/>
+	
 	<style>
-		#summernote{
-			margin-top:20px; 
-			width:900px; 
-			height:500px; 
-		}
+   		#summernote{
+   			 margin-top:20px; 
+   			 width:900px; 
+   			 height:500px; 
+   		}
    </style>
+	
 </head>
 <body>	
 	<c:import url="../common/header.jsp"/>

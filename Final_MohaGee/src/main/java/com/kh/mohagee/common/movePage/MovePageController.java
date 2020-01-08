@@ -41,4 +41,30 @@ public class MovePageController {
 	public String gotoTravelBoardList() {
 		return "travelBoard/travelBoardList";
 	}
+	
+	@RequestMapping("/gotoGymBoardInsertForm.do")
+    public String gotoGymBoardInsertForm() {
+       return "gymBoard/gymBoardInsertForm";
+    }
+   
+    @RequestMapping("/gotoGymBoardList.do")
+    public String gotoGymBoardList() {
+       return "gymBoard/gymBoardList";
+    }
+   
+    @RequestMapping("/gotoGymBoardDetail.do")
+    public String gotoGymBoardDetail() {
+       return "gymBoard/gymBoardDetail";
+    }
+    
+    @RequestMapping("/TalkBoardList.do")
+    public String TalkBoardList() {
+       return "talkBoard/talkBoardList";
+    }
+    
+    @RequestMapping("/TalkBoardDetail.do")
+    public String TalkBoardDetail() {
+       return "travelBoard/travelBoardList";
+    }
+    
 }
