@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="GymBoard-mapper">
+
+	<select id="selectList" resultType="GymBoard">
+		SELECT * FROM BOARD
+	</select>
+	
+	<select id="selectTotalContents" resultType="int">
+		SELECT COUNT(*) FROM BOARD
+	</select>
+	
+	<insert id="insertGymBoard" parameterType="GymBoard">
+		INSERT INTO BOARD 
+		VALUES(SEQ_BNO.NEXTVAL, 
+			#{userNo},
+			#{boardWriter}, 
+			#{boardTitle},
+			#{boardTag},
+			#{boardContent},
+		        #{cNo},
+		       #{boardCount},
+		       SYSDATE, DEFAULT)
+	</insert>
+	
+	<insert id="insertGymAttachment" parameterType="GymAttachment">
+		<selectKey keyProperty="boardNo" resultType="int" order="BEFORE">
+			SELECT SEQ_BOARDNO.CURRVAL FROM DUAL
+		</selectKey>
+		INSERT INTO ATTACHMENT
+		VALUES (SEQ_ATTACHMENTNO.NEXTVAL, #{boardNo}, 
+				#{originalFileName}, 
+				#{renamedFileName},
+				DEFAULT, DEFAULT, DEFAULT)
+	</insert>
+	
+	<select id="selectGymBoard" parameterType="_int" resultType="GymBoard">
+		SELECT * FROM BOARD WHERE BOARDNO = #{boardNo}
+	</select>
+	
+	<select id="selectGymAttachment" parameterType="int" resultType="GymAttachment">
+		SELECT * FROM ATTACHMENT WHERE BOARDNO = #{boardNo}
+	</select>
+	
+	<update id="updateGymBoard" parameterType="GymBoard">
+		UPDATE BOARD
+		SET BOARDTITLE = #{boardTitle},
+		    BOARDCONTENT = #{boardContent}
+		WHERE BOARDNO = #{boardNo}
+	</update>
+	
+	<insert id="updateGymAttachment" parameterType="GymAttachment">
+		INSERT INTO ATTACHMENT
+		VALUES (SEQ_ATTACHMENTNO.NEXTVAL, #{boardNo}, 
+				#{originalFileName}, 
+				#{renamedFileName},
+				DEFAULT, DEFAULT, DEFAULT)
+	</insert>
+	
+	<delete id="deleteGymBoard" parameterType="int">
+		DELETE FROM BOARD WHERE BOARDNO = #{boardNo}
+	</delete>
+	
+	<delete id="deleteGymAttachment" parameterType="int">
+		DELETE FROM ATTACHMENT WHERE BOARDNO = #{boardNo}
+	</delete>
+</mapper>
+
+
+
+
+
+
+
+
+
+

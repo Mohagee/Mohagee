@@ -12,18 +12,53 @@
                 <div class="col-sm-12 overflow">
                    <div class="social-icons pull-right">
                     <div class="text-center" style="font-family:biggrea;">
-						<a href="" class="btn btn-info btn-rounded mb-4" data-toggle="modal" data-target="#modalJoinForm">
-                            Join
-                        </a>
-                        &nbsp;&nbsp;
-                        <a href="" class="btn btn-warning btn-rounded mb-4" data-toggle="modal" data-target="#modalLoginForm">
-                            Login
-                        </a>
+						<ul>
+				<span>
+					<a href=""  class="btn btn-danger btn-rounded mb-4" data-toggle="modal" data-target="#modalAlarm">
+						alarm
+					</a>
+				</span>
+				 <span>
+					<a href="" class="btn btn-info btn-rounded mb-4" data-toggle="modal" data-target="#modalJoinForm">
+						Join
+					</a>
+				 </span>
+				<span>
+					<a href="" class="btn btn-warning btn-rounded mb-4" data-toggle="modal" data-target="#modalLoginForm">
+						Login
+					</a>
+				</span>
+			</ul>
                     </div>
                     </div> 
                 </div>
              </div>
         </div>
+
+<!-- alarm Modal -->
+<div id="modalAlarm" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalAlarmLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalAlarmLabel" style="font-family:cookierun;">알람 왔어용</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>
+          <a role="button" class="btn btn-secondary popover-test" title="" data-content="Popover body content is set in this attribute."
+            data-original-title="Popover title" data-toggle="popover" >$닉넴{member.nickName}님이 댓글을 달았습니다</a>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary"data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 <!-- Login Modal -->
 <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -147,8 +182,7 @@
 									 style="font-family:cookierun; font-size : 20px;">공연</a>
                         </li>                                                                 
                         <li class="category">
-                        	<a href="${ pageContext.request.contextPath }/gymBoardList.do"  
-                        			style="font-family:cookierun; font-size : 20px;">운동</a>
+                        	<a href="${ pageContext.request.contextPath }/gotoGymBoardList.do">운동</a>
                         </li>                  
                         <li class="category">
                         	<a href="${ pageContext.request.contextPath }/gotoPortfolio.do"  
