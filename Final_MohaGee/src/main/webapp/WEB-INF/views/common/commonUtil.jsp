@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<!DOCTYPE html>
 <link href="${ pageContext.request.contextPath }/resources/css/bootstrap.min.css" rel="stylesheet">
 <link href="${ pageContext.request.contextPath }/resources/css/fontawesome.min.css" rel="stylesheet">
 <link href="${ pageContext.request.contextPath }/resources/css/all.min.css" rel="stylesheet">
@@ -11,6 +10,8 @@
 <link href="${ pageContext.request.contextPath }/resources/css/lightbox.css" rel="stylesheet"> 
 <link href="${ pageContext.request.contextPath }/resources/css/main.css" rel="stylesheet">
 <link href="${ pageContext.request.contextPath }/resources/css/responsive.css" rel="stylesheet"> 
+<link href="${ pageContext.request.contextPath }/resources/css/memberCSS.css" rel="stylesheet"> 
+
 <link rel="shortcut icon" href="${ pageContext.request.contextPath }/resources/images/favicon.png">
 
 <script type="text/javascript" src="${ pageContext.request.contextPath }/resources/js/jquery-3.4.1.min.js"></script>

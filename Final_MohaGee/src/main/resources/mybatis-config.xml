@@ -3,16 +3,21 @@
 "-//mybatis.org//DTD Config 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-	<!-- 마이바티스 설정과 관련된 태그 -->
+	
 	<settings>
-		<!-- 만약에 Null 값이 들어온다면 DB에서도
-		    Null 이라고 받아라! -->
 		<setting name="jdbcTypeForNull" value="NULL"/>
 	</settings>
 	
-	<!-- 마이바티스에서 사용하기 위한 
-       VO 클래스의 별칭을 정의하는 태그 -->
-   
+	<typeAliases>
+		<typeAlias type="com.kh.mohagee.member.model.vo.Member" alias="Member"/>
+		<typeAlias type="com.kh.mohagee.email.model.vo.Email" alias="Email"/>
+		<typeAlias type="com.kh.mohagee.showBoard.model.vo.ShowBoard" alias="ShowBoard" />
+ 		<typeAlias type="com.kh.mohagee.showBoard.model.vo.ShowAttachment" alias="ShowAttachment" />
+		<typeAlias type="com.kh.mohagee.gymBoard.model.vo.GymBoard" alias="GymBoard"/>
+		<typeAlias type="com.kh.mohagee.gymBoard.model.vo.GymAttachment" alias="GymAttachment"/>
+		<typeAlias type="com.kh.mohagee.travelBoard.model.vo.TravelBoard" alias="TravelBoard"/>
+        <typeAlias type="com.kh.mohagee.travelBoard.model.vo.TravelAttachment" alias="TravelAttachment"/>
+	</typeAliases>
 
 </configuration>
 

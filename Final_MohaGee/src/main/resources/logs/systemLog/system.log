@@ -1,0 +1,28 @@
+INFO :[2020-01-08 16:04:57] Root WebApplicationContext: initialization started
+INFO :[2020-01-08 16:04:58] Root WebApplicationContext initialized in 1876 ms
+INFO :[2020-01-08 16:04:59] Initializing Servlet 'appServlet'
+INFO :[2020-01-08 16:05:02] Completed initialization in 3788 ms
+INFO :[2020-01-08 16:06:01] Root WebApplicationContext: initialization started
+INFO :[2020-01-08 16:06:03] Root WebApplicationContext initialized in 1731 ms
+INFO :[2020-01-08 16:06:03] Initializing Servlet 'appServlet'
+INFO :[2020-01-08 16:06:07] Completed initialization in 3555 ms
+INFO :[2020-01-08 16:09:44] Root WebApplicationContext: initialization started
+INFO :[2020-01-08 16:09:46] Root WebApplicationContext initialized in 1816 ms
+INFO :[2020-01-08 16:09:46] Initializing Servlet 'appServlet'
+INFO :[2020-01-08 16:09:50] Completed initialization in 3773 ms
+INFO :[2020-01-08 16:12:14] Root WebApplicationContext: initialization started
+INFO :[2020-01-08 16:12:15] Root WebApplicationContext initialized in 1721 ms
+INFO :[2020-01-08 16:12:15] Initializing Servlet 'appServlet'
+INFO :[2020-01-08 16:12:19] Completed initialization in 3575 ms
+INFO :[2020-01-08 16:13:52] Root WebApplicationContext: initialization started
+INFO :[2020-01-08 16:13:53] Root WebApplicationContext initialized in 1751 ms
+INFO :[2020-01-08 16:13:54] Initializing Servlet 'appServlet'
+INFO :[2020-01-08 16:13:57] Completed initialization in 3577 ms
+INFO :[2020-01-08 16:33:25] Root WebApplicationContext: initialization started
+INFO :[2020-01-08 16:33:27] Root WebApplicationContext initialized in 1861 ms
+INFO :[2020-01-08 16:33:27] Initializing Servlet 'appServlet'
+INFO :[2020-01-08 16:33:31] Completed initialization in 3829 ms
+INFO :[2020-01-08 16:38:06] Root WebApplicationContext: initialization started
+INFO :[2020-01-08 16:38:08] Root WebApplicationContext initialized in 1792 ms
+INFO :[2020-01-08 16:38:08] Initializing Servlet 'appServlet'
+INFO :[2020-01-08 16:38:12] Completed initialization in 4030 ms

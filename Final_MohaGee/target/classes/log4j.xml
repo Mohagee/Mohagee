@@ -10,6 +10,25 @@
 		</layout>
 	</appender>
 	
+	<!-- 서버의 실행 기록들을 파일로 남기는 어펜더 -->
+	<appender name="fileAppender" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="C:/Users/persons/Desktop/Final_Project/FinalGit/Final_MohaGee/src/main/resources/logs/systemLog/system.log" />
+		<param name="Append" value="true"/>
+		<param name="datePattern" value=".yyyy-MM-dd"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-5p:[%d{yyyy-MM-dd HH:mm:ss}] %m%n"/>
+		</layout>
+	</appender>
+	
+	<appender name="loginAppender" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="C:/Users/persons/Desktop/Final_Project/FinalGit/Final_MohaGee/src/main/resources/logs/loginLog/login.log" />
+		<param name="Append" value="true"/>
+		<param name="datePattern" value=".yyyy-MM-dd"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-5p:[%d{yyyy-MM-dd HH:mm:ss}] %m%n"/>
+		</layout>
+	</appender>
+	
 	<!-- Application Loggers -->
 	<logger name="com.kh.mohagee">
 		<level value="info" />
@@ -31,11 +50,17 @@
 	<logger name="org.springframework.web">
 		<level value="info" />
 	</logger>
+	
+	<logger name="com.kh.mohagee.common.aop.AfterReturningLoginLogger" additivity="false">
+		<level value="debug"/>
+		<appender-ref ref="loginAppender"/>
+	</logger>
 
 	<!-- Root Logger -->
 	<root>
 		<priority value="warn" />
 		<appender-ref ref="console" />
+		<appender-ref ref="fileAppender" />
 	</root>
 	
 </log4j:configuration>

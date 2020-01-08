@@ -11,38 +11,63 @@
             <div class="row">
                 <div class="col-sm-12 overflow">
                    <div class="social-icons pull-right">
-                    <div class="text-center">
-
-
-                <!--  검색 버튼  -->
-                <div class="search">
-                     <form role="form"> 
-                    	<button type="button" class="btn btn-success" ></button>
-                      <input type="text" class="search-form" autocomplete="off" placeholder="Search">
-                     </form>
-                </div>
-               <!--  검색 버튼 끝  -->
-
-						<a href="" class="btn btn-info btn-rounded mb-4" data-toggle="modal" data-target="#modalJoinForm">
-                            Join
-                        </a>
-                        &nbsp;&nbsp;
-                        <a href="" class="btn btn-warning btn-rounded mb-4" data-toggle="modal" data-target="#modalLoginForm">
-                            Login
-                        </a>
+                    <div class="text-center" style="font-family:biggrea;">
+						<ul>
+				<span>
+					<a href=""  class="btn btn-danger btn-rounded mb-4" data-toggle="modal" data-target="#modalAlarm">
+						alarm
+					</a>
+				</span>
+				 <span>
+					<a href="" class="btn btn-info btn-rounded mb-4" data-toggle="modal" data-target="#modalJoinForm">
+						Join
+					</a>
+				 </span>
+				<span>
+					<a href="" class="btn btn-warning btn-rounded mb-4" data-toggle="modal" data-target="#modalLoginForm">
+						Login
+					</a>
+				</span>
+			</ul>
                     </div>
-                   </div> 
+                    </div> 
                 </div>
              </div>
         </div>
 
-<!-- Login Modal -->
-<div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-  aria-hidden="true">
+<!-- alarm Modal -->
+<div id="modalAlarm" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalAlarmLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalAlarmLabel" style="font-family:cookierun;">알람 왔어용</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>
+          <a role="button" class="btn btn-secondary popover-test" title="" data-content="Popover body content is set in this attribute."
+            data-original-title="Popover title" data-toggle="popover" >$닉넴{member.nickName}님이 댓글을 달았습니다</a>
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary"data-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Login Modal -->
+<div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true" style="font-family:biggrea;">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    <form action="${ pageContext.request.contextPath }/member/memberLogin.do" method="POST" onsubmit="return login();">
       <div class="modal-header text-center" style="background-color:#f0ad4e;">
-        <h4 class="modal-title w-100 font-weight-bold" style="color : snow;">Sign In</h4>
+        <h4 class="modal-title w-100 font-weight-bold" style="color : snow; font-family: biggrea;">Sign In</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <!-- <span aria-hidden="true">&times;</span> -->
         </button>
@@ -50,20 +75,20 @@
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
         <i class="fas fa-envelope prefix grey-text"></i>
-        <label data-error="wrong" data-success="right" for="defaultForm-email">ID</label>
-          <input type="email" id="defaultForm-email" class="form-control validate" placeholder="example@example.com">
+        <label data-error="wrong" data-success="right" for="Login-defaultForm-email">ID</label>
+          <input name="userId" type="email" id="Login-defaultForm-email" class="form-control validate" placeholder="example@example.com">
         </div>
         <br>
         <div class="md-form mb-4">
           <i class="fas fa-lock prefix grey-text"></i>
-          <label data-error="wrong" data-success="right" for="defaultForm-pass">PW</label>
-          <input type="password" id="defaultForm-pass" class="form-control validate" placeholder="Your Password">
+          <label data-error="wrong" data-success="right" for="Login-defaultForm-pass">PW</label>
+          <input name="password" type="password" id="Login-defaultForm-pass" class="form-control validate" placeholder="Your Password">
         </div>
-
       </div>
       <div class="modal-footer d-flex justify-content-center">
         <input type="submit" class="btn btn-warning btn-rounded mb-4" value="Login" >
       </div>
+      </form>
     </div>
   </div>
 </div>
@@ -71,11 +96,12 @@
 
 <!-- Join Modal -->
 <div class="modal fade" id="modalJoinForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-  aria-hidden="true">
+  aria-hidden="true" style="font-family:biggrea;">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
+    <form action="${ pageContext.request.contextPath }/member/signUp.do" method="POST" onsubmit="return enroll();">
       <div class="modal-header text-center" style="background-color:#5bc0de;">
-        <h4 class="modal-title w-100 font-weight-bold" style="color : snow;">Sign Up</h4>
+        <h4 class="modal-title w-100 font-weight-bold" style="color : snow;  font-family: biggrea;">Sign Up</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <!-- <span aria-hidden="true">&times;</span> -->
         </button>
@@ -83,43 +109,61 @@
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
         <i class="fas fa-envelope prefix grey-text"></i>
-        <label data-error="wrong" data-success="right" for="defaultForm-email">ID</label>
-          <input type="email" id="defaultForm-email" class="form-control validate" placeholder="example@example.com">
+        <label data-error="wrong" data-success="right" for="Sign-defaultForm-email">ID</label>
+          <section>
+	          <input style="width: 83%; display:inline;" type="email" name="userId" id="Sign-defaultForm-email" class="form-control validate" placeholder="example@example.com">
+	          <button class="btn btn-success" type="button" id="checkEmail">중복확인</button>
+	          <input type="hidden" id="emailSameCheck" value="0"/>
+          </section>
+        </div>
+        
+        <br>
+        <div class="md-form mb-4">
+          <i class="fas fa-lock prefix grey-text"></i>
+          <label data-error="wrong" data-success="right" for="Sign-defaultForm-pass">Password</label>
+          <input type="password" name="password" id="Sign-defaultForm-pass" class="form-control validate" placeholder="영문 대소문자 6~18자리">
         </div>
         <br>
         <div class="md-form mb-4">
           <i class="fas fa-lock prefix grey-text"></i>
-          <label data-error="wrong" data-success="right" for="defaultForm-pass">PW</label>
-          <input type="password" id="defaultForm-pass" class="form-control validate" placeholder="Password">
+          <label data-error="wrong" data-success="right" for="Sign-defaultForm-passCheck">Check Password</label>
+          <input type="password" name="passwordCheck" id="Sign-defaultForm-passCheck" class="form-control validate" placeholder="비밀번호 확인">
+		  <span class="guide ok">일치 합니다</span>
+          <span class="guide error">불일치 합니다</span>
+          <input type="hidden" name="passwordSameCheck" id="passwordSameCheck" value="0"/>
         </div>
         <br>
         <div class="md-form mb-4">
-            <i class="fas fa-lock prefix grey-text"></i>
-            <label data-error="wrong" data-success="right" for="defaultForm-pass">Name</label>
-            <input type="text" id="defaultForm-pass" class="form-control validate" placeholder="Name">
+            <i class="fas fa-user prefix grey-text"></i>
+            <label data-error="wrong" data-success="right" for="Sign-defaultForm-Name">Name</label>
+            <input type="text" name="userName" id="Sign-defaultForm-Name" class="form-control validate" placeholder="한글만 적어주세요">
         </div>
         <br>
         <div class="md-form mb-4">
-            <i class="fas fa-lock prefix grey-text"></i>
-            <label data-error="wrong" data-success="right" for="defaultForm-pass">NickName</label>
-            <input type="text" id="defaultForm-pass" class="form-control validate" placeholder="NickName">
+            <i class="fas fa-user prefix grey-text"></i>
+            <label data-error="wrong" data-success="right" for="Sign-defaultForm-NickName">NickName</label>
+            <section>
+	            <input style="width: 83%; display:inline;" type="text" name="nickName" id="Sign-defaultForm-NickName" class="form-control validate" placeholder="NickName">
+				<button id="checkNick" class="btn btn-success" type="button">중복확인</button>
+				<input type="hidden" id="nickNameSameCheck" value="0"/>
+          </section>
         </div>
         <br>
         <div class="md-form mb-4">
-            <i class="fas fa-lock prefix grey-text"></i>
-            <label data-error="wrong" data-success="right" for="defaultForm-pass">Phone</label>
-            <input type="text" id="defaultForm-pass" class="form-control validate" placeholder="Phone">
+            <i class="fas fa-phone prefix grey-text"></i>
+            <label data-error="wrong" data-success="right" for="Sign-defaultForm-Phone">Phone</label>
+            <input type="text" name="phone" id="Sign-defaultForm-Phone" class="form-control validate" placeholder="'-' 제외한 전화번호">
         </div>
 
       </div>
-      <div class="modal-footer d-flex justify-content-center">
-        <input type="submit" class="btn btn-info" value="Join" >
-      </div>
+	      <div class="modal-footer d-flex justify-content-center">
+	        <input type="submit" class="btn btn-info" id="join" value="Join" >
+	      </div>
+      </form>
     </div>
   </div>
 </div>
 <!-- Modal -->
-
 
 <!-- 카테고리 부분 -->
         <div class="navbar navbar-inverse" role="banner">
@@ -130,49 +174,212 @@
                     </a>
                     
                 </div>
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="category">
-                        	<a href="${ pageContext.request.contextPath }/gotoshowList.do">공연</a>
+               <!--  <div class="collapse navbar-collapse" > -->
+               <br />
+                    <ul class="nav navbar-nav navbar-right" >
+                        <li class="category" >
+                        	<a href="${ pageContext.request.contextPath }/showBoard/showBoardList.do" 
+									style="font-family:cookierun; font-size : 20px;">공연</a>
                         </li>                                                                 
                         <li class="category">
-                        	<a href="${ pageContext.request.contextPath }/gotoPortfolio.do">운동</a>
+                        	<a href="${ pageContext.request.contextPath }/gotoGymBoardList.do"
+                        			style="font-family:cookierun; font-size : 20px;">운동</a>
                         </li>                  
                         <li class="category">
-                        	<a href="${ pageContext.request.contextPath }/gotoPortfolio.do">여행</a>
+                        	<a href="${ pageContext.request.contextPath }/gotoTravelBoardList.do"  
+                        			style="font-family:cookierun; font-size : 20px;">여행</a>
                         </li> 
                         <li class="category">
-                        	<a href="${ pageContext.request.contextPath }/gotoPortfolio.do">수다방</a>
+                        	<a href="${ pageContext.request.contextPath }/TalkBoardList.do"
+                        			 style="font-family:cookierun; font-size : 20px;">수다방</a>
                         </li>
                         <li class="category">
-                        	<a href="${ pageContext.request.contextPath }/gotoPortfolio.do">공지사항</a>
-                        </li>                                             
-                        <li class="dropdown">
-                        <a href="${ pageContext.request.contextPath }/goto404.do">404</a>
-                        </li>                   
-                        <li class="dropdown">
-                        <a href="${ pageContext.request.contextPath }/gotoComingSoon.do">coming-soon</a>
+                        	<a href="${ pageContext.request.contextPath }/gotoPortfolio.do"
+                        			 style="font-family:cookierun; font-size : 20px;">공지사항</a>
                         </li>
-<%--                         <a href="${ pageContext.request.contextPath }/gotoBlogdetails.do">blogdetails</a>
-                        </li>                    
-                        <li class="dropdown">
-                        <a href="${ pageContext.request.contextPath }/gotoPortfolioDetails.do">portfolio-details</a>
-                        </li> --%>
                     </ul>
-                </div>
-                
-         
-                <!--  검색 버튼  -->
- <!--                <div class="search">
-                    <form role="form">
-                    	<button type="button" class="btn btn-success" ></button>
-                      <input type="text" class="search-form" autocomplete="off" placeholder="Search">
-					  <div class="field-toggle">
-                        </div> 
-                    </form>
-                </div>  -->
-               <!--  검색 버튼 끝  -->
-               
             </div>
         </div>
+        <script>
+        
+	        JQ("#checkEmail").on("click", function(){
+	        	
+	        	var email = JQ("#Sign-defaultForm-email").val();
+	        	var reg = /^[a-z][a-z0-9_-]{3,11}@([a-z\d\.-]+)\.([a-z\.]{2,6})$/;
+	        	
+	        	if(reg.test(email)){
+	        		
+	        		JQ.ajax({
+		        		url : "${pageContext.request.contextPath}/email/checkEmail.do",
+		        		data : {
+		        			email : email
+		        		},
+		        		success: function(data){
+		        			if(data == 1){
+		        				alert("이미 존재하는 이메일입니다.");
+		        				JQ("#emailSameCheck").val(0);
+		        			} else {
+		        				alert("사용가능한 이메일입니다.")
+		        				JQ("#emailSameCheck").val(1);
+		        			}
+		        		}, error: function(){
+		        			alert("이메일 체크에 실패했습니다.");
+		        		}
+		        	});
+	        		
+	        	} else {
+	        		
+	        		alert("이메일 형식에 맞게 작성해주시기 바랍니다.");
+	        		
+	        	}
+	        	
+	        	
+	        });
+        
+        	JQ("#Sign-defaultForm-passCheck").on("keyup", function(){
+        		var p1 = JQ("#Sign-defaultForm-passCheck").val();
+        		var p2 = JQ("#Sign-defaultForm-pass").val();
+        		
+        		if(p1 != p2){
+        			JQ(".guide.error").show();
+        			JQ(".guide.ok").hide();
+        			JQ("#passwordSameCheck").val(0);
+        		} else if(p1 == p2){
+        			JQ(".guide.ok").show();
+        			JQ(".guide.error").hide();
+        			JQ("#passwordSameCheck").val(1);
+        		}
+        	});
+        	
+        	JQ("#checkNick").on("click", function(){
+				var nick = JQ("#Sign-defaultForm-NickName").val();
+	        	
+	        	JQ.ajax({
+	        		url : "${pageContext.request.contextPath}/nick/checkNick.do",
+	        		data : {
+	        			nick : nick
+	        		},
+	        		success: function(data){
+	        			if(data == 1){
+	        				alert("이미 존재하는 닉네임입니다.");
+	        				JQ("#nickNameSameCheck").val(0);
+	        			} else {
+	        				alert("사용가능한 닉네임입니다.")
+	        				JQ("#nickNameSameCheck").val(1);
+	        			}
+	        		}, error: function(){
+	        			alert("이메일 체크에 실패했습니다.");
+	        		}
+	        	});
+        	});
+        	
+        	function enroll(){
+        		
+        		var reg = /^[가-힣]{2,5}$/;
+        		var name = JQ("#Sign-defaultForm-Name").val();
+        		
+				var reg2 = /^[A-Za-z0-9_-]{6,18}$/;
+				var pass = JQ("#Sign-defaultForm-pass").val();
+				
+				var reg3 = /^\d{2,3}\d{3,4}\d{4}$/;
+				var phone = JQ('#Sign-defaultForm-Phone').val();
+				
+				if(JQ('#emailSameCheck').val() == 0){
+        			alert("이메일 중복확인을 해주세요");
+        			JQ("#Sign-defaultForm-email").focus();
+        			return false;
+        		}
+				
+				if( !reg2.test(pass) ) {
+					alert("비밀번호를 확인해주세요");
+					JQ("#Sign-defaultForm-pass").focus();
+					return false;
+				}
+				
+				if(JQ('#passwordSameCheck').val() == 0){
+        			alert("비밀번호가 불일치 합니다.");
+        			JQ("#Sign-defaultForm-pass").focus();
+        			return false;
+        		}
+        		
+        		if( !reg.test(name) ){
+        			alert("이름을 확인해주세요");
+        			JQ("#Sign-defaultForm-Name").focus();
+        			return false;
+        		}
+        		
+        		if(JQ('#nickNameSameCheck').val() == 0){
+        			alert("닉네임 중복확인을 해주세요");
+        			JQ("#Sign-defaultForm-NickName").focus();
+        			return false;
+        		}
+        		
+        		if( !reg3.test(phone) ){
+        			alert("전화번호를 확인 해주세요");
+        			JQ("#Sign-defaultForm-Phone").focus();
+        			return false;
+        		}
+        		
+        		return true;
+        		
+        	}
+        	
+			JQ("#Sign-defaultForm-email").on("keyup", function(){
+        		
+        		JQ("#emailSameCheck").val(0);
+        		
+        	});
+        	
+        	JQ("#Sign-defaultForm-NickName").on("keyup", function(){
+        		
+        		JQ("#nickNameSameCheck").val(0);
+        		
+        	});
+        	
+			JQ("#Sign-defaultForm-pass").on("keyup", function(){
+				
+				var p1 = JQ("#Sign-defaultForm-passCheck").val();
+        		var p2 = JQ("#Sign-defaultForm-pass").val();
+        		
+				if(p1 != p2){
+        			JQ(".guide.error").show();
+        			JQ(".guide.ok").hide();
+        			JQ("#passwordSameCheck").val(0);
+        		} else if(p1 == p2){
+        			JQ(".guide.ok").show();
+        			JQ(".guide.error").hide();
+        			JQ("#passwordSameCheck").val(1);
+        		}
+        		
+        	});
+			
+			function login(){
+				var userId = JQ("#Login-defaultForm-email").val();
+				var pass = JQ("#Login-defaultForm-pass").val();
+				
+				if(userId == "" || userId == null){
+					alert("아이디를 입력해주세요");
+					return false;
+				}
+				if(pass == "" || pass == null){
+					alert("비밀번호를 입력해주세요");
+					return false;
+				}
+				
+				return true;
+			}
+        </script>
     </header>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
