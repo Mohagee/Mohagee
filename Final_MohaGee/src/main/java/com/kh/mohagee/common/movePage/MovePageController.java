@@ -37,4 +37,8 @@ public class MovePageController {
 		return "portfolio";
 	}
 
+	@RequestMapping("/gotoTravelBoardList.do")
+	public String gotoTravelBoardList() {
+		return "travelBoard/travelBoardList";
+	}
 }
