@@ -11,6 +11,8 @@
 	<typeAliases>
 		<typeAlias type="com.kh.mohagee.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="com.kh.mohagee.email.model.vo.Email" alias="Email"/>
+		<typeAlias type="com.kh.mohagee.showBoard.model.vo.ShowBoard" alias="ShowBoard" />
+ 		<typeAlias type="com.kh.mohagee.showBoard.model.vo.ShowAttachment" alias="ShowAttachment" />
 	</typeAliases>
 
 </configuration>

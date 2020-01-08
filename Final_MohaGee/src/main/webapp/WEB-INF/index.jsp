@@ -23,9 +23,17 @@
             <div class="row">
                 <div class="main-slider">
                     <div class="slide-text">
-                        <h1>취미를 가지자아</h1>
-                        <p>짧은 인생에 다이나믹한 취미 하나정돈 좋잖아?</p>
-                    </div>
+                        <h1 style="font-family:cookierun;">Mohagee</h1>
+                   <!-- 검색 창 -->     
+						<form class="form-inline mr-auto">
+						  <input class="form-control mr-sm-2" type="text" placeholder="내용 입력" 
+						  style="font-family:cookierun; font-size : 15px;"  aria-label="Search">
+						  <button class="btn btn-success btn-rounded btn-sm my-0" type="submit">Search</button>
+						</form>  
+					<!--  검색 창 끝 -->
+					
+                  </div>
+                  
                     <img src="${ pageContext.request.contextPath }/resources/images/home/slider/hill.png" class="slider-hill" alt="slider image">
                     <img src="${ pageContext.request.contextPath }/resources/images/home/slider/house.png" class="slider-house" alt="slider image">
                     <img src="${ pageContext.request.contextPath }/resources/images/home/slider/sun.png" class="slider-sun" alt="slider image">

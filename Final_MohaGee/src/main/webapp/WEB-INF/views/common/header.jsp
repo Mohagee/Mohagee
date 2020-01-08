@@ -11,16 +11,7 @@
             <div class="row">
                 <div class="col-sm-12 overflow">
                    <div class="social-icons pull-right">
-                    <div class="text-center">
-                    	<!--  검색 버튼  -->
-	                     <form role="form">
-	                     	<div id="container">
-		                      	<input type="text" class="search-form" autocomplete="off" placeholder="Search">
-		                    	<button type="button" class="btn btn-success" >검색</button>
-	                    	</div>
-	                     </form>
-		               	<br />
-		               <!--  검색 버튼 끝  -->
+                    <div class="text-center" style="font-family:biggrea;">
 						<a href="" class="btn btn-info btn-rounded mb-4" data-toggle="modal" data-target="#modalJoinForm">
                             Join
                         </a>
@@ -36,12 +27,12 @@
 
 <!-- Login Modal -->
 <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-  aria-hidden="true">
+  aria-hidden="true" style="font-family:biggrea;">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
     <form action="${ pageContext.request.contextPath }/member/memberLogin.do" method="POST" onsubmit="return login();">
       <div class="modal-header text-center" style="background-color:#f0ad4e;">
-        <h4 class="modal-title w-100 font-weight-bold" style="color : snow;">Sign In</h4>
+        <h4 class="modal-title w-100 font-weight-bold" style="color : snow; font-family: biggrea;">Sign In</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <!-- <span aria-hidden="true">&times;</span> -->
         </button>
@@ -58,7 +49,6 @@
           <label data-error="wrong" data-success="right" for="Login-defaultForm-pass">PW</label>
           <input name="password" type="password" id="Login-defaultForm-pass" class="form-control validate" placeholder="Your Password">
         </div>
-
       </div>
       <div class="modal-footer d-flex justify-content-center">
         <input type="submit" class="btn btn-warning btn-rounded mb-4" value="Login" >
@@ -71,12 +61,12 @@
 
 <!-- Join Modal -->
 <div class="modal fade" id="modalJoinForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-  aria-hidden="true">
+  aria-hidden="true" style="font-family:biggrea;">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
     <form action="${ pageContext.request.contextPath }/member/signUp.do" method="POST" onsubmit="return enroll();">
       <div class="modal-header text-center" style="background-color:#5bc0de;">
-        <h4 class="modal-title w-100 font-weight-bold" style="color : snow;">Sign Up</h4>
+        <h4 class="modal-title w-100 font-weight-bold" style="color : snow;  font-family: biggrea;">Sign Up</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <!-- <span aria-hidden="true">&times;</span> -->
         </button>
@@ -140,7 +130,6 @@
 </div>
 <!-- Modal -->
 
-
 <!-- 카테고리 부분 -->
         <div class="navbar navbar-inverse" role="banner">
             <div class="container">
@@ -150,31 +139,30 @@
                     </a>
                     
                 </div>
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="category">
-                        	<a href="${ pageContext.request.contextPath }/gotoshowList.do">공연</a>
+               <!--  <div class="collapse navbar-collapse" > -->
+               <br />
+                    <ul class="nav navbar-nav navbar-right" >
+                        <li class="category" >
+                        	<a href="${ pageContext.request.contextPath }/showBoard/showBoardList.do" 
+									 style="font-family:cookierun; font-size : 20px;">공연</a>
                         </li>                                                                 
                         <li class="category">
-                        	<a href="${ pageContext.request.contextPath }/gotoPortfolio.do">운동</a>
+                        	<a href="${ pageContext.request.contextPath }/gymBoardList.do"  
+                        			style="font-family:cookierun; font-size : 20px;">운동</a>
                         </li>                  
                         <li class="category">
-                        	<a href="${ pageContext.request.contextPath }/gotoPortfolio.do">여행</a>
+                        	<a href="${ pageContext.request.contextPath }/gotoPortfolio.do"  
+                        			style="font-family:cookierun; font-size : 20px;">여행</a>
                         </li> 
                         <li class="category">
-                        	<a href="${ pageContext.request.contextPath }/gotoPortfolio.do">수다방</a>
+                        	<a href="${ pageContext.request.contextPath }/gotoPortfolio.do"
+                        			 style="font-family:cookierun; font-size : 20px;">수다방</a>
                         </li>
                         <li class="category">
-                        	<a href="${ pageContext.request.contextPath }/gotoPortfolio.do">공지사항</a>
-                        </li>                                             
-                        <li class="dropdown">
-                        <a href="${ pageContext.request.contextPath }/goto404.do">404</a>
-                        </li>                   
-                        <li class="dropdown">
-                        <a href="${ pageContext.request.contextPath }/gotoComingSoon.do">coming-soon</a>
+                        	<a href="${ pageContext.request.contextPath }/gotoPortfolio.do"
+                        			 style="font-family:cookierun; font-size : 20px;">공지사항</a>
                         </li>
                     </ul>
-                </div>
             </div>
         </div>
         <script>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- MemberDAO에 사용된다. -->
+<!-- namespace : 현재 매퍼파일의 별칭 -->
+<!-- resultMap : 데이터베이스에서 조회한 결과를 내가 원하는 형식으로 저장하고자 할 때 사용하는 설정이다. -->
+
+<mapper namespace="board-mapper">
+
+	<!-- 게시글 목록 -->
+	<select id="selectList" resultType="ShowBoard">
+		SELECT * FROM BOARD 
+	</select>
+
+	<select id="selectTotalContents" resultType="int">
+		SELECT COUNT(*) FROM
+		BOARD
+	</select>
+
+	<insert id="insertShowBoard" parameterType="ShowBoard">
+	INSERT INTO BOARD
+	VALUES(SEQ_BNO.NEXTVAL,#{userNo},#{bWriter},#{bTitle}, #{bTag},
+				#{bContent}, #{cNo}, DEFAULT, DEFAULT , DEFAULT )
+	</insert>
+
+	<!-- 게시글 등록 -->
+	<insert id="insertAttachment" parameterType="ShowAttachment">
+		<!-- 먼저 조회해서 결과를 가져오겠다? -->
+		<selectKey keyProperty="boardNo" resultType="int"
+			order="BEFORE">
+			SELECT SEQ_BOARDNO.CURRVAL FROM DUAL
+		</selectKey>
+		INSERT INTO ATTACHMENT
+		VALUES (SEQ_ATTACHMENTNO.NEXTVAL, #{boardNo}, #{originalFileName},
+		#{renamedFileName}, DEFAULT, DEFAULT, DEFAULT )
+	</insert>
+
+	<select id="selectBoard" parameterType="_int" resultType="ShowBoard">
+		SELECT * FROM BOARD WHERE BOARDNO = #{boardNo}
+	</select>
+
+	<select id="selectAttachment" parameterType="int" resultType="ShowAttachment">
+		SELECT * FROM ATTACHMENT WHERE BOARDNO = #{boardNo}
+	</select>
+
+	<update id="updateBoard" parameterType="ShowBoard">
+		UPDATE BOARD
+		SET BOARDTITLE = #{boardTitle}, BOARDCONTENT = #{boardContent}
+		WHERE
+		BOARDNO = #{boardNo}
+	</update>
+
+	<!-- 게시글 수정 하기 -->
+	<insert id="updateAttachment" parameterType="ShowAttachment">
+		INSERT INTO ATTACHMENT
+		VALUES (SEQ_ATTACHMENTNO.NEXTVAL, #{boardNo}, #{originalFileName},
+		#{renamedFileName}, DEFAULT, DEFAULT, DEFAULT )
+	</insert>
+
+	<delete id="deleteAttachment" parameterType="int">
+		DELETE FROM ATTACHMENT WHERE BOARDNO = #{boardNo}
+	</delete>
+
+	<!-- 게시글 삭제  -->
+	<delete id="deleteBoard" parameterType="int">
+		DELETE FROM BOARD WHERE BOARDNO = #{boardNo}
+	</delete>
+
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
