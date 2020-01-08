@@ -46,7 +46,7 @@
                     <li><a class="btn btn-default" href="#" data-filter=".design">소극장</a></li>
                     <li><a class="btn btn-default" href="#" data-filter=".folio">창작뮤지컬</a></li>
                     <li><a class="btn btn-default" href="#" data-filter=".logos">오리지널 내한</a></li>
-
+				</ul>
                 
                 <div class="masonery-items masonery_area">
                         <div class="col-md-3 col-sm-4 masonery-item branded mobile">
@@ -276,7 +276,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        
     </section>
     <c:import url="../common/footer.jsp"/>
 </body>
