@@ -26,7 +26,7 @@
 
 
   a{
-    color:#C03035;
+    color:black;
   }
 
   a:hover {
@@ -292,7 +292,7 @@
 }
 
 #header .navbar-inverse .navbar-nav  li a:hover{
-  color: #00aeef;
+  color: black;
 }
 
 

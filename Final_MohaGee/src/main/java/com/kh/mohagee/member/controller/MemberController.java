@@ -72,8 +72,8 @@ public class MemberController {
 				&& m.getEmailCheck() == 1) {
 			msg = m.getNickName() + "님, 환영합니다.";
 			
-			session.setAttribute("member", member);
-			mv.addObject("member", member);
+			session.setAttribute("member", m);
+			mv.addObject("member", m);
 			
 		} else if( m != null) {
 			msg = "비밀번호가 틀렸습니다.";
