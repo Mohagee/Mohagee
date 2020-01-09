@@ -31,12 +31,13 @@
 	<section id="portfolio" class="padding-top padding-bottom">
 		<div class="container">
 		<!--  글쓰기 버튼  -->
-			<div align="right">
+		<div align="right">
+			<c:if test="JQ{ !empty member }">
 				<a href="${ pageContext.request.contextPath }/showBoard/showBoardInsert.do">
 					<button type="button" class="btn btn-success" id="writerBtn">글쓰기</button>
 				</a>
-			</div>
-			
+			</c:if>
+		</div>
 			<!-- 태그 리스트  -->
 			<div class="row">
 				<ul class="masonery-filter text-center">

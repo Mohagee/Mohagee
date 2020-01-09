@@ -23,7 +23,13 @@
             <div class="row">
                 <div class="main-slider">
                     <div class="slide-text">
-                        <h1 style="font-family:cookierun;">Mohagee</h1>
+                    					
+                        <h1 id="indexMyMenu" style="font-family:cookierun;">
+							<c:if test="${!empty member}">  
+							<a href="#" >${ member.nickName } </a>
+						</c:if> Mohagee</h1>
+		
+						
                    <!-- 검색 창 -->     
 						<form class="form-inline mr-auto">
 						  <input class="form-control mr-sm-2" type="text" placeholder="내용 입력" 

@@ -6,60 +6,67 @@
 
 
 <!-- 로그인 버튼 부분 헤더 -->
-   <header id="header">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12 overflow">
-                   <div class="social-icons pull-right">
-                    <div class="text-center" style="font-family:biggrea;">
+<header id="header">
+
+
+<!-- 마이페이지 메뉴 버튼 -->
+<c:if test="${!empty member}">
+	<div class="row">
+		<div class="col-md-10" align="right" >
+			<div class="btn-group">
+				<button type="button" class="btn btn-info  .rounded-circle dropdown-toggle"  id="dropdownMenu" 
+					  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					  <i class="far fa-user-circle fa-3x"></i>
+				</button>	 			 
+	 			  			 
+	  				<div class="dropdown-menu dropdown-info"  >
+					    <a class="dropdown-item" style="font-family : binggrea; color: black; " href="#">마이페이지</a>
+					    <br />	
+					    <a class="dropdown-item" style="font-family : binggrea; color: black; " href="#">알람</a>
+					    <br />
+					    <a class="dropdown-item" style="font-family : binggrea; color: black; " href="#">로그아웃</a>
+					    <br />
+					    <div class="dropdown-divider"></div>
+	  				</div>
+				</div>
+		</div>
+	</div>
+</c:if>	
+<!-- 메인 페이지 메뉴 버튼 끝 -->
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12 overflow">
+				<div class="social-icons pull-right">
+					<div class="text-center" style="font-family: biggrea;">
 						<ul>
-				<span>
-					<a href=""  class="btn btn-danger btn-rounded mb-4" data-toggle="modal" data-target="#modalAlarm">
-						alarm
-					</a>
-				</span>
-				 <span>
-					<a href="" class="btn btn-info btn-rounded mb-4" data-toggle="modal" data-target="#modalJoinForm">
-						Join
-					</a>
-				 </span>
-				<span>
-					<a href="" class="btn btn-warning btn-rounded mb-4" data-toggle="modal" data-target="#modalLoginForm">
-						Login
-					</a>
-				</span>
-			</ul>
-                    </div>
-                    </div> 
-                </div>
-             </div>
-        </div>
+ 
 
-<!-- alarm Modal -->
-<div id="modalAlarm" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalAlarmLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalAlarmLabel" style="font-family:cookierun;">알람 왔어용</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>
-          <a role="button" class="btn btn-secondary popover-test" title="" data-content="Popover body content is set in this attribute."
-            data-original-title="Popover title" data-toggle="popover" >$닉넴{member.nickName}님이 댓글을 달았습니다</a>
-        </p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary"data-dismiss="modal">닫기</button>
-      </div>
-    </div>
-  </div>
-</div>
+						<!-- 로그인 상태가 아닐때 (조인 버튼) --> 
+							<span> 
+							<c:if test="${empty member}">
+									<a href="" class="btn btn-success btn-rounded mb-4"
+										data-toggle="modal" data-target="#modalJoinForm"> Join </a>
+								</c:if>
+							</span>
+							
 
-
-
+						<!--  로그인 일 때 (로그인 버튼) -->
+						<span> 
+							<c:if test="${empty member}">
+									<a href="" class="btn btn-warning btn-rounded mb-4"
+										data-toggle="modal" data-target="#modalLoginForm"> Login </a>
+							</c:if> 
+						</span>
+							
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+    
 <!-- Login Modal -->
 <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
   aria-hidden="true" style="font-family:biggrea;">
@@ -86,6 +93,10 @@
         </div>
       </div>
       <div class="modal-footer d-flex justify-content-center">
+      	<a href="${ pageContext.request.contextPath }/member/findId.do" style="color: red;">아이디를 잊으셨나요?</a>
+      	&nbsp;
+      	<a href="${ pageContext.request.contextPath }/member/findPw.do" style="color: red;">비밀번호를 잊으셨나요?</a>
+      	&nbsp;
         <input type="submit" class="btn btn-warning btn-rounded mb-4" value="Login" >
       </div>
       </form>
@@ -284,37 +295,67 @@
 				var reg3 = /^\d{2,3}\d{3,4}\d{4}$/;
 				var phone = JQ('#Sign-defaultForm-Phone').val();
 				
-				if(JQ('#emailSameCheck').val() == 0){
+				if(JQ("#Sign-defaultForm-email").val() == null || JQ("#Sign-defaultForm-email").val() == ""){
+					alert("아이디는 필수 입력 사항입니다.");
+					JQ("#Sign-defaultForm-email").focus();
+					return false;
+				}
+				
+				else if(JQ("#Sign-defaultForm-pass").val() == null || JQ("#Sign-defaultForm-pass").val() == ""){
+					alert("비밀번호는 필수 입력 사항입니다.");
+					JQ("#Sign-defaultForm-pass").focus();
+					return false;
+				}
+				
+				else if(JQ("#Sign-defaultForm-Name").val() == null || JQ("#Sign-defaultForm-Name").val() == ""){
+					alert("이름은 필수 입력 사항입니다.");
+					JQ("#Sign-defaultForm-Name").focus();
+					return false;
+				}
+				
+				else if(JQ("#Sign-defaultForm-NickName").val() == null || JQ("#Sign-defaultForm-NickName").val() == ""){
+					alert("닉네임은 필수 입력 사항입니다.");
+					JQ("#Sign-defaultForm-NickName").focus();
+					return false;
+				}
+				
+				else if(JQ("#Sign-defaultForm-Phone").val() == null || JQ("#Sign-defaultForm-Phone").val() == ""){
+					alert("전화번호는 필수 입력 사항입니다.");
+					JQ("#Sign-defaultForm-Phone").focus();
+					return false;
+				}
+				
+				else if(JQ('#emailSameCheck').val() == 0){
         			alert("이메일 중복확인을 해주세요");
         			JQ("#Sign-defaultForm-email").focus();
         			return false;
         		}
 				
-				if( !reg2.test(pass) ) {
+				else if( !reg2.test(pass) ) {
 					alert("비밀번호를 확인해주세요");
 					JQ("#Sign-defaultForm-pass").focus();
 					return false;
 				}
 				
-				if(JQ('#passwordSameCheck').val() == 0){
+				else if(JQ('#passwordSameCheck').val() == 0){
         			alert("비밀번호가 불일치 합니다.");
         			JQ("#Sign-defaultForm-pass").focus();
         			return false;
         		}
         		
-        		if( !reg.test(name) ){
+				else if( !reg.test(name) ){
         			alert("이름을 확인해주세요");
         			JQ("#Sign-defaultForm-Name").focus();
         			return false;
         		}
         		
-        		if(JQ('#nickNameSameCheck').val() == 0){
+				else if(JQ('#nickNameSameCheck').val() == 0){
         			alert("닉네임 중복확인을 해주세요");
         			JQ("#Sign-defaultForm-NickName").focus();
         			return false;
         		}
         		
-        		if( !reg3.test(phone) ){
+				else if( !reg3.test(phone) ){
         			alert("전화번호를 확인 해주세요");
         			JQ("#Sign-defaultForm-Phone").focus();
         			return false;
