@@ -5,67 +5,69 @@
 <mapper namespace="GymBoard-mapper">
 
 	<select id="selectList" resultType="GymBoard">
-		SELECT * FROM BOARD
-	</select>
-	
-	<select id="selectTotalContents" resultType="int">
-		SELECT COUNT(*) FROM BOARD
+      SELECT B.*, a.bfilename titleFilename, a.bFileType FROM BOARD B
+      LEFT JOIN B_ATTACHMENT A ON(B.BNO = A.BNO AND A.BFILELEVEL = 0) order by BDATE DESC
 	</select>
 	
 	<insert id="insertGymBoard" parameterType="GymBoard">
-		INSERT INTO BOARD 
-		VALUES(SEQ_BNO.NEXTVAL, 
-			#{userNo},
-			#{boardWriter}, 
-			#{boardTitle},
-			#{boardTag},
-			#{boardContent},
-		        #{cNo},
-		       #{boardCount},
-		       SYSDATE, DEFAULT)
+      INSERT INTO BOARD 
+      VALUES(SEQ_BNO.NEXTVAL, 
+         #{userNo},
+         #{bTitle},
+         #{bTag},
+         #{bContent},
+         #{cNo},
+         #{bUrl},
+         #{bCount},
+         DEFAULT,
+         DEFAULT)
 	</insert>
 	
 	<insert id="insertGymAttachment" parameterType="GymAttachment">
-		<selectKey keyProperty="boardNo" resultType="int" order="BEFORE">
-			SELECT SEQ_BOARDNO.CURRVAL FROM DUAL
+		<selectKey keyProperty="bNo" resultType="int" order="BEFORE">
+         SELECT SEQ_BNO.CURRVAL FROM DUAL
 		</selectKey>
-		INSERT INTO ATTACHMENT
-		VALUES (SEQ_ATTACHMENTNO.NEXTVAL, #{boardNo}, 
-				#{originalFileName}, 
-				#{renamedFileName},
-				DEFAULT, DEFAULT, DEFAULT)
+      INSERT INTO B_ATTACHMENT
+      VALUES (SEQ_BFILENO.NEXTVAL,
+      	    #{bNo}, 
+            #{bFileName}, 
+            #{bFilePath},
+            DEFAULT, DEFAULT, DEFAULT,
+            #{bFileType})
 	</insert>
 	
 	<select id="selectGymBoard" parameterType="_int" resultType="GymBoard">
-		SELECT * FROM BOARD WHERE BOARDNO = #{boardNo}
+      SELECT * FROM BOARD WHERE BNO = #{bNo}
 	</select>
 	
 	<select id="selectGymAttachment" parameterType="int" resultType="GymAttachment">
-		SELECT * FROM ATTACHMENT WHERE BOARDNO = #{boardNo}
+      SELECT * FROM B_ATTACHMENT WHERE BNO = #{bNo}
 	</select>
 	
 	<update id="updateGymBoard" parameterType="GymBoard">
-		UPDATE BOARD
-		SET BOARDTITLE = #{boardTitle},
-		    BOARDCONTENT = #{boardContent}
-		WHERE BOARDNO = #{boardNo}
+      UPDATE BOARD
+      SET BTITLE = #{bTitle},
+          BCONTENT = #{bContent}
+      WHERE BNO = #{bNo}
 	</update>
 	
 	<insert id="updateGymAttachment" parameterType="GymAttachment">
-		INSERT INTO ATTACHMENT
-		VALUES (SEQ_ATTACHMENTNO.NEXTVAL, #{boardNo}, 
-				#{originalFileName}, 
-				#{renamedFileName},
-				DEFAULT, DEFAULT, DEFAULT)
+      INSERT INTO B_ATTACHMENT
+      VALUES (SEQ_BFILENO.NEXTVAL, #{bNo}, 
+            #{bFileName}, 
+            #{bFilePath},
+            DEFAULT, DEFAULT, DEFAULT, #{bFileType})
 	</insert>
 	
-	<delete id="deleteGymBoard" parameterType="int">
-		DELETE FROM BOARD WHERE BOARDNO = #{boardNo}
-	</delete>
+	<update id="deleteGymBoard" parameterType="int">
+      UPDATE FROM BOARD
+      SET BSTATUS=${bStatus}
+	</update>
 	
-	<delete id="deleteGymAttachment" parameterType="int">
-		DELETE FROM ATTACHMENT WHERE BOARDNO = #{boardNo}
-	</delete>
+	<update id="deleteGymAttachment" parameterType="int">
+      UPDATE FROM B_ATTACHMENT
+      SET BFILESTATUS=${bFileStatus}
+	</update>
 </mapper>
 
 

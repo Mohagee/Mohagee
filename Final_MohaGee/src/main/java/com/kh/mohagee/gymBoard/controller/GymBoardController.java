@@ -1,8 +1,9 @@
 package com.kh.mohagee.gymBoard.controller;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,17 +22,36 @@ import com.kh.mohagee.gymBoard.model.vo.GymBoard;
 @Controller
 public class GymBoardController {
 	
+    private String[] imgExt = {"jpg", "png", "PNG", "gif", "bmp", "svg", "jpeg", "webp"};
+    private String[] videoExt = {"mp4", "avi", "mkv", "wmv", "flv", "asf", "ts", "mpg"};
+    private String[] audioExt = {"mp3", "ogg", "wav", "flac"};
+
+    public List<String> imgExtList = Arrays.asList(imgExt);
+    public List<String> videoExtList = Arrays.asList(videoExt);
+    public List<String> audioExtList = Arrays.asList(audioExt);
+	
+	
 	@Autowired
 	GymBoardService GymBoardService;
 	
+	   @RequestMapping("/gymBoard/gymBoardList.do")
+	   public String GymBoardList(Model model) {
+	      
+	      List<GymBoard> list = GymBoardService.selectList();
+	            
+	      model.addAttribute("list", list);
+	      
+	      return "gymBoard/gymBoardList";
+	   }	
+	
 	// 글쓰기 버튼 함수가 이동할곳
-	@RequestMapping("/board/gymBoardForm.do")
-	public String gymBoardForm() {
-		return "gymBoard/gymBoardForm";
+	@RequestMapping("/gymBoard/gymBoardInsertForm.do")
+	public String gymBoardInsertForm() {
+		return "gymBoard/gymBoardInsertForm";
 	}	
 
 	// 글쓰기 폼에서 등록버튼 눌렀을때 이동할 곳
-	@RequestMapping("/gymBoard/gymBoardFormEnd.do")
+	@RequestMapping("gymBoard/gymBoardInsertEnd.do")
 	public String InsertGymBoard(
 			GymBoard board, Model model,
 			@RequestParam(value="upFile", required=false) MultipartFile[] upFiles,
@@ -40,7 +60,7 @@ public class GymBoardController {
 		// 1. 저장할 폴더 설정
 		String savePath
 			= request.getSession().getServletContext()
-			.getRealPath("resouces/upload");
+			.getRealPath("resources/gymUpload");
 		
 		// 2. DB에 전달할 파일 정보를 담을 list 준비하기
 		List<GymAttachment> list = new ArrayList();
@@ -51,13 +71,38 @@ public class GymBoardController {
 		
 		/********** Multipart 파일 업로드 시작 **********/
 
-		for(MultipartFile f : upFiles) {
-			if(!f.isEmpty()) {
-				GymAttachment att = new GymAttachment();
-				
-				list.add(att);
-			}
-		}
+	       for(MultipartFile f : upFiles) { 
+	           if(!f.isEmpty()) {
+	              String originalFileName = f.getOriginalFilename();
+	              String ext = originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
+	                
+	              try {
+	                 
+	                f.transferTo(new File(savePath + "/" + originalFileName));
+	             } catch (IllegalStateException e) {
+	                // TODO Auto-generated catch block
+	                e.printStackTrace();
+	             } catch (IOException e) {
+	                // TODO Auto-generated catch block
+	                e.printStackTrace();
+	             }
+	              GymAttachment att = new GymAttachment();
+	        
+	              att.setbFileName(originalFileName);
+	              att.setbFilePath(savePath);
+	              if(imgExtList.contains(ext)) {
+	                 att.setbFileType("I");
+	              } else if(videoExtList.contains(ext) ) {
+	                 att.setbFileType("V");
+	              } else if(audioExtList.contains(ext)) {
+	                 att.setbFileType("A");
+	              } else {
+	                 att.setbFileType("E");
+	              }
+	              
+	              list.add(att); 
+	       } 
+	    }
 		/********** Multipart 파일 업로드 끝   **********/
 		
 		int result = 0;
@@ -78,8 +123,10 @@ public class GymBoardController {
 			throw e; // 스프링이 처리할 꺼라서 그냥 던져도 됩니다.
 		}
 		
+ 
+		
 		String msg = "";
-		String loc = "gotoGymBoardList.do";//운동 게시판으로 가기
+		String loc = "/gymBoard/gymBoardList.do";//운동 게시판으로 가기
 		
 		if(result > 0) {
 			msg = "게시글 추가 성공해버렸네?ㅋㅋ";
@@ -89,21 +136,21 @@ public class GymBoardController {
 		
 		model.addAttribute("msg", msg).addAttribute("loc", loc);
 		
-	return "common/msg";
+	return "common/util";
 	}
 	
 	// 건하 운동 게시판 상세보기
 	@RequestMapping("gymBoardDetail.do")
-	public String selectOne(@RequestParam("no") int boardNo, Model model) {
+	public String selectOne(@RequestParam("bNo") int bNo, Model model) {
 		
-		GymBoard b = GymBoardService.selectOneGymBoard(boardNo);
+		GymBoard gb = GymBoardService.selectOneGymBoard(bNo);
 		
-		List<GymAttachment> list = GymBoardService.selectAttachment(boardNo);
+		List<GymAttachment> list = GymBoardService.selectAttachment(bNo);
 		
-		model.addAttribute("board", b)
-			.addAttribute("attachmentList", list);
+		model.addAttribute("board", gb)
+			.addAttribute("GymAttachmentList", list);
 		
-		return "gymBoardDetail.do";
+		return "gymBoard/gymBoardDetail";
 	}
 
 /*

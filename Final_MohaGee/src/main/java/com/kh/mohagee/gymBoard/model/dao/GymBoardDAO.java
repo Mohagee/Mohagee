@@ -1,5 +1,6 @@
 package com.kh.mohagee.gymBoard.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,24 +18,24 @@ public class GymBoardDAO {
 	SqlSessionTemplate sqlSession;
 	
 	
-	public List<Map<String, String>> selectList() {
+	public List<GymBoard> selectList() {
 	// "매퍼의 실행할 SQL 명", 파라미터로 받을 값, RowBounds 전용 공간 
 		return sqlSession.selectList("GymBoard-mapper.selectList");
 	}
 
-	public int selectTotalContents() {
-		return sqlSession.selectOne("GymBoard-mapper.selectTotalContents");
-	}
-	
 	public int insertGymBoard(GymBoard board) {
 		
-		return sqlSession.insert("GymBoard-mapper.insertBoard", board);
+		return sqlSession.insert("GymBoard-mapper.insertGymBoard", board);
 	}
 	
 	public int insertGymAttachment(GymAttachment a) {
-		return sqlSession.insert("GymBoard-mapper.insertAttachment", a);
+		return sqlSession.insert("GymBoard-mapper.insertGymAttachment", a);
 	}
 
+	
+	
+	
+	
 	public GymBoard selectOneGymBoard(int boardNo) {
 		return sqlSession.selectOne("GymBoard-mapper.selectGymBoard", boardNo);
 	}

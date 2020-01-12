@@ -194,7 +194,7 @@
 									style="font-family:cookierun; font-size : 20px;">공연</a>
                         </li>                                                                 
                         <li class="category">
-                        	<a href="${ pageContext.request.contextPath }/gotoGymBoardList.do"
+                        	<a href="${ pageContext.request.contextPath }/gymBoard/gymBoardList.do"
                         			style="font-family:cookierun; font-size : 20px;">운동</a>
                         </li>                  
                         <li class="category">
