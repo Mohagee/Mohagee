@@ -1,5 +1,6 @@
 package com.kh.mohagee.showBoard.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +18,7 @@ public class ShowBoardDAO {
 	SqlSessionTemplate sqlSession;
 	
 	
-	public List<Map<String, String>> selectList() {
+	public List<ShowBoard> selectList() {
 	// "매퍼의 실행할 SQL 명", 파라미터로 받을 값, RowBounds 전용 공간 
 		return sqlSession.selectList("ShowBoard-mapper.selectList");
 	}
@@ -32,7 +33,7 @@ public class ShowBoardDAO {
 	}
 	
 	public int insertShowAttachment(ShowAttachment a) {
-		return sqlSession.insert("ShowBoard-mapper.insertAttachment", a);
+		return sqlSession.insert("ShowBoard-mapper.insertShowAttachment", a);
 	}
 
 	public ShowBoard selectOneShowBoard(int bNo) {
