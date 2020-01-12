@@ -24,4 +24,24 @@ public class MemberService {
 		return memberDao.selectOneMember(member);
 	}
 
+	public String findEmail(Member member) {
+		return memberDao.findEmail(member);
+	}
+
+	public int updateConfirm(String email) {
+		return memberDao.updateConfirm(email);
+	}
+
+	public int findPassword(Member member) {
+		return memberDao.findPassword(member);
+	}
+
+	public int updateTemPass(Member member) {
+		return memberDao.updateTemPass(member);
+	}
+
+	public Member selectMyPage(int userNo) {
+		return memberDao.selectMyPage(userNo);
+	}
+
 }

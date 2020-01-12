@@ -7,15 +7,19 @@ public class ShowBoard implements Serializable {
 
 	private int bNo;
 	private int userNo;
-	private String bWriter;
 	private String bTitle;
-	private String bCategory;
 	private String bTag;
 	private String bContent;
 	private int cNo;
+	private String bUrl;
 	private int bCount;
 	private Date bDate;
+	private String titleFilename;
+	private String bFileType;
 	private String bStatus;
+	
+	private int bFileno;
+	private int rm;
 	
 	
 	public ShowBoard() {
@@ -23,138 +27,147 @@ public class ShowBoard implements Serializable {
 	}
 
 
-	public ShowBoard(int bNo, int userNo, String bWriter, String bTitle, String bCategory, String bTag, String bContent,
-			int cNo, int bCount, Date bDate, String bStatus) {
+	public ShowBoard(int bNo, int userNo, String bTitle, String bTag, String bContent, int cNo, String bUrl, int bCount,
+			Date bDate, String titleFilename, String bFileType, String bStatus, int bFileno, int rm) {
 		super();
 		this.bNo = bNo;
 		this.userNo = userNo;
-		this.bWriter = bWriter;
 		this.bTitle = bTitle;
-		this.bCategory = bCategory;
 		this.bTag = bTag;
 		this.bContent = bContent;
 		this.cNo = cNo;
+		this.bUrl = bUrl;
 		this.bCount = bCount;
 		this.bDate = bDate;
+		this.titleFilename = titleFilename;
+		this.bFileType = bFileType;
 		this.bStatus = bStatus;
+		this.bFileno = bFileno;
+		this.rm = rm;
 	}
 
+
+
+
+	@Override
+	public String toString() {
+		return "ShowBoard [bNo=" + bNo + ", userNo=" + userNo + ", bTitle=" + bTitle + ", bTag=" + bTag + ", bContent="
+				+ bContent + ", cNo=" + cNo + ", bUrl=" + bUrl + ", bCount=" + bCount + ", bDate=" + bDate
+				+ ", titleFilename=" + titleFilename + ", bFileType=" + bFileType + ", bStatus=" + bStatus
+				+ ", bFileno=" + bFileno + ", rm=" + rm + "]";
+	}
 
 	public int getbNo() {
 		return bNo;
 	}
 
-
 	public void setbNo(int bNo) {
 		this.bNo = bNo;
 	}
-
 
 	public int getUserNo() {
 		return userNo;
 	}
 
-
 	public void setUserNo(int userNo) {
 		this.userNo = userNo;
 	}
-
-
-	public String getbWriter() {
-		return bWriter;
-	}
-
-
-	public void setbWriter(String bWriter) {
-		this.bWriter = bWriter;
-	}
-
 
 	public String getbTitle() {
 		return bTitle;
 	}
 
-
 	public void setbTitle(String bTitle) {
 		this.bTitle = bTitle;
 	}
-
-
-	public String getbCategory() {
-		return bCategory;
-	}
-
-
-	public void setbCategory(String bCategory) {
-		this.bCategory = bCategory;
-	}
-
 
 	public String getbTag() {
 		return bTag;
 	}
 
-
 	public void setbTag(String bTag) {
 		this.bTag = bTag;
 	}
-
 
 	public String getbContent() {
 		return bContent;
 	}
 
-
 	public void setbContent(String bContent) {
 		this.bContent = bContent;
 	}
-
 
 	public int getcNo() {
 		return cNo;
 	}
 
-
 	public void setcNo(int cNo) {
 		this.cNo = cNo;
 	}
 
+	public String getbUrl() {
+		return bUrl;
+	}
+
+	public void setbUrl(String bUrl) {
+		this.bUrl = bUrl;
+	}
 
 	public int getbCount() {
 		return bCount;
 	}
 
-
 	public void setbCount(int bCount) {
 		this.bCount = bCount;
 	}
-
 
 	public Date getbDate() {
 		return bDate;
 	}
 
-
 	public void setbDate(Date bDate) {
 		this.bDate = bDate;
 	}
-
 
 	public String getbStatus() {
 		return bStatus;
 	}
 
-
 	public void setbStatus(String bStatus) {
 		this.bStatus = bStatus;
 	}
 
-
-	@Override
-	public String toString() {
-		return "ShowBoard [bNo=" + bNo + ", userNo=" + userNo + ", bWriter=" + bWriter + ", bTitle=" + bTitle
-				+ ", bCategory=" + bCategory + ", bTag=" + bTag + ", bContent=" + bContent + ", cNo=" + cNo
-				+ ", bCount=" + bCount + ", bDate=" + bDate + ", bStatus=" + bStatus + "]";
+	public String getTitleFilename() {
+		return titleFilename;
 	}
 
+	public void setTitleFilename(String titleFilename) {
+		this.titleFilename = titleFilename;
+	}
+
+	public int getbFileno() {
+		return bFileno;
+	}
+
+	public void setbFileno(int bFileno) {
+		this.bFileno = bFileno;
+	}
+
+	public int getRm() {
+		return rm;
+	}
+
+	public void setRm(int rm) {
+		this.rm = rm;
+	}
+
+	public String getbFileType() {
+		return bFileType;
+	}
+
+	public void setbFileType(String bFileType) {
+		this.bFileType = bFileType;
+	}
+	
+	
 }

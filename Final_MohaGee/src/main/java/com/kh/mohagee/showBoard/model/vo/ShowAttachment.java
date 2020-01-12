@@ -8,6 +8,7 @@ public class ShowAttachment implements Serializable {
 	private int bFileNo;
 	private int bNo;
 	private String bFileName;
+	private String bFileType;
 	private String bFilePath;
 	private Date bFileDate;
 	private int bFileLevel;
@@ -101,12 +102,25 @@ public class ShowAttachment implements Serializable {
 		this.bFileStatus = bFileStatus;
 	}
 
+	
+
+	public String getbFileType() {
+		return bFileType;
+	}
+
+
+	public void setbFileType(String bFileType) {
+		this.bFileType = bFileType;
+	}
+
 
 	@Override
 	public String toString() {
-		return "ShowAttachment [bFileNo=" + bFileNo + ", bNo=" + bNo + ", bFileName=" + bFileName + ", bFilePath="
-				+ bFilePath + ", bFileDate=" + bFileDate + ", bFileLevel=" + bFileLevel + ", bFileStatus=" + bFileStatus
-				+ "]";
+		return "ShowAttachment [bFileNo=" + bFileNo + ", bNo=" + bNo + ", bFileName=" + bFileName + ", bFileType="
+				+ bFileType + ", bFilePath=" + bFilePath + ", bFileDate=" + bFileDate + ", bFileLevel=" + bFileLevel
+				+ ", bFileStatus=" + bFileStatus + "]";
 	}
+
+
 		
 }

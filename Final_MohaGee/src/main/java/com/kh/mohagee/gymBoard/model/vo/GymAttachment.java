@@ -1,118 +1,126 @@
 package com.kh.mohagee.gymBoard.model.vo;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 
-public class GymAttachment implements Serializable{
+public class GymAttachment implements Serializable {
+   
+   private int bFileNo;
+   private int bNo;
+   private String bFileName;
+   private String bFileType;
+   private String bFilePath;
+   private Date bFileDate;
+   private int bFileLevel;
+   private String bFileStatus;
 
-	private int bFileNo;
-	private int bNo;
-	private String bFileName;
-	private String bFilePath;
-	private Date bFileDate;
-	private int bFileLevel;
-	private String bFileStatus;
-	
-	
-	public GymAttachment() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-
-	public GymAttachment(int bFileNo, int bNo, String bFileName, String bFilePath, Date bFileDate, int bFileLevel,
-			String bFileStatus) {
-		super();
-		this.bFileNo = bFileNo;
-		this.bNo = bNo;
-		this.bFileName = bFileName;
-		this.bFilePath = bFilePath;
-		this.bFileDate = bFileDate;
-		this.bFileLevel = bFileLevel;
-		this.bFileStatus = bFileStatus;
-	}
+   
+   public GymAttachment() {
+      super();
+   }
 
 
-	public int getbFileNo() {
-		return bFileNo;
-	}
+   public GymAttachment(int bFileNo, int bNo, String bFileName, String bFilePath, Date bFileDate, int bFileLevel,
+         String bFileStatus) {
+      super();
+      this.bFileNo = bFileNo;
+      this.bNo = bNo;
+      this.bFileName = bFileName;
+      this.bFilePath = bFilePath;
+      this.bFileDate = bFileDate;
+      this.bFileLevel = bFileLevel;
+      this.bFileStatus = bFileStatus;
+   }
 
 
-	public void setbFileNo(int bFileNo) {
-		this.bFileNo = bFileNo;
-	}
+   public int getbFileNo() {
+      return bFileNo;
+   }
 
 
-	public int getbNo() {
-		return bNo;
-	}
+   public void setbFileNo(int bFileNo) {
+      this.bFileNo = bFileNo;
+   }
 
 
-	public void setbNo(int bNo) {
-		this.bNo = bNo;
-	}
+   public int getbNo() {
+      return bNo;
+   }
 
 
-	public String getbFileName() {
-		return bFileName;
-	}
+   public void setbNo(int bNo) {
+      this.bNo = bNo;
+   }
 
 
-	public void setbFileName(String bFileName) {
-		this.bFileName = bFileName;
-	}
+   public String getbFileName() {
+      return bFileName;
+   }
 
 
-	public String getbFilePath() {
-		return bFilePath;
-	}
+   public void setbFileName(String bFileName) {
+      this.bFileName = bFileName;
+   }
 
 
-	public void setbFilePath(String bFilePath) {
-		this.bFilePath = bFilePath;
-	}
+   public String getbFilePath() {
+      return bFilePath;
+   }
 
 
-	public Date getbFileDate() {
-		return bFileDate;
-	}
+   public void setbFilePath(String bFilePath) {
+      this.bFilePath = bFilePath;
+   }
 
 
-	public void setbFileDate(Date bFileDate) {
-		this.bFileDate = bFileDate;
-	}
+   public Date getbFileDate() {
+      return bFileDate;
+   }
 
 
-	public int getbFileLevel() {
-		return bFileLevel;
-	}
+   public void setbFileDate(Date bFileDate) {
+      this.bFileDate = bFileDate;
+   }
 
 
-	public void setbFileLevel(int bFileLevel) {
-		this.bFileLevel = bFileLevel;
-	}
+   public int getbFileLevel() {
+      return bFileLevel;
+   }
 
 
-	public String getbFileStatus() {
-		return bFileStatus;
-	}
+   public void setbFileLevel(int bFileLevel) {
+      this.bFileLevel = bFileLevel;
+   }
 
 
-	public void setbFileStatus(String bFileStatus) {
-		this.bFileStatus = bFileStatus;
-	}
+   public String getbFileStatus() {
+      return bFileStatus;
+   }
 
 
-	@Override
-	public String toString() {
-		return "Attachment [bFileNo=" + bFileNo + ", bNo=" + bNo + ", bFileName=" + bFileName + ", bFilePath="
-				+ bFilePath + ", bFileDate=" + bFileDate + ", bFileLevel=" + bFileLevel + ", bFileStatus=" + bFileStatus
-				+ "]";
-	}
-	
-	
-	
-	
-	
-	
+   public void setbFileStatus(String bFileStatus) {
+      this.bFileStatus = bFileStatus;
+   }
+
+   
+
+   public String getbFileType() {
+      return bFileType;
+   }
+
+
+   public void setbFileType(String bFileType) {
+      this.bFileType = bFileType;
+   }
+
+
+   @Override
+   public String toString() {
+      return "ShowAttachment [bFileNo=" + bFileNo + ", bNo=" + bNo + ", bFileName=" + bFileName + ", bFileType="
+            + bFileType + ", bFilePath=" + bFilePath + ", bFileDate=" + bFileDate + ", bFileLevel=" + bFileLevel
+            + ", bFileStatus=" + bFileStatus + "]";
+   }
+
+
+      
 }

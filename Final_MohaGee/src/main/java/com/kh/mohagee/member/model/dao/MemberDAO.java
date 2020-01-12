@@ -24,4 +24,24 @@ public class MemberDAO {
 		return sqlSession.selectOne("member-mapper.selectOneMember", member);
 	}
 
+	public String findEmail(Member member) {
+		return sqlSession.selectOne("member-mapper.selectFindEmail", member);
+	}
+
+	public int updateConfirm(String email) {
+		return sqlSession.update("member-mapper.updateConfirm", email);
+	}
+
+	public int findPassword(Member member) {
+		return sqlSession.selectOne("member-mapper.selectFindPassword", member);
+	}
+
+	public int updateTemPass(Member member) {
+		return sqlSession.update("member-mapper.updateTemPass", member);
+	}
+
+	public Member selectMyPage(int userNo) {
+		return sqlSession.selectOne("member-mapper.selectMyPage", userNo);
+	}
+
 }

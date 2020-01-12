@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="travelBoard-mapper">
+
+<!-- <resultMap id="travelBoardList" type="TravelBoard">
+      <result column="BNO" property="bNo" />
+      <result column="USERNO" property="userNo" />
+      <result column="BTITLE" property="bTitle" />   
+      <result column="BTAG"  property="bTag" />
+       <result column="BFILENO" property="bFileno" />
+      <result column="RM" property="rm" />
+   </resultMap>  -->
+
+
+   <insert id="insertTravelBoard" parameterType="TravelBoard">
+      INSERT INTO BOARD 
+      VALUES(SEQ_BNO.NEXTVAL, 
+         #{userNo},
+         #{bTitle},
+         #{bTag},
+         #{bContent},
+         #{cNo},
+         #{bUrl},
+         #{bCount},
+         DEFAULT, 
+         DEFAULT)
+   </insert>
+   
+   <insert id="insertTravelAttachment" parameterType="TravelAttachment">
+      <selectKey keyProperty="bNo" resultType="int" order="BEFORE">
+         SELECT SEQ_BNO.CURRVAL FROM DUAL
+      </selectKey>
+      INSERT INTO B_ATTACHMENT
+      VALUES (SEQ_BFILENO.NEXTVAL, 
+            #{bNo}, 
+            #{bFileName}, 
+            #{bFilePath},
+            DEFAULT, DEFAULT, DEFAULT, 
+            #{bFileType})
+   </insert>
+   
+   
+   <select id="selectList" resultType="TravelBoard">
+      SELECT B.*, a.bfilename titleFilename, a.bFileType FROM BOARD B
+       LEFT JOIN B_ATTACHMENT A ON(B.BNO = A.BNO AND A.BFILELEVEL = 0) order by BDATE DESC
+   </select>
+   
+   
+   <select id="selectTravelBoard" parameterType="_int" resultType="travelBoard">
+   SELECT B.*, a.bfilename titleFilename, a.bFileType FROM BOARD B
+   LEFT JOIN B_ATTACHMENT A ON(B.BNO = A.BNO AND A.BFILELEVEL = 0) 
+   WHERE B.BNO = #{bNo}
+   </select>
+   
+   
+   <select id="selectTravelAttachment" parameterType="int" resultType="TravelAttachment">
+      SELECT * FROM B_ATTACHMENT WHERE BNO = #{bNo}
+   </select>
+   
+   <update id="updateTravelBoard" parameterType="TravelBoard">
+      UPDATE BOARD
+      SET BTITLE = #{bTitle},
+          BCONTENT = #{bContent}
+      WHERE BNO = #{bNo}
+   </update>
+   
+   <insert id="updateTravelAttachment" parameterType="TravelAttachment">
+      INSERT INTO B_ATTACHMENT
+      VALUES (SEQ_BFILENO.NEXTVAL, #{bNo}, 
+            #{bFileName}, 
+            #{bFilePath},
+            DEFAULT, DEFAULT, DEFAULT)
+   </insert>
+   
+   <update id="deleteTravelBoard" parameterType="int">
+      UPDATE FROM BOARD
+      SET BSTATUS=${bStatus}
+   </update>
+   
+   <update id="deleteTravelAttachment" parameterType="int">
+      UPDATE FROM B_ATTACHMENT
+      SET BFILESTATUS=${bFileStatus}
+   </update>
+</mapper>

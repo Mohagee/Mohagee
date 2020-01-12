@@ -4,21 +4,28 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ShowBoard-mapper">
 
-   <select id="selectList" resultType="ShowBoard">
-      SELECT * FROM BOARD
-   </select>
-   
+<!-- <resultMap id="showBoardList" type="ShowBoard">
+		<result column="BNO" property="bNo" />
+		<result column="USERNO" property="userNo" />
+		<result column="BTITLE" property="bTitle" />	
+		<result column="BTAG"  property="bTag" />
+	    <result column="BFILENO" property="bFileno" />
+		<result column="RM" property="rm" />
+	</resultMap>  -->
+
+
    <insert id="insertShowBoard" parameterType="ShowBoard">
       INSERT INTO BOARD 
       VALUES(SEQ_BNO.NEXTVAL, 
          #{userNo},
-         #{bWriter}, 
          #{bTitle},
          #{bTag},
          #{bContent},
-              #{cNo},
-             #{bCount},
-             DEFAULT, DEFAULT)
+         #{cNo},
+         #{bUrl},
+         #{bCount},
+         DEFAULT, 
+         DEFAULT)
    </insert>
    
    <insert id="insertShowAttachment" parameterType="ShowAttachment">
@@ -26,15 +33,27 @@
          SELECT SEQ_BNO.CURRVAL FROM DUAL
       </selectKey>
       INSERT INTO B_ATTACHMENT
-      VALUES (SEQ_BFILENO.NEXTVAL, #{bNo}, 
+      VALUES (SEQ_BFILENO.NEXTVAL, 
+      		#{bNo}, 
             #{bFileName}, 
             #{bFilePath},
-            DEFAULT, DEFAULT, DEFAULT)
+            DEFAULT, DEFAULT, DEFAULT, 
+            #{bFileType})
    </insert>
    
-   <select id="selectShowBoard" parameterType="_int" resultType="ShowBoard">
-      SELECT * FROM BOARD WHERE BNO = #{bNo}
+   
+   <select id="selectList" resultType="ShowBoard">
+		SELECT B.*, a.bfilename titleFilename, a.bFileType FROM BOARD B
+	    LEFT JOIN B_ATTACHMENT A ON(B.BNO = A.BNO AND A.BFILELEVEL = 0) order by BDATE DESC
    </select>
+   
+   
+   <select id="selectShowBoard" parameterType="_int" resultType="showBoard">
+	SELECT B.*, a.bfilename titleFilename, a.bFileType FROM BOARD B
+	LEFT JOIN B_ATTACHMENT A ON(B.BNO = A.BNO AND A.BFILELEVEL = 0) 
+	WHERE B.BNO = #{bNo}
+   </select>
+   
    
    <select id="selectShowAttachment" parameterType="int" resultType="ShowAttachment">
       SELECT * FROM B_ATTACHMENT WHERE BNO = #{bNo}

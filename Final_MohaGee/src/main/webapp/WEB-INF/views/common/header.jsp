@@ -16,15 +16,16 @@
 			<div class="btn-group">
 				<button type="button" class="btn btn-info  .rounded-circle dropdown-toggle"  id="dropdownMenu" 
 					  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					  <i class="far fa-user-circle fa-3x"></i>
+					  <img style="height: 50px; width: 50px; border-top-right-radius : 50%; border-top-left-radius : 50%; border-bottom-right-radius : 50%; border-bottom-left-radius : 50%;"
+					  			src="${ pageContext.request.contextPath }/resources/myPageResources/img/profile.png"/>
 				</button>	 			 
 	 			  			 
 	  				<div class="dropdown-menu dropdown-info"  >
-					    <a class="dropdown-item" style="font-family : binggrea; color: black; " href="#">마이페이지</a>
+					    <a class="dropdown-item" style="font-family : binggrea; color: black; " href="${ pageContext.request.contextPath }/member/myPage.do?userNo=${member.userNo}">마이페이지</a>
 					    <br />	
 					    <a class="dropdown-item" style="font-family : binggrea; color: black; " href="#">알람</a>
 					    <br />
-					    <a class="dropdown-item" style="font-family : binggrea; color: black; " href="#">로그아웃</a>
+					    <a class="dropdown-item" style="font-family : binggrea; color: black; " href="${ pageContext.request.contextPath }/member/logOut.do">로그아웃</a>
 					    <br />
 					    <div class="dropdown-divider"></div>
 	  				</div>
@@ -93,9 +94,9 @@
         </div>
       </div>
       <div class="modal-footer d-flex justify-content-center">
-      	<a href="${ pageContext.request.contextPath }/member/findId.do" style="color: red;">아이디를 잊으셨나요?</a>
+      	<a href="${ pageContext.request.contextPath }/member/findIdPage.do" style="color: red;">아이디를 잊으셨나요?</a>
       	&nbsp;
-      	<a href="${ pageContext.request.contextPath }/member/findPw.do" style="color: red;">비밀번호를 잊으셨나요?</a>
+      	<a href="${ pageContext.request.contextPath }/member/findPwPage.do" style="color: red;">비밀번호를 잊으셨나요?</a>
       	&nbsp;
         <input type="submit" class="btn btn-warning btn-rounded mb-4" value="Login" >
       </div>
@@ -193,7 +194,7 @@
 									style="font-family:cookierun; font-size : 20px;">공연</a>
                         </li>                                                                 
                         <li class="category">
-                        	<a href="${ pageContext.request.contextPath }/gotoGymBoardList.do"
+                        	<a href="${ pageContext.request.contextPath }/gymBoard/gymBoardList.do"
                         			style="font-family:cookierun; font-size : 20px;">운동</a>
                         </li>                  
                         <li class="category">
