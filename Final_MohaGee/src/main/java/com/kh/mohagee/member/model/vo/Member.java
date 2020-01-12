@@ -8,6 +8,7 @@ public class Member {
 	private String userName;
 	private String nickName;
 	private String phone;
+	private String introduce;
 	private String status;
 	private int reportCount;
 	private String userGrade;
@@ -19,7 +20,7 @@ public class Member {
 	}
 
 	public Member(int userNo, String userId, String password, String userName, String nickName, String phone,
-			String status, int reportCount, String userGrade, int emailCheck) {
+			String introduce, String status, int reportCount, String userGrade, int emailCheck) {
 		super();
 		this.userNo = userNo;
 		this.userId = userId;
@@ -27,6 +28,7 @@ public class Member {
 		this.userName = userName;
 		this.nickName = nickName;
 		this.phone = phone;
+		this.introduce = introduce;
 		this.status = status;
 		this.reportCount = reportCount;
 		this.userGrade = userGrade;
@@ -36,8 +38,8 @@ public class Member {
 	@Override
 	public String toString() {
 		return "Member [userNo=" + userNo + ", userId=" + userId + ", password=" + password + ", userName=" + userName
-				+ ", nickName=" + nickName + ", phone=" + phone + ", status=" + status + ", reportCount=" + reportCount
-				+ ", userGrade=" + userGrade + ", emailCheck=" + emailCheck + "]";
+				+ ", nickName=" + nickName + ", phone=" + phone + ", introduce=" + introduce + ", status=" + status
+				+ ", reportCount=" + reportCount + ", userGrade=" + userGrade + ", emailCheck=" + emailCheck + "]";
 	}
 
 	public int getUserNo() {
@@ -88,6 +90,14 @@ public class Member {
 		this.phone = phone;
 	}
 
+	public String getIntroduce() {
+		return introduce;
+	}
+
+	public void setIntroduce(String introduce) {
+		this.introduce = introduce;
+	}
+
 	public String getStatus() {
 		return status;
 	}
@@ -119,7 +129,5 @@ public class Member {
 	public void setEmailCheck(int emailCheck) {
 		this.emailCheck = emailCheck;
 	}
-	
-	
 	
 }

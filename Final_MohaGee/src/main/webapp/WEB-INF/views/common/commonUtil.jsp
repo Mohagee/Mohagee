@@ -31,7 +31,7 @@
 <script type="text/javascript" src="${ pageContext.request.contextPath }/resources/js/coundown-timer.js"></script>
 <script type="text/javascript" src="${ pageContext.request.contextPath }/resources/js/masonry.min.js"></script>
 <script type="text/javascript" src="${ pageContext.request.contextPath }/resources/js/audio.min.js"></script>
-<script type="text/javascript" src="${ pageContext.request.contextPath }/resources/js/jquery.isotope.min.js"></script>     
+<script type="text/javascript" src="${ pageContext.request.contextPath }/resources/js/jquery.isotope.min.js"></script>
 
 <script type="text/javascript">var switchTo5x=true;</script>
 <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>

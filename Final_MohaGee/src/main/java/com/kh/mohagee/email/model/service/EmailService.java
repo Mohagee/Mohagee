@@ -8,6 +8,8 @@ import com.kh.mohagee.email.RandomNumber;
 import com.kh.mohagee.email.emailHandler.EmailHandler;
 import com.kh.mohagee.email.model.dao.EmailDAO;
 import com.kh.mohagee.email.model.vo.Email;
+import com.kh.mohagee.member.model.service.MemberService;
+import com.kh.mohagee.member.model.vo.Member;
 
 @Service
 public class EmailService {
@@ -20,6 +22,9 @@ public class EmailService {
 	
 	@Autowired
 	Email email;
+	
+	@Autowired
+	MemberService memberService;
 
 	public int checkEmail(String email) {
 		return emailDao.checkEmail(email);
@@ -65,6 +70,42 @@ public class EmailService {
 		
 	}
 	
+	public int findPassword(String userId, String TemPass, String encTemPass) throws Exception {
+		
+		int result = 0;
+		
+		Member member = new Member();
+		
+		member.setUserId(userId);
+		member.setPassword(encTemPass);
+		
+		result = memberService.updateTemPass(member);
+		
+		if(result > 0) {
+			
+			EmailHandler sendMail = new EmailHandler(mailSender);
+			
+			sendMail.setSubject("뭐하지? 비밀번호 찾기");
+			sendMail.setText("<h1>비밀번호 찾기</h1>"
+					+ "회원님의 비밀번호는 "  + TemPass + "입니다.");
+			sendMail.setFrom("cainchel357@naver.com", "뭐하지?");
+			sendMail.setTo(userId);
+			sendMail.send();
+			
+		}
+		
+		return result;
+		
+	}
+
+	public String TemPass(String userId) {
+		RandomNumber randomNumber = new RandomNumber();
+		
+		String TemPass = randomNumber.getKey(8, false);
+		
+		return TemPass;
+	}
+
 }
 
 

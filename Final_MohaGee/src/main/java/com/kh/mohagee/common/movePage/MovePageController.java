@@ -67,4 +67,14 @@ public class MovePageController {
        return "travelBoard/travelBoardList";
     }
     
+    @RequestMapping("/member/findIdPage.do")
+	public String findIdPage() {
+		return "member/findId";
+	}
+    
+    @RequestMapping("/member/findPwPage.do")
+	public String findPwPage() {
+		return "member/findPassword";
+	}
+    
 }
