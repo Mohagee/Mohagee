@@ -77,4 +77,9 @@ public class MovePageController {
 		return "member/findPassword";
 	}
     
+    @RequestMapping("/member/memberUpdatePage.do")
+    public String memberUpdatePage() {
+    	return "member/updateProfile";
+    }
+    
 }

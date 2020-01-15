@@ -17,6 +17,7 @@
 		<typeAlias type="com.kh.mohagee.gymBoard.model.vo.GymAttachment" alias="GymAttachment"/>
 		<typeAlias type="com.kh.mohagee.travelBoard.model.vo.TravelBoard" alias="TravelBoard"/>
         <typeAlias type="com.kh.mohagee.travelBoard.model.vo.TravelAttachment" alias="TravelAttachment"/>
+        <typeAlias type="com.kh.mohagee.member.model.vo.Profile" alias="Profile"/>
 	</typeAliases>
 
 </configuration>

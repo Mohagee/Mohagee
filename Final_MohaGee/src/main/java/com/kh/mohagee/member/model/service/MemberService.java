@@ -3,8 +3,10 @@ package com.kh.mohagee.member.model.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.mohagee.member.exception.MemberException;
 import com.kh.mohagee.member.model.dao.MemberDAO;
 import com.kh.mohagee.member.model.vo.Member;
+import com.kh.mohagee.member.model.vo.Profile;
 
 @Service
 public class MemberService {
@@ -44,4 +46,49 @@ public class MemberService {
 		return memberDao.selectMyPage(userNo);
 	}
 
+	public int updateMember(Member member, Profile profile)  {
+		
+		int result = 0;
+		
+		System.out.println("여기까진 옵니다1");
+		System.out.println(profile);
+		
+		Profile originProfile = memberDao.selectProfile(member.getUserNo());
+		
+		result = memberDao.updateMember(member);
+		
+		if (result > 0) {
+			System.out.println("여기까진 옵니다2");
+			if(originProfile != null) { 
+				System.out.println("여기까진 옵니다3");
+				result = memberDao.deleteProfile(member.getUserNo());
+				
+			}
+			  
+			if (profile != null) { 
+				System.out.println("여기까진 옵니다4");
+				result = memberDao.updateProfile(profile); 
+			
+			} 
+		}
+		 
+		return result;
+	}
+
+	public Profile selectProfile(int userNo) {
+		return memberDao.selectProfile(userNo);
+	}
+
 }
+
+
+
+
+
+
+
+
+
+
+
+

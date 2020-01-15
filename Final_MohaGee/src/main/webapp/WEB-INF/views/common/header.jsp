@@ -8,7 +8,7 @@
 <!-- 로그인 버튼 부분 헤더 -->
 <header id="header">
 
-
+<c:url var="pUpFile" value="/resources/profile/"/>
 <!-- 마이페이지 메뉴 버튼 -->
 <c:if test="${!empty member}">
 	<div class="row">
@@ -17,7 +17,7 @@
 				<button type="button" class="btn btn-info  .rounded-circle dropdown-toggle"  id="dropdownMenu" 
 					  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					  <img style="height: 50px; width: 50px; border-top-right-radius : 50%; border-top-left-radius : 50%; border-bottom-right-radius : 50%; border-bottom-left-radius : 50%;"
-					  			src="${ pageContext.request.contextPath }/resources/myPageResources/img/profile.png"/>
+					  			src="${ pUpFile }${profile.pRenamedFileName}"/>
 				</button>	 			 
 	 			  			 
 	  				<div class="dropdown-menu dropdown-info"  >
@@ -280,7 +280,7 @@
 	        				JQ("#nickNameSameCheck").val(1);
 	        			}
 	        		}, error: function(){
-	        			alert("이메일 체크에 실패했습니다.");
+	        			alert("닉네임 체크에 실패했습니다.");
 	        		}
 	        	});
         	});
