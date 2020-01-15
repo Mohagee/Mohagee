@@ -34,7 +34,7 @@ public class TravelBoardDAO {
       return sqlSession.insert("TravelBoard-mapper.insertTravelAttachment", a);
    }
 
-   public TravelBoard selectOneTravelBoard(int bNo) {
+   public TravelBoard selectOne(int bNo) {
       return sqlSession.selectOne("TravelBoard-mapper.selectTravelBoard", bNo);
    }
 
@@ -42,9 +42,8 @@ public class TravelBoardDAO {
       return sqlSession.selectList("TravelBoard-mapper.selectTravelAttachment", bNo);
    }
 
-   public int updateTravelBoard(TravelBoard originBoard) {
-      
-      return sqlSession.update("TravelBoard-mapper.updateTravelBoard", originBoard);
+   public int updateTravelBoard(TravelBoard travelBoard) {
+      return sqlSession.update("TravelBoard-mapper.updateTravelBoard", travelBoard);
    }
    
    public int updateTravelAttachment(TravelAttachment a) {
@@ -52,10 +51,10 @@ public class TravelBoardDAO {
    }
 
    public int deleteTravelBoard(int bNo) {
-      return sqlSession.delete("TravelBoard-mapper.deleteTravelBoard", bNo);
+      return sqlSession.update("TravelBoard-mapper.deleteTravelBoard", bNo);
    }
 
    public int deleteTravelAttachment(int bNo) {
-      return sqlSession.delete("TravelBoard-mapper.deleteTravelAttachment", bNo);
+      return sqlSession.update("TravelBoard-mapper.deleteTravelAttachment", bNo);
    }
 }

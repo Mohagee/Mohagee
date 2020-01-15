@@ -38,6 +38,39 @@
 	<select id="selectMyPage" parameterType="int" resultType="Member">
 		SELECT USERNO, NICKNAME, INTRODUCE, USERGRADE FROM MEMBER WHERE USERNO = #{userNo} AND STATUS = 'N'
 	</select>
+	
+	<update id="updateMember" parameterType="Member">
+		UPDATE MEMBER
+		<set>
+			<if test = "introduce != null">
+				INTRODUCE = #{introduce},
+			</if>
+			<if test = "password != null">
+				PASSWORD = #{password},
+			</if>
+			<if test = "userName != null">
+				USERNAME = #{userName},
+			</if>
+			<if test = "nickName != null">
+				NICKNAME = #{nickName},
+			</if>
+			<if test = "phone != null">
+				PHONE = #{phone},
+			</if>
+		</set>
+		WHERE USERNO = #{userNo}
+	</update>
+	<select id="selectProfile" parameterType="int" resultType="Profile">
+		SELECT * FROM PROFILEPHOTO WHERE USERNO = #{userNo}
+	</select>
+	
+	<delete id="deleteProfile">
+		DELETE FROM PROFILEPHOTO WHERE USERNO = #{userNo}
+	</delete>
+	
+	<insert id="updateProfile">
+		INSERT INTO PROFILEPHOTO VALUES(SEQ_PNO.NEXTVAL, #{userNo}, #{pOriginalFileName}, #{pRenamedFileName}, #{pFilePath}, DEFAULT,DEFAULT)
+	</insert>
 </mapper>
 
 

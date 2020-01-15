@@ -68,10 +68,11 @@
       <div class="row">
             <ul class="masonery-filter text-center">
                <li><a class="btn btn-default active" href="#" data-filter="*" style="font-family:cookierun;">All</a></li>
-               <li><a class="btn btn-default" href="#" data-filter=".big" style="font-family:cookierun;">헬스</a></li>
-               <li><a class="btn btn-default" href="#" data-filter=".small" style="font-family:cookierun;">요가</a></li>
-               <li><a class="btn btn-default" href="#" data-filter=".creative" style="font-family:cookierun;">수영</a></li>
-               <li><a class="btn btn-default" href="#" data-filter=".original" style="font-family:cookierun;">클라이밍</a></li>
+               <li><a class="btn btn-default" href="#" data-filter=".1" style="font-family:cookierun;">쇠질</a></li>
+               <li><a class="btn btn-default" href="#" data-filter=".2" style="font-family:cookierun;">홈트레이닝</a></li>
+               <li><a class="btn btn-default" href="#" data-filter=".3" style="font-family:cookierun;">요가&필라테스</a></li>
+               <li><a class="btn btn-default" href="#" data-filter=".4" style="font-family:cookierun;">철인삼종</a></li>
+               <li><a class="btn btn-default" href="#" data-filter=".5" style="font-family:cookierun;">식단</a></li>
             </ul>
             
 
@@ -81,7 +82,7 @@
             <c:forEach var="gymBoard" items="${list}">
          
             <!--  글 리스트 1 -->
-               <div class="col-md-3 col-sm-4 masonery-item branded mobile big">
+               <div class="col-md-3 col-sm-4 masonery-item branded mobile ${gymBoard.bCategory}">
                   <div class="single-blog two-column">
                   
                   <!-- 사진파일 -->

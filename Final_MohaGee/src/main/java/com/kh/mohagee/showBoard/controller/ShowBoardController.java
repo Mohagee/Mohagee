@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -54,7 +55,7 @@ public class ShowBoardController {
 	public String InsertShowBoard(ShowBoard board, Model model,
 			@RequestParam(value="upFile", required=false) MultipartFile[] upFiles,
 			HttpServletRequest request) {
-
+		System.out.println(board);
 		
 		  // 1. 저장할 폴더 설정 
 		String savePath = request.getSession().getServletContext().getRealPath("resources/showUpload");
@@ -119,6 +120,7 @@ public class ShowBoardController {
 														 
 		  int result = 0;
 		  
+		  System.out.println(list);
 		 try {
 		 
 		 result = showBoardService.insertShowBoard(board, list);
@@ -137,8 +139,6 @@ public class ShowBoardController {
 		 throw e; // 스프링이 처리할 꺼라서 그냥 던져도 됩니다. 
 	 }
 												
-		
-		
 		String msg = "";
 		String loc = "/showBoard/showBoardList.do";// 게시판으로 가기
 
@@ -162,7 +162,11 @@ public class ShowBoardController {
 		List<ShowAttachment> list = showBoardService.selectAttachment(bNo);
 		
 		System.out.println(sb);
-		System.out.println(list.get(0));
+		for(int i = 0; i < list.size(); i++) {
+			System.out.println(list.get(i));
+		}
+		
+		System.out.println(list.size());
 		
 		model.addAttribute("ShowBoard", sb).addAttribute("ShowAttachment", list);
 
@@ -170,9 +174,166 @@ public class ShowBoardController {
 	}
 
 
-	//  게시판 수정하기 (수정버튼에 넣기)
-	 
-	//  @RequestMapping("/showBoard/showBoardUpdate.do")
-	 
+	// 수정페이지로 이동하기
+	@RequestMapping("/showBoard/showBoardUpdateForm.do")
+	public String showBoardUpdateForm(@RequestParam int bNo, Model model) {
 
+		model.addAttribute("ShowBoard", showBoardService.selectOneShowBoard(bNo))
+			.addAttribute("attachmentList", showBoardService.selectAttachment(bNo));
+
+		return "showBoard/showBoardUpdate";
+	}
+	
+	// 게시글 수정하기
+	@RequestMapping("/showBoard/showBoardUpdate.do")
+	public String updateShowBoard(ShowBoard showBoard, Model model,
+			@RequestParam(value = "upFile", required = false) MultipartFile[] upFiles, HttpServletRequest request) {
+
+		int bNo = showBoard.getbNo();
+
+		// 원본 게시글 수정 부분
+		ShowBoard originBoard = showBoardService.selectOneShowBoard(bNo);
+		originBoard.setbTitle(showBoard.getbTitle());
+		originBoard.setbContent(showBoard.getbContent());
+		originBoard.setbTag(showBoard.getbTag());
+		originBoard.setbUrl(showBoard.getbUrl());
+		originBoard.setbCategory(showBoard.getbCategory());
+
+		// 첨부 파일 수정 부분
+		// 1. 파일을 저장할 경로 생성
+		String savePath = request.getSession().getServletContext().getRealPath("/resources/showUpload");
+
+		// 2. 변경을 위해 알아야 할 예전 첨부파일 정보
+		List<ShowAttachment> list = showBoardService.selectAttachment(bNo);
+
+		// *** 만약 첨부파일이 이전에 없었다면...?
+		if (list == null)
+			list = new ArrayList();
+
+		// 3. 저장할 첨부파일을 저장할 위치 존재 확인
+		File dir = new File(savePath);
+
+		// 현재 폴더가 생성되었는지 확인
+		if (dir.exists() == false)
+			dir.mkdirs(); // mkdirs()는 존재하는 파일들까지 전부 생성해줌
+
+		// 4. 파일 업로드 시작!
+		int idx = 0;
+		for (MultipartFile f : upFiles) {
+			ShowAttachment att = null;
+
+			if (!f.isEmpty()) {
+				
+				// 원본파일 삭제
+				if (list.size() > idx) {
+					boolean isDelete = new File(savePath + "/" + list.get(idx).getbFileName()).delete(); // 파일 삭제
+																												// 명령어
+
+					System.out.println("원본파일 삭제 되었나? :" + isDelete);
+
+					att = list.get(idx);
+
+				} else { // 첨부파일이 없는 게시글일때 기존 첨부파일을 삭제할 필요 없어서 추가만 한다.
+					att = new ShowAttachment();
+					att.setbNo(bNo);
+					
+					String originalFileName = f.getOriginalFilename();
+					String ext = originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
+					
+					 if(imgExtList.contains(ext)) {
+						 
+						 att.setbFileType("I");
+						 
+					 } else if(videoExtList.contains(ext) ) {
+						 
+						 att.setbFileType("V");
+						 
+					 } else if(audioExtList.contains(ext)) {
+						 
+						 att.setbFileType("A");
+						 
+					 } else {
+						 
+						 att.setbFileType("E");
+					 }
+					
+					list.add(att);
+				}
+
+				// 정상적인 파일 추가 과정
+				// 원본 파일 이름 가져오기
+				String originalFileName = f.getOriginalFilename();
+								
+				att.setbFileName(originalFileName);
+				att.setbFilePath(savePath + "/" + originalFileName);
+				
+				try {
+
+					f.transferTo(new File(savePath + "/" + originalFileName));
+
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
+				list.set(idx, att);
+			}
+
+			idx++;
+		}
+
+		int result = showBoardService.updateShowBoard(originBoard, list);
+
+		String msg = "";
+		String loc = "/showBoard/showBoardList.do";
+
+		if (result > 0) {
+			msg = "게시글 수정 성공! +_+ ";
+
+		} else {
+			msg = "게시글 수정 실패 ㅜ_ㅜ";
+		}
+
+		model.addAttribute("msg", msg).addAttribute("loc", loc);
+
+		return "common/util";
+	}
+
+	
+	
+	// 게시글 삭제
+	@RequestMapping("/showBoard/showBoardDelete.do")
+	public String boardDelete(int bNo, Model model, HttpSession session) {
+
+		// 게시글에 담긴 첨부파일도 삭제해야한다.
+		String savePath = session.getServletContext().getRealPath("/resources/showUpload");
+
+		List<ShowAttachment> list = showBoardService.selectAttachment(bNo);
+
+		for (ShowAttachment a : list) {
+
+			new File(savePath + "/" + a.getbFileName()).delete();
+		}
+
+		int result = showBoardService.deleteShowBoard(bNo);
+
+		String msg = "";
+		String loc = "/showBoard/showBoardList.do";
+
+		if (result > 0) {
+			msg = "게시글 삭제 성공!";
+
+		} else {
+			msg = "게시글 삭제 실패";
+		}
+
+		model.addAttribute("msg", msg);
+		model.addAttribute("loc", loc);
+
+		return "common/util";
+	}
+
+	
 }

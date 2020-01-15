@@ -80,104 +80,103 @@
                         </div>
                     </div>
                 </div>
-            </div>ss
+            </div>
         </div>
    </section>
 
-<section>
-<div class="mb-2" align="center">
-   <form id="updateShowBoard" 
-         action="${ pageContext.request.contextPath }/showBoard/showBoardUpdate.do"  
-         method="post" enctype="multipart/form-data">
-      <input type="hidden" name="userNo"  value="${member.userNo}"/>
-      
-      <!-- 제목 입력 칸 -->
-      <div class="input-group mb-3" style="width:900px" >
-         <br />
-              <input type="text" class="form-control" aria-label="Text input with dropdown button" 
-              id = "title" name="bTitle" placeholder="제목 입력">
-      </div>
-      
-      <!-- 태그 입력 칸 -->
-      <div class="input-group mb-3" style="width:900px;">
-         <br />
-              <input type="text" class="form-control" aria-label="Text input with dropdown button" 
-              id = "tag" name="bTag" placeholder="태그입력 ex) # 엘리스, #하울">
-      </div>
-           <!-- URL 입력 칸 -->
-      <div class="input-group mb-3" style="width:900px;">
-         <br />
-              <input type="url" class="form-control" aria-label="Text input with dropdown button" 
-              id = "bUrl" name="bUrl" placeholder="link입력 ex) www.naver.com">
-      </div>
-      
-      <br />
-      
- 
-   <div  style="margin-bottom:3px;">
-   		<div class="filebox">
-   			<label id="board_img" for="ex_file">
-   				<i class="fas fa-image"></i>&nbsp;&nbsp;&nbsp;사진 업로드
-   			</label>
-   			<input type="file" id="ex_file" name="upFile">&nbsp;&nbsp; 			
-   			<label id="board_video" for="ex_file">
-   				<i class="fas fa-video"></i>&nbsp;&nbsp;&nbsp;영상 업로드
-   			</label>
-   			<input type="file" id="ex_file" name="upFile">&nbsp;&nbsp;	   		
-   			<label id="board_audio" for="ex_file">
-   				<i class="fas fa-headphones"></i>&nbsp;&nbsp;&nbsp;오디오 업로드
-   			</label>
-   			<input type="file" id="ex_file" name="upFile">&nbsp;&nbsp;     			
-   		</div>
-	</div>
+	<section>
+		<div class="mb-2" align="center">
+			<form id="updateShowBoard" action="${ pageContext.request.contextPath }/showBoard/showBoardUpdate.do"
+					  method="post" enctype="multipart/form-data">
+				<input type="hidden" name="userNo" value="${member.userNo}" />
+				<input type="hidden" name="bNo" value="${ShowBoard.bNo}" />
 
+    <!-- 카테고리선택 칸 -->
+      <select id = "bCategory" name="bCategory" class="input-group mb-3" style="width:900px; border:1px solid lightblue; font-family: bingrae;" >
+		   <option disabled selected >카테고리를 선택해주세요 (필수!)</option>
+		   <option value="musical" >뮤지컬</option>
+		   <option value="act" >연극</option>
+		   <option value="create" >창작 뮤지컬</option>
+		   <option value="original" >오리지널 내한</option>
+      </select>
 
+				<!-- 제목 입력 칸 -->
+				<div class="input-group mb-3" style="width: 900px"><br /> 
+					<input type="text" class="form-control" aria-label="Text input with dropdown button" id="title"
+																	name="bTitle" placeholder="제목 입력" value="${ShowBoard.bTitle}" >
+				</div>
 
-<!--       <div class="form-group">
-          <textarea class="form-control" type="textarea" id="tbcontent" name="tbContent" placeholder="글 내용" maxlength="1000" rows="7"></textarea>
-          <span class="help-block"><p id="characterLeft" class="help-block ">더 이상 작성할 수 없습니다.</p></span>
-      </div>
- -->
-   <!-- 내용 입력칸 -->
-      <div class="editorArea"  style="margin-top:5px;">
-              <textarea id="summernote" name="bContent" placeholder="글 내용" maxlength="1000" rows="7"></textarea>
-              <span class="help-block"><p id="characterLeft" class="help-block ">더 이상 작성할 수 없습니다.</p></span>
-      </div>
-            
+				<!-- 태그 입력 칸 -->
+				<div class="input-group mb-3" style="width: 900px;"><br /> 
+					<input type="text" class="form-control" aria-label="Text input with dropdown button" id="tag" name="bTag"
+																					placeholder="태그입력 ex) # 엘리스, #하울" value="${ShowBoard.bTag}">
+				</div>
+				
+				<!-- URL 입력 칸 -->
+				<div class="input-group mb-3" style="width: 900px;"><br /> 
+					<input type="url" class="form-control" aria-label="Text input with dropdown button" id="bUrl" name="bUrl"
+																				placeholder="link입력 ex) www.naver.com" value="${ShowBoard.bUrl}">
+				</div><br />
 
-<div align="center">
-<button type="reset" class="btn btn-warning" onclick="cancelbtn();">취소</button>
-<button type="submit" class="btn btn-primary" id="btnSubmit">확인</button>
-</div>
-</form>
-            
-</div>
-</section>
-<br ><br ><br ><br ><br >
+				<div style="margin-bottom: 3px;">
+					<div class="filebox">
+						<label id="board_img" for="ex_file"> <i class="fas fa-image"></i>&nbsp;&nbsp;&nbsp;사진올리기
+						</label> <input type="file" id="ex_file" name="upFile" multiple>&nbsp;&nbsp;
 
+						<label id="board_video" for="ex_file"> <i class="fas fa-video"></i>&nbsp;&nbsp;&nbsp;영상올리기
+						</label> <input type="file" id="ex_file" name="upFile">&nbsp;&nbsp;
 
-<c:import url="../common/footer.jsp" />
+						<label id="board_audio" for="ex_file"> <i class="fas fa-headphones"></i>&nbsp;&nbsp;&nbsp;음악올리기
+						</label> <input type="file" id="ex_file" name="upFile">&nbsp;&nbsp;
+					</div>
+				</div>
+
+				<!-- 내용 입력칸 -->
+				<div class="editorArea" style="margin-top: 5px;">
+					<textarea id="summernote" name="bContent"
+						required placeholder="글 내용" maxlength="1000" rows="7">${ShowBoard.bContent}</textarea>
+					<span class="help-block"><p id="characterLeft" class="help-block ">더 이상 작성할 수 없습니다.</p></span>
+				</div>
+
+				<div align="center">
+					<button type="submit" class="btn btn-danger" id="btnSubmit">수정완료</button>
+			
+				<input type="button" class="btn btn-warning" value="삭제하기" 
+					onclick="location.href='${pageContext.request.contextPath}/showBoard/showBoardDelete.do?bNo=${ShowBoard.bNo}'"/>
+					
+				 </div>
+				 <br />
+				 
+			</form>
+		</div>
+	</section>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+
+	<c:import url="../common/footer.jsp" />
 
     <!-- 최대글 작성 한도 스크립트 구현해야함@ -->
 <script>
-   $(document).ready(function(){
-       $('#characterLeft').text('1000 자 작성가능');
-       $('#summernote').keydown(function () {
-           var max = 1000;
-           var len = $(this).val().length;
-           if (len >= max) {
-               $('#characterLeft').text('더 이상 작성할 수 없습니다.');
-               $('#characterLeft').addClass('red');
-               $('#btnSubmit').addClass('disabled');
-           }
-           else {
-               var ch = max - len;
-               $('#characterLeft').text(ch + ' 자 작성가능');
-               $('#btnSubmit').removeClass('disabled');
-               $('#characterLeft').removeClass('red');
-           }
-       });
-   });
+	$(document).ready(function() {
+		$('#characterLeft').text('1000 자 작성가능');
+		$('#summernote').keydown(function() {
+			var max = 1000;
+			var len = $(this).val().length;
+			if (len >= max) {
+				$('#characterLeft').text('더 이상 작성할 수 없습니다.');
+				$('#characterLeft').addClass('red');
+				$('#btnSubmit').addClass('disabled');
+			} else {
+				var ch = max - len;
+				$('#characterLeft').text(ch + ' 자 작성가능');
+				$('#btnSubmit').removeClass('disabled');
+				$('#characterLeft').removeClass('red');
+			}
+		});
+	});
 </script>
 
 

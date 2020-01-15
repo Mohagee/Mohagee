@@ -27,6 +27,7 @@ public class ShowBoardDAO {
 		return sqlSession.selectOne("ShowBoard-mapper.selectTotalContents");
 	}
 	
+	// 게시글 작성
 	public int insertShowBoard(ShowBoard showBoard) {
 		
 		return sqlSession.insert("ShowBoard-mapper.insertShowBoard", showBoard);
@@ -36,6 +37,7 @@ public class ShowBoardDAO {
 		return sqlSession.insert("ShowBoard-mapper.insertShowAttachment", a);
 	}
 
+	// 게시글 선택
 	public ShowBoard selectOneShowBoard(int bNo) {
 		return sqlSession.selectOne("ShowBoard-mapper.selectShowBoard", bNo);
 	}
@@ -44,6 +46,7 @@ public class ShowBoardDAO {
 		return sqlSession.selectList("ShowBoard-mapper.selectShowAttachment", bNo);
 	}
 
+	// 게시글 수정
 	public int updateShowBoard(ShowBoard originBoard) {
 		
 		return sqlSession.update("ShowBoard-mapper.updateShowBoard", originBoard);
@@ -52,13 +55,15 @@ public class ShowBoardDAO {
 	public int updateShowAttachment(ShowAttachment a) {
 		return sqlSession.insert("ShowBoard-mapper.updateShowAttachment", a);
 	}
-
+	
+	
+	// 게시글 삭제
 	public int deleteShowBoard(int bNo) {
-		return sqlSession.delete("ShowBoard-mapper.deleteShowBoard", bNo);
+		return sqlSession.update("ShowBoard-mapper.deleteShowBoard", bNo);
 	}
 
 	public int deleteShowAttachment(int bNo) {
-		return sqlSession.delete("ShowBoard-mapper.deleteShowAttachment", bNo);
+		return sqlSession.update("ShowBoard-mapper.deleteShowAttachment", bNo);
 	}
 
 

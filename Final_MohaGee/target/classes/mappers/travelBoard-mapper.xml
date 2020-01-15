@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC
 "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="travelBoard-mapper">
+<mapper namespace="TravelBoard-mapper">
 
 <!-- <resultMap id="travelBoardList" type="TravelBoard">
       <result column="BNO" property="bNo" />
@@ -23,8 +23,9 @@
          #{bContent},
          #{cNo},
          #{bUrl},
+         #{bCategory},
          #{bCount},
-         DEFAULT, 
+         DEFAULT,
          DEFAULT)
    </insert>
    
@@ -44,14 +45,13 @@
    
    <select id="selectList" resultType="TravelBoard">
       SELECT B.*, a.bfilename titleFilename, a.bFileType FROM BOARD B
-       LEFT JOIN B_ATTACHMENT A ON(B.BNO = A.BNO AND A.BFILELEVEL = 0) order by BDATE DESC
+      LEFT JOIN B_ATTACHMENT A ON(B.BNO = A.BNO AND A.BFILELEVEL = 0) 
+      WHERE BSTATUS = 'N' order by BDATE DESC
    </select>
    
    
    <select id="selectTravelBoard" parameterType="_int" resultType="travelBoard">
-   SELECT B.*, a.bfilename titleFilename, a.bFileType FROM BOARD B
-   LEFT JOIN B_ATTACHMENT A ON(B.BNO = A.BNO AND A.BFILELEVEL = 0) 
-   WHERE B.BNO = #{bNo}
+   SELECT * FROM BOARD WHERE BNO = #{bNo}
    </select>
    
    

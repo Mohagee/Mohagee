@@ -40,7 +40,7 @@
       <div class="collapse navbar-collapse justify-content-end" id="navigation" data-nav-image="${pageContext.request.contextPath}/resources/myPageResources/img/blurred-image-1.jpg">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="#" rel="tooltip" title="Find Password">
+            <a class="nav-link" href="${ pageContext.request.contextPath }/member/findPwPage.do" rel="tooltip" title="Find Password">
             	<i class="fas fa-key fa-2x"></i>
 	            <p class="d-lg-none d-xl-none">Find Password</p>
             </a>

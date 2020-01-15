@@ -16,6 +16,11 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
 <!-- core -->
+<script type="text/javascript" src="${ pageContext.request.contextPath }/resources/js/jquery-3.4.1.min.js"></script>
+
+<script>
+	var JQ = $.noConflict();
+</script>
 <script type="text/javascript" src="${ pageContext.request.contextPath }/resources/myPageResources/js/core/jquery.min.js"></script>
 <script type="text/javascript" src="${ pageContext.request.contextPath }/resources/myPageResources/js/core/popper.min.js"></script>
 <script type="text/javascript" src="${ pageContext.request.contextPath }/resources/myPageResources/js/core/bootstrap.min.js"></script>

@@ -10,15 +10,16 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-    ${ myPageMember.nickName }님의 마이페이지
+	${ myPageMember.nickName }님의 마이페이지
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   
-  <c:import url="../common/myPageUtil.jsp"></c:import>
+  <c:import url="../common/myPageUtil.jsp"/>
   
 </head>
 
 <body class="profile-page sidebar-collapse">
+	<c:url var="pUpFile" value="/resources/profile/"/>
 	<c:set value="${ member.userNo }" var="userNo"/>
 	<c:set value="${ myPageMember.userNo }" var="mUserNo"/>
 	<c:set value="${ myPageMember.userGrade }" var="mGrade"/>
@@ -45,18 +46,12 @@
         <ul class="navbar-nav">
         	<c:if test="${ userNo eq mUserNo }">
 	          <li class="nav-item">
-	            <a class="nav-link" href="#" rel="tooltip" title="Edit Profile">
+	            <a class="nav-link" href="${ pageContext.request.contextPath }/member/memberUpdatePage.do" rel="tooltip" title="Edit Profile">
 	            	<i class="fas fa-user-edit fa-2x"></i>
 		            <p class="d-lg-none d-xl-none">Edit Profile</p>
 	            </a>
 	          </li>
           	</c:if>
-          <li class="nav-item">
-            <a class="nav-link" href="#" rel="tooltip" title="Favorite">
-            	<i class="fas fa-heart fa-2x"></i>
-            	<p class="d-lg-none d-xl-none">Favorite</p>
-			</a>
-          </li>
         </ul>
       </div>
     </div>
@@ -68,7 +63,7 @@
       </div>
       <div class="container" style="height: auto;">
         <div class="photo-container">
-          <img src="${ pageContext.request.contextPath }/resources/myPageResources/img/profile.png" alt="">
+          <img src="${ pUpFile }${myPageProfile.pRenamedFileName}" alt="">
         </div>
         <h3 class="title">${ myPageMember.nickName }</h3>
         <p class="category">
@@ -77,7 +72,7 @@
         </p>
         <div class="content" style="position: relative;height: auto; width: auto;">
           <div class="social-description" style="height: auto; width: auto;">
-          	<c:if test="${ !empty introduce }">
+          	<c:if test="${ !empty mIntroduce }">
 	            <h3>자기 소개</h3>
 	            <div style="margin: auto;">
 	            	${ myPageMember.introduce }
@@ -87,23 +82,82 @@
         </div>
       </div>
     </div>
+    <c:if test="${ mGrade eq 'E' }">
     <div class="section">
       <div class="container">
         <div class="row">
           <div class="col-md-6 ml-auto mr-auto">
             <h4 class="title text-center">
-				<c:if test="${ mGrade eq 'E' }">My Post</c:if>
-				<c:if test="${ mGrade eq 'U' }">My Favorite</c:if>
+				${ myPageMember.nickName }'s Post
 			</h4>
             <div class="nav-align-center">
               <ul class="nav nav-pills nav-pills-primary nav-pills-just-icons" role="tablist">
-              	<c:if test="${ mGrade eq 'E' }">
                 <li class="nav-item">
-                  <a class="nav-link" data-toggle="tab" href="#profile" role="tablist">
+                  <a class="nav-link active" data-toggle="tab" href="#profile" role="tablist">
                     <i class="far fa-image"></i>
                   </a>
                 </li>
-                </c:if>
+              </ul>
+            </div>
+          </div>
+          <!-- Tab panes -->
+          <div class="tab-content gallery">
+            <div class="tab-pane active" id="home" role="tabpanel">
+              <div class="col-md-10 ml-auto mr-auto">
+                <div class="row collections">
+                  	<div class="col-md-6">
+                    <img src="${ pageContext.request.contextPath }/resources/myPageResources/img/bg6.jpg" class="img-raised">
+                    <img src="${ pageContext.request.contextPath }/resources/myPageResources/img/bg11.jpg" alt="" class="img-raised">
+                  </div>
+                  <div class="col-md-6">
+                    <img src="${ pageContext.request.contextPath }/resources/myPageResources/img/bg7.jpg" alt="" class="img-raised">
+                    <img src="${ pageContext.request.contextPath }/resources/myPageResources/img/bg8.jpg" alt="" class="img-raised">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane" id="profile" role="tabpanel">
+              <div class="col-md-10 ml-auto mr-auto">
+                <div class="row collections">
+                  <div class="col-md-6">
+                    <img src="${ pageContext.request.contextPath }/resources/myPageResources/img/bg6.jpg" class="img-raised">
+                    <img src="${ pageContext.request.contextPath }/resources/myPageResources/img/bg11.jpg" alt="" class="img-raised">
+                  </div>
+                  <div class="col-md-6">
+                    <img src="${ pageContext.request.contextPath }/resources/myPageResources/img/bg7.jpg" alt="" class="img-raised">
+                    <img src="${ pageContext.request.contextPath }/resources/myPageResources/img/bg8.jpg" alt="" class="img-raised">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane" id="messages" role="tabpanel">
+              <div class="col-md-10 ml-auto mr-auto">
+                <div class="row collections">
+                  <div class="col-md-6">
+                    <img src="${ pageContext.request.contextPath }/resources/myPageResources/img/bg3.jpg" alt="" class="img-raised">
+                    <img src="${ pageContext.request.contextPath }/resources/myPageResources/img/bg8.jpg" alt="" class="img-raised">
+                  </div>
+                  <div class="col-md-6">
+                    <img src="${ pageContext.request.contextPath }/resources/myPageResources/img/bg7.jpg" alt="" class="img-raised">
+                    <img src="${ pageContext.request.contextPath }/resources/myPageResources/img/bg6.jpg" class="img-raised">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </c:if>
+    <div class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 ml-auto mr-auto">
+            <h4 class="title text-center">
+				${ myPageMember.nickName }'s Favorite
+			</h4>
+            <div class="nav-align-center">
+              <ul class="nav nav-pills nav-pills-primary nav-pills-just-icons" role="tablist">
                 <li class="nav-item">
                   <a class="nav-link active" data-toggle="tab" href="#home" role="tablist">
                     <i class="fas fa-heart"></i>

@@ -36,34 +36,30 @@ public class GymBoardDAO {
 	
 	
 	
-	public GymBoard selectOneGymBoard(int boardNo) {
-		return sqlSession.selectOne("GymBoard-mapper.selectGymBoard", boardNo);
+	public GymBoard selectOneGymBoard(int bNo) {
+		return sqlSession.selectOne("GymBoard-mapper.selectGymBoard", bNo);
 	}
 
-	public List<GymAttachment> selectGymAttachment(int boardNo) {
-		return sqlSession.selectList("GymBoard-mapper.selectGymAttachment", boardNo);
+	public List<GymAttachment> selectGymAttachment(int bNo) {
+		return sqlSession.selectList("GymBoard-mapper.selectGymAttachment", bNo);
 	}
 
-	public int updateGymBoard(GymBoard originBoard) {
+	public int updateGymBoard(GymBoard gymBoard) {
 		
-		return sqlSession.update("GymBoard-mapper.updateGymBoard", originBoard);
+		return sqlSession.update("GymBoard-mapper.updateGymBoard", gymBoard);
 	}
 	
 	public int updateGymAttachment(GymAttachment a) {
 		return sqlSession.insert("GymBoard-mapper.updateGymAttachment", a);
 	}
 
-	public int deleteGymBoard(int boardNo) {
-		return sqlSession.delete("GymBoard-mapper.deleteGymBoard", boardNo);
+	public int deleteGymBoard(int bNo) {
+		return sqlSession.update("GymBoard-mapper.deleteGymBoard", bNo);
 	}
 
-	public int deleteGymAttachment(int boardNo) {
-		return sqlSession.delete("GymBoard-mapper.deleteGymAttachment", boardNo);
+	public int deleteGymAttachment(int bNo) {
+		return sqlSession.update("GymBoard-mapper.deleteGymAttachment", bNo);
 	}
-
-
-	
-	
 }
 
 

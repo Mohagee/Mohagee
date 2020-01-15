@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.mohagee.member.model.vo.Member;
+import com.kh.mohagee.member.model.vo.Profile;
 
 @Repository
 public class MemberDAO {
@@ -42,6 +43,26 @@ public class MemberDAO {
 
 	public Member selectMyPage(int userNo) {
 		return sqlSession.selectOne("member-mapper.selectMyPage", userNo);
+	}
+
+	public int updateMember(Member member) {
+		return sqlSession.update("member-mapper.updateMember", member);
+	}
+
+	public int insertProfilePhoto(Profile profile) {
+		return sqlSession.insert("member-mapper.insertProfile");
+	}
+
+	public Profile selectProfile(int userNo) {
+		return sqlSession.selectOne("member-mapper.selectProfile", userNo);
+	}
+
+	public int deleteProfile(int userNo) {
+		return sqlSession.delete("member-mapper.deleteProfile", userNo);
+	}
+
+	public int updateProfile(Profile profile) {
+		return sqlSession.insert("member-mapper.updateProfile", profile);
 	}
 
 }

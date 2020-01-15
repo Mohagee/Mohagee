@@ -82,6 +82,18 @@
                                         </ul>
                                     </div>
                                     </div>
+                                    <!-- 게시글 수정 버튼  -->
+		                            <div>
+		                            <a href="${ pageContext.request.contextPath }/travelBoard/travelBoardList.do">
+		                               <button type="button" class="btn btn-warning" id="rewriteBtn">목록으로</button>
+		                            </a>&nbsp;                           
+		                            <a href="${ pageContext.request.contextPath }/travelBoard/travelBoardUpdate.do">
+		                               <button type="button" class="btn btn-primary" id="rewriteBtn">수정하기</button>
+		                            </a>&nbsp;
+		                            <a href="${ pageContext.request.contextPath }/travelBoard/travelBoardDelete.do">
+		                               <button type="button" class="btn btn-danger" id="deleteBtn">삭제하기</button>
+		                            </a>
+		                            </div><br />
                                     <div class="blog-share">
                                         <span class='st_facebook_hcount'></span>
                                         <span class='st_twitter_hcount'></span>
