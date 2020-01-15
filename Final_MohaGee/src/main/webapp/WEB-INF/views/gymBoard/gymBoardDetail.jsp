@@ -61,18 +61,30 @@
                              
                                 <div class="post-content overflow">
                                     <p style="font-family:cookierun; font-size:30px;">
-                                    	${board.bContent }
+                                    	${gymBoard.bContent }
                                     </p>
-
-                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalVM"><i class="fas fa-caret-square-right"></i></button>
+					<br />
+                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalVM"><i class="fas fa-caret-square-right"></i>&nbsp;&nbsp; PlayVedio</button>
                                     <div class="post-bottom overflow">
                                         <ul class="nav navbar-nav post-nav">
-                                            <li><a href="#"><i class="far fa-clock" style="font-family:cookierun;"></i>&nbsp;&nbsp;${board.bDate}</a></li>
-                                            <li><a href="#"><i class="fa fa-tag" style="font-family:cookierun;"></i>&nbsp;&nbsp;${board.bTag}</a></li>
+                                            <li><a href="#"><i class="far fa-clock" style="font-family:cookierun;"></i>&nbsp;&nbsp;${gymBoard.bDate}</a></li>
+                                            <li><a href="#"><i class="fa fa-tag" style="font-family:cookierun;"></i>&nbsp;&nbsp;${gymBoard.bTag}</a></li>
                                             <li><a href="#"><i class="fa fa-heart" style="font-family:cookierun;"></i>&nbsp;&nbsp;좋아요 숫자</a></li>
                                             <li><a href="#"><i class="fa fa-comments" style="font-family:cookierun;"></i>&nbsp;&nbsp;댓글 숫자</a></li>
                                         </ul>
                                     </div>
+                                                               <!-- 게시글 수정 버튼  -->
+				<div>
+					<a href="${ pageContext.request.contextPath }/gymBoard/gymBoardList.do">
+					   <button type="button" class="btn btn-warning" id="rewriteBtn">목록으로</button>
+					</a>&nbsp;                           
+					<a href="${ pageContext.request.contextPath }/gymBoard/gymBoardUpdateView.do?bNo=${gymBoard.bNo}">
+					   <button type="button" class="btn btn-primary" id="rewriteBtn">수정하기</button>
+					</a>&nbsp;
+					<a href="${ pageContext.request.contextPath }/gymBoard/gymBoardDelete.do?bNo=${gymBoard.bNo}">
+					   <button type="button" class="btn btn-danger" id="deleteBtn">삭제하기</button>
+					</a>
+				 </div><br />
                                </div>
                                     <div class="blog-share">
                                         <span class='st_facebook_hcount'></span>
@@ -103,19 +115,25 @@
                                     <ul class="media-list">
                                         <li class="media">
                                         
+                                        <!-- 댓글창 시작 -->
                                             <div class="post-comment">
                                                 <a class="pull-left" href="#">
                                                     <img class="media-object" src="${ pageContext.request.contextPath }/resources/images/blogdetails/2.png" alt="">
                                                 </a>
                                                 <div class="media-body">
-                                                    <span><i class="fa fa-user"></i>댓글 작성자 <a href="#">댓글 작성자 이름 이하 동문</a></span>
-                                                    <p>댓글 내용</p>
-                                                    <ul class="nav navbar-nav post-nav">
-                                                        <li><a href="#"><i class="far fa-comment-alt"></i>댓글 작성일</a></li>                                         
-                                                    </ul>
+                                                    <span><i class="fa fa-user"></i>댓글 작성자 <a href="#">댓글 작성일</a></span>
+                                                    
+                                                    <p>댓글 내용3333</p>
+                                                  
+                                                       <div align="right">
+                                                       <a href=""><button type="button" class="btn btn-primary" id="rewriteBtn">수정</button></a>                           
+                                                       <a href=""><button type="button" class="btn btn-danger" id="deleteBtn">삭제</button></a>                                     
+                                                       <a href=""><button type="button" class="btn btn-success" id="reply">댓글</button></a>                                    
+                                                        </div>
+                                                    
                                                 </div>
                                             </div>
-                                        </li>                                    
+                                        </li>
                                     </ul>                   
                                   </div><!--/Response-area-->
 

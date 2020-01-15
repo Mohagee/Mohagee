@@ -2,11 +2,14 @@ package com.kh.mohagee.gymBoard.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -56,7 +59,7 @@ public class GymBoardController {
 			GymBoard board, Model model,
 			@RequestParam(value="upFile", required=false) MultipartFile[] upFiles,
 			HttpServletRequest request) {
-	
+		System.out.println(board);
 		// 1. 저장할 폴더 설정
 		String savePath
 			= request.getSession().getServletContext()
@@ -88,6 +91,8 @@ public class GymBoardController {
 	             }
 	              GymAttachment att = new GymAttachment();
 	        
+	              System.out.println("INSERT FILENAME : " + originalFileName);
+	              
 	              att.setbFileName(originalFileName);
 	              att.setbFilePath(savePath);
 	              if(imgExtList.contains(ext)) {
@@ -145,18 +150,181 @@ public class GymBoardController {
 		
 		GymBoard gb = GymBoardService.selectOneGymBoard(bNo);
 		
+		ArrayList<Gym>
 		List<GymAttachment> list = GymBoardService.selectAttachment(bNo);
 		
-		model.addAttribute("board", gb)
+		
+		
+		// gymBoard라는 이름에(키) gb에 담긴 값을 담는다(값)
+		model.addAttribute("gymBoard", gb)
 			.addAttribute("GymAttachmentList", list);
 		
 		return "gymBoard/gymBoardDetail";
 	}
+	
+	// 건하 게시판 수정하러가기 (수정버튼에 넣기)
+	@RequestMapping("/gymBoard/gymBoardUpdateView.do")
+	public String gymBoardUpdateView(@RequestParam int bNo, Model model) {
+		
+		model.addAttribute("gymBoard", GymBoardService.selectOneGymBoard(bNo))
+		     .addAttribute("GymAttachmentList", GymBoardService.selectAttachment(bNo));
+		
+		return "gymBoard/gymBoardUpdateView";
+	}
+	
+	// 건하 게시판 수정완료하기 (수정완료버튼에 넣기)
+	
+	@RequestMapping("/gymBoard/gymBoardUpdateEnd.do")
+	public String GymBoardUpdate(GymBoard board, Model model,
+					@RequestParam(value="upFile", required=false) 
+	  					MultipartFile[] upFiles,
+					HttpServletRequest request) {
+		
+		int bNo = board.getbNo();
+		
+		// 원본 게시글 수정 부분
+		GymBoard originBoard
+		   = GymBoardService.selectOneGymBoard(bNo);
+		
+		originBoard.setbTitle(board.getbTitle());
+		originBoard.setbContent(board.getbContent());
+		originBoard.setbTag(board.getbTag());
+		originBoard.setbUrl(board.getbUrl());
+		originBoard.setbCategory(board.getbCategory());
+		
+		
+		// 첨부파일 내용을 수정하는 부분
+		// 1. 파일을 저장할 경로 생성
+		String savePath
+		 = request.getSession().getServletContext()
+		          .getRealPath("/resources/gymUpload");
+		
+		// 2. 변경을 위해 알아야 할 예전 첨부파일 정보
+		List<GymAttachment> list
+		   = GymBoardService.selectAttachment(bNo);
+		// ** 만약 첨부파일이 이전에 없었다면...?
+		if(list == null) list = new ArrayList();
+		
+		// 3. 첨부파일을 저장할 위치 존재 확인
+		File dir = new File(savePath);
+		
+		// 현재 폴더가 생성되었는지 확인
+		if(dir.exists() == false) dir.mkdirs();
+		
+		// 4. 파일 업로드 시작!
+		int idx = 0;
+		for(MultipartFile f : upFiles) {
+			GymAttachment att = null;
+			
+			if( ! f.isEmpty() ) {
+				 String originalFileName = f.getOriginalFilename();
+	             String ext = originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
+	             
+	             System.out.println("UPDATE FILENAME : " + originalFileName);
+	              
+				// 원본 파일 삭제
+				if(list.size() > idx) {
+					boolean isDelete
+					  = new File(savePath + "/" + list.get(idx).getbFileName()).delete();
+					
+					System.out.println("원본 파일 삭제 되었나요? : " + isDelete);
+					
+					att = list.get(idx);
+				} else {
+					att = new GymAttachment();
+					att.setbNo(bNo);
+					
+					 
+		              att.setbFileName(originalFileName);
+		              att.setbFilePath(savePath);
+		              
+		              if(imgExtList.contains(ext)) {
+		                 att.setbFileType("I");
+		              } else if(videoExtList.contains(ext) ) {
+		                 att.setbFileType("V");
+		              } else if(audioExtList.contains(ext)) {
+		                 att.setbFileType("A");
+		              } else {
+		                 att.setbFileType("E");
+		              }
+					
+					list.add(att);
+				}
+				
+				// 정상적인 파일 추가 과정
+				// 원본 파일 이름 가져오기
+				try {
+					
+					f.transferTo(new File(savePath + "/" + originalFileName));
+					
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+				att.setbFileName(originalFileName);
+				
+				list.set(idx, att);
+			}
+			
+			idx++;
+		}
+		
+		int result = GymBoardService.updateBoard(originBoard, list);
+		
+		String msg = "";
+		String loc = "/gymBoard/gymBoardList.do";
+		
+		if(result > 0)	{
+			msg = "게시글 수정 성공!";
+		} else {
+			msg = "게시글 수정 실패!";
+		}
+		
+		model.addAttribute("msg", msg)
+		     .addAttribute("loc", loc);
+		
+		return "common/util";
+	}	
+	
+	
 
-/*
-	// 건하 게시판 수정하기 (수정버튼에 넣기)
-	@RequestMapping("/board/gymBoardUpdate.do")
- */
+	
+	
+	
+	
+	
+	// 건하 게시판 삭제하기 (삭제버튼에 넣기)
+	@RequestMapping("/gymBoard/gymBoardDelete.do")
+	public String gymBoardDelete(@RequestParam int bNo, Model model, HttpSession session) {
+		
+		// 게시글 삭제 시 게시글에 담긴 첨부파일도 삭제해야 한다.
+		String savePath
+		    = session.getServletContext().getRealPath("/resources/gymUpload");
+		
+		List<GymAttachment> list = GymBoardService.selectAttachment(bNo);
+		
+		for(GymAttachment a : list) {
+			new File(savePath + "/" + a.getbFileName()).delete();
+		}
+		
+		int result = GymBoardService.deleteGymBoard(bNo);
+		
+		String msg = "";
+		String loc = "/gymBoard/gymBoardList.do";
+		
+		if(result > 0) {
+			msg = "게시글 삭제 성공!";
+		} else {
+			msg = "게시글 삭제 실패!";
+		}
+		
+		model.addAttribute("msg", msg)
+		     .addAttribute("loc", loc);
+		
+		return "common/util";
+	}
 	
 }
 

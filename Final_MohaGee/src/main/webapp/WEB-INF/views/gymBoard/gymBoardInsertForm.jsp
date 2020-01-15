@@ -90,14 +90,16 @@
          action="${ pageContext.request.contextPath }/gymBoard/gymBoardInsertEnd.do"  
          method="post" enctype="multipart/form-data">
       <input type="hidden" name="userNo"  value="${member.userNo}"/>
-      
+
+
       <!-- 제목 입력 칸 -->
       <div class="input-group mb-3" style="width:900px" >
          <br />
               <input type="text" class="form-control" aria-label="Text input with dropdown button" 
-              id = "title" name="bTitle" placeholder="제목 입력">
+              id = "title" name="bTitle" placeholder="제목 입력" required>
       </div>
-      
+
+     
       <!-- 태그 입력 칸 -->
       <div class="input-group mb-3" style="width:900px;">
          <br />
@@ -107,11 +109,25 @@
            <!-- URL 입력 칸 -->
       <div class="input-group mb-3" style="width:900px;">
          <br />
-              <input type="text" class="form-control" aria-label="Text input with dropdown button" 
+              <input type="text" class="form-control" 
+              aria-label="Text input with dropdown button" 
               id = "bUrl" name="bUrl" placeholder="link입력 ex) www.naver.com">
       </div>
+
+      <!-- 카테고리선택 칸 -->
+      <select id = "bCategory" name="bCategory" class="input-group mb-3 required" style="width:900px" required>
+      	<option value="" style="font-family:cookierun;"disabled selected >카테고리를 선택해주세요 (필수!)</option>
+	<option value="1" style="font-family:cookierun;">쇠질</option>
+	<option value="2" style="font-family:cookierun;">홈트레이닝</option>
+	<option value="3" style="font-family:cookierun;">요가&필라테스</option>
+	<option value="4" style="font-family:cookierun;">철인삼종</option>
+	<option value="5" style="font-family:cookierun;">식단</option> 
+      </select>
+      
       
       <br />
+
+
       
  
    <div  style="margin-bottom:3px;">
@@ -142,8 +158,8 @@
  -->
    <!-- 내용 입력칸 -->
       <div class="editorArea"  style="margin-top:5px;">
-              <textarea id="summernote" name="bContent" placeholder="글 내용" maxlength="1000" rows="7"></textarea>
-              <span class="help-block"><p id="characterLeft" class="help-block ">더 이상 작성할 수 없습니다.</p></span>
+              <textarea id="summernote" name="bContent" placeholder="글 내용" maxlength="1000" rows="7" required></textarea>
+              <span class="help-block"><p id="characterLeft" class="help-block " >더 이상 작성할 수 없습니다.</p></span>
       </div>
             
 
@@ -180,6 +196,9 @@
            }
        });
    });
+   
+
+   
 </script>
 
 

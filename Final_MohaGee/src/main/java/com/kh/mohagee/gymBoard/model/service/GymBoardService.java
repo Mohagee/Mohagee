@@ -60,19 +60,21 @@ public class GymBoardService {
 
 	public int updateBoard(GymBoard gymBoard, List<GymAttachment> list) {
 		int result = 0;
-		
+		System.out.println("bNo : " + gymBoard.getbNo());
 		List<GymAttachment> originList
 		   = GymBoardDAO.selectGymAttachment(gymBoard.getbNo());
 		
 		result = GymBoardDAO.updateGymBoard(gymBoard);
 		
 		if(result > 0) {
-			if(originList.size() > 0) {
+			if(originList.size() > 0 && list.size() > 0) {
 				result = GymBoardDAO.deleteGymAttachment(gymBoard.getbNo());
 				
-			}
-			
-			if(list.size() > 0) {
+				for(GymAttachment a : list) {
+					result = GymBoardDAO.updateGymAttachment(a);
+					
+				}
+			} else if ( list.size() > 0) {
 				for(GymAttachment a : list) {
 					result = GymBoardDAO.updateGymAttachment(a);
 					
