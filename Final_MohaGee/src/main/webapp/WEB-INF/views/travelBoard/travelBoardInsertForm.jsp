@@ -6,7 +6,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">   
    <c:import url="../common/commonUtil.jsp"/>
@@ -65,6 +64,17 @@
           }
    
    </style>
+   <script>
+	/* textarea에도 required속성을 적용할 수 있지만, 공백이 입력된 경우를 대비해 유효성검사를 실시. */
+	function validate(){
+		var content = JQ("#summernote").val();
+		if(content.trim().length==0){
+			alert("내용을 입력하세요");
+			return false;
+		}
+		return true;
+	}
+	</script>
    
 </head>
 <body>   
@@ -80,22 +90,33 @@
                         </div>
                     </div>
                 </div>
-            </div>ss
+            </div>
         </div>
    </section>
 
 <section>
 <div class="mb-2" align="center">
    <form id="insertForm" 
-         action="${ pageContext.request.contextPath }/showBoard/showBoardInsertEnd.do"  
-         method="post" enctype="multipart/form-data">
+         action="${ pageContext.request.contextPath }/travelBoard/travelBoardInsertEnd.do"  
+         method="post" enctype="multipart/form-data" onsubmit="return validate();">
       <input type="hidden" name="userNo"  value="${member.userNo}"/>
       
+      <!-- 카테고리선택 칸 -->
+	  <select id = "bCategory" name="bCategory" class="input-group mb-3" style="width:900px" required>
+		  <option value="" style="font-family:cookierun;" disabled selected >카테고리를 선택해주세요 (필수!)</option>
+		  <option value="korea" style="font-family:cookierun;">국내</option>
+		  <option value="asia" style="font-family:cookierun;">아시아</option>
+		  <option value="america" style="font-family:cookierun;">아메리카</option>
+		  <option value="europe" style="font-family:cookierun;">유럽</option>
+		  <option value="oceania" style="font-family:cookierun;">오세아니아</option>
+		  <option value="africa" style="font-family:cookierun;">아프리카</option>
+	  </select>
+      
       <!-- 제목 입력 칸 -->
-      <div class="input-group mb-3" style="width:900px" >
+      <div class="input-group mb-3" style="width:900px">
          <br />
               <input type="text" class="form-control" aria-label="Text input with dropdown button" 
-              id = "title" name="bTitle" placeholder="제목 입력">
+              id = "title" name="bTitle" placeholder="제목 입력" required>
       </div>
       
       <!-- 태그 입력 칸 -->
@@ -119,7 +140,7 @@
             <label id="board_img" for="ex_file">
                <i class="fas fa-image"></i>&nbsp;&nbsp;&nbsp;사진 업로드
             </label>
-            <input type="file" id="ex_file" name="upFile">&nbsp;&nbsp;          
+            <input type="file" id="ex_file" name="upFile" multiple>&nbsp;&nbsp;          
             <label id="board_video" for="ex_file">
                <i class="fas fa-video"></i>&nbsp;&nbsp;&nbsp;영상 업로드
             </label>

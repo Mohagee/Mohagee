@@ -198,7 +198,7 @@
                         			style="font-family:cookierun; font-size : 20px;">운동</a>
                         </li>                  
                         <li class="category">
-                        	<a href="${ pageContext.request.contextPath }/gotoTravelBoardList.do"  
+                        	<a href="${ pageContext.request.contextPath }/travelBoard/travelBoardList.do"  
                         			style="font-family:cookierun; font-size : 20px;">여행</a>
                         </li> 
                         <li class="category">

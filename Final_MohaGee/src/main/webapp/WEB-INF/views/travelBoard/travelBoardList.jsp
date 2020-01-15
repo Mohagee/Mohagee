@@ -65,7 +65,8 @@
       <!-- 태그 리스트  -->
       <div class="row">
             <ul class="masonery-filter text-center">
-               <li><a class="btn btn-default active" href="#" data-filter="*">국내</a></li>
+               <li><a class="btn btn-default active" href="#" data-filter="*">ALL</a></li>
+               <li><a class="btn btn-default" href="#" data-filter=".korea">국내</a></li>
                <li><a class="btn btn-default" href="#" data-filter=".asia">아시아</a></li>
                <li><a class="btn btn-default" href="#" data-filter=".america">아메리카</a></li>
                <li><a class="btn btn-default" href="#" data-filter=".europe">유럽</a></li>
@@ -83,7 +84,7 @@
             
          
             <!--  글 리스트 1 -->
-               <div class="col-md-3 col-sm-4 masonery-item branded mobile big">
+               <div class="col-md-3 col-sm-4 masonery-item branded mobile ${travelBoard.bCategory}">
                   <div class="single-blog two-column">
                   
                   <!-- 사진파일 -->
@@ -103,7 +104,7 @@
                         
                         <!--  제목 -->
                         <h2 class="post-title bold">
-                           <a href="${ pageContext.request.contextPath }/travelBoardDetail.do?bNo=${travelBoard.bNo}">${ travelBoard.bTitle }</a>
+                           <a href="${ pageContext.request.contextPath }/travelBoard/travelBoardDetail.do?bNo=${travelBoard.bNo}">${ travelBoard.bTitle }</a>
                         </h2>
 
                         <div class="post-bottom overflow">

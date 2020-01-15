@@ -39,7 +39,6 @@ public class TravelBoardService {
         
         
         // 2. 추가된 게시글의 번호를 가져와 // 첨부파일 추가하기 
-        
         if(list.size() > 0) { 
            int idx = 0;
            for(TravelAttachment a : list) { 
@@ -58,8 +57,8 @@ public class TravelBoardService {
       return result;
    }
 
-   public TravelBoard selectOneTravelBoard(int bNo) {
-      return travelBoardDAO.selectOneTravelBoard(bNo);
+   public TravelBoard selectOne(int bNo) {
+      return travelBoardDAO.selectOne(bNo);
    }
 
    public List<TravelAttachment> selectAttachment(int bNo) {
@@ -67,32 +66,35 @@ public class TravelBoardService {
    }
 
    public int updateBoard(TravelBoard travelBoard, List<TravelAttachment> list) {
-      int result = 0;
+		int result = 0;
+		System.out.println("bNo : " + travelBoard.getbNo());
+		List<TravelAttachment> originList
+		   = travelBoardDAO.selectTravelAttachment(travelBoard.getbNo());
+		
+		result = travelBoardDAO.updateTravelBoard(travelBoard);
+		
+		if(result > 0) {
+			if(originList.size() > 0 && list.size() > 0) {
+				result = travelBoardDAO.deleteTravelAttachment(travelBoard.getbNo());
+				
+				for(TravelAttachment a : list) {
+					result = travelBoardDAO.updateTravelAttachment(a);
+					
+				}
+			} else if ( list.size() > 0) {
+				for(TravelAttachment a : list) {
+					result = travelBoardDAO.updateTravelAttachment(a);
+					
+				}
+			}
+		}
+		
+		return result;
+	}
 
-      List<TravelAttachment> originList = travelBoardDAO.selectTravelAttachment(travelBoard.getbNo());
-
-      result = travelBoardDAO.updateTravelBoard(travelBoard);
-
-      if (result > 0) {
-         if (originList.size() > 0) {
-            result = travelBoardDAO.deleteTravelAttachment(travelBoard.getbNo());
-
-         }
-
-         if (list.size() > 0) {
-            for (TravelAttachment a : list) {
-               result = travelBoardDAO.updateTravelAttachment(a);
-
-            }
-         }
-      }
-
-      return result;
-   }
-
-   public int deleteTravelBoard(int bNo) {
-
-      return travelBoardDAO.deleteTravelBoard(bNo);
-   }
-
+	public int deleteTravelBoard(int bNo) {
+		
+		return travelBoardDAO.deleteTravelBoard(bNo);
+	}
+	
 }
