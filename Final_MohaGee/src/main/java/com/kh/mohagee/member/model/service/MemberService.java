@@ -1,9 +1,10 @@
 package com.kh.mohagee.member.model.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kh.mohagee.member.exception.MemberException;
 import com.kh.mohagee.member.model.dao.MemberDAO;
 import com.kh.mohagee.member.model.vo.Member;
 import com.kh.mohagee.member.model.vo.Profile;
@@ -12,6 +13,7 @@ import com.kh.mohagee.member.model.vo.Profile;
 public class MemberService {
 	
 	@Autowired
+	static
 	MemberDAO memberDao;
 
 	public int insertMember(Member member) {
@@ -77,6 +79,10 @@ public class MemberService {
 
 	public Profile selectProfile(int userNo) {
 		return memberDao.selectProfile(userNo);
+	}
+	
+	public static List<Member> selectMemberList(Member member) {
+		return memberDao.selectMemberList(member);
 	}
 
 }

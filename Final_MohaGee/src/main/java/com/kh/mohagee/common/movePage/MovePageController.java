@@ -82,4 +82,8 @@ public class MovePageController {
     	return "member/updateProfile";
     }
     
+    @RequestMapping("/Chatting.do")
+    public String Chatting() {
+    	return "chat/chatting";
+    }
 }

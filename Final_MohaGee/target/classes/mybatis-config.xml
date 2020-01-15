@@ -19,6 +19,10 @@
 		<typeAlias type="com.kh.mohagee.travelBoard.model.vo.TravelBoard" alias="TravelBoard"/>
         <typeAlias type="com.kh.mohagee.travelBoard.model.vo.TravelAttachment" alias="TravelAttachment"/>
         <typeAlias type="com.kh.mohagee.member.model.vo.Profile" alias="Profile"/>
+        <typeAlias type="com.kh.mohagee.chat.model.vo.Chat" alias="chat" />
+		<typeAlias type="com.kh.mohagee.chat.model.vo.ChatRoom" alias="chatRoom" />
+		<typeAlias type="com.kh.mohagee.talkBoard.model.vo.TalkBoard" alias="Talk"/>
+		<typeAlias type="com.kh.mohagee.talkBoard.model.vo.TalkAttachment" alias="TalkAttachment"/>
 	</typeAliases>
 
 </configuration>

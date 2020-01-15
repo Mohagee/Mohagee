@@ -11,6 +11,11 @@
     
     <c:import url="../common/commonUtil.jsp"/>
 
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
 </head>
 
 <body>
@@ -37,8 +42,12 @@
         <div class="container">
         
         	<div align="right">
-        	<a href="${ pageContext.request.contextPath }/gototravelBoardInsert.do">
+        	<a href="${ pageContext.request.contextPath }/talkInsert.do">
               <button type="button" class="btn btn-success" id="writerBtn">글쓰기</button>
+             </a>
+             &nbsp;&nbsp;&nbsp;
+             <a class="btn btn-primary" href="${ pageContext.request.contextPath }/Chatting.do" role="button">
+             	<span class="glyphicon glyphicon-send" aria-hidden="true"></span> 쪽지
              </a>
         	</div>
              
@@ -50,7 +59,7 @@
                     <li><a class="btn btn-default" href="#" data-filter=".folio">액티비티</a></li>
                     <li><a class="btn btn-default" href="#" data-filter=".logos">기타</a></li>
                 </ul><!--/#portfolio-filter-->
-                <div class="masonery-items masonery_area">
+                <div class="masonery-items masonery_area" id="boardScroll">
                         <div class="col-md-3 col-sm-4 masonery-item branded mobile">
                             <div class="single-blog two-column">
                                 <div class="post-thumb">
@@ -62,17 +71,14 @@
                                     </div>
                                 </div>
                                 <div class="post-content overflow">
-                                    <ul class="nav nav-justified post-nav">
-                                        <li><a href="#"><i class="fa fa-tag"></i>Creative</a></li>
-                                    </ul>
                                     <h2 class="post-title bold"><a href="blogdetails.html">Advanced business cards design</a></h2>
                                     <h3 class="post-author"><a href="#">Posted by micron News</a></h3>
-                                    <p>Duis autem vel eum iriure dolor in hendrerit in blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber [...]</p>
+                                    <p>Duis autemm vel eum iriure dolor in hendrerit in blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber [...]</p>
                                     <a href="#" class="read-more">View More</a>
                                     <div class="post-bottom overflow">
                                         <ul class="nav nav-justified post-nav">
-                                            <li><a href="#"><i class="fa fa-heart"></i>32 Love</a></li>
-                                            <li><a href="#"><i class="fa fa-comments"></i>3 Comments</a></li>
+                                            <li><a href="#"><i class="fa fa-heart"></i> Love</a></li>
+                                            <li><a href="#"><i class="fa fa-comments"></i> Comments</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -274,10 +280,42 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- 여기 들어가야한다고ㅠ -->
                     </div>
+                   
                 </div>
             </div>
     </section>
+    
+    <!-- <script>
+	    $(function() {
+	
+	        // 스크롤 감지
+	        var didScroll = false;
+	
+	        $(window).on('scroll', function() { didScroll = true; });
+	
+	        setInterval(function() {
+	            var bottomHeight = $(window).scrollTop() + $(window).height() + 600;
+	            var docHeight = $(document).height();
+	
+	            if (didScroll) {
+	                didScroll = false;
+	                if (bottomHeight > docHeight) infiniteScrollContent();
+	            }
+	        }, 250);
+	
+	        function infiniteScrollContent() {
+	
+	            var scrollcon = '';
+	            for (var k = 0; k < 4; k++) {
+	                scrollcon += 'foreach 안에 있는 것들 들어갈 곳이에요';
+	            }            
+	            $("#boardScroll").append(scrollcon);
+	        }
+	    });
+    </script> -->
+    
     <c:import url="../common/footer.jsp"/>
 </body>
 </html>

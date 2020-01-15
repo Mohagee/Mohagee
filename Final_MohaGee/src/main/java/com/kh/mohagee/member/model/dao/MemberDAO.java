@@ -1,5 +1,7 @@
 package com.kh.mohagee.member.model.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -63,6 +65,9 @@ public class MemberDAO {
 
 	public int updateProfile(Profile profile) {
 		return sqlSession.insert("member-mapper.updateProfile", profile);
+	}
+	public List<Member> selectMemberList(Member member) {
+		return sqlSession.selectList("member-mapper.selectMemberList", member);
 	}
 
 }

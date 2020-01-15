@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="talkBoard-mapper">
+	
+	<select id="selectList" resultType="Talk">
+		SELECT * FROM TALK
+	</select>
+	
+	<insert id="insertTalk" parameterType="Talk">
+		INSERT INTO TALK 
+		VALUES(SEQ_TNO.NEXTVAL, 
+				#{tTitle},
+		       #{tWriter}, 
+		       #{tContent},
+		       DEFAULT, DEFAULT)
+	</insert>
+	
+	<insert id="insertAttachment" parameterType="TalkAttachment">
+		<selectKey keyProperty="tno" resultType="int" order="BEFORE">
+			SELECT SEQ_TNO.CURRVAL FROM DUAL
+		</selectKey>
+		INSERT INTO T_ATTACHMENT
+		VALUES (SEQ_TFILENO.NEXTVAL, #{tno}, 
+				#{tFileName}, 
+				#{tFilePath},
+				DEFAULT, DEFAULT, DEFAULT)
+	</insert>
+	
+	<select id="selectBoard" parameterType="_int" resultType="Talk">
+		SELECT * FROM TALK WHERE TNO = #{tno}
+	</select>
+	
+	<select id="selectAttachment" parameterType="int" resultType="TalkAttachment">
+		SELECT * FROM T_ATTACHMENT WHERE TNO = #{tno}
+	</select>
+	
+	<update id="updateBoard" parameterType="Talk">
+		UPDATE TALK
+		SET TTITLE = #{tTitle},
+		    TCONTENT = #{tContent}
+		WHERE TNO = #{tno}
+	</update>
+	
+	<insert id="updateAttachment" parameterType="TalkAttachment">
+		INSERT INTO T_ATTACHMENT
+		VALUES (SEQ_TFILENO.NEXTVAL, #{tno}, 
+				#{tFileName}, 
+				#{tFilePath},
+				DEFAULT, DEFAULT, DEFAULT)
+	</insert>
+	
+	<update id="deleteBoard" parameterType="int">
+		UPDATE FROM TALK
+      	SET TSTATUS=${tStatus}
+	</update>
+	
+	<delete id="deleteAttachment" parameterType="int">
+		UPDATE FROM T_ATTACHMENT SET TFILESTATUS = #{tFileStatus}
+	</delete>
+</mapper>
+
+
+
+
+
+
+
+
+
+
