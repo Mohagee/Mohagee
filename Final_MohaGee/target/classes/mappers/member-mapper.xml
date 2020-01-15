@@ -71,6 +71,10 @@
 	<insert id="updateProfile">
 		INSERT INTO PROFILEPHOTO VALUES(SEQ_PNO.NEXTVAL, #{userNo}, #{pOriginalFileName}, #{pRenamedFileName}, #{pFilePath}, DEFAULT,DEFAULT)
 	</insert>
+	
+	<select id="selectMemberList" parameterType="java.util.HashMap">
+		SELECT * FROM MEMBER WHERE USERGRADE = 'U'
+	</select>
 </mapper>
 
 
