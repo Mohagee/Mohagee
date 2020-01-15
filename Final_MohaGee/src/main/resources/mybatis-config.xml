@@ -13,6 +13,7 @@
 		<typeAlias type="com.kh.mohagee.email.model.vo.Email" alias="Email"/>
 		<typeAlias type="com.kh.mohagee.showBoard.model.vo.ShowBoard" alias="ShowBoard" />
  		<typeAlias type="com.kh.mohagee.showBoard.model.vo.ShowAttachment" alias="ShowAttachment" />
+ 		<typeAlias type="com.kh.mohagee.sbComment.model.vo.sbComment" alias="sbComment" />
 		<typeAlias type="com.kh.mohagee.gymBoard.model.vo.GymBoard" alias="GymBoard"/>
 		<typeAlias type="com.kh.mohagee.gymBoard.model.vo.GymAttachment" alias="GymAttachment"/>
 		<typeAlias type="com.kh.mohagee.travelBoard.model.vo.TravelBoard" alias="TravelBoard"/>

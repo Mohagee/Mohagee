@@ -14,7 +14,7 @@
 	<div class="row">
 		<div class="col-md-10" align="right" >
 			<div class="btn-group">
-				<button type="button" class="btn btn-info  .rounded-circle dropdown-toggle"  id="dropdownMenu" 
+				<button type="button" class="btn btn-default  .rounded-circle dropdown-toggle"  id="dropdownMenu" 
 					  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					  <img style="height: 50px; width: 50px; border-top-right-radius : 50%; border-top-left-radius : 50%; border-bottom-right-radius : 50%; border-bottom-left-radius : 50%;"
 					  			src="${ pUpFile }${profile.pRenamedFileName}"/>

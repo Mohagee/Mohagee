@@ -39,7 +39,7 @@
 				<div class="row">
 					<div class="action">
 						<div class="col-sm-12">
-							<h1 class="title">공연, 뭐 볼까?</h1>
+							<h1 class="title" style="font-family:cookierun;">공연, 뭐 볼까?</h1>
 						</div>
 					</div>
 				</div>
@@ -64,11 +64,11 @@
 		
 		<!-- 태그 리스트  -->
 		<div class="row">
-				<ul class="masonery-filter text-center">
+				<ul class="masonery-filter text-center" style="font-family:cookierun;">
 					<li><a class="btn btn-default active" href="#" data-filter="*">All</a></li>
-					<li><a class="btn btn-default" href="#" data-filter=".big">대극장</a></li>
-					<li><a class="btn btn-default" href="#" data-filter=".small">소극장</a></li>
-					<li><a class="btn btn-default" href="#" data-filter=".creative">창작뮤지컬</a></li>
+					<li><a class="btn btn-default" href="#" data-filter=".musical">뮤지컬</a></li>
+					<li><a class="btn btn-default" href="#" data-filter=".act">연극</a></li>
+					<li><a class="btn btn-default" href="#" data-filter=".create">창작 뮤지컬</a></li>
 					<li><a class="btn btn-default" href="#" data-filter=".original">오리지널 내한</a></li>
 				</ul>
 
@@ -80,7 +80,7 @@
 				
 			
 				<!--  글 리스트 1 -->
-					<div class="col-md-3 col-sm-4 masonery-item branded mobile big">
+					<div class="col-md-3 col-sm-4 masonery-item branded mobile ${ showBoard.bCategory} ">
 						<div class="single-blog two-column">
 						
 						<!-- 사진파일 -->
@@ -93,10 +93,12 @@
 							</c:if>
 							
 							<!-- 태그  -->
-							<div class="post-content overflow">
+<%-- 							<div class="post-content overflow">
 								<ul class="nav nav-justified post-nav">
-									<li><a href="#"><i class="fa fa-tag"></i></a></li>
-								</ul>
+									<li><a href="#"><i class="fa fa-tag">${ ShowBoard.bTag }</i></a></li>
+								</ul> --%>
+							<div class="post-content overflow">	
+								<i class="fa fa-tag">${ ShowBoard.bTag }</i>
 								
 								<!--  제목 -->
 								<h2 class="post-title bold">
