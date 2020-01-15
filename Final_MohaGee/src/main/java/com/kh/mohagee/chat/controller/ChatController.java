@@ -23,13 +23,7 @@ import com.kh.mohagee.member.model.vo.Member;
 public class ChatController {
 
 	@Autowired
-	private Member member;
-
-	@Autowired
 	private ChatService chatService;
-
-	@Autowired
-	private MemberService memberService;
 
 	@RequestMapping("/chat/croom/{croomNo}")
 	public String chatView(@PathVariable int croomNo, Model model, HttpServletRequest request) {
@@ -46,7 +40,7 @@ public class ChatController {
 		cr.setUserNo(loginMember.getUserNo());
 		cr.setCroomNo(croomNo);
 		model.addAttribute("croom", chatService.selectCroom(cr));
-		model.addAttribute("memList", MemberService.selectMemberList(member));
+		/* model.addAttribute("memList", MemberService.selectMemberList(member)); */
 		model.addAttribute("chatUser", new Gson().toJson(chatService.selectChatUser(croomNo)));
 
 		return "chat/chatting";

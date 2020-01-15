@@ -1,8 +1,5 @@
 package com.kh.mohagee.member.model.vo;
 
-import org.springframework.stereotype.Component;
-
-@Component
 public class Member {
 	
 	private int userNo;
