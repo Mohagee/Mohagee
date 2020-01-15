@@ -143,7 +143,7 @@
                     	<p>댓글 내용</p>
                     	<i class="far fa-clock"></i> 댓글 작성일
                     	<div align="right">	
-				    		<input type="button" class="btn btn-success btn-rounded btn-sm" value="댓글작성" 
+				    		<input type="button" class="btn btn-info btn-rounded btn-sm" value="댓글작성" 
 							onclick="location.href='${pageContext.request.contextPath}/showBoard/showBoardUpdateForm.do?bNo=${ShowBoard.bNo}'" />&nbsp;					
    			 </div>
                     
