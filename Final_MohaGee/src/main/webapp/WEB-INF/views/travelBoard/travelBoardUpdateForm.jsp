@@ -148,7 +148,11 @@
             
             <div>
 		        <div class="imgs_wrap" style="width:900px">
-		            <img id="img" />
+		        <c:forEach items="${TravelAttachment }" var="att">
+		            <img onclick="fileDelete(this, ${att.bFileNo}, '${att.bFileName}');" id="img" src="${ pageContext.request.contextPath }/resources/upload/${att.bFileName}"/>
+		            <!--  이미지 개별 삭제  -->
+		            <!-- <button type="button" class="btn btn-danger" >X</button> -->
+		        </c:forEach>
 		        </div>
 		    </div> 
 
@@ -201,16 +205,25 @@
 
 $("#tag").tagsinput({
 	   maxTags: 5,
+	   
 	   itemText: function(item) {
-	       return '#' + item;
+		   
+		   $('#tag').on('beforeItemAdd', function(event) {
+				
+				var tag = '#' + event.item;
+				
+				  return tag;
+			});
+		   
+		   $('#tag').on('itemAddedOnInit', function(event) {
+			     return '#' + event.item.label;
+			});
+		   
+		   return item;
 	   },
 	   
 	   cancelConfirmKeysOnEmpty: false
 	   
-	});
-
-	$('#tag').on('itemAddedOnInit', function(event) {
-	     return '#' + event.item.label;
 	});
 	
 	
@@ -278,6 +291,7 @@ $("#tag").tagsinput({
           
       });
   }  
+  /*
      function deleteImageAction(index){
         console.log("index : " + index);
         sel_files.splice(index, 1);
@@ -287,6 +301,24 @@ $("#tag").tagsinput({
         
         console.log(sel_files);
      }
+  */
+  
+  function fileDelete(obj, attNo, attFile){
+	  $.ajax({
+		  url : '${pageContext.request.contextPath}/board/travelFileDelete.do',
+		  data : {attNo : attNo, attFile : attFile},
+		  dataType : 'json',
+		  success : function(data){
+			  if(data ==true){
+				  alert('삭제 완료!');
+				  obj.remove();
+				  obj.prev().remove();
+			  }
+		  }, error : function(data){
+			  console.log(data);
+		  }
+	  });
+  }
      /* -------------------------------------------------------------- */
 </script>
 

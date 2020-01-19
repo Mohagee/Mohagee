@@ -79,7 +79,7 @@ public class TravelBoardService {
 			if(originList.size() > 0 && list.size() > 0) { // 원본도 있고, 변경하려는 이미지도 있을 때
 				result = travelBoardDAO.deleteTravelAttachment(travelBoard.getbNo());
 				// i 가 0일 때 대표이미지를, 1이면 서브이미지를 구현하기 위한 대표 사진 번호를 i로 먼저 지정하기
-				// 내가 추가함
+				// 내가 추가함... 
 				int i = 0; // 이렇게!
 				
 				for(TravelAttachment a : list) {
@@ -118,6 +118,18 @@ public class TravelBoardService {
 	public int deleteTravelBoard(int bNo) {
 		
 		return travelBoardDAO.deleteTravelBoard(bNo);
+	}
+
+	public int deleteFile(int attNo) {
+		// 만약 지우려는 파일이 메인 사진 일 경우
+		// 메인 사진을 지우면 다음의 사진이 메인 역할을 해야 한다.
+		TravelAttachment ta = travelBoardDAO.getAttachmentOne(attNo);
+		if(ta.getbFileLevel() == 0 ) {
+			travelBoardDAO.setNextTitleImage(ta.getbNo());
+		}
+		
+		// 그렇지 않을 경우
+		return travelBoardDAO.deleteFile(attNo);
 	}
 	
 }
