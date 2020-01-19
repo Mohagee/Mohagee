@@ -91,7 +91,7 @@
                   <c:if test="${ fn:trim(travelBoard.bFileType)  == 'I'}">
                      <div class="post-thumb">
                         <a href="${ pageContext.request.contextPath }/travelBoard/travelBoardDetail.do?bNo=${travelBoard.bNo}">
-                           <img src="${ pageContext.request.contextPath }/resources/upload/${travelBoard.titleFilename}"></a>                  
+                           <img src="${ pageContext.request.contextPath }/resources/upload/${travelBoard.titleFilename}" class="img-responsive"></a>                  
                      </div>
                      </c:if>
                      
