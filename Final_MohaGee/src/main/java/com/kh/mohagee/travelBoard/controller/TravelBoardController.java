@@ -2,10 +2,8 @@ package com.kh.mohagee.travelBoard.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,9 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.mohagee.favorite.model.service.FavoriteService;
 import com.kh.mohagee.travelBoard.model.service.TravelBoardService;
-import com.kh.mohagee.travelBoard.model.vo.TravelAttachment;
-import com.kh.mohagee.travelBoard.model.vo.TravelBoard;
 import com.kh.mohagee.travelBoard.model.vo.TravelAttachment;
 import com.kh.mohagee.travelBoard.model.vo.TravelBoard;
 
@@ -36,6 +33,9 @@ public class TravelBoardController {
     
    @Autowired
    TravelBoardService travelBoardService;
+   
+   @Autowired
+   FavoriteService favoriteService;
 
    @RequestMapping("/travelBoard/travelBoardList.do")
    public String travelBoardList(Model model) {
@@ -59,6 +59,20 @@ public class TravelBoardController {
    public String InsertTravelBoard(TravelBoard board, Model model,
          @RequestParam(value="upFile", required=false) MultipartFile[] upFiles,
          HttpServletRequest request) {
+	   
+	   String[] tagArray = board.getbTag().split(",");
+		
+		for(int i = 0; i < tagArray.length; i++) {
+			tagArray[i] = "#" + tagArray[i];
+		}
+		
+		String tagArrayToString = Arrays.toString(tagArray);
+
+		String tag = tagArrayToString.substring(1, tagArrayToString.lastIndexOf(']'));
+
+		System.out.println("tag : " + tag);
+		
+		board.setbTag(tag);
 
       
         // 1. 저장할 폴더 설정 
@@ -170,8 +184,10 @@ public class TravelBoardController {
 
       List<TravelAttachment> list = travelBoardService.selectAttachment(bNo);
       
+      int favoriteCount = favoriteService.favoriteCount(bNo);
+      
    // travelBoard라는 이름에(키) gb에 담긴 값을 담는다(값)
-      model.addAttribute("TravelBoard", tb).addAttribute("TravelAttachment", list);
+      model.addAttribute("TravelBoard", tb).addAttribute("TravelAttachment", list).addAttribute("favoriteCount", favoriteCount);
 
       return "travelBoard/travelBoardDetail";
    }
@@ -193,6 +209,20 @@ public class TravelBoardController {
 			@RequestParam(value="upFile", required=false) MultipartFile[] upFiles, HttpServletRequest request) {
 		
 		int bNo = board.getbNo();
+		
+		String[] tagArray = board.getbTag().split(",");
+		
+		for(int i = 0; i < tagArray.length; i++) {
+			tagArray[i] = "#" + tagArray[i];
+		}
+		
+		String tagArrayToString = Arrays.toString(tagArray);
+
+		String tag = tagArrayToString.substring(1, tagArrayToString.lastIndexOf(']'));
+
+		System.out.println("tag : " + tag);
+		
+		board.setbTag(tag);
 		
 		// 원본 게시글 수정 부분
 		TravelBoard originBoard = travelBoardService.selectOne(bNo);

@@ -23,6 +23,25 @@
           font-size : 30px;
           
        }
+       
+       .bootstrap-tagsinput input{
+		display: none;
+	}
+	
+	li span[data-role = remove]{
+		display: none;
+	}
+	
+	.bootstrap-tagsinput{
+		display: initial;
+		border: none;
+		box-shadow: none;
+	}
+	
+	
+	#favorite:hover{
+		cursor: pointer;
+	}
     </style>
     
     
@@ -72,13 +91,13 @@
                                     <p class="form-control" id="board_content" name="bContent"><b>${TravelBoard.bContent }</b></p>
                                     <div class="post-bottom overflow">
                                         <ul class="nav navbar-nav post-nav">
-                                            <li><a href="#"><i class="far fa-clock"></i>&nbsp;&nbsp;${TravelBoard.bDate}</a></li>
-                                            
-                                            <li><a href="#"><i class="fa fa-tag"></i>여기 태그</a></li>
-                                            
-                                            <li><a href="#"><i class="fa fa-heart"></i>좋아요 숫자</a></li>
-                                            
-                                            <li><a href="#"><i class="fa fa-comments"></i>댓글 숫자</a></li>
+                                            <li style="color: #0099AE"><i class="fas fa-clock"></i>&nbsp;&nbsp;${TravelBoard.bDate}</li>
+             
+                                  			<li style="color: #0099AE"><i class="fas fa-tags"></i>&nbsp;&nbsp;<input type="text" data-role="tagsinput" value="${ TravelBoard.bTag }"/></li>
+                                	
+                                  			<li id="favorite" style="color: #0099AE"><i class="fas fa-heart"></i>&nbsp;&nbsp;${ favoriteCount }</li>
+                                  
+                                  			<li style="color: #0099AE"><i class="fas fa-comments"></i>&nbsp;&nbsp;댓글 숫자</li>
                                         </ul>
                                     </div>
                                     </div>
@@ -149,5 +168,116 @@
     </section>
     
     <c:import url="../common/footer.jsp"/>
+    
+    <script>
+  //태그 관련 스크립트
+	$("input").tagsinput('items')
+// 좋아요 기능
+
+$(function(){
+	
+	var userNo = "${member.userNo}";
+	var bNo = "${TravelBoard.bNo}";
+	
+	$.ajax({
+		url: "${pageContext.request.contextPath}/favorite/checkFavorite",
+		data: {
+			userNo : userNo,
+			bNo : bNo
+		},
+		dataType: "json",
+		async: false,
+		success: function(data){
+			
+			if(data.Favorite.fStatus == 'Y'){
+				$("#favorite").css("color", "red");
+			}
+			
+		}
+	});
+	
+});
+
+$("#favorite").on("click", function(){
+	
+	var userNo = "${member.userNo}";
+	var bNo = "${TravelBoard.bNo}";
+	
+	$.ajax({
+		url: "${pageContext.request.contextPath}/favorite/checkFavorite",
+		data: {
+			userNo : userNo,
+			bNo : bNo
+		},
+		dataType: "json",
+		async: false,
+		success: function(data){
+			
+			/* console.log(data);
+			console.log(data.Favorite);
+			console.log(data.Favorite.fStatus); */
+			
+			var fStatus = data.Favorite.fStatus;
+			
+			if(fStatus == null || fStatus == 'N'){
+				$.ajax({
+					url: "${pageContext.request.contextPath}/favorite/doFavorite",
+					data: {
+						fStatus : fStatus,
+		    			userNo : userNo,
+		    			bNo : bNo
+		    		},
+		    		async: false,
+		    		success: function(data){
+		    			if(data == 1){
+		    				alert("좋아요를 눌러주셔서 감사합니다.");
+		        			$("#favorite").css("color", "red");
+		        			
+		        			var text = $('#favorite').text();
+		        			
+		        			$.ajax({
+		        				url: "${pageContext.request.contextPath}/favorite/favoriteNumber",
+		        				data: {
+		        					bNo : bNo
+		        				},
+		        				async: false,
+		        				success: function(data){
+		        					$('#favorite').html('<i class="fas fa-heart"></i>&nbsp;&nbsp;' + data);
+		        				}
+		        			});
+		    			}
+		    		}
+				});
+			} else {
+				$.ajax({
+					url: "${pageContext.request.contextPath}/favorite/cancelFavorite",
+					data: {
+						userNo : userNo,
+		    			bNo : bNo
+					},
+					async: false,
+					success: function(data){
+						if(data == 1) {
+							alert("좋아요를 취소하였습니다.");
+		        			$("#favorite").css("color", "#0099AE");
+		        			
+		        			$.ajax({
+		        				url: "${pageContext.request.contextPath}/favorite/favoriteNumber",
+		        				data: {
+		        					bNo : bNo
+		        				},
+		        				async: false,
+		        				success: function(data){
+		        					$('#favorite').html('<i class="fas fa-heart"></i>&nbsp;&nbsp;' + data);
+		        				}
+		        			});
+						}
+					}
+				});
+			}
+		}
+	});
+});
+    </script>
 </body>
 </html>
