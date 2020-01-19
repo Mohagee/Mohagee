@@ -40,7 +40,11 @@
 	</insert>
 	
 	<select id="selectGymBoard" parameterType="_int" resultType="GymBoard">
-      SELECT * FROM BOARD WHERE BNO = #{bNo} AND BKIND = 'G'
+      SELECT B.*, M.NICKNAME, M.INTRODUCE , P.PRENAMEDFILENAME,  C.CLAT, C.CLNG FROM BOARD B
+		JOIN MEMBER M ON(B.USERNO = M.USERNO)
+		JOIN PROFILEPHOTO P ON(B.USERNO = P.USERNO)
+		JOIN COORDINATES C ON(B.CNO = C.CNO)
+		WHERE BNO = #{bNo}
 	</select>
 	
 	<select id="selectGymAttachment" parameterType="int" resultType="GymAttachment">

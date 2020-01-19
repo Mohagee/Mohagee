@@ -19,9 +19,12 @@ public class TravelBoard implements Serializable {
    private String titleFilename;
    private String bFileType;
    private String bStatus;
+   private String nickName;
+   private String introduce;
+   private String pRenamedFileName;
    
    private int bFileno;
-   private int rm;
+
    
    
    public TravelBoard() {
@@ -29,9 +32,10 @@ public class TravelBoard implements Serializable {
    }
 
 
+
 public TravelBoard(int bNo, int userNo, String bTitle, String bTag, String bContent, int cNo, String bUrl,
 		String bCategory, String bKind, int bCount, Date bDate, String titleFilename, String bFileType, String bStatus,
-		int bFileno, int rm) {
+		String nickName, String introduce, String pRenamedFileName, int bFileno) {
 	super();
 	this.bNo = bNo;
 	this.userNo = userNo;
@@ -47,9 +51,12 @@ public TravelBoard(int bNo, int userNo, String bTitle, String bTag, String bCont
 	this.titleFilename = titleFilename;
 	this.bFileType = bFileType;
 	this.bStatus = bStatus;
+	this.nickName = nickName;
+	this.introduce = introduce;
+	this.pRenamedFileName = pRenamedFileName;
 	this.bFileno = bFileno;
-	this.rm = rm;
 }
+
 
 
 @Override
@@ -57,8 +64,10 @@ public String toString() {
 	return "TravelBoard [bNo=" + bNo + ", userNo=" + userNo + ", bTitle=" + bTitle + ", bTag=" + bTag + ", bContent="
 			+ bContent + ", cNo=" + cNo + ", bUrl=" + bUrl + ", bCategory=" + bCategory + ", bKind=" + bKind
 			+ ", bCount=" + bCount + ", bDate=" + bDate + ", titleFilename=" + titleFilename + ", bFileType="
-			+ bFileType + ", bStatus=" + bStatus + ", bFileno=" + bFileno + ", rm=" + rm + "]";
+			+ bFileType + ", bStatus=" + bStatus + ", nickName=" + nickName + ", introduce=" + introduce
+			+ ", pRenamedFileName=" + pRenamedFileName + ", bFileno=" + bFileno + "]";
 }
+
 
 
 public int getbNo() {
@@ -66,9 +75,11 @@ public int getbNo() {
 }
 
 
+
 public void setbNo(int bNo) {
 	this.bNo = bNo;
 }
+
 
 
 public int getUserNo() {
@@ -76,9 +87,11 @@ public int getUserNo() {
 }
 
 
+
 public void setUserNo(int userNo) {
 	this.userNo = userNo;
 }
+
 
 
 public String getbTitle() {
@@ -86,9 +99,11 @@ public String getbTitle() {
 }
 
 
+
 public void setbTitle(String bTitle) {
 	this.bTitle = bTitle;
 }
+
 
 
 public String getbTag() {
@@ -96,9 +111,11 @@ public String getbTag() {
 }
 
 
+
 public void setbTag(String bTag) {
 	this.bTag = bTag;
 }
+
 
 
 public String getbContent() {
@@ -106,9 +123,11 @@ public String getbContent() {
 }
 
 
+
 public void setbContent(String bContent) {
 	this.bContent = bContent;
 }
+
 
 
 public int getcNo() {
@@ -116,9 +135,11 @@ public int getcNo() {
 }
 
 
+
 public void setcNo(int cNo) {
 	this.cNo = cNo;
 }
+
 
 
 public String getbUrl() {
@@ -126,9 +147,11 @@ public String getbUrl() {
 }
 
 
+
 public void setbUrl(String bUrl) {
 	this.bUrl = bUrl;
 }
+
 
 
 public String getbCategory() {
@@ -136,9 +159,11 @@ public String getbCategory() {
 }
 
 
+
 public void setbCategory(String bCategory) {
 	this.bCategory = bCategory;
 }
+
 
 
 public String getbKind() {
@@ -146,9 +171,11 @@ public String getbKind() {
 }
 
 
+
 public void setbKind(String bKind) {
 	this.bKind = bKind;
 }
+
 
 
 public int getbCount() {
@@ -156,9 +183,11 @@ public int getbCount() {
 }
 
 
+
 public void setbCount(int bCount) {
 	this.bCount = bCount;
 }
+
 
 
 public Date getbDate() {
@@ -166,9 +195,11 @@ public Date getbDate() {
 }
 
 
+
 public void setbDate(Date bDate) {
 	this.bDate = bDate;
 }
+
 
 
 public String getTitleFilename() {
@@ -176,9 +207,11 @@ public String getTitleFilename() {
 }
 
 
+
 public void setTitleFilename(String titleFilename) {
 	this.titleFilename = titleFilename;
 }
+
 
 
 public String getbFileType() {
@@ -186,9 +219,11 @@ public String getbFileType() {
 }
 
 
+
 public void setbFileType(String bFileType) {
 	this.bFileType = bFileType;
 }
+
 
 
 public String getbStatus() {
@@ -196,9 +231,47 @@ public String getbStatus() {
 }
 
 
+
 public void setbStatus(String bStatus) {
 	this.bStatus = bStatus;
 }
+
+
+
+public String getNickName() {
+	return nickName;
+}
+
+
+
+public void setNickName(String nickName) {
+	this.nickName = nickName;
+}
+
+
+
+public String getIntroduce() {
+	return introduce;
+}
+
+
+
+public void setIntroduce(String introduce) {
+	this.introduce = introduce;
+}
+
+
+
+public String getpRenamedFileName() {
+	return pRenamedFileName;
+}
+
+
+
+public void setpRenamedFileName(String pRenamedFileName) {
+	this.pRenamedFileName = pRenamedFileName;
+}
+
 
 
 public int getbFileno() {
@@ -206,20 +279,11 @@ public int getbFileno() {
 }
 
 
+
 public void setbFileno(int bFileno) {
 	this.bFileno = bFileno;
 }
-
-
-public int getRm() {
-	return rm;
-}
-
-
-public void setRm(int rm) {
-	this.rm = rm;
-}
-
+   
    
 	
 }

@@ -85,8 +85,7 @@
 						<c:if test="${ fn:trim(showBoard.bFileType)  == 'I'}">
 							<div class="post-thumb">
 								<a href="${ pageContext.request.contextPath }/showBoard/showBoardDetail.do?bNo=${showBoard.bNo}">
-									<img src="${ pageContext.request.contextPath }/resources/showUpload/${showBoard.titleFilename}"
-											class="img-responsive" alt=""></a>						
+									<img src="${ pageContext.request.contextPath }/resources/upload/${showBoard.titleFilename}"></a>				
 							</div>
 							</c:if>
 							

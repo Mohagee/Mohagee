@@ -106,7 +106,7 @@ html, body {
                             <!--  게시글 상세보기 영역 -->
                                 <div class="post-thumb">
                                     <!-- <a href="#"> -->
-                                    <img src="${ pageContext.request.contextPath }/resources/gymUpload/${GymAttachment.bFileName}" class="img-responsive" alt="">
+                                    <img src="${ pageContext.request.contextPath }/resources/upload/${GymAttachment.bFileName}" class="img-responsive" alt="">
                                     <!-- </a> -->
                                    
                                 </div>
@@ -140,6 +140,9 @@ html, body {
 					</a>
 				 </div><br />
                                </div>
+                               
+                               
+                               
                                     <div class="blog-share">
                                     
                                         <span class='st_facebook_hcount'></span>
@@ -149,6 +152,19 @@ html, body {
                                         <span class='st_email_hcount'></span>
                                       
                                     </div>
+                                    
+                                    <div class="author-profile padding">
+                 <div class="row">
+                     <div class="col-sm-2">
+                         <img src="${ pageContext.request.contextPath }/resources/profile/${gymBoard.pRenamedFileName}">
+                    </div>
+                    <div class="col-sm-10" style="font-family:binggrae;">
+                        <h3 style="font-family:binggrae;">${ gymBoard.nickName }</h3>
+                        <p>${ gymBoard.introduce }</p>
+                    </div>
+                </div>
+            </div>
+                                    
                                     <div align="right" >
 					<a href=""><button type="button" class="btn btn-success" id="reply" data-toggle="modal" data-target="layerpop">댓글달기</button></a>   
 			    	    </div> <br />  

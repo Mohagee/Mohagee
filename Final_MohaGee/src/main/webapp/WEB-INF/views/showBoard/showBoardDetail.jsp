@@ -84,7 +84,7 @@
                     <!--  게시글 상세보기 영역 -->
    				 	<c:forEach var="ShowAttachment" items="${ShowAttachment}"> 				 			
                                 <div class="post-thumb">                           
-                                    <img src="${ pageContext.request.contextPath }/resources/showUpload/${ShowAttachment.bFileName}" class="img-responsive">                                  
+                                     <img src="${ pageContext.request.contextPath }/resources/upload/${ShowAttachment.bFileName}" class="img-responsive">                                    
                                 </div><br />                                           
                       </c:forEach>
                       
@@ -193,6 +193,7 @@
             </div>
         </div>
      </div>
+</div>
 </div>
 </div>
 </section>

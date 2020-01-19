@@ -61,9 +61,9 @@
                             
                    <c:forEach var="TravelAttachment" items="${TravelAttachment}">
                          
-                            <!--  게시글 상세보기 영역 -->
+                                <!--  게시글 상세보기 영역 -->
                                 <div class="post-thumb">                           
-                                    <img src="${ pageContext.request.contextPath }/resources/travelUpload/${TravelAttachment.bFileName}" class="img-responsive" alt="">
+                                    <img src="${ pageContext.request.contextPath }/resources/upload/${TravelAttachment.bFileName}" class="img-responsive" alt="">
                                 </div>
                                 
                       </c:forEach>
@@ -104,17 +104,16 @@
                                     </div>
                                     
                                     <div class="author-profile padding">
-                                        <div class="row">
-                                            <div class="col-sm-2">
-                                                <img src="${ pageContext.request.contextPath }/resources/images/blogdetails/1.png" alt="">
-                                            </div>
-                                            <div class="col-sm-10">
-                                                <h3>에디터 이름</h3>
-                                                <p>에디터정보</p>
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
+                 <div class="row">
+                     <div class="col-sm-2">
+                         <img src="${ pageContext.request.contextPath }/resources/profile/${TravelBoard.pRenamedFileName}">
+                    </div>
+                    <div class="col-sm-10" style="font-family:binggrae;">
+                        <h3 style="font-family:binggrae;">${ TravelBoard.nickName }</h3>
+                        <p>${ TravelBoard.introduce }</p>
+                    </div>
+                </div>
+            </div>
                            
                                     
                                     

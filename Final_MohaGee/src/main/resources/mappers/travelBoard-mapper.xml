@@ -44,7 +44,11 @@
    
    <!-- 게시글 상세보기 -->
    <select id="selectTravelBoard" parameterType="_int" resultType="travelBoard">
-   SELECT * FROM BOARD WHERE BNO = #{bNo}
+   		SELECT B.*, M.NICKNAME, M.INTRODUCE , P.PRENAMEDFILENAME,  C.CLAT, C.CLNG FROM BOARD B
+		JOIN MEMBER M ON(B.USERNO = M.USERNO)
+		JOIN PROFILEPHOTO P ON(B.USERNO = P.USERNO)
+		JOIN COORDINATES C ON(B.CNO = C.CNO)
+		WHERE BNO = #{bNo}
    </select>
    
    <select id="selectTravelAttachment" parameterType="int" resultType="TravelAttachment">

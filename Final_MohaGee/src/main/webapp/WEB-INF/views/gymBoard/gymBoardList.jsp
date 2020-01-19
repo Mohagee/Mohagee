@@ -89,7 +89,7 @@
                   <c:if test="${ fn:trim(gymBoard.bFileType)  == 'I'}">
                      <div class="post-thumb">
                         <a href="${pageContext.request.contextPath }/gymBoardDetail.do?bNo=${gymBoard.bNo}">
-                           <img src="${pageContext.request.contextPath }/resources/gymUpload/${gymBoard.titleFilename}"
+                           <img src="${pageContext.request.contextPath }/resources/upload/${gymBoard.titleFilename}"
                                  class="img-responsive" alt=""></a>                  
                      </div>
                      </c:if>

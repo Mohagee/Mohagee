@@ -62,9 +62,7 @@ public class GymBoardController {
 			HttpServletRequest request) {
 		System.out.println(board);
 		// 1. 저장할 폴더 설정
-		String savePath
-			= request.getSession().getServletContext()
-			.getRealPath("resources/gymUpload");
+		String savePath = request.getSession().getServletContext().getRealPath("resources/upload");
 		
 		// 2. DB에 전달할 파일 정보를 담을 list 준비하기
 		List<GymAttachment> list = new ArrayList();
