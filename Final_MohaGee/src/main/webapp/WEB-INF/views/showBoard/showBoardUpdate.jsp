@@ -218,41 +218,104 @@ input[type=file]{
 
 	<c:import url="../common/footer.jsp" />
 
-    <!-- 최대글 작성 한도 스크립트 구현해야함@ -->
 <script>
 
+/* 태그 구현 */
 $("#tag").tagsinput({
-	maxTags: 5,
-	itemText: function(item) {
-	    return '#' + item;
-	},
-	
-	cancelConfirmKeysOnEmpty: false
-	
+   maxTags: 5,
+   itemText: function(item) {
+       return '#' + item;
+   },
+   
+   cancelConfirmKeysOnEmpty: false
+   
 });
 
 $('#tag').on('itemAddedOnInit', function(event) {
-	  return '#' + event.item.label;
+     return '#' + event.item.label;
 });
 
-	$(document).ready(function() {
-		$('#characterLeft').text('1000 자 작성가능');
-		$('#summernote').keydown(function() {
-			var max = 1000;
-			var len = $(this).val().length;
-			if (len >= max) {
-				$('#characterLeft').text('더 이상 작성할 수 없습니다.');
-				$('#characterLeft').addClass('red');
-				$('#btnSubmit').addClass('disabled');
-			} else {
-				var ch = max - len;
-				$('#characterLeft').text(ch + ' 자 작성가능');
-				$('#btnSubmit').removeClass('disabled');
-				$('#characterLeft').removeClass('red');
-			}
-		});
-	});
+/* -------------------------------------------------------------- */
+ 
+ /* 이미지 수정 구현 */
+ 
+ //이미지 정보들을 담을 배열
+var sel_files = [];
+
+
+$(document).ready(function() {
+    $("#ex_file_img").on("change", handleImgFileSelect);
+}); 
+
+function fileUploadAction() {
+    console.log("fileUploadAction");
+    $("#ex_file_img").trigger('click');
+}
+
+function handleImgFileSelect(e) {
+
+    // 이미지 정보들을 초기화
+    sel_files = [];
+    $(".imgs_wrap").empty();
+
+    var files = e.target.files;
+    var filesArr = Array.prototype.slice.call(files);
+
+    var index = 0;
+    filesArr.forEach(function(f) {
+        if(!f.type.match("image.*")) {
+            alert("확장자는 이미지 확장자만 가능합니다.");
+            return;
+        }
+
+        sel_files.push(f);
+
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var html = "<a href=\"javascript:void(0);\" onclick=\"deleteImageAction(" + index + ")\" id=\"img_id_" + 
+                           index + "\"><img src=\"" + e.target.result + "\" data-file='" + 
+                           f.name + "' class='selProductFile' title='Click to remove'></a>";
+            $(".imgs_wrap").append(html);
+            index++;
+
+        }
+        reader.readAsDataURL(f);
+        
+    });
+}  
+   function deleteImageAction(index){
+      console.log("index : " + index);
+      sel_files.splice(index, 1);
+      
+      var img_id = "#img_id" + index;
+      $(img_id).remove();
+      
+      console.log(sel_files);
+   }
+   /* -------------------------------------------------------------- */   
+ 
+ 
+ /* 게시글 1000자 이상 작성 금지 구현 */
+   $(document).ready(function() {
+      $('#characterLeft').text('1000 자 작성가능');
+      $('#summernote').keydown(function() {
+         var max = 1000;
+         var len = $(this).val().length;
+         if (len >= max) {
+            $('#characterLeft').text('더 이상 작성할 수 없습니다.');
+            $('#characterLeft').addClass('red');
+            $('#btnSubmit').addClass('disabled');
+         } else {
+            var ch = max - len;
+            $('#characterLeft').text(ch + ' 자 작성가능');
+            $('#btnSubmit').removeClass('disabled');
+            $('#characterLeft').removeClass('red');
+         }
+      });
+   });
+   /* -------------------------------------------------------------- */
 </script>
+
 
 
     <c:import url="../common/footer.jsp"/>

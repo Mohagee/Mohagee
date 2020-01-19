@@ -63,7 +63,7 @@ public class ShowBoardController {
 		String[] tagArray = board.getbTag().split(",");
 		
 		for(int i = 0; i < tagArray.length; i++) {
-			tagArray[i] = "#" + tagArray[i] + ",";
+			tagArray[i] = "#" + tagArray[i];
 		}
 		
 		String tagArrayToString = Arrays.toString(tagArray);

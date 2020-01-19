@@ -26,17 +26,15 @@ public class ShowBoard implements Serializable {
 	   private String cLng;
 	   
 	   private int bFileno;
-	   private int rm;
-	   
-	   
-	   
+
 	public ShowBoard() {
 		super();
 	}
 
 	public ShowBoard(int bNo, int userNo, String bTitle, String bTag, String bContent, int cNo, String bUrl,
-			String bCategory, int bCount, Date bDate, String titleFilename, String bFileType, String bStatus,
-			String nickName, String introduce, String pRenamedFileName, String cLat, String cLng, int bFileno, int rm) {
+			String bCategory, String bKind, int bCount, Date bDate, String titleFilename, String bFileType,
+			String bStatus, String nickName, String introduce, String pRenamedFileName, String cLat, String cLng,
+			int bFileno) {
 		super();
 		this.bNo = bNo;
 		this.userNo = userNo;
@@ -46,6 +44,7 @@ public class ShowBoard implements Serializable {
 		this.cNo = cNo;
 		this.bUrl = bUrl;
 		this.bCategory = bCategory;
+		this.bKind = bKind;
 		this.bCount = bCount;
 		this.bDate = bDate;
 		this.titleFilename = titleFilename;
@@ -57,16 +56,16 @@ public class ShowBoard implements Serializable {
 		this.cLat = cLat;
 		this.cLng = cLng;
 		this.bFileno = bFileno;
-		this.rm = rm;
 	}
 
 	@Override
 	public String toString() {
 		return "ShowBoard [bNo=" + bNo + ", userNo=" + userNo + ", bTitle=" + bTitle + ", bTag=" + bTag + ", bContent="
-				+ bContent + ", cNo=" + cNo + ", bUrl=" + bUrl + ", bCategory=" + bCategory + ", bCount=" + bCount
-				+ ", bDate=" + bDate + ", titleFilename=" + titleFilename + ", bFileType=" + bFileType + ", bStatus="
-				+ bStatus + ", nickName=" + nickName + ", introduce=" + introduce + ", pRenamedFileName="
-				+ pRenamedFileName + ", cLat=" + cLat + ", cLng=" + cLng + ", bFileno=" + bFileno + ", rm=" + rm + "]";
+				+ bContent + ", cNo=" + cNo + ", bUrl=" + bUrl + ", bCategory=" + bCategory + ", bKind=" + bKind
+				+ ", bCount=" + bCount + ", bDate=" + bDate + ", titleFilename=" + titleFilename + ", bFileType="
+				+ bFileType + ", bStatus=" + bStatus + ", nickName=" + nickName + ", introduce=" + introduce
+				+ ", pRenamedFileName=" + pRenamedFileName + ", cLat=" + cLat + ", cLng=" + cLng + ", bFileno="
+				+ bFileno + "]";
 	}
 
 	public int getbNo() {
@@ -131,6 +130,14 @@ public class ShowBoard implements Serializable {
 
 	public void setbCategory(String bCategory) {
 		this.bCategory = bCategory;
+	}
+
+	public String getbKind() {
+		return bKind;
+	}
+
+	public void setbKind(String bKind) {
+		this.bKind = bKind;
 	}
 
 	public int getbCount() {
@@ -220,13 +227,5 @@ public class ShowBoard implements Serializable {
 	public void setbFileno(int bFileno) {
 		this.bFileno = bFileno;
 	}
-
-	public int getRm() {
-		return rm;
-	}
-
-	public void setRm(int rm) {
-		this.rm = rm;
-	}
-	
+	   
 }
