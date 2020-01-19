@@ -15,18 +15,20 @@
          #{cNo},
          #{bUrl},
          #{bCategory},
+         #{bKind},
          #{bCount},
          DEFAULT,
          DEFAULT)
    </insert>
    
+   <!--  사진 작성 -->
    <insert id="insertShowAttachment" parameterType="ShowAttachment">
       <selectKey keyProperty="bNo" resultType="int" order="BEFORE">
          SELECT SEQ_BNO.CURRVAL FROM DUAL
       </selectKey>
       INSERT INTO B_ATTACHMENT
       VALUES (SEQ_BFILENO.NEXTVAL, 
-      		#{bNo}, 
+            #{bNo}, 
             #{bFileName}, 
             #{bFilePath},
             DEFAULT, #{bFileLevel}, DEFAULT, 
@@ -37,7 +39,7 @@
    <select id="selectList" resultType="ShowBoard">
       SELECT B.*, A.BFILENAME TITLEFILENAME, A.BFILETYPE FROM BOARD B
       LEFT JOIN B_ATTACHMENT A ON(B.BNO = A.BNO AND A.BFILELEVEL = 0 AND BFILESTATUS= 'N') 
-      WHERE BSTATUS = 'N' 
+      WHERE BSTATUS = 'N' AND BKIND = 'S'
       ORDER BY BDATE DESC
    </select>
    
@@ -57,8 +59,8 @@
    <!--  게시글 수정하기 -->
    <update id="updateShowBoard" parameterType="ShowBoard">
       UPDATE BOARD
-      SET BTITLE = #{bTitle}, BTAG = #{bTag}, BCONTENT = #{bContent}, BURL = #{bUrl}, 
-	      	BCATEGORY = #{bCategory}
+      SET BTITLE = #{bTitle}, BTAG = #{bTag}, BCONTENT = #{bContent}, CNO = #{cNo}, BURL = #{bUrl}, 
+            BCATEGORY = #{bCategory}, BKIND = #{bKind}
       WHERE BNO = #{bNo}
    </update>
    
@@ -74,13 +76,13 @@
  <update id="deleteShowBoard" parameterType="int">
       UPDATE BOARD
       SET BSTATUS= 'Y'
-      WHERE BNO = ${bNo}
+      WHERE BNO = #{bNo}
    </update>
    
    <update id="deleteShowAttachment" parameterType="int">
       UPDATE B_ATTACHMENT
       SET BFILESTATUS= 'Y'
-      WHERE BNO = ${bNo}
+      WHERE BNO = #{bNo}
    </update>
 </mapper> 
 

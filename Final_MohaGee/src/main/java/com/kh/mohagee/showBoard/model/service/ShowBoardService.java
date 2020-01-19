@@ -40,21 +40,24 @@ public class ShowBoardService {
 		  }
 		  
 		  
+		/*
+		 * String content = request.getParameter("bContent");
+		 * 
+		 * contents = contents.replace("\r\n","<br>");
+		 */
+
 		  // 2. 추가된 게시글의 번호를 가져와 // 첨부파일 추가하기 
 		  
 		  if(list.size() > 0) { 
 			  for(int i = 0; i < list.size(); i++) {
 				  ShowAttachment a = list.get(i);
 				  
+				  // 파일 레벨 0, 1 나누기
 				  if(i== 0) a.setbFileLevel(0);
 				  else  a.setbFileLevel(1);
 				  
-				  System.out.println("check : "+a);
 				 result = showBoardDAO.insertShowAttachment(a);
-		  
-				  System.out.println("result 확인 : " + result); // 확인용 result 값 변경하기 // 
-				  
-		  		// result = 0; 
+		  				  
 		  
 		  if(result < 1) 
 			  throw new ShowBoardException("첨부파일 추가 중 에러 발생!"); 
@@ -91,16 +94,12 @@ public class ShowBoardService {
 				  for(int i = 0; i < list.size(); i++) {
 					  ShowAttachment a = list.get(i);
 					  
+					  // 파일레벨 0, 1 나누기
 					  if(i== 0) a.setbFileLevel(0);
 					  else  a.setbFileLevel(1);
 					  
-					  System.out.println("check : "+a);
-					 result = showBoardDAO.updateShowAttachment(a);
-			  
-					  System.out.println("result 확인 : " + result); // 확인용 result 값 변경하기 // 
-					  
-			  		// result = 0; 
-			  
+					result = showBoardDAO.updateShowAttachment(a);
+			  					  			  
 			  if(result < 1) 
 				  throw new ShowBoardException("첨부파일 추가 중 에러 발생!"); 
 			  } 

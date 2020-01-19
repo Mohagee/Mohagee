@@ -61,22 +61,50 @@
 			</a>
 		</c:if>
 	</div>
-		
-		<!-- 태그 리스트  -->
-		<div class="row">
-				<ul class="masonery-filter text-center" style="font-family:cookierun;">
-					<li><a class="btn btn-default active" href="#" data-filter="*">All</a></li>
-					<li><a class="btn btn-default" href="#" data-filter=".musical">뮤지컬</a></li>
-					<li><a class="btn btn-default" href="#" data-filter=".act">연극</a></li>
-					<li><a class="btn btn-default" href="#" data-filter=".create">창작 뮤지컬</a></li>
-					<li><a class="btn btn-default" href="#" data-filter=".original">오리지널 내한</a></li>
-				</ul>
 
-			<!--  글 목록  -->		
-			<div class="masonery-items masonery_area">
+	<!-- 태그 리스트  -->
+	<div class="row">
+			<ul class="masonery-filter text-center" style="font-family:cookierun;">
+		<li><a class="btn btn-default active" href="#" data-filter="*">All</a></li>
+		<li><a class="btn btn-default" href="#" data-filter=".musical">라이센스</a></li>
+		<li><a class="btn btn-default" href="#" data-filter=".create">창작 뮤지컬</a></li>
+		<li><a class="btn btn-default" href="#" data-filter=".original">오리지널 내한</a></li>
+		<li><a class="btn btn-default" href="#" data-filter=".act">연극</a></li>
+	</ul>
+
+<!--  글 목록  -->		
+<div class="masonery-items masonery_area">
+
+
+	<c:forEach var="showBoard" items="${list}">
+
+
+<!--  글 리스트 1 -->
+	<div class="col-md-3 col-sm-4 masonery-item branded mobile ${ showBoard.bCategory} ">
+		<div class="single-blog two-column">
+		
+		<!-- 사진파일 -->
+		<c:if test="${ fn:trim(showBoard.bFileType)  == 'I'}">
+			<div class="post-thumb">
+				<a href="${ pageContext.request.contextPath }/showBoard/showBoardDetail.do?bNo=${showBoard.bNo}">
+					<img src="${ pageContext.request.contextPath }/resources/showUpload/${showBoard.titleFilename}"
+							class="img-responsive" alt=""></a>						
+			</div>
+			</c:if>
 			
-			
-				<c:forEach var="showBoard" items="${list}">
+
+         <!-- 태그  -->
+          <div class="post-content overflow">
+             <ul class="nav nav-justified post-nav">
+                <li><a href="#"><i class="fa fa-tag"></i> ${showBoard.bTag} </a></li>
+             </ul>
+             
+             <!--  제목 -->
+			<h2 class="post-title bold"> 
+				<a href="${ pageContext.request.contextPath }/showBoard/showBoardDetail.do?bNo=${showBoard.bNo}">
+					${ showBoard.bTitle }
+				</a>
+			</h2>
 				
 			
 				<!--  글 리스트 1 -->

@@ -219,6 +219,7 @@ public class ShowBoardController {
 		originBoard.setbTag(showBoard.getbTag());
 		originBoard.setbUrl(showBoard.getbUrl());
 		originBoard.setbCategory(showBoard.getbCategory());
+		originBoard.setcNo(showBoard.getcNo());
 
 		// 첨부 파일 수정 부분
 		// 1. 파일을 저장할 경로 생성
@@ -247,11 +248,15 @@ public class ShowBoardController {
 				
 				// 원본파일 삭제
 				if (list.size() > idx) {
-					boolean isDelete = new File(savePath + "/" + list.get(idx).getbFileName()).delete(); // 파일 삭제
-																												// 명령어
-
-					System.out.println("원본파일 삭제 되었나? :" + isDelete);
-
+					
+					for(int i = 0 ; i < list.size(); i ++) {
+						
+						boolean isDelete = new File(savePath + "/" + list.get(i).getbFileName()).delete(); // 파일 삭제
+						// 명령어
+						
+						System.out.println("원본파일 삭제 되었나? :" + isDelete);
+						
+					}
 					att = list.get(idx);
 
 				} else { // 첨부파일이 없는 게시글일때 기존 첨부파일을 삭제할 필요 없어서 추가만 한다.

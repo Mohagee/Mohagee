@@ -13,6 +13,7 @@ public class ShowBoard implements Serializable {
 	   private int cNo;
 	   private String bUrl;
 	   private String bCategory;
+	   private String bKind;
 	   private int bCount;
 	   private Date bDate;
 	   private String titleFilename;

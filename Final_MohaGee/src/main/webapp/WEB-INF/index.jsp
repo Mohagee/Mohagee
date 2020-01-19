@@ -207,15 +207,13 @@
                                         </div>
                                         <div class="social-profile">
                                             <ul class="nav nav-pills">
-                                                <li><a href="#">테</a></li>
-                                                <li><a href="#">스</a></li>
-                                                <li><a href="#">트</a></li>
+                                                <li><a href="#">개발자 프로필로 이동</a></li>
                                             </ul>
                                         </div>
                                     </div>
                                     <div class="person-info">
-                                        <h2>John Doe</h2>
-                                        <p>CEO &amp; Developer</p>
+                                        <h2>Howl</h2>
+                                        <p>Developer &nbsp; 김건하</p>
                                     </div>
                                 </div>
                             </div>
@@ -227,8 +225,8 @@
                                         </div>
                                     </div>
                                     <div class="person-info">
-                                        <h2>John Doe</h2>
-                                        <p>CEO &amp; Developer</p>
+                                        <h2>Alice</h2>
+                                        <p>Developer &nbsp; 백혜영</p>
                                     </div>
                                 </div>
                             </div>
