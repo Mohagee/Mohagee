@@ -12,7 +12,7 @@
     
     <c:import url="../common/commonUtil.jsp"/>
     
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cf7110ab3d2f259e4ee58031eb2c3bc0"></script> 
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3484c416ab1339a45db9fa79d4fa15c5"></script> 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services,clusterer,drawing"></script>
 
     <style>

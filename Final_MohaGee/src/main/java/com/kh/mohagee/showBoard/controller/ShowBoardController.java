@@ -175,6 +175,10 @@ public class ShowBoardController {
 	public String selectOne(@RequestParam("bNo") int bNo, Model model) {
 
 		ShowBoard sb = showBoardService.selectOneShowBoard(bNo);
+		
+		if(sb.getpRenamedFileName() == null) {
+			sb.setpRenamedFileName("profile.png");
+		}
 
 		List<ShowAttachment> list = showBoardService.selectAttachment(bNo);
 		

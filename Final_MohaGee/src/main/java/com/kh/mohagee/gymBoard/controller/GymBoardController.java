@@ -150,6 +150,10 @@ public class GymBoardController {
 		
 		GymBoard gb = GymBoardService.selectOneGymBoard(bNo);
 		
+		if(gb.getpRenamedFileName() == null) {
+			gb.setpRenamedFileName("profile.png");
+	     }
+		
 		//ArrayList<Gym>
 		//List<gbComment> cList = GymBoardService.selectOneGymBoard(bcNo)
 		List<GymAttachment> list = GymBoardService.selectAttachment(bNo);

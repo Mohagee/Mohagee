@@ -163,6 +163,10 @@ public class TravelBoardController {
    public String selectOne(@RequestParam("bNo") int bNo, Model model) {
 
       TravelBoard tb = travelBoardService.selectOne(bNo);
+      
+      if(tb.getpRenamedFileName() == null) {
+          tb.setpRenamedFileName("profile.png");
+      }
 
       List<TravelAttachment> list = travelBoardService.selectAttachment(bNo);
       
