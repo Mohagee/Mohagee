@@ -21,11 +21,12 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.mohagee.gymBoard.model.service.GymBoardService;
 import com.kh.mohagee.gymBoard.model.vo.GymAttachment;
 import com.kh.mohagee.gymBoard.model.vo.GymBoard;
+import com.kh.mohagee.gymBoard.model.vo.gbComment;
 
 @Controller
 public class GymBoardController {
 	
-    private String[] imgExt = {"jpg", "png", "PNG", "gif", "bmp", "svg", "jpeg", "webp"};
+    private String[] imgExt = {"jpg", "png", "PNG", "gif", "GIF", "bmp", "svg", "jpeg", "webp"};
     private String[] videoExt = {"mp4", "avi", "mkv", "wmv", "flv", "asf", "ts", "mpg"};
     private String[] audioExt = {"mp3", "ogg", "wav", "flac"};
 
@@ -61,9 +62,7 @@ public class GymBoardController {
 			HttpServletRequest request) {
 		System.out.println(board);
 		// 1. 저장할 폴더 설정
-		String savePath
-			= request.getSession().getServletContext()
-			.getRealPath("resources/gymUpload");
+		String savePath = request.getSession().getServletContext().getRealPath("resources/upload");
 		
 		// 2. DB에 전달할 파일 정보를 담을 list 준비하기
 		List<GymAttachment> list = new ArrayList();
@@ -111,7 +110,7 @@ public class GymBoardController {
 		/********** Multipart 파일 업로드 끝   **********/
 		
 		int result = 0;
-		
+		  System.out.println(list);		
 		try {
 			result = GymBoardService.insertGymBoard(board, list);
 		}catch(Exception e) {
@@ -146,18 +145,28 @@ public class GymBoardController {
 	
 	// 건하 운동 게시판 상세보기
 	@RequestMapping("gymBoardDetail.do")
-	public String selectOne(@RequestParam("bNo") int bNo, Model model) {
+	public String selectOne(@RequestParam("bNo") int bNo,
+											Model model) {
 		
 		GymBoard gb = GymBoardService.selectOneGymBoard(bNo);
 		
-		ArrayList<Gym>
+		if(gb.getpRenamedFileName() == null) {
+			gb.setpRenamedFileName("profile.png");
+	     }
+		
+		//ArrayList<Gym>
+		//List<gbComment> cList = GymBoardService.selectOneGymBoard(bcNo)
 		List<GymAttachment> list = GymBoardService.selectAttachment(bNo);
 		
+		for(int i = 0; i < list.size(); i++) {
+			System.out.println(list.get(i));
+		}
 		
 		
 		// gymBoard라는 이름에(키) gb에 담긴 값을 담는다(값)
 		model.addAttribute("gymBoard", gb)
-			.addAttribute("GymAttachmentList", list);
+			.addAttribute("GymAttachmentList", list)//.addAttribute("gbComment", gbc)
+			;
 		
 		return "gymBoard/gymBoardDetail";
 	}
@@ -197,7 +206,7 @@ public class GymBoardController {
 		// 1. 파일을 저장할 경로 생성
 		String savePath
 		 = request.getSession().getServletContext()
-		          .getRealPath("/resources/gymUpload");
+		          .getRealPath("/resources/upload");
 		
 		// 2. 변경을 위해 알아야 할 예전 첨부파일 정보
 		List<GymAttachment> list
@@ -217,11 +226,7 @@ public class GymBoardController {
 			GymAttachment att = null;
 			
 			if( ! f.isEmpty() ) {
-				 String originalFileName = f.getOriginalFilename();
-	             String ext = originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
-	             
-	             System.out.println("UPDATE FILENAME : " + originalFileName);
-	              
+					              
 				// 원본 파일 삭제
 				if(list.size() > idx) {
 					boolean isDelete
@@ -233,11 +238,10 @@ public class GymBoardController {
 				} else {
 					att = new GymAttachment();
 					att.setbNo(bNo);
-					
-					 
-		              att.setbFileName(originalFileName);
-		              att.setbFilePath(savePath);
-		              
+
+					String originalFileName = f.getOriginalFilename();
+		            String ext = originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
+	              
 		              if(imgExtList.contains(ext)) {
 		                 att.setbFileType("I");
 		              } else if(videoExtList.contains(ext) ) {
@@ -253,6 +257,12 @@ public class GymBoardController {
 				
 				// 정상적인 파일 추가 과정
 				// 원본 파일 이름 가져오기
+				String originalFileName = f.getOriginalFilename();
+								
+				att.setbFileName(originalFileName);
+				att.setbFilePath(savePath + "/" + originalFileName);
+				
+				
 				try {
 					
 					f.transferTo(new File(savePath + "/" + originalFileName));
@@ -301,7 +311,7 @@ public class GymBoardController {
 		
 		// 게시글 삭제 시 게시글에 담긴 첨부파일도 삭제해야 한다.
 		String savePath
-		    = session.getServletContext().getRealPath("/resources/gymUpload");
+		    = session.getServletContext().getRealPath("/resources/upload");
 		
 		List<GymAttachment> list = GymBoardService.selectAttachment(bNo);
 		
@@ -326,25 +336,13 @@ public class GymBoardController {
 		return "common/util";
 	}
 	
+	
+	
+	
+	
+	
+	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

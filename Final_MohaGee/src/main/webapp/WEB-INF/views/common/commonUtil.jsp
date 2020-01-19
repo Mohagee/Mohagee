@@ -11,6 +11,7 @@
 <link href="${ pageContext.request.contextPath }/resources/css/main.css" rel="stylesheet">
 <link href="${ pageContext.request.contextPath }/resources/css/responsive.css" rel="stylesheet"> 
 <link href="${ pageContext.request.contextPath }/resources/css/memberCSS.css" rel="stylesheet"> 
+<link href="${ pageContext.request.contextPath }/resources/css/bootstrap-tagsinput.css" rel="stylesheet"> 
 
 <link rel="shortcut icon" href="${ pageContext.request.contextPath }/resources/images/favicon.png">
 
@@ -32,6 +33,7 @@
 <script type="text/javascript" src="${ pageContext.request.contextPath }/resources/js/masonry.min.js"></script>
 <script type="text/javascript" src="${ pageContext.request.contextPath }/resources/js/audio.min.js"></script>
 <script type="text/javascript" src="${ pageContext.request.contextPath }/resources/js/jquery.isotope.min.js"></script>
+<script type="text/javascript" src="${ pageContext.request.contextPath }/resources/js/bootstrap-tagsinput.js"></script>
 
 <script type="text/javascript">var switchTo5x=true;</script>
 <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>

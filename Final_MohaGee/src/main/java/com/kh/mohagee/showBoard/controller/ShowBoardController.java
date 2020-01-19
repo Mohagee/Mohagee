@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.mohagee.favorite.model.service.FavoriteService;
 import com.kh.mohagee.showBoard.model.service.ShowBoardService;
 import com.kh.mohagee.showBoard.model.vo.ShowAttachment;
 import com.kh.mohagee.showBoard.model.vo.ShowBoard;
@@ -32,6 +33,9 @@ public class ShowBoardController {
 	 
 	@Autowired
 	ShowBoardService showBoardService;
+	
+	@Autowired
+	FavoriteService favoriteService;
 
 	@RequestMapping("/showBoard/showBoardList.do")
 	public String showBoardList(Model model) {
@@ -55,10 +59,23 @@ public class ShowBoardController {
 	public String InsertShowBoard(ShowBoard board, Model model,
 			@RequestParam(value="upFile", required=false) MultipartFile[] upFiles,
 			HttpServletRequest request) {
-		System.out.println(board);
 		
-		  // 1. 저장할 폴더 설정 
-		String savePath = request.getSession().getServletContext().getRealPath("resources/showUpload");
+		String[] tagArray = board.getbTag().split(",");
+		
+		for(int i = 0; i < tagArray.length; i++) {
+			tagArray[i] = "#" + tagArray[i];
+		}
+		
+		String tagArrayToString = Arrays.toString(tagArray);
+
+		String tag = tagArrayToString.substring(1, tagArrayToString.lastIndexOf(']'));
+
+		System.out.println("tag : " + tag);
+		
+		board.setbTag(tag);
+
+		 // 1. 저장할 폴더 설정 
+	      String savePath = request.getSession().getServletContext().getRealPath("resources/upload");
 		 
 		 // 2. DB에 전달할 파일 정보를 담을 list 준비하기 
 		  List<ShowAttachment> list = new ArrayList();
@@ -158,8 +175,14 @@ public class ShowBoardController {
 	public String selectOne(@RequestParam("bNo") int bNo, Model model) {
 
 		ShowBoard sb = showBoardService.selectOneShowBoard(bNo);
+		
+		if(sb.getpRenamedFileName() == null) {
+			sb.setpRenamedFileName("profile.png");
+		}
 
 		List<ShowAttachment> list = showBoardService.selectAttachment(bNo);
+		
+		int favoriteCount = favoriteService.favoriteCount(bNo);
 		
 		System.out.println(sb);
 		for(int i = 0; i < list.size(); i++) {
@@ -168,7 +191,9 @@ public class ShowBoardController {
 		
 		System.out.println(list.size());
 		
-		model.addAttribute("ShowBoard", sb).addAttribute("ShowAttachment", list);
+		model.addAttribute("ShowBoard", sb)
+		.addAttribute("ShowAttachment", list)
+		.addAttribute("favoriteCount", favoriteCount);
 
 		return "showBoard/showBoardDetail";
 	}
@@ -198,10 +223,11 @@ public class ShowBoardController {
 		originBoard.setbTag(showBoard.getbTag());
 		originBoard.setbUrl(showBoard.getbUrl());
 		originBoard.setbCategory(showBoard.getbCategory());
+		originBoard.setcNo(showBoard.getcNo());
 
 		// 첨부 파일 수정 부분
 		// 1. 파일을 저장할 경로 생성
-		String savePath = request.getSession().getServletContext().getRealPath("/resources/showUpload");
+		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload");
 
 		// 2. 변경을 위해 알아야 할 예전 첨부파일 정보
 		List<ShowAttachment> list = showBoardService.selectAttachment(bNo);
@@ -226,11 +252,15 @@ public class ShowBoardController {
 				
 				// 원본파일 삭제
 				if (list.size() > idx) {
-					boolean isDelete = new File(savePath + "/" + list.get(idx).getbFileName()).delete(); // 파일 삭제
-																												// 명령어
-
-					System.out.println("원본파일 삭제 되었나? :" + isDelete);
-
+					
+					for(int i = 0 ; i < list.size(); i ++) {
+						
+						boolean isDelete = new File(savePath + "/" + list.get(i).getbFileName()).delete(); // 파일 삭제
+						// 명령어
+						
+						System.out.println("원본파일 삭제 되었나? :" + isDelete);
+						
+					}
 					att = list.get(idx);
 
 				} else { // 첨부파일이 없는 게시글일때 기존 첨부파일을 삭제할 필요 없어서 추가만 한다.
@@ -308,7 +338,7 @@ public class ShowBoardController {
 	public String boardDelete(int bNo, Model model, HttpSession session) {
 
 		// 게시글에 담긴 첨부파일도 삭제해야한다.
-		String savePath = session.getServletContext().getRealPath("/resources/showUpload");
+		String savePath = session.getServletContext().getRealPath("/resources/upload");
 
 		List<ShowAttachment> list = showBoardService.selectAttachment(bNo);
 

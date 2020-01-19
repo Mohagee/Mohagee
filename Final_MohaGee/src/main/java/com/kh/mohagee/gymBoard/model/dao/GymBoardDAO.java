@@ -31,10 +31,6 @@ public class GymBoardDAO {
 	public int insertGymAttachment(GymAttachment a) {
 		return sqlSession.insert("GymBoard-mapper.insertGymAttachment", a);
 	}
-
-	
-	
-	
 	
 	public GymBoard selectOneGymBoard(int bNo) {
 		return sqlSession.selectOne("GymBoard-mapper.selectGymBoard", bNo);
@@ -60,6 +56,23 @@ public class GymBoardDAO {
 	public int deleteGymAttachment(int bNo) {
 		return sqlSession.update("GymBoard-mapper.deleteGymAttachment", bNo);
 	}
+
+	
+// 댓글관련 
+	
+	public int insertGymBoardComment(int bcNo) {
+		return sqlSession.insert("GymBoard-mapper.insertGymBoardComment", bcNo);
+	}
+	
+	public int updateGymBoardComment(int bcNo) {
+		return sqlSession.insert("GymBoard-mapper.updateGymBoardComment", bcNo);
+	}	
+	
+	public int deleteGymBoardComment(int bcNo) {
+		return sqlSession.insert("GymBoard-mapper.deleteGymBoardComment", bcNo);
+	}
+	
+	
 }
 
 

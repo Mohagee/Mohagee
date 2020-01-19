@@ -5,32 +5,35 @@ import java.sql.Date;
 
 public class GymBoard implements Serializable {
 
-   private int bNo;
-   private int userNo;
-   private String bTitle;
-   private String bTag;
-   private String bContent;
-   private int cNo;
-   private String bUrl;
-   private String bCategory;
-   private int bCount;
-   private Date bDate;
-   private String titleFilename;
-   private String bFileType;
-   private String bStatus;
-   
-   private int bFileno;
-   private int rm;
-   
-   
+     private int bNo;
+      private int userNo;
+      private String bTitle;
+      private String bTag;
+      private String bContent;
+      private int cNo;
+      private String bUrl;
+      private String bCategory;
+      private String bKind;
+      private int bCount;
+      private Date bDate;
+      private String titleFilename;
+      private String bFileType;
+      private String bStatus;
+      private String nickName;
+	  private String introduce;
+	  private String pRenamedFileName;
+      
+      private int bFileno;
+      
+      
    public GymBoard() {
       super();
    }
 
 
 public GymBoard(int bNo, int userNo, String bTitle, String bTag, String bContent, int cNo, String bUrl,
-		String bCategory, int bCount, Date bDate, String titleFilename, String bFileType, String bStatus, int bFileno,
-		int rm) {
+		String bCategory, String bKind, int bCount, Date bDate, String titleFilename, String bFileType, String bStatus,
+		String nickName, String introduce, String pRenamedFileName, int bFileno) {
 	super();
 	this.bNo = bNo;
 	this.userNo = userNo;
@@ -40,13 +43,26 @@ public GymBoard(int bNo, int userNo, String bTitle, String bTag, String bContent
 	this.cNo = cNo;
 	this.bUrl = bUrl;
 	this.bCategory = bCategory;
+	this.bKind = bKind;
 	this.bCount = bCount;
 	this.bDate = bDate;
 	this.titleFilename = titleFilename;
 	this.bFileType = bFileType;
 	this.bStatus = bStatus;
+	this.nickName = nickName;
+	this.introduce = introduce;
+	this.pRenamedFileName = pRenamedFileName;
 	this.bFileno = bFileno;
-	this.rm = rm;
+}
+
+
+@Override
+public String toString() {
+	return "GymBoard [bNo=" + bNo + ", userNo=" + userNo + ", bTitle=" + bTitle + ", bTag=" + bTag + ", bContent="
+			+ bContent + ", cNo=" + cNo + ", bUrl=" + bUrl + ", bCategory=" + bCategory + ", bKind=" + bKind
+			+ ", bCount=" + bCount + ", bDate=" + bDate + ", titleFilename=" + titleFilename + ", bFileType="
+			+ bFileType + ", bStatus=" + bStatus + ", nickName=" + nickName + ", introduce=" + introduce
+			+ ", pRenamedFileName=" + pRenamedFileName + ", bFileno=" + bFileno + "]";
 }
 
 
@@ -130,6 +146,16 @@ public void setbCategory(String bCategory) {
 }
 
 
+public String getbKind() {
+	return bKind;
+}
+
+
+public void setbKind(String bKind) {
+	this.bKind = bKind;
+}
+
+
 public int getbCount() {
 	return bCount;
 }
@@ -180,6 +206,36 @@ public void setbStatus(String bStatus) {
 }
 
 
+public String getNickName() {
+	return nickName;
+}
+
+
+public void setNickName(String nickName) {
+	this.nickName = nickName;
+}
+
+
+public String getIntroduce() {
+	return introduce;
+}
+
+
+public void setIntroduce(String introduce) {
+	this.introduce = introduce;
+}
+
+
+public String getpRenamedFileName() {
+	return pRenamedFileName;
+}
+
+
+public void setpRenamedFileName(String pRenamedFileName) {
+	this.pRenamedFileName = pRenamedFileName;
+}
+
+
 public int getbFileno() {
 	return bFileno;
 }
@@ -190,27 +246,5 @@ public void setbFileno(int bFileno) {
 }
 
 
-public int getRm() {
-	return rm;
-}
-
-
-public void setRm(int rm) {
-	this.rm = rm;
-}
-
-
-@Override
-public String toString() {
-	return "GymBoard [bNo=" + bNo + ", userNo=" + userNo + ", bTitle=" + bTitle + ", bTag=" + bTag + ", bContent="
-			+ bContent + ", cNo=" + cNo + ", bUrl=" + bUrl + ", bCategory=" + bCategory + ", bCount=" + bCount
-			+ ", bDate=" + bDate + ", titleFilename=" + titleFilename + ", bFileType=" + bFileType + ", bStatus="
-			+ bStatus + ", bFileno=" + bFileno + ", rm=" + rm + "]";
-}
-
-   
-   
-   
-   
    
 }

@@ -25,8 +25,8 @@ public class TravelBoardDAO {
       return sqlSession.selectOne("TravelBoard-mapper.selectTotalContents");
    }
    
+   // 게시글 작성
    public int insertTravelBoard(TravelBoard travelBoard) {
-      
       return sqlSession.insert("TravelBoard-mapper.insertTravelBoard", travelBoard);
    }
    
@@ -34,6 +34,7 @@ public class TravelBoardDAO {
       return sqlSession.insert("TravelBoard-mapper.insertTravelAttachment", a);
    }
 
+   // 게시글 선택
    public TravelBoard selectOne(int bNo) {
       return sqlSession.selectOne("TravelBoard-mapper.selectTravelBoard", bNo);
    }
@@ -42,6 +43,7 @@ public class TravelBoardDAO {
       return sqlSession.selectList("TravelBoard-mapper.selectTravelAttachment", bNo);
    }
 
+   // 게시글 수정
    public int updateTravelBoard(TravelBoard travelBoard) {
       return sqlSession.update("TravelBoard-mapper.updateTravelBoard", travelBoard);
    }
@@ -50,6 +52,7 @@ public class TravelBoardDAO {
       return sqlSession.insert("TravelBoard-mapper.updateTravelAttachment", a);
    }
 
+   // 게시글 삭제
    public int deleteTravelBoard(int bNo) {
       return sqlSession.update("TravelBoard-mapper.deleteTravelBoard", bNo);
    }

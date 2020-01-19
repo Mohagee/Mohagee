@@ -62,7 +62,7 @@ public class TravelBoardController {
 
       
         // 1. 저장할 폴더 설정 
-      String savePath = request.getSession().getServletContext().getRealPath("resources/travelUpload");
+	   String savePath = request.getSession().getServletContext().getRealPath("resources/upload");
        
        // 2. DB에 전달할 파일 정보를 담을 list 준비하기 
         List<TravelAttachment> list = new ArrayList();
@@ -162,13 +162,16 @@ public class TravelBoardController {
    @RequestMapping("/travelBoard/travelBoardDetail.do")
    public String selectOne(@RequestParam("bNo") int bNo, Model model) {
 
-      TravelBoard sb = travelBoardService.selectOne(bNo);
+      TravelBoard tb = travelBoardService.selectOne(bNo);
+      
+      if(tb.getpRenamedFileName() == null) {
+          tb.setpRenamedFileName("profile.png");
+      }
 
       List<TravelAttachment> list = travelBoardService.selectAttachment(bNo);
       
-      System.out.println(sb);
-      
-      model.addAttribute("TravelBoard", sb).addAttribute("TravelAttachment", list);
+   // travelBoard라는 이름에(키) gb에 담긴 값을 담는다(값)
+      model.addAttribute("TravelBoard", tb).addAttribute("TravelAttachment", list);
 
       return "travelBoard/travelBoardDetail";
    }
@@ -178,15 +181,16 @@ public class TravelBoardController {
    @RequestMapping("/travelBoard/travelBoardUpdateView.do")
 	public String boardUpdateView(@RequestParam int bNo, Model model) {
 		
-		model.addAttribute("travelBoard", travelBoardService.selectOne(bNo))
-		     .addAttribute("attachmentList", travelBoardService.selectAttachment(bNo));
+		model.addAttribute("TravelBoard", travelBoardService.selectOne(bNo))
+		     .addAttribute("TravelAttachment", travelBoardService.selectAttachment(bNo));
 		
-		return "travelBoard/travelBoardUpdateView";
+		return "travelBoard/travelBoardUpdateForm";
 	}
 	
    // 게시판 수정완료하기 (수정완료 버튼)
-	@RequestMapping("/travelboard/travelBoardUpdate.do")
-	public String travelBoardUpdate(TravelBoard board, Model model, @RequestParam(value="upFile", required=false) MultipartFile[] upFiles, HttpServletRequest request) {
+	@RequestMapping("/travelBoard/travelBoardUpdate.do")
+	public String travelBoardUpdate(TravelBoard board, Model model, 
+			@RequestParam(value="upFile", required=false) MultipartFile[] upFiles, HttpServletRequest request) {
 		
 		int bNo = board.getbNo();
 		
@@ -198,10 +202,9 @@ public class TravelBoardController {
 		originBoard.setbUrl(board.getbUrl());
 		originBoard.setbCategory(board.getbCategory());
 		
-		
 		// 첨부파일 내용을 수정하는 부분
 		// 1.파일을 저장할 경로 생성
-		String savePath = request.getSession().getServletContext().getRealPath("/resources/travelUpload");
+		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload");
 		
 		// 2. 변경을 위해 알아야 할 예전 첨부파일 정보
 		List<TravelAttachment>list = travelBoardService.selectAttachment(bNo);
@@ -292,11 +295,13 @@ public class TravelBoardController {
 	
 	// 게시판 삭제하기 (삭제버튼에 넣기)
 		@RequestMapping("/travelBoard/travelBoardDelete.do")
-		public String gymBoardDelete(@RequestParam int bNo, Model model, HttpSession session) {
+		public String travelBoardDelete(@RequestParam int bNo, Model model, HttpSession session) {
+			
+			System.out.println("bno확인 : " + bNo);
 			
 			// 게시글 삭제 시 게시글에 담긴 첨부파일도 삭제해야 한다.
 			String savePath
-			    = session.getServletContext().getRealPath("/resources/travelUpload");
+			    = session.getServletContext().getRealPath("/resources/upload");
 			
 			List<TravelAttachment> list = travelBoardService.selectAttachment(bNo);
 			

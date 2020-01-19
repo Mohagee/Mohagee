@@ -12,8 +12,12 @@
     
     <c:import url="../common/commonUtil.jsp"/>
     
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3484c416ab1339a45db9fa79d4fa15c5"></script> 
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services,clusterer,drawing"></script>
+
     <style>
     	#board_content{
+    		width : 1300px;
     		border : none;
     		font-size : 20px;
     		height : auto;
@@ -23,6 +27,26 @@
     		/* font-family : ; */
     		font-size : 30px;
     	}
+    	
+    .bootstrap-tagsinput input{
+		display: none;
+	}
+	
+	li span[data-role = remove]{
+		display: none;
+	}
+	
+	.bootstrap-tagsinput{
+		display: initial;
+		border: none;
+		box-shadow: none;
+	}
+	
+	
+	#favorite:hover{
+		cursor: pointer;
+	}
+    	
     </style>
     
 </head>
@@ -46,9 +70,7 @@
     </section>
     <!--/#page-breadcrumb-->
 
-
-    <section id="blog-details" ><!-- class="padding-top" -->
-    
+    <section id="blog-details" >
         <div class="container">
             <div class="row">
                 <div class="col-md-9 col-sm-7">
@@ -62,21 +84,30 @@
                     <!--  게시글 상세보기 영역 -->
    				 	<c:forEach var="ShowAttachment" items="${ShowAttachment}"> 				 			
                                 <div class="post-thumb">                           
-                                    <img src="${ pageContext.request.contextPath }/resources/showUpload/${ShowAttachment.bFileName}" class="img-responsive">                                  
+                                     <img src="${ pageContext.request.contextPath }/resources/upload/${ShowAttachment.bFileName}" class="img-responsive">                                    
                                 </div><br />                                           
                       </c:forEach>
+                      
+                      <!-- 동영상 영역 -->
+       <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalVM">
+			<i class="fas fa-caret-square-right"></i>&nbsp;&nbsp; 누르면 영상이 나옵니다</button><br /><br />
+          <div class="post-content overflow">                                  					
+			<pre class="form-control" id="board_content" name="bContent"><b>${ShowBoard.bContent }</b></pre><br />
+					
+        <!-- 지도 담을 영역 -->
+        <div id="map" style="width:500px;height:400px;"></div>   
+        
 
                       <div class="post-content overflow">                                  					
-                          <p class="form-control" id="board_content" name="bContent"><b>${ShowBoard.bContent }</b></p>
                           <div class="post-bottom overflow">
                               <ul class="nav navbar-nav post-nav">
-                                  <li><a href="#"><i class="fas fa-clock"></i>&nbsp;&nbsp;${ShowBoard.bDate}</a></li>
+                                  <li style="color: #0099AE"><i class="fas fa-clock"></i>&nbsp;&nbsp;${ShowBoard.bDate}</li>
+             
+                                  <li style="color: #0099AE"><i class="fas fa-tags"></i>&nbsp;&nbsp;<input type="text" data-role="tagsinput" value="${ ShowBoard.bTag }"/></li>
+                                	
+                                  <li id="favorite" style="color: #0099AE"><i class="fas fa-heart"></i>&nbsp;&nbsp;${ favoriteCount }</li>
                                   
-                                  <li><a href="#"><i class="fas fa-tags"></i>${ ShowBoard.bTag }</a></li>
-                                
-                                  <li><a href="#"><i class="fas fa-heart"></i>좋아요 숫자</a></li>
-                                  
-                                  <li><a href="#"><i class="fas fa-comments"></i>댓글 숫자</a></li>
+                                  <li style="color: #0099AE"><i class="fas fa-comments"></i>&nbsp;&nbsp;댓글 숫자</li>
                               </ul>
                           </div>
                          <div class="blog-share">
@@ -94,25 +125,25 @@
 			<!-- 게시글 수정 버튼  -->
 			<div>
 			<a href="${ pageContext.request.contextPath }/showBoard/showBoardList.do">
-				<button type="button" class="btn btn-warning" id="listBtn">목록이동</button>
+				<button type="button" class="btn btn-warning btn-rounded btn-sm" id="listBtn">목록이동</button>
 			</a>&nbsp;			
 
-			<input type="button" class="btn btn-success" value="수정하기" 
-			onclick="location.href='${pageContext.request.contextPath}/showBoard/showBoardUpdateForm.do?bNo=${ShowBoard.bNo}'" />&nbsp;
+			<button type="button" class="btn btn-success"
+			onclick="location.href='${pageContext.request.contextPath}/showBoard/showBoardUpdateForm.do?bNo=${ShowBoard.bNo}'" >수정 하기</button>&nbsp;
 
-				<input type="button" class="btn btn-danger" value="삭제하기" 
-					onclick="location.href='${pageContext.request.contextPath}/showBoard/showBoardDelete.do?bNo=${ShowBoard.bNo}'"/>				
+				<button type="button" class="btn btn-danger" 
+					onclick="location.href='${pageContext.request.contextPath}/showBoard/showBoardDelete.do?bNo=${ShowBoard.bNo}'">삭제 하기</button>				
 				
 	<br /><br />
 
              <div class="author-profile padding">
                  <div class="row">
                      <div class="col-sm-2">
-                         <img src="${ pageContext.request.contextPath }/resources/images/alice.jpg" alt="">
+                         <img src="${ pageContext.request.contextPath }/resources/profile/${ShowBoard.pRenamedFileName}">
                     </div>
                     <div class="col-sm-10" style="font-family:binggrae;">
-                        <h3 style="font-family:binggrae;">ALice</h3>
-                        <p>공연을 소개해드리는 에디터입니다!</p>
+                        <h3 style="font-family:binggrae;">${ ShowBoard.nickName }</h3>
+                        <p>${ ShowBoard.introduce }</p>
                     </div>
                 </div>
             </div>
@@ -121,13 +152,15 @@
     <div class="response-area"  style="font-family:binggrae;">
     
     <!--  댓글 제목 & 버튼 부분 -->
-    <div class="row">
-    	<div class="col-sm-10">
-			<p class="bold" style="font-size:25px;">Comment</p>
+<div class="row">
+	<div class="col-sm-10"></div>	
+		<div class="col-sm-2" align="right">	
+			<button type="button" class="btn btn-success btn-rounded btn-sm"  
+				onclick="location.href='${pageContext.request.contextPath}/showBoard/showBoardUpdateForm.do?bNo=${ShowBoard.bNo}'" >댓글작성</button>&nbsp;					
 		</div>
     		<div class="col-sm-2" align="right">	
-				    <input type="button" class="btn btn-success btn-rounded btn-sm" value="댓글작성" 
-							onclick="location.href='${pageContext.request.contextPath}/showBoard/showBoardUpdateForm.do?bNo=${ShowBoard.bNo}'" />&nbsp;					
+				    <button type="button" class="btn btn-success btn-rounded btn-sm"
+							onclick="location.href='${pageContext.request.contextPath}/showBoard/showBoardUpdateForm.do?bNo=${ShowBoard.bNo}'" >댓글 작성</button>&nbsp;					
    			 </div>
    </div>	
 
@@ -143,8 +176,8 @@
                     	<p>댓글 내용</p>
                     	<i class="far fa-clock"></i> 댓글 작성일
                     	<div align="right">	
-				    		<input type="button" class="btn btn-info btn-rounded btn-sm" value="댓글작성" 
-							onclick="location.href='${pageContext.request.contextPath}/showBoard/showBoardUpdateForm.do?bNo=${ShowBoard.bNo}'" />&nbsp;					
+				    		<button type="button" class="btn btn-info btn-rounded btn-sm"
+							onclick="location.href='${pageContext.request.contextPath}/showBoard/showBoardUpdateForm.do?bNo=${ShowBoard.bNo}'">댓글작성</button>&nbsp;					
    			 </div>
                     
                 </div>
@@ -161,12 +194,190 @@
      </div>
 </div>
 </div>
+</div>
 </section>
+
+<!-- ===========동영상 모달 시작 ===========-->
+<!--Modal: modalVM-->
+<div class="modal fade" id="modalVM" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+
+    <!--Content-->
+    <div class="modal-content">
+
+      <!--Body-->
+	<div class="modal-body mb-0 p-0">
+		<div class="embed-responsive embed-responsive-16by9 z-depth-1-half"> ${ShowBoard.bUrl}</div>
+	</div>
+
+      <!--Footer-->
+      <div class="modal-footer justify-content-center flex-column flex-md-row">
+	        <button type="button" class="btn btn-outline-primary btn-rounded btn-md ml-4"
+	          data-dismiss="modal">Close</button>
+         </div>
+      </div>
+    <!--/.Content-->
+  </div>
+</div>
+<!--Modal: modalVM-->    
+<!-- ===========동영상 모달 끝 ===========-->    
     
-    <script>
+
+<script>
+		/*  카카오 지도 구현  */
+		var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+		var options = { //지도를 생성할 때 필요한 기본 옵션
+			center: new kakao.maps.LatLng(${ShowBoard.cLat}, ${ShowBoard.cLng}),  //지도의 중심좌표.
+			level: 3 //지도의 레벨(확대, 축소 정도)
+		};
 		
+		var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+		
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	    mapOption = {
+	        center: new kakao.maps.LatLng(${ShowBoard.cLat}, ${ShowBoard.cLng}), // 지도의 중심좌표
+	        level: 3, // 지도의 확대 레벨
+	        mapTypeId : kakao.maps.MapTypeId.ROADMAP // 지도종류
+	    }; 
+
+		// 지도를 생성한다 
+		var map = new kakao.maps.Map(mapContainer, mapOption); 
+	
+		// 지도에 마커를 생성하고 표시한다
+		var marker = new kakao.maps.Marker({
+		    position: new kakao.maps.LatLng(${ShowBoard.cLat}, ${ShowBoard.cLng}),   // 마커의 좌표
+		    map: map // 마커를 표시할 지도 객체
+		});
+		
+		
+		new Carousel(document.querySelector('#carousel-banner'), { 
+			CarouselMotion: 'default', naviPosition: 'bottom', naviStyle: 'dot', autoMove: true, autoMoveTime: 2000 
+			}); 
+
+		new Carousel(document.querySelector('#carousel-banner'), { 
+			CarouselMotion: 'default' 
+			// --> slide / prev / fade 
+		});
+    
+    // 태그 관련 스크립트
+    	$("input").tagsinput('items')
+    // 좋아요 기능
+    
+    $(function(){
+    	
+    	var userNo = "${member.userNo}";
+    	var bNo = "${ShowBoard.bNo}";
+    	
+    	$.ajax({
+    		url: "${pageContext.request.contextPath}/favorite/checkFavorite",
+    		data: {
+    			userNo : userNo,
+    			bNo : bNo
+    		},
+    		dataType: "json",
+    		async: false,
+    		success: function(data){
+    			
+    			if(data.Favorite.fStatus == 'Y'){
+    				$("#favorite").css("color", "red");
+    			}
+    			
+    		}
+    	});
+    	
+    });
+    
+    $("#favorite").on("click", function(){
+    	
+    	var userNo = "${member.userNo}";
+    	var bNo = "${ShowBoard.bNo}";
+    	
+    	$.ajax({
+    		url: "${pageContext.request.contextPath}/favorite/checkFavorite",
+    		data: {
+    			userNo : userNo,
+    			bNo : bNo
+    		},
+    		dataType: "json",
+    		async: false,
+    		success: function(data){
+    			
+    			/* console.log(data);
+    			console.log(data.Favorite);
+    			console.log(data.Favorite.fStatus); */
+    			
+    			var fStatus = data.Favorite.fStatus;
+    			
+    			if(fStatus == null || fStatus == 'N'){
+    				$.ajax({
+    					url: "${pageContext.request.contextPath}/favorite/doFavorite",
+    					data: {
+    						fStatus : fStatus,
+    		    			userNo : userNo,
+    		    			bNo : bNo
+    		    		},
+    		    		async: false,
+    		    		success: function(data){
+    		    			if(data == 1){
+    		    				alert("좋아요를 눌러주셔서 감사합니다.");
+    		        			$("#favorite").css("color", "red");
+    		        			
+    		        			var text = $('#favorite').text();
+    		        			
+    		        			$.ajax({
+    		        				url: "${pageContext.request.contextPath}/favorite/favoriteNumber",
+    		        				data: {
+    		        					bNo : bNo
+    		        				},
+    		        				async: false,
+    		        				success: function(data){
+    		        					$('#favorite').html('<i class="fas fa-heart"></i>&nbsp;&nbsp;' + data);
+    		        				}
+    		        			});
+    		    			}
+    		    		}
+    				});
+    			} else {
+    				$.ajax({
+    					url: "${pageContext.request.contextPath}/favorite/cancelFavorite",
+    					data: {
+    						userNo : userNo,
+    		    			bNo : bNo
+    					},
+    					async: false,
+    					success: function(data){
+    						if(data == 1) {
+    							alert("좋아요를 취소하였습니다.");
+    		        			$("#favorite").css("color", "#0099AE");
+    		        			
+    		        			$.ajax({
+    		        				url: "${pageContext.request.contextPath}/favorite/favoriteNumber",
+    		        				data: {
+    		        					bNo : bNo
+    		        				},
+    		        				async: false,
+    		        				success: function(data){
+    		        					$('#favorite').html('<i class="fas fa-heart"></i>&nbsp;&nbsp;' + data);
+    		        				}
+    		        			});
+    						}
+    					}
+    				});
+    			}
+    		}
+    	});
+    });
+    	
     </script>
     
     <c:import url="../common/footer.jsp"/>
 </body>
 </html>
+
+
+
+
+
+
+

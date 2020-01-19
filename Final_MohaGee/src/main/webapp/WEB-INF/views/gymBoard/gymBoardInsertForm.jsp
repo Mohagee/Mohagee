@@ -15,7 +15,8 @@
       #summernote{
          margin-top:1px; 
          width:900px; 
-         height:500px; 
+         height:500px;
+         border : 1px solid lightgrey;
       }
       #input-group mb-3{
          
@@ -63,7 +64,31 @@
               clip:rect(0,0,0,0); 
               border: 0; 
           }
-   
+	input[type=file]{
+	   display: none;
+	}
+	
+	.my_button{
+	   display: inline-block;
+	   text-align: center;
+	   color: #fff;
+	   text-decoration: none;
+	   border-radius: 5px;
+	}
+	
+	.imgs_wrap{
+	   border: 1px solid lightgrey;
+	   margin-top: 30px;
+	   margin-bottom: 30px;
+	   padding-top: 10px;
+	   padding-bottom: 10px
+	}
+	
+	.imgs_wrap img{
+	   max-width: 150px;
+	   margin-left: 10px;
+	   margin-right: 10px;
+	}   
    </style>
    
 </head>
@@ -90,6 +115,17 @@
          action="${ pageContext.request.contextPath }/gymBoard/gymBoardInsertEnd.do"  
          method="post" enctype="multipart/form-data">
       <input type="hidden" name="userNo"  value="${member.userNo}"/>
+      <input type="hidden" name="bKind" value="G"/>
+      <!-- 카테고리선택 칸 -->
+      <select id = "bCategory" name="bCategory" class="input-group mb-3" 
+      		   style="width:900px; border:1px solid lightgrey; font-family: cookierun;" required>
+      	<option value=""   disabled selected >카테고리를 선택해주세요 (필수!)</option>
+	<option value="1" >쇠질</option>
+	<option value="2" >홈트레이닝</option>
+	<option value="3" >요가&필라테스</option>
+	<option value="4" >철인삼종</option>
+	<option value="5" >식단</option> 
+      </select>
 
 
       <!-- 제목 입력 칸 -->
@@ -114,48 +150,32 @@
               id = "bUrl" name="bUrl" placeholder="link입력 ex) www.naver.com">
       </div>
 
-      <!-- 카테고리선택 칸 -->
-      <select id = "bCategory" name="bCategory" class="input-group mb-3 required" style="width:900px" required>
-      	<option value="" style="font-family:cookierun;"disabled selected >카테고리를 선택해주세요 (필수!)</option>
-	<option value="1" style="font-family:cookierun;">쇠질</option>
-	<option value="2" style="font-family:cookierun;">홈트레이닝</option>
-	<option value="3" style="font-family:cookierun;">요가&필라테스</option>
-	<option value="4" style="font-family:cookierun;">철인삼종</option>
-	<option value="5" style="font-family:cookierun;">식단</option> 
-      </select>
-      
-      
-      <br />
+<!--  업로드 사진 미리보기 칸 -->
+    <div>
+        <div class="imgs_wrap" style="width:900px">
+            <img id="img" />
+        </div>
+    </div>
 
-
-      
- 
-   <div  style="margin-bottom:3px;">
+      <!--  이미지 미리보기  -->
+   <div style="margin-bottom:3px;">
          <div class="filebox">
-            <label id="board_img" for="ex_file">
-               <i class="fas fa-image"></i>&nbsp;&nbsp;&nbsp;사진 업로드
-            </label>
-            <input type="file" id="ex_file" name="upFile">&nbsp;&nbsp;          
-            <label id="board_video" for="ex_file">
-               <i class="fas fa-video"></i>&nbsp;&nbsp;&nbsp;영상 업로드
-            </label>
-            <input type="file" id="ex_file" name="upFile">&nbsp;&nbsp;            
-            <label id="board_audio" for="ex_file">
-               <i class="fas fa-headphones"></i>&nbsp;&nbsp;&nbsp;오디오 업로드
-            </label>
-            <input type="file" id="ex_file" name="upFile">&nbsp;&nbsp;              
-         </div>
+            <label id="board_img" for="ex_file_img" name="upFile">
+               <a href="javascript:" onclick="fileUploadAction();" class="my_button">
+               <i class="fas fa-image"></i>&nbsp;&nbsp;&nbsp;사진 업로드</a></label>
+            <input type="file" id="ex_file_img" name="upFile"  multiple>&nbsp;&nbsp;
+
+            <label id="board_video" for="ex_file_video">
+               <i class="fas fa-video"></i>&nbsp;&nbsp;&nbsp;영상 업로드</label>
+            <input type="file" id="ex_file_video" name="upFile">&nbsp;&nbsp;         
+                             
+            <label id="board_audio" for="ex_file_audio">
+               <i class="fas fa-headphones"></i>&nbsp;&nbsp;&nbsp;오디오 업로드</label>
+            <input type="file" id="ex_file_audio" name="upFile">&nbsp;&nbsp;              
+          </div>
    </div>
 
 
-
-
-
-<!--       <div class="form-group">
-          <textarea class="form-control" type="textarea" id="tbcontent" name="tbContent" placeholder="글 내용" maxlength="1000" rows="7"></textarea>
-          <span class="help-block"><p id="characterLeft" class="help-block ">더 이상 작성할 수 없습니다.</p></span>
-      </div>
- -->
    <!-- 내용 입력칸 -->
       <div class="editorArea"  style="margin-top:5px;">
               <textarea id="summernote" name="bContent" placeholder="글 내용" maxlength="1000" rows="7" required></textarea>
@@ -176,7 +196,7 @@
 
 <c:import url="../common/footer.jsp" />
 
-    <!-- 최대글 작성 한도 스크립트 구현해야함@ -->
+    <!-- 최대글 작성 한도 스크립트  -->
 <script>
    $(document).ready(function(){
        $('#characterLeft').text('1000 자 작성가능');
@@ -198,6 +218,55 @@
    });
    
 
+   
+ //이미지 정보들을 담을 배열
+   var sel_files = [];
+
+
+   $(document).ready(function() {
+       $("#ex_file_img").on("change", handleImgFileSelect);
+   }); 
+
+   function fileUploadAction() {
+       console.log("fileUploadAction");
+       $("#ex_file_img").trigger('click');
+   }
+
+   function handleImgFileSelect(e) {
+
+       // 이미지 정보들을 초기화
+       sel_files = [];
+       $(".imgs_wrap").empty();
+
+       var files = e.target.files;
+       var filesArr = Array.prototype.slice.call(files);
+
+       var index = 0;
+       filesArr.forEach(function(f) {
+           if(!f.type.match("image.*")) {
+               alert("확장자는 이미지 확장자만 가능합니다.");
+               return;
+           }
+
+           sel_files.push(f);
+
+           var reader = new FileReader();
+           reader.onload = function(e) {
+               var html = "<a href=\"javascript:void(0);\" onclick=\"deleteImageAction(" + index + ")\" id=\"img_id_" + 
+                              index + "\"><img src=\"" + e.target.result + "\" data-file='" + 
+                              f.name + "' class='selProductFile' title='Click to remove'></a>";
+               $(".imgs_wrap").append(html);
+               index++;
+
+           }
+           reader.readAsDataURL(f);
+           
+       });
+   }   
+   
+   
+   
+   
    
 </script>
 

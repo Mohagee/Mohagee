@@ -6,10 +6,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">   
    <c:import url="../common/commonUtil.jsp"/>
+   
    <style>
       #summernote{
          margin-top:1px; 
@@ -20,50 +20,76 @@
          
       }
       
-      #board_img{
-      	
-      	background : rgb(8, 187, 104);
+        #board_img{
+         
+         background : rgb(8, 187, 104);
       
       }
       
       #board_video{
-      	
-      	background : rgb(223, 67, 152);
+         
+         background : rgb(223, 67, 152);
       
       }
       
       #board_audio{
-      	
-      	background : rgb(8, 143, 233);
+         
+         background : rgb(8, 143, 233);
       
       }
-      
-      
+          
       .filebox label { 
-      		display: inline-block; 
-      		padding: .5em .75em; 
-      		color: white; 
-      		font-size: inherit; 
-      		line-height: normal; 
-      		vertical-align: middle; 
-      		cursor: pointer; 
-      		border: 1px solid #ebebeb; 
-      		border-bottom-color: #e2e2e2; 
-      		border-radius: .25em; 
-      	}
-  	
-      	
-       .filebox input[type="file"] {
-       		 position: absolute; 
-       		 width: 1px; 
-       		 height: 1px; 
-       		 padding: 0; 
-       		 margin: -1px; 
-       		 overflow: hidden; 
-       		 clip:rect(0,0,0,0); 
-       		 border: 0; 
-       	}
-   
+            display: inline-block; 
+            padding: .5em .75em; 
+            color: white; 
+            font-size: inherit; 
+            line-height: normal; 
+            vertical-align: middle; 
+            cursor: pointer; 
+            border: 1px solid #ebebeb; 
+            border-bottom-color: #e2e2e2; 
+            border-radius: .25em; 
+         }
+
+         
+    .filebox input[type="file"] {
+              position: absolute; 
+              width: 1px; 
+              height: 1px; 
+              padding: 0; 
+              margin: -1px; 
+            overflow: hidden;  
+              clip:rect(0,0,0,0); 
+              border: 0; 
+          }    
+          
+input[type=file]{
+   display: none;
+}
+
+.my_button{
+   display: inline-block;
+   text-align: center;
+   color: #fff;
+   text-decoration: none;
+   border-radius: 5px;
+}
+
+.imgs_wrap{
+   border: 1px solid lightgrey;
+   margin-top: 30px;
+   margin-bottom: 30px;
+   padding-top: 10px;
+   padding-bottom: 10px
+}
+
+.imgs_wrap img{
+   max-width: 150px;
+   margin-left: 10px;
+   margin-right: 10px;
+}
+
+
    </style>
    
 </head>
@@ -92,19 +118,40 @@
 				<input type="hidden" name="bNo" value="${ShowBoard.bNo}" />
 
     <!-- 카테고리선택 칸 -->
-      <select id = "bCategory" name="bCategory" class="input-group mb-3" style="width:900px; border:1px solid lightblue; font-family: bingrae;" >
-		   <option disabled selected >카테고리를 선택해주세요 (필수!)</option>
-		   <option value="musical" >뮤지컬</option>
-		   <option value="act" >연극</option>
+      <!-- 카테고리선택 칸 -->
+      <select id = "bCategory" name="bCategory" class="input-group mb-3" style="width:900px; border:1px solid lightblue; font-family: bingrae;" required>
+		   <option value="" disabled selected >카테고리를 선택해주세요 (필수!)</option>
+		   <option value="musical" >라이센스</option>
 		   <option value="create" >창작 뮤지컬</option>
 		   <option value="original" >오리지널 내한</option>
-      </select>
+		   <option value="act" >연극</option>
+      </select><br />
+
+	 <!-- 공연장 위치 선택  -->
+	<select id = "cNo" name="cNo" class="input-group mb-3" style="width:900px; border:1px solid lightgrey; color:gray; font-family: bingrae;" >
+         <option value="" disabled selected >공연장선택 (필수!)</option>
+         <option value="1" >LG아트센터</option>
+         <option value="2" >블루스퀘어 인터파크홀</option>
+         <option value="3" >예술의전당</option>
+         <option value="4" >세종문화회관</option>
+         <option value="5">샤롯데씨어터</option>
+         <option value="6">디큐브아트센터</option>
+         <option value="7">충무아트센터</option>
+         <option value="8">두산아트센터</option>
+         <option value="9">대학로 유니플렉스</option>
+         <option value="10">동양예술극장</option>
+         <option value="11">한전아트센터</option>
+         <option value="12">광림아트센터</option>
+         <option value="13">대학로 틴틴홀</option>
+         <option value="14">서경대학교 스콘1관</option>
+         <option value="15">아트원씨어터</option>
+	</select>
 
 				<!-- 제목 입력 칸 -->
-				<div class="input-group mb-3" style="width: 900px"><br /> 
-					<input type="text" class="form-control" aria-label="Text input with dropdown button" id="title"
-																	name="bTitle" placeholder="제목 입력" value="${ShowBoard.bTitle}" >
-				</div>
+	<div class="input-group mb-3" style="width: 900px"><br /> 
+		<input type="text" class="form-control" aria-label="Text input with dropdown button" id="title"
+														name="bTitle" placeholder="제목 입력" value="${ShowBoard.bTitle}" >
+	</div>
 
 				<!-- 태그 입력 칸 -->
 				<div class="input-group mb-3" style="width: 900px;"><br /> 
@@ -113,23 +160,37 @@
 				</div>
 				
 				<!-- URL 입력 칸 -->
-				<div class="input-group mb-3" style="width: 900px;"><br /> 
-					<input type="url" class="form-control" aria-label="Text input with dropdown button" id="bUrl" name="bUrl"
-																				placeholder="link입력 ex) www.naver.com" value="${ShowBoard.bUrl}">
-				</div><br />
+       <div class="input-group mb-3" style="width:900px;">
+         <br />
+              <input type="text" class="form-control" 
+              aria-label="Text input with dropdown button" 
+              id = "bUrl" name="bUrl" placeholder="link입력 ex) www.naver.com">
+      </div><br />
 
-				<div style="margin-bottom: 3px;">
-					<div class="filebox">
-						<label id="board_img" for="ex_file"> <i class="fas fa-image"></i>&nbsp;&nbsp;&nbsp;사진올리기
-						</label> <input type="file" id="ex_file" name="upFile" multiple>&nbsp;&nbsp;
+				<!--  업로드 사진 미리보기 칸 -->
+    <div>
+        <div class="imgs_wrap" style="width:900px">
+            <img id="img" />
+        </div>
+    </div>           
+      
+<!--  이미지 미리보기  -->
+   <div style="margin-bottom:3px;">
+         <div class="filebox">
+            <label id="board_img" for="ex_file_img" name="upFile">
+               <a href="javascript:" onclick="fileUploadAction();" class="my_button">
+               <i class="fas fa-image"></i>&nbsp;&nbsp;&nbsp;사진 업로드</a></label>
+            <input type="file" id="ex_file_img" name="upFile"  multiple>&nbsp;&nbsp;
 
-						<label id="board_video" for="ex_file"> <i class="fas fa-video"></i>&nbsp;&nbsp;&nbsp;영상올리기
-						</label> <input type="file" id="ex_file" name="upFile">&nbsp;&nbsp;
-
-						<label id="board_audio" for="ex_file"> <i class="fas fa-headphones"></i>&nbsp;&nbsp;&nbsp;음악올리기
-						</label> <input type="file" id="ex_file" name="upFile">&nbsp;&nbsp;
-					</div>
-				</div>
+            <label id="board_video" for="ex_file_video">
+               <i class="fas fa-video"></i>&nbsp;&nbsp;&nbsp;영상 업로드</label>
+            <input type="file" id="ex_file_video" name="upFile">&nbsp;&nbsp;         
+                             
+            <label id="board_audio" for="ex_file_audio">
+               <i class="fas fa-headphones"></i>&nbsp;&nbsp;&nbsp;오디오 업로드</label>
+            <input type="file" id="ex_file_audio" name="upFile">&nbsp;&nbsp;              
+          </div>
+   </div>
 
 				<!-- 내용 입력칸 -->
 				<div class="editorArea" style="margin-top: 5px;">
@@ -138,15 +199,14 @@
 					<span class="help-block"><p id="characterLeft" class="help-block ">더 이상 작성할 수 없습니다.</p></span>
 				</div>
 
-				<div align="center">
-					<button type="submit" class="btn btn-danger" id="btnSubmit">수정완료</button>
-			
-				<input type="button" class="btn btn-warning" value="삭제하기" 
-					onclick="location.href='${pageContext.request.contextPath}/showBoard/showBoardDelete.do?bNo=${ShowBoard.bNo}'"/>
-					
-				 </div>
-				 <br />
-				 
+				<!--  수정, 삭제 버튼  -->
+	<div align="center">
+		<button type="submit" class="btn btn-danger" id="btnSubmit">수정완료</button>
+
+	<input type="button" class="btn btn-warning" value="삭제하기" 
+		onclick="location.href='${pageContext.request.contextPath}/showBoard/showBoardDelete.do?bNo=${ShowBoard.bNo}'"/>
+	 </div>
+	 <br />			 
 			</form>
 		</div>
 	</section>
@@ -158,26 +218,104 @@
 
 	<c:import url="../common/footer.jsp" />
 
-    <!-- 최대글 작성 한도 스크립트 구현해야함@ -->
 <script>
-	$(document).ready(function() {
-		$('#characterLeft').text('1000 자 작성가능');
-		$('#summernote').keydown(function() {
-			var max = 1000;
-			var len = $(this).val().length;
-			if (len >= max) {
-				$('#characterLeft').text('더 이상 작성할 수 없습니다.');
-				$('#characterLeft').addClass('red');
-				$('#btnSubmit').addClass('disabled');
-			} else {
-				var ch = max - len;
-				$('#characterLeft').text(ch + ' 자 작성가능');
-				$('#btnSubmit').removeClass('disabled');
-				$('#characterLeft').removeClass('red');
-			}
-		});
-	});
+
+/* 태그 구현 */
+$("#tag").tagsinput({
+   maxTags: 5,
+   itemText: function(item) {
+       return '#' + item;
+   },
+   
+   cancelConfirmKeysOnEmpty: false
+   
+});
+
+$('#tag').on('itemAddedOnInit', function(event) {
+     return '#' + event.item.label;
+});
+
+/* -------------------------------------------------------------- */
+ 
+ /* 이미지 수정 구현 */
+ 
+ //이미지 정보들을 담을 배열
+var sel_files = [];
+
+
+$(document).ready(function() {
+    $("#ex_file_img").on("change", handleImgFileSelect);
+}); 
+
+function fileUploadAction() {
+    console.log("fileUploadAction");
+    $("#ex_file_img").trigger('click');
+}
+
+function handleImgFileSelect(e) {
+
+    // 이미지 정보들을 초기화
+    sel_files = [];
+    $(".imgs_wrap").empty();
+
+    var files = e.target.files;
+    var filesArr = Array.prototype.slice.call(files);
+
+    var index = 0;
+    filesArr.forEach(function(f) {
+        if(!f.type.match("image.*")) {
+            alert("확장자는 이미지 확장자만 가능합니다.");
+            return;
+        }
+
+        sel_files.push(f);
+
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var html = "<a href=\"javascript:void(0);\" onclick=\"deleteImageAction(" + index + ")\" id=\"img_id_" + 
+                           index + "\"><img src=\"" + e.target.result + "\" data-file='" + 
+                           f.name + "' class='selProductFile' title='Click to remove'></a>";
+            $(".imgs_wrap").append(html);
+            index++;
+
+        }
+        reader.readAsDataURL(f);
+        
+    });
+}  
+   function deleteImageAction(index){
+      console.log("index : " + index);
+      sel_files.splice(index, 1);
+      
+      var img_id = "#img_id" + index;
+      $(img_id).remove();
+      
+      console.log(sel_files);
+   }
+   /* -------------------------------------------------------------- */   
+ 
+ 
+ /* 게시글 1000자 이상 작성 금지 구현 */
+   $(document).ready(function() {
+      $('#characterLeft').text('1000 자 작성가능');
+      $('#summernote').keydown(function() {
+         var max = 1000;
+         var len = $(this).val().length;
+         if (len >= max) {
+            $('#characterLeft').text('더 이상 작성할 수 없습니다.');
+            $('#characterLeft').addClass('red');
+            $('#btnSubmit').addClass('disabled');
+         } else {
+            var ch = max - len;
+            $('#characterLeft').text(ch + ' 자 작성가능');
+            $('#btnSubmit').removeClass('disabled');
+            $('#characterLeft').removeClass('red');
+         }
+      });
+   });
+   /* -------------------------------------------------------------- */
 </script>
+
 
 
     <c:import url="../common/footer.jsp"/>
