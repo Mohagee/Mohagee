@@ -99,7 +99,6 @@
         
 
                       <div class="post-content overflow">                                  					
-                          <p class="form-control" id="board_content" name="bContent"><b>${ShowBoard.bContent }</b></p>
                           <div class="post-bottom overflow">
                               <ul class="nav navbar-nav post-nav">
                                   <li style="color: #0099AE"><i class="fas fa-clock"></i>&nbsp;&nbsp;${ShowBoard.bDate}</li>

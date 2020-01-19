@@ -223,7 +223,7 @@ public class ShowBoardController {
 
 		// 첨부 파일 수정 부분
 		// 1. 파일을 저장할 경로 생성
-		String savePath = request.getSession().getServletContext().getRealPath("/resources/showUpload");
+		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload");
 
 		// 2. 변경을 위해 알아야 할 예전 첨부파일 정보
 		List<ShowAttachment> list = showBoardService.selectAttachment(bNo);
@@ -334,7 +334,7 @@ public class ShowBoardController {
 	public String boardDelete(int bNo, Model model, HttpSession session) {
 
 		// 게시글에 담긴 첨부파일도 삭제해야한다.
-		String savePath = session.getServletContext().getRealPath("/resources/showUpload");
+		String savePath = session.getServletContext().getRealPath("/resources/upload");
 
 		List<ShowAttachment> list = showBoardService.selectAttachment(bNo);
 

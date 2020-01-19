@@ -81,7 +81,7 @@ public class gbCommentController {
 	@RequestMapping("/gbComment/gbCommentDelete.do")
 	@ResponseBody
 	public List<GymBoard> gbCommentDeleteSelect (@RequestParam int bcNo,
-																					  @RequestParam int bNo){
+												@RequestParam int bNo){
 		List<GymBoard> data = null;
 	
 		int result = gbCommentService.deletegbComment(bcNo);
@@ -92,21 +92,6 @@ public class gbCommentController {
 		}
 		return data;
 	}	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 }

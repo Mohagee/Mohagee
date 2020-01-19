@@ -200,7 +200,7 @@ public class TravelBoardController {
 		
 		// 첨부파일 내용을 수정하는 부분
 		// 1.파일을 저장할 경로 생성
-		String savePath = request.getSession().getServletContext().getRealPath("/resources/travelUpload");
+		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload");
 		
 		// 2. 변경을 위해 알아야 할 예전 첨부파일 정보
 		List<TravelAttachment>list = travelBoardService.selectAttachment(bNo);
@@ -297,7 +297,7 @@ public class TravelBoardController {
 			
 			// 게시글 삭제 시 게시글에 담긴 첨부파일도 삭제해야 한다.
 			String savePath
-			    = session.getServletContext().getRealPath("/resources/travelUpload");
+			    = session.getServletContext().getRealPath("/resources/upload");
 			
 			List<TravelAttachment> list = travelBoardService.selectAttachment(bNo);
 			

@@ -85,9 +85,9 @@
 						<c:if test="${ fn:trim(showBoard.bFileType)  == 'I'}">
 							<div class="post-thumb">
 								<a href="${ pageContext.request.contextPath }/showBoard/showBoardDetail.do?bNo=${showBoard.bNo}">
-									<img src="${ pageContext.request.contextPath }/resources/upload/${showBoard.titleFilename}"></a>				
+									<img src="${ pageContext.request.contextPath }/resources/upload/${showBoard.titleFilename}" class="img-responsive"></a>				
 							</div>
-							</c:if>
+						</c:if>
 							
 							<!-- 태그  -->
 <%-- 							<div class="post-content overflow">
