@@ -7,7 +7,7 @@
 	<select id="selectList" resultType="GymBoard">
       SELECT B.*, a.bfilename titleFilename, a.bFileType FROM BOARD B
       LEFT JOIN B_ATTACHMENT A ON(B.BNO = A.BNO AND A.BFILELEVEL = 0 AND BFILESTATUS = 'N') 
-      WHERE BSTATUS = 'N' order by BDATE DESC
+      WHERE BSTATUS = 'N' AND BKIND = 'G' ORDER BY BDATE DESC
 	</select>
 	
 	<insert id="insertGymBoard" parameterType="GymBoard">
@@ -20,6 +20,7 @@
          #{cNo},
          #{bUrl},
          #{bCategory},
+         #{bKind},
          #{bCount},
          DEFAULT,
          DEFAULT)
@@ -39,7 +40,7 @@
 	</insert>
 	
 	<select id="selectGymBoard" parameterType="_int" resultType="GymBoard">
-      SELECT * FROM BOARD WHERE BNO = #{bNo}
+      SELECT * FROM BOARD WHERE BNO = #{bNo} AND BKIND = 'G'
 	</select>
 	
 	<select id="selectGymAttachment" parameterType="int" resultType="GymAttachment">
@@ -72,6 +73,45 @@
       UPDATE B_ATTACHMENT
       SET BFILESTATUS = 'Y' WHERE BNO = #{bNo}
 	</update>
+	
+	
+	
+	
+	<!-- 댓글 관련 쿼리 -->
+	<insert id="insertGymBoardComment" parameterType="gbComment">
+		INSERT INTO BCOMMENT VALUES(
+		SEQ_BCNO.NEXTVAL,
+		#{bNo},
+		#{userNo},
+		#{bcContent},
+		SYSDATE,
+		DEFAULT,
+		DEFAULT
+		)
+	</insert>
+	
+	<update id="updateGymBoardComment" parameterType="gbComment">
+	      UPDATE BCOMMENT
+	      SET BCCONTENT = #{bcContent}
+	      WHERE BCNO = #{bcNo}	
+	</update>
+	
+	<update id="deleteGymBoardComment" parameterType="int">
+		UPDATE BCOMMENT SET BCSTATUS= 'Y' WHERE BCNO = #{bcNo}
+	</update>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </mapper>
 
 

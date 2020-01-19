@@ -5,212 +5,219 @@ import java.sql.Date;
 
 public class GymBoard implements Serializable {
 
-   private int bNo;
-   private int userNo;
-   private String bTitle;
-   private String bTag;
-   private String bContent;
-   private int cNo;
-   private String bUrl;
-   private String bCategory;
-   private int bCount;
-   private Date bDate;
-   private String titleFilename;
-   private String bFileType;
-   private String bStatus;
-   
-   private int bFileno;
-   private int rm;
-   
-   
+     private int bNo;
+      private int userNo;
+      private String bTitle;
+      private String bTag;
+      private String bContent;
+      private int cNo;
+      private String bUrl;
+      private String bCategory;
+      private String bKind;
+      private int bCount;
+      private Date bDate;
+      private String titleFilename;
+      private String bFileType;
+      private String bStatus;
+      
+      private int bFileno;
+      private int rm;
+      
+      
    public GymBoard() {
       super();
    }
 
 
-public GymBoard(int bNo, int userNo, String bTitle, String bTag, String bContent, int cNo, String bUrl,
-		String bCategory, int bCount, Date bDate, String titleFilename, String bFileType, String bStatus, int bFileno,
-		int rm) {
-	super();
-	this.bNo = bNo;
-	this.userNo = userNo;
-	this.bTitle = bTitle;
-	this.bTag = bTag;
-	this.bContent = bContent;
-	this.cNo = cNo;
-	this.bUrl = bUrl;
-	this.bCategory = bCategory;
-	this.bCount = bCount;
-	this.bDate = bDate;
-	this.titleFilename = titleFilename;
-	this.bFileType = bFileType;
-	this.bStatus = bStatus;
-	this.bFileno = bFileno;
-	this.rm = rm;
-}
+   public GymBoard(int bNo, int userNo, String bTitle, String bTag, String bContent, int cNo, String bUrl,
+         String bCategory, String bKind, int bCount, Date bDate, String titleFilename, String bFileType,
+         String bStatus, int bFileno, int rm) {
+      super();
+      this.bNo = bNo;
+      this.userNo = userNo;
+      this.bTitle = bTitle;
+      this.bTag = bTag;
+      this.bContent = bContent;
+      this.cNo = cNo;
+      this.bUrl = bUrl;
+      this.bCategory = bCategory;
+      this.bKind = bKind;
+      this.bCount = bCount;
+      this.bDate = bDate;
+      this.titleFilename = titleFilename;
+      this.bFileType = bFileType;
+      this.bStatus = bStatus;
+      this.bFileno = bFileno;
+      this.rm = rm;
+   }
 
 
-public int getbNo() {
-	return bNo;
-}
+   @Override
+   public String toString() {
+      return "ShowBoard [bNo=" + bNo + ", userNo=" + userNo + ", bTitle=" + bTitle + ", bTag=" + bTag + ", bContent="
+            + bContent + ", cNo=" + cNo + ", bUrl=" + bUrl + ", bCategory=" + bCategory + ", bKind=" + bKind
+            + ", bCount=" + bCount + ", bDate=" + bDate + ", titleFilename=" + titleFilename + ", bFileType="
+            + bFileType + ", bStatus=" + bStatus + ", bFileno=" + bFileno + ", rm=" + rm + "]";
+   }
 
 
-public void setbNo(int bNo) {
-	this.bNo = bNo;
-}
+   public int getbNo() {
+      return bNo;
+   }
 
 
-public int getUserNo() {
-	return userNo;
-}
+   public void setbNo(int bNo) {
+      this.bNo = bNo;
+   }
 
 
-public void setUserNo(int userNo) {
-	this.userNo = userNo;
-}
+   public int getUserNo() {
+      return userNo;
+   }
 
 
-public String getbTitle() {
-	return bTitle;
-}
+   public void setUserNo(int userNo) {
+      this.userNo = userNo;
+   }
 
 
-public void setbTitle(String bTitle) {
-	this.bTitle = bTitle;
-}
+   public String getbTitle() {
+      return bTitle;
+   }
 
 
-public String getbTag() {
-	return bTag;
-}
+   public void setbTitle(String bTitle) {
+      this.bTitle = bTitle;
+   }
 
 
-public void setbTag(String bTag) {
-	this.bTag = bTag;
-}
+   public String getbTag() {
+      return bTag;
+   }
 
 
-public String getbContent() {
-	return bContent;
-}
+   public void setbTag(String bTag) {
+      this.bTag = bTag;
+   }
 
 
-public void setbContent(String bContent) {
-	this.bContent = bContent;
-}
+   public String getbContent() {
+      return bContent;
+   }
 
 
-public int getcNo() {
-	return cNo;
-}
+   public void setbContent(String bContent) {
+      this.bContent = bContent;
+   }
 
 
-public void setcNo(int cNo) {
-	this.cNo = cNo;
-}
+   public int getcNo() {
+      return cNo;
+   }
 
 
-public String getbUrl() {
-	return bUrl;
-}
+   public void setcNo(int cNo) {
+      this.cNo = cNo;
+   }
 
 
-public void setbUrl(String bUrl) {
-	this.bUrl = bUrl;
-}
+   public String getbUrl() {
+      return bUrl;
+   }
 
 
-public String getbCategory() {
-	return bCategory;
-}
+   public void setbUrl(String bUrl) {
+      this.bUrl = bUrl;
+   }
 
 
-public void setbCategory(String bCategory) {
-	this.bCategory = bCategory;
-}
+   public String getbCategory() {
+      return bCategory;
+   }
 
 
-public int getbCount() {
-	return bCount;
-}
+   public void setbCategory(String bCategory) {
+      this.bCategory = bCategory;
+   }
 
 
-public void setbCount(int bCount) {
-	this.bCount = bCount;
-}
+   public String getbKind() {
+      return bKind;
+   }
 
 
-public Date getbDate() {
-	return bDate;
-}
+   public void setbKind(String bKind) {
+      this.bKind = bKind;
+   }
 
 
-public void setbDate(Date bDate) {
-	this.bDate = bDate;
-}
+   public int getbCount() {
+      return bCount;
+   }
 
 
-public String getTitleFilename() {
-	return titleFilename;
-}
+   public void setbCount(int bCount) {
+      this.bCount = bCount;
+   }
 
 
-public void setTitleFilename(String titleFilename) {
-	this.titleFilename = titleFilename;
-}
+   public Date getbDate() {
+      return bDate;
+   }
 
 
-public String getbFileType() {
-	return bFileType;
-}
+   public void setbDate(Date bDate) {
+      this.bDate = bDate;
+   }
 
 
-public void setbFileType(String bFileType) {
-	this.bFileType = bFileType;
-}
+   public String getTitleFilename() {
+      return titleFilename;
+   }
 
 
-public String getbStatus() {
-	return bStatus;
-}
+   public void setTitleFilename(String titleFilename) {
+      this.titleFilename = titleFilename;
+   }
 
 
-public void setbStatus(String bStatus) {
-	this.bStatus = bStatus;
-}
+   public String getbFileType() {
+      return bFileType;
+   }
 
 
-public int getbFileno() {
-	return bFileno;
-}
+   public void setbFileType(String bFileType) {
+      this.bFileType = bFileType;
+   }
 
 
-public void setbFileno(int bFileno) {
-	this.bFileno = bFileno;
-}
+   public String getbStatus() {
+      return bStatus;
+   }
 
 
-public int getRm() {
-	return rm;
-}
+   public void setbStatus(String bStatus) {
+      this.bStatus = bStatus;
+   }
 
 
-public void setRm(int rm) {
-	this.rm = rm;
-}
+   public int getbFileno() {
+      return bFileno;
+   }
 
 
-@Override
-public String toString() {
-	return "GymBoard [bNo=" + bNo + ", userNo=" + userNo + ", bTitle=" + bTitle + ", bTag=" + bTag + ", bContent="
-			+ bContent + ", cNo=" + cNo + ", bUrl=" + bUrl + ", bCategory=" + bCategory + ", bCount=" + bCount
-			+ ", bDate=" + bDate + ", titleFilename=" + titleFilename + ", bFileType=" + bFileType + ", bStatus="
-			+ bStatus + ", bFileno=" + bFileno + ", rm=" + rm + "]";
-}
+   public void setbFileno(int bFileno) {
+      this.bFileno = bFileno;
+   }
 
-   
-   
-   
-   
-   
+
+   public int getRm() {
+      return rm;
+   }
+
+
+   public void setRm(int rm) {
+      this.rm = rm;
+   }
+
 }

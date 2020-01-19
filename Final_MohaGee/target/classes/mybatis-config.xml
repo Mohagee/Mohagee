@@ -15,6 +15,7 @@
  		<typeAlias type="com.kh.mohagee.showBoard.model.vo.ShowAttachment" alias="ShowAttachment" />
 		<typeAlias type="com.kh.mohagee.gymBoard.model.vo.GymBoard" alias="GymBoard"/>
 		<typeAlias type="com.kh.mohagee.gymBoard.model.vo.GymAttachment" alias="GymAttachment"/>
+		<typeAlias type="com.kh.mohagee.gymBoard.model.vo.gbComment" alias="gbComment"/>	
 		<typeAlias type="com.kh.mohagee.travelBoard.model.vo.TravelBoard" alias="TravelBoard"/>
         <typeAlias type="com.kh.mohagee.travelBoard.model.vo.TravelAttachment" alias="TravelAttachment"/>
         <typeAlias type="com.kh.mohagee.member.model.vo.Profile" alias="Profile"/>

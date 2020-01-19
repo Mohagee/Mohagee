@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gbComment-mapper">
+
+	<select id="selectTotalContents" resultType="int">
+		SELECT COUNT(*) FROM BCOMMENT WHERE BSTATUS = 'N' 
+	</select>
+	
+	<select id="selectListgbComment" parameterType = "int" resultType="gbComment">
+		SELECT * FROM BCOMMENT JOIN MEMBER USING(USERNO) 
+		WHERE BSTATUS = 'N' AND BNO = #{bNo} ORDER BY BCDATE DESC
+	</select>
+
+	<insert id="insertgbComment" parameterType="gbComment">
+		INSERT INTO BCOMMENT VALUES(SEQ_BCNO.NEXTVAL,
+									 #{bNo}, 
+									 #{userNo}, 
+									 #{bcContent}, 
+									 DEFAULT,
+									 DEFAULT,
+									 DEFAULT)
+	</insert>
+	<update id="updategbComment" parameterType="gbComment">
+		UPDATE BCOMMENT
+		<set>
+			<if test="bcContent != null">
+				BCCONTENT = #{bcContent},
+			</if>
+
+		</set>
+		WHERE BCNO = #{bcNo}
+		</update>
+		
+	<update id="deletegbComment" parameterType="int">
+		UPDATE BCCOMMENT SET BSTATUS = 'Y' WHERE BCNO = #{bcNo}
+	</update>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+

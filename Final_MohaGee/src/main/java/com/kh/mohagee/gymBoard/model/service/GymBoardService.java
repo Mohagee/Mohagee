@@ -11,12 +11,14 @@ import com.kh.mohagee.gymBoard.model.dao.GymBoardDAO;
 
 import com.kh.mohagee.gymBoard.model.vo.GymAttachment;
 import com.kh.mohagee.gymBoard.model.vo.GymBoard;
+import com.kh.mohagee.gymBoard.model.vo.gbComment;
 
 @Service
 public class GymBoardService {
 
 	@Autowired
 	GymBoardDAO GymBoardDAO;
+	gbComment gbComment;
 	
 	
 	 public List<GymBoard> selectList(){
@@ -35,13 +37,17 @@ public class GymBoardService {
 		// 2. 추가된 게시글의 번호를 가져와
 		//    첨부파일 추가하기
 		if(list.size() > 0) {
-			int idx = 0;
-			for(GymAttachment a : list) {
-				if(idx==0) a.setbFileLevel(0);
+			  for(int i = 0; i < list.size(); i++) {
+				  GymAttachment a = list.get(i);
+				  
+				  if(i== 0) a.setbFileLevel(0);
+				  else  a.setbFileLevel(1);
+				  
+				  System.out.println("check : "+a);
 				result = GymBoardDAO.insertGymAttachment(a);
 				
 				System.out.println("result 확인 : " + result);
-				idx++;
+
 				// 확인용 result 값 변경하기
 				// result = 0;
 				if(result < 1)
