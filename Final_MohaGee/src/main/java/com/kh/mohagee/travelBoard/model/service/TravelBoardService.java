@@ -40,14 +40,16 @@ public class TravelBoardService {
         
         // 2. 추가된 게시글의 번호를 가져와 // 첨부파일 추가하기 
         if(list.size() > 0) { 
-           int idx = 0;
-           for(TravelAttachment a : list) { 
-              if(idx == 0) a.setbFileLevel(0);
+           for(int i = 0; i < list.size(); i++) { 
+              TravelAttachment a = list.get(i);
+              
+              if(i == 0) a.setbFileLevel(0);
+              else a.setbFileLevel(1);
               result = travelBoardDAO.insertTravelAttachment(a);
         
-        System.out.println("result 확인 : " + result); // 확인용 result 값 변경하기 // 
-              idx++;
-        // result =0; 
+              System.out.println("result 확인 : " + result); // 확인용 result 값 변경하기 // 
+           
+              // result =0; 
         
         if(result < 1) 
            throw new TravelBoardException("첨부파일 추가 중 에러 발생!"); 
@@ -65,26 +67,46 @@ public class TravelBoardService {
       return travelBoardDAO.selectTravelAttachment(bNo);
    }
 
+   // 게시글 수정하기
    public int updateBoard(TravelBoard travelBoard, List<TravelAttachment> list) {
+	   
 		int result = 0;
-		System.out.println("bNo : " + travelBoard.getbNo());
-		List<TravelAttachment> originList
-		   = travelBoardDAO.selectTravelAttachment(travelBoard.getbNo());
 		
+		List<TravelAttachment> originList = travelBoardDAO.selectTravelAttachment(travelBoard.getbNo());
 		result = travelBoardDAO.updateTravelBoard(travelBoard);
 		
 		if(result > 0) {
-			if(originList.size() > 0 && list.size() > 0) {
+			if(originList.size() > 0 && list.size() > 0) { // 원본도 있고, 변경하려는 이미지도 있을 때
 				result = travelBoardDAO.deleteTravelAttachment(travelBoard.getbNo());
+				// i 가 0일 때 대표이미지를, 1이면 서브이미지를 구현하기 위한 대표 사진 번호를 i로 먼저 지정하기
+				// 내가 추가함
+				int i = 0; // 이렇게!
 				
 				for(TravelAttachment a : list) {
+			              
+					// 내가 추가함
+					if(i == 0) a.setbFileLevel(0); // 대표 이미지로 설정할려고 0을 set함 
+			        else a.setbFileLevel(1);  // 서브 이미지로 설정할려고 1을 set함
+					
 					result = travelBoardDAO.updateTravelAttachment(a);
 					
+					// 내가 추가함
+					i++; // i++ 로 대표와 서브 구분 
 				}
-			} else if ( list.size() > 0) {
+			} else if ( list.size() > 0) { // 원본은 없고 변경 이미지만 있을 때
+				// 내가 추가함
+				int i = 0; // 이렇게!
+				
 				for(TravelAttachment a : list) {
+			              
+					// 내가 추가함
+					if(i == 0) a.setbFileLevel(0); // 대표 이미지로 설정할려고 0을 set함 
+			        else a.setbFileLevel(1);  // 서브 이미지로 설정할려고 1을 set함
+					
 					result = travelBoardDAO.updateTravelAttachment(a);
 					
+					// 내가 추가함
+					i++; // i++ 로 대표와 서브 구분
 				}
 			}
 		}
@@ -92,6 +114,7 @@ public class TravelBoardService {
 		return result;
 	}
 
+   // 게시글 삭제하기
 	public int deleteTravelBoard(int bNo) {
 		
 		return travelBoardDAO.deleteTravelBoard(bNo);

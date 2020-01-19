@@ -87,10 +87,10 @@
 		                            <a href="${ pageContext.request.contextPath }/travelBoard/travelBoardList.do">
 		                               <button type="button" class="btn btn-warning" id="rewriteBtn">목록으로</button>
 		                            </a>&nbsp;                           
-		                            <a href="${ pageContext.request.contextPath }/travelBoard/travelBoardUpdate.do">
+		                            <a href="${ pageContext.request.contextPath }/travelBoard/travelBoardUpdateView.do?bNo=${TravelBoard.bNo}">
 		                               <button type="button" class="btn btn-primary" id="rewriteBtn">수정하기</button>
 		                            </a>&nbsp;
-		                            <a href="${ pageContext.request.contextPath }/travelBoard/travelBoardDelete.do">
+		                            <a href="${ pageContext.request.contextPath }/travelBoard/travelBoardDelete.do?bNo=${TravelBoard.bNo}">
 		                               <button type="button" class="btn btn-danger" id="deleteBtn">삭제하기</button>
 		                            </a>
 		                            </div><br />
