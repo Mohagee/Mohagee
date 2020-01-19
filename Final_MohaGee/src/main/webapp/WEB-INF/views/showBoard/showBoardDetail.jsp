@@ -250,15 +250,6 @@
 		    map: map // 마커를 표시할 지도 객체
 		});
 		
-		
-		new Carousel(document.querySelector('#carousel-banner'), { 
-			CarouselMotion: 'default', naviPosition: 'bottom', naviStyle: 'dot', autoMove: true, autoMoveTime: 2000 
-			}); 
-
-		new Carousel(document.querySelector('#carousel-banner'), { 
-			CarouselMotion: 'default' 
-			// --> slide / prev / fade 
-		});
     
     // 태그 관련 스크립트
     	$("input").tagsinput('items')

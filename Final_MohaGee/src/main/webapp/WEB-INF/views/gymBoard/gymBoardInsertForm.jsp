@@ -137,10 +137,9 @@
 
      
       <!-- 태그 입력 칸 -->
-      <div class="input-group mb-3" style="width:900px;">
-         <br />
-              <input type="text" class="form-control" aria-label="Text input with dropdown button" 
-              id = "tag" name="bTag" placeholder="태그입력 ex) # 엘리스, #하울">
+      <div class="input-group mb-3" style="display: table-cell; text-align: center; vertical-align: middle; width:900px;"><br />
+              <input  type="text" class="form-control" aria-label="Text input with dropdown button" 
+              id = "tag" name="bTag" placeholder="최대 5개" required>
       </div>
            <!-- URL 입력 칸 -->
       <div class="input-group mb-3" style="width:900px;">
@@ -198,6 +197,21 @@
 
     <!-- 최대글 작성 한도 스크립트  -->
 <script>
+
+$("#tag").tagsinput({
+	maxTags: 5,
+	itemText: function(item) {
+	    return '#' + item;
+	},
+	
+	cancelConfirmKeysOnEmpty: false
+	
+});
+
+$('#tag').on('itemAddedOnInit', function(event) {
+	  return '#' + event.item.label;
+});
+
    $(document).ready(function(){
        $('#characterLeft').text('1000 자 작성가능');
        $('#summernote').keydown(function () {

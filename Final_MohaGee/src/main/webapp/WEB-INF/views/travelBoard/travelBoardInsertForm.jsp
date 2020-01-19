@@ -157,9 +157,9 @@ input[type=file]{
       </div>      
 
       <!-- 태그 입력 칸 -->
-      <div class="input-group mb-3" style="width:900px;"><br />
-              <input type="text" class="form-control" aria-label="Text input with dropdown button" 
-              id = "tag" name="bTag" placeholder="태그입력 ex) # 엘리스, #하울" required>
+      <div class="input-group mb-3" style="display: table-cell; text-align: center; vertical-align: middle; width:900px;"><br />
+              <input  type="text" class="form-control" aria-label="Text input with dropdown button" 
+              id = "tag" name="bTag" placeholder="최대 5개" required>
       </div>
            <!-- URL 입력 칸 -->
       <div class="input-group mb-3" style="width:900px;"><br />
@@ -215,6 +215,20 @@ input[type=file]{
 
     <!-- 최대글 작성 한도 스크립트 구현해야함@ -->
 <script>
+
+$("#tag").tagsinput({
+	maxTags: 5,
+	itemText: function(item) {
+	    return '#' + item;
+	},
+	
+	cancelConfirmKeysOnEmpty: false
+	
+});
+
+$('#tag').on('itemAddedOnInit', function(event) {
+	  return '#' + event.item.label;
+});
 
 //이미지 정보들을 담을 배열
 var sel_files = [];

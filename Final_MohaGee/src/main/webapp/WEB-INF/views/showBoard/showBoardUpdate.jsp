@@ -154,10 +154,10 @@ input[type=file]{
 	</div>
 
 				<!-- 태그 입력 칸 -->
-				<div class="input-group mb-3" style="width: 900px;"><br /> 
-					<input type="text" class="form-control" aria-label="Text input with dropdown button" id="tag" name="bTag"
-																					placeholder="태그입력 ex) # 엘리스, #하울" value="${ShowBoard.bTag}">
-				</div>
+				<div class="input-group mb-3" style="display: table-cell; text-align: center; vertical-align: middle; width:900px;"><br />
+              <input value="${ ShowBoard.bTag }" type="text" class="form-control" aria-label="Text input with dropdown button" 
+              id = "tag" name="bTag" placeholder="최대 5개" required>
+      </div>
 				
 				<!-- URL 입력 칸 -->
        <div class="input-group mb-3" style="width:900px;">

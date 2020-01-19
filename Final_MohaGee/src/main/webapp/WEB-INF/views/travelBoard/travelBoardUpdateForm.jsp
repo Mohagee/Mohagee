@@ -63,6 +63,32 @@
               clip:rect(0,0,0,0); 
               border: 0; 
           }
+          
+          input[type=file]{
+   display: none;
+}
+
+.my_button{
+   display: inline-block;
+   text-align: center;
+   color: #fff;
+   text-decoration: none;
+   border-radius: 5px;
+}
+
+.imgs_wrap{
+   border: 1px solid lightgrey;
+   margin-top: 30px;
+   margin-bottom: 30px;
+   padding-top: 10px;
+   padding-bottom: 10px
+}
+
+.imgs_wrap img{
+   max-width: 150px;
+   margin-left: 10px;
+   margin-right: 10px;
+}
    
    </style>
    
@@ -109,29 +135,39 @@
             </div>
 
             <!-- 태그 입력 칸 -->
-            <div class="input-group mb-3" style="width: 900px;"><br /> 
-               <input type="text" class="form-control" aria-label="Text input with dropdown button" id="tag" name="bTag"
-                                                               placeholder="태그입력 ex) # 엘리스, #하울" value="${TravelBoard.bTag}">
-            </div>
+            <div class="input-group mb-3" style="display: table-cell; text-align: center; vertical-align: middle; width:900px;"><br />
+              <input value="${ TravelBoard.bTag }" type="text" class="form-control" aria-label="Text input with dropdown button" 
+              id = "tag" name="bTag" placeholder="최대 5개" required>
+      		</div>
             
             <!-- URL 입력 칸 -->
             <div class="input-group mb-3" style="width: 900px;"><br /> 
                <input type="url" class="form-control" aria-label="Text input with dropdown button" id="bUrl" name="bUrl"
                                                             placeholder="link입력 ex) www.naver.com" value="${TravelBoard.bUrl}">
             </div><br />
+            
+            <div>
+		        <div class="imgs_wrap" style="width:900px">
+		            <img id="img" />
+		        </div>
+		    </div> 
 
-            <div style="margin-bottom: 3px;">
-               <div class="filebox">
-                  <label id="board_img" for="ex_file"> <i class="fas fa-image"></i>&nbsp;&nbsp;&nbsp;사진올리기
-                  </label> <input type="file" id="ex_file" name="upFile" multiple>&nbsp;&nbsp;
+            <div style="margin-bottom:3px;">
+         <div class="filebox">
+            <label id="board_img" for="ex_file_img" name="upFile">
+               <a href="javascript:" onclick="fileUploadAction();" class="my_button">
+               <i class="fas fa-image"></i>&nbsp;&nbsp;&nbsp;사진 업로드</a></label>
+            <input type="file" id="ex_file_img" name="upFile"  multiple>&nbsp;&nbsp;
 
-                  <label id="board_video" for="ex_file"> <i class="fas fa-video"></i>&nbsp;&nbsp;&nbsp;영상올리기
-                  </label> <input type="file" id="ex_file" name="upFile">&nbsp;&nbsp;
-
-                  <label id="board_audio" for="ex_file"> <i class="fas fa-headphones"></i>&nbsp;&nbsp;&nbsp;음악올리기
-                  </label> <input type="file" id="ex_file" name="upFile">&nbsp;&nbsp;
-               </div>
-            </div>
+            <label id="board_video" for="ex_file_video">
+               <i class="fas fa-video"></i>&nbsp;&nbsp;&nbsp;영상 업로드</label>
+            <input type="file" id="ex_file_video" name="upFile">&nbsp;&nbsp;         
+                             
+            <label id="board_audio" for="ex_file_audio">
+               <i class="fas fa-headphones"></i>&nbsp;&nbsp;&nbsp;오디오 업로드</label>
+            <input type="file" id="ex_file_audio" name="upFile">&nbsp;&nbsp;              
+          </div>
+   </div>
 
             <!-- 내용 입력칸 -->
             <div class="editorArea" style="margin-top: 5px;">
@@ -162,6 +198,22 @@
 
     <!-- 최대글 작성 한도 스크립트 구현해야함@ -->
 <script>
+
+$("#tag").tagsinput({
+	   maxTags: 5,
+	   itemText: function(item) {
+	       return '#' + item;
+	   },
+	   
+	   cancelConfirmKeysOnEmpty: false
+	   
+	});
+
+	$('#tag').on('itemAddedOnInit', function(event) {
+	     return '#' + event.item.label;
+	});
+	
+	
    $(document).ready(function() {
       $('#characterLeft').text('1000 자 작성가능');
       $('#summernote').keydown(function() {
@@ -179,6 +231,63 @@
          }
       });
    });
+   
+   /* 이미지 수정 구현 */
+   
+   //이미지 정보들을 담을 배열
+  var sel_files = [];
+
+
+  $(document).ready(function() {
+      $("#ex_file_img").on("change", handleImgFileSelect);
+  }); 
+
+  function fileUploadAction() {
+      console.log("fileUploadAction");
+      $("#ex_file_img").trigger('click');
+  }
+
+  function handleImgFileSelect(e) {
+
+      // 이미지 정보들을 초기화
+      sel_files = [];
+      $(".imgs_wrap").empty();
+
+      var files = e.target.files;
+      var filesArr = Array.prototype.slice.call(files);
+
+      var index = 0;
+      filesArr.forEach(function(f) {
+          if(!f.type.match("image.*")) {
+              alert("확장자는 이미지 확장자만 가능합니다.");
+              return;
+          }
+
+          sel_files.push(f);
+
+          var reader = new FileReader();
+          reader.onload = function(e) {
+              var html = "<a href=\"javascript:void(0);\" onclick=\"deleteImageAction(" + index + ")\" id=\"img_id_" + 
+                             index + "\"><img src=\"" + e.target.result + "\" data-file='" + 
+                             f.name + "' class='selProductFile' title='Click to remove'></a>";
+              $(".imgs_wrap").append(html);
+              index++;
+
+          }
+          reader.readAsDataURL(f);
+          
+      });
+  }  
+     function deleteImageAction(index){
+        console.log("index : " + index);
+        sel_files.splice(index, 1);
+        
+        var img_id = "#img_id" + index;
+        $(img_id).remove();
+        
+        console.log(sel_files);
+     }
+     /* -------------------------------------------------------------- */
 </script>
 
 
