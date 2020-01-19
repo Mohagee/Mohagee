@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -19,6 +20,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.mohagee.email.model.service.EmailService;
+import com.kh.mohagee.favorite.model.service.FavoriteService;
+import com.kh.mohagee.favorite.model.vo.Favorite;
 import com.kh.mohagee.member.model.service.MemberService;
 import com.kh.mohagee.member.model.vo.Member;
 import com.kh.mohagee.member.model.vo.Profile;
@@ -31,6 +34,9 @@ public class MemberController {
 
 	@Autowired
 	EmailService emailService;
+	
+	@Autowired
+	FavoriteService favoriteService;
 
 	@Autowired
 	BCryptPasswordEncoder bcryptPasswordEncoder;
@@ -66,50 +72,66 @@ public class MemberController {
 	}
 
 	@RequestMapping("/member/memberLogin.do")
-	public ModelAndView memberLogin(Member member, HttpSession session) throws Exception {
+	public ModelAndView memberLogin(HttpServletRequest context, Member member, HttpSession session) throws Exception {
 
 		ModelAndView mv = new ModelAndView();
-
-		try {
-
-			Member m = memberService.selectOneMember(member);
-			Profile profile = memberService.selectProfile(m.getUserNo());
-
-			String msg = "";
-			String loc = "/";
-
-			if (m != null && bcryptPasswordEncoder.matches(member.getPassword(), m.getPassword())
-					&& m.getEmailCheck() == 0) {
-				msg = "이메일 인증을 진행하고 로그인을 해주시기 바랍니다";
-			} else if (m != null && bcryptPasswordEncoder.matches(member.getPassword(), m.getPassword())
-					&& m.getEmailCheck() == 1) {
-
+		
+		String msg = "";
+		String loc = "/";
+		
+		if(context.getAttribute(member.getUserId()) == null) {
+			
+			try {
 				
-
-				if (profile == null || profile.getpOriginalFileName() == "") {
+				Member m = memberService.selectOneMember(member);
+				Profile profile = memberService.selectProfile(m.getUserNo());
+				
+				
+				
+				if (m != null && bcryptPasswordEncoder.matches(member.getPassword(), m.getPassword())
+						&& m.getEmailCheck() == 0) {
+					msg = "이메일 인증을 진행하고 로그인을 해주시기 바랍니다";
+				} else if (m != null && bcryptPasswordEncoder.matches(member.getPassword(), m.getPassword())
+						&& m.getEmailCheck() == 1) {
 					
-					profile = new Profile();
-					profile.setpRenamedFileName("profile.png");
+					
+					if (profile == null || profile.getpOriginalFileName() == "") {
+						
+						profile = new Profile();
+						profile.setpRenamedFileName("profile.png");
+						
+					}
+					
+					context.setAttribute(m.getUserId(), m.getNickName());
+					
+					msg = m.getNickName() + "님, 환영합니다.";
+					
+					session.setAttribute("profile", profile);
+					session.setAttribute("member", m);
+					
+					mv.addObject("member", m);
+					
+				} else if (m != null) {
+					
+					msg = "비밀번호가 틀렸습니다.";
 					
 				}
-
-				msg = m.getNickName() + "님, 환영합니다.";
-
-
-				session.setAttribute("profile", profile);
-				session.setAttribute("member", m);
-				mv.addObject("member", m);
-
-			} else if (m != null) {
-				msg = "비밀번호가 틀렸습니다.";
+				
+				mv.addObject("msg", msg).addObject("loc", loc);
+				mv.setViewName("common/util");
+				
+			} catch (Exception e) {
+				throw new Exception("로그인 시도 중 에러 발생!");
 			}
-
+			
+		} else {
+			
+			msg = "이미로그인한 아이디 입니다";
 			mv.addObject("msg", msg).addObject("loc", loc);
 			mv.setViewName("common/util");
-
-		} catch (Exception e) {
-			throw new Exception("로그인 시도 중 에러 발생!");
+			
 		}
+
 
 		return mv;
 	}
@@ -212,7 +234,9 @@ public class MemberController {
 			profile.setpRenamedFileName("profile.png");
 			
 		}
-
+		
+		List<Favorite> list = favoriteService.selectFavoriteList(userNo);
+		
 		String msg = "";
 		String loc = "";
 
@@ -228,6 +252,7 @@ public class MemberController {
 
 		session.setAttribute("myPageMember", m);
 		session.setAttribute("myPageProfile", profile);
+		session.setAttribute("favoriteList", list);
 
 		return "member/myPage";
 	}

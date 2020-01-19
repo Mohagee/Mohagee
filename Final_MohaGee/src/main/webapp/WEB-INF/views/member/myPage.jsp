@@ -105,7 +105,7 @@
             <div class="tab-pane active" id="home" role="tabpanel">
               <div class="col-md-10 ml-auto mr-auto">
                 <div class="row collections">
-                  	<div class="col-md-6">
+                  <div class="col-md-6">
                     <img src="${ pageContext.request.contextPath }/resources/myPageResources/img/bg6.jpg" class="img-raised">
                     <img src="${ pageContext.request.contextPath }/resources/myPageResources/img/bg11.jpg" alt="" class="img-raised">
                   </div>

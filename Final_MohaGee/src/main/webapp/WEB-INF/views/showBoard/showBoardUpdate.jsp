@@ -92,8 +92,8 @@
 				<input type="hidden" name="bNo" value="${ShowBoard.bNo}" />
 
     <!-- 카테고리선택 칸 -->
-      <select id = "bCategory" name="bCategory" class="input-group mb-3" style="width:900px; border:1px solid lightblue; font-family: bingrae;" >
-		   <option disabled selected >카테고리를 선택해주세요 (필수!)</option>
+      <select id = "bCategory" name="bCategory" class="input-group mb-3" style="width:900px; border:1px solid lightblue; font-family: bingrae;" required>
+		   <option value="" disabled selected >카테고리를 선택해주세요 (필수!)</option>
 		   <option value="musical" >뮤지컬</option>
 		   <option value="act" >연극</option>
 		   <option value="create" >창작 뮤지컬</option>
@@ -160,6 +160,21 @@
 
     <!-- 최대글 작성 한도 스크립트 구현해야함@ -->
 <script>
+
+$("#tag").tagsinput({
+	maxTags: 5,
+	itemText: function(item) {
+	    return '#' + item;
+	},
+	
+	cancelConfirmKeysOnEmpty: false
+	
+});
+
+$('#tag').on('itemAddedOnInit', function(event) {
+	  return '#' + event.item.label;
+});
+
 	$(document).ready(function() {
 		$('#characterLeft').text('1000 자 작성가능');
 		$('#summernote').keydown(function() {

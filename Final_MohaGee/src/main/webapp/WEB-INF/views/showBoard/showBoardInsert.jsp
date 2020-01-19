@@ -54,16 +54,16 @@
       	}
 
       	
-    .filebox input[type="file"] {
-       		 position: absolute; 
-       		 width: 1px; 
-       		 height: 1px; 
-       		 padding: 0; 
-       		 margin: -1px; 
-      		overflow: hidden;  
-       		 clip:rect(0,0,0,0); 
-       		 border: 0; 
-       	}    
+	.filebox input[type="file"] {
+		position: absolute; 
+		width: 1px; 
+		height: 1px; 
+		padding: 0; 
+		margin: -1px; 
+		overflow: hidden;  
+		clip:rect(0,0,0,0); 
+		border: 0; 
+	} 
        	
 
 /* named upload */
@@ -109,7 +109,7 @@ input[type=file]{
 	margin-right: 10px;
 }
 
-   </style>
+</style>
 
    
 </head>
@@ -139,7 +139,7 @@ input[type=file]{
       
       <!-- 카테고리선택 칸 -->
       <select id = "bCategory" name="bCategory" class="input-group mb-3" style="width:900px; border:1px solid lightgrey; font-family: bingrae;" >
-		   <option disabled selected >카테고리를 선택해주세요 (필수!)</option>
+		   <option value="" disabled selected >카테고리를 선택해주세요 (필수!)</option>
 		   <option value="musical" >뮤지컬</option>
 		   <option value="act" >연극</option>
 		   <option value="create" >창작 뮤지컬</option>
@@ -154,10 +154,12 @@ input[type=file]{
       </div>      
 
       <!-- 태그 입력 칸 -->
-      <div class="input-group mb-3" style="width:900px;"><br />
-              <input type="text" class="form-control" aria-label="Text input with dropdown button" 
-              id = "tag" name="bTag" placeholder="태그입력 ex) # 엘리스, #하울" required>
+      
+      <div class="input-group mb-3" style="display: table-cell; text-align: center; vertical-align: middle; width:900px;"><br />
+              <input  type="text" class="form-control" aria-label="Text input with dropdown button" 
+              id = "tag" name="bTag" placeholder="최대 5개" required>
       </div>
+      
            <!-- URL 입력 칸 -->
       <div class="input-group mb-3" style="width:900px;"><br />
               <input type="url" class="form-control" aria-label="Text input with dropdown button" 
@@ -191,8 +193,7 @@ input[type=file]{
 
    <!-- 내용 입력칸 -->
       <div class="editorArea"  style="margin-top:5px;">
-    	<textarea  id="summernote" name="bContent" placeholder="글 내용" maxlength="1000" rows="7" required>
-   		</textarea>
+    	<textarea  id="summernote" name="bContent" placeholder="글 내용" maxlength="1000" rows="7" required></textarea>
 		<span class="help-block"><p id="characterLeft" class="help-block ">더 이상 작성할 수 없습니다.</p></span>
       </div>
 
@@ -210,9 +211,22 @@ input[type=file]{
 
 
 <c:import url="../common/footer.jsp" />
-
     <!-- 최대글 작성 한도 스크립트 구현해야함@ -->
 <script>
+
+$("#tag").tagsinput({
+	maxTags: 5,
+	itemText: function(item) {
+	    return '#' + item;
+	},
+	
+	cancelConfirmKeysOnEmpty: false
+	
+});
+
+$('#tag').on('itemAddedOnInit', function(event) {
+	  return '#' + event.item.label;
+});
 
 //이미지 정보들을 담을 배열
 var sel_files = [];
@@ -312,6 +326,14 @@ function handleImgFileSelect(e) {
 		   }
 	    } */
    /* 업로드 이미지 미리보기  */
+   
+   $('#insertForm').on('keyup keypress', function(e) {
+	   var keyCode = e.keyCode || e.which;
+	   if (keyCode === 13) { 
+	     e.preventDefault();
+	     return false;
+	   }
+	 });
 
 </script>
 

@@ -23,6 +23,26 @@
     		/* font-family : ; */
     		font-size : 30px;
     	}
+    	
+    .bootstrap-tagsinput input{
+		display: none;
+	}
+	
+	li span[data-role = remove]{
+		display: none;
+	}
+	
+	.bootstrap-tagsinput{
+		display: initial;
+		border: none;
+		box-shadow: none;
+	}
+	
+	
+	#favorite:hover{
+		cursor: pointer;
+	}
+    	
     </style>
     
 </head>
@@ -70,13 +90,13 @@
                           <p class="form-control" id="board_content" name="bContent"><b>${ShowBoard.bContent }</b></p>
                           <div class="post-bottom overflow">
                               <ul class="nav navbar-nav post-nav">
-                                  <li><a href="#"><i class="fas fa-clock"></i>&nbsp;&nbsp;${ShowBoard.bDate}</a></li>
+                                  <li style="color: #0099AE"><i class="fas fa-clock"></i>&nbsp;&nbsp;${ShowBoard.bDate}</li>
+             
+                                  <li style="color: #0099AE"><i class="fas fa-tags"></i>&nbsp;&nbsp;<input type="text" data-role="tagsinput" value="${ ShowBoard.bTag }"/></li>
+                                	
+                                  <li id="favorite" style="color: #0099AE"><i class="fas fa-heart"></i>&nbsp;&nbsp;${ favoriteCount }</li>
                                   
-                                  <li><a href="#"><i class="fas fa-tags"></i>${ ShowBoard.bTag }</a></li>
-                                
-                                  <li><a href="#"><i class="fas fa-heart"></i>좋아요 숫자</a></li>
-                                  
-                                  <li><a href="#"><i class="fas fa-comments"></i>댓글 숫자</a></li>
+                                  <li style="color: #0099AE"><i class="fas fa-comments"></i>&nbsp;&nbsp;댓글 숫자</li>
                               </ul>
                           </div>
                          <div class="blog-share">
@@ -97,22 +117,22 @@
 				<button type="button" class="btn btn-warning" id="listBtn">목록이동</button>
 			</a>&nbsp;			
 
-			<input type="button" class="btn btn-success" value="수정하기" 
-			onclick="location.href='${pageContext.request.contextPath}/showBoard/showBoardUpdateForm.do?bNo=${ShowBoard.bNo}'" />&nbsp;
+			<button type="button" class="btn btn-success"
+			onclick="location.href='${pageContext.request.contextPath}/showBoard/showBoardUpdateForm.do?bNo=${ShowBoard.bNo}'" >수정 하기</button>&nbsp;
 
-				<input type="button" class="btn btn-danger" value="삭제하기" 
-					onclick="location.href='${pageContext.request.contextPath}/showBoard/showBoardDelete.do?bNo=${ShowBoard.bNo}'"/>				
+				<button type="button" class="btn btn-danger" 
+					onclick="location.href='${pageContext.request.contextPath}/showBoard/showBoardDelete.do?bNo=${ShowBoard.bNo}'">삭제 하기</button>				
 				
 	<br /><br />
 
              <div class="author-profile padding">
                  <div class="row">
                      <div class="col-sm-2">
-                         <img src="${ pageContext.request.contextPath }/resources/images/alice.jpg" alt="">
+                         <img src="${ pageContext.request.contextPath }/resources/profile/${ShowBoard.pRenamedFileName}">
                     </div>
                     <div class="col-sm-10" style="font-family:binggrae;">
-                        <h3 style="font-family:binggrae;">ALice</h3>
-                        <p>공연을 소개해드리는 에디터입니다!</p>
+                        <h3 style="font-family:binggrae;">${ ShowBoard.nickName }</h3>
+                        <p>${ ShowBoard.introduce }</p>
                     </div>
                 </div>
             </div>
@@ -126,8 +146,8 @@
 			<p class="bold" style="font-size:25px;">Comment</p>
 		</div>
     		<div class="col-sm-2" align="right">	
-				    <input type="button" class="btn btn-success btn-rounded btn-sm" value="댓글작성" 
-							onclick="location.href='${pageContext.request.contextPath}/showBoard/showBoardUpdateForm.do?bNo=${ShowBoard.bNo}'" />&nbsp;					
+				    <button type="button" class="btn btn-success btn-rounded btn-sm"
+							onclick="location.href='${pageContext.request.contextPath}/showBoard/showBoardUpdateForm.do?bNo=${ShowBoard.bNo}'" >댓글 작성</button>&nbsp;					
    			 </div>
    </div>	
 
@@ -143,8 +163,8 @@
                     	<p>댓글 내용</p>
                     	<i class="far fa-clock"></i> 댓글 작성일
                     	<div align="right">	
-				    		<input type="button" class="btn btn-info btn-rounded btn-sm" value="댓글작성" 
-							onclick="location.href='${pageContext.request.contextPath}/showBoard/showBoardUpdateForm.do?bNo=${ShowBoard.bNo}'" />&nbsp;					
+				    		<button type="button" class="btn btn-info btn-rounded btn-sm"
+							onclick="location.href='${pageContext.request.contextPath}/showBoard/showBoardUpdateForm.do?bNo=${ShowBoard.bNo}'">댓글작성</button>&nbsp;					
    			 </div>
                     
                 </div>
@@ -164,9 +184,125 @@
 </section>
     
     <script>
-		
+    
+    // 태그 관련 스크립트
+    	$("input").tagsinput('items')
+    // 좋아요 기능
+    
+    $(function(){
+    	
+    	var userNo = "${member.userNo}";
+    	var bNo = "${ShowBoard.bNo}";
+    	
+    	$.ajax({
+    		url: "${pageContext.request.contextPath}/favorite/checkFavorite",
+    		data: {
+    			userNo : userNo,
+    			bNo : bNo
+    		},
+    		dataType: "json",
+    		async: false,
+    		success: function(data){
+    			
+    			if(data.Favorite.fStatus == 'Y'){
+    				$("#favorite").css("color", "red");
+    			}
+    			
+    		}
+    	});
+    	
+    });
+    
+    $("#favorite").on("click", function(){
+    	
+    	var userNo = "${member.userNo}";
+    	var bNo = "${ShowBoard.bNo}";
+    	
+    	$.ajax({
+    		url: "${pageContext.request.contextPath}/favorite/checkFavorite",
+    		data: {
+    			userNo : userNo,
+    			bNo : bNo
+    		},
+    		dataType: "json",
+    		async: false,
+    		success: function(data){
+    			
+    			/* console.log(data);
+    			console.log(data.Favorite);
+    			console.log(data.Favorite.fStatus); */
+    			
+    			var fStatus = data.Favorite.fStatus;
+    			
+    			if(fStatus == null || fStatus == 'N'){
+    				$.ajax({
+    					url: "${pageContext.request.contextPath}/favorite/doFavorite",
+    					data: {
+    						fStatus : fStatus,
+    		    			userNo : userNo,
+    		    			bNo : bNo
+    		    		},
+    		    		async: false,
+    		    		success: function(data){
+    		    			if(data == 1){
+    		    				alert("좋아요를 눌러주셔서 감사합니다.");
+    		        			$("#favorite").css("color", "red");
+    		        			
+    		        			var text = $('#favorite').text();
+    		        			
+    		        			$.ajax({
+    		        				url: "${pageContext.request.contextPath}/favorite/favoriteNumber",
+    		        				data: {
+    		        					bNo : bNo
+    		        				},
+    		        				async: false,
+    		        				success: function(data){
+    		        					$('#favorite').html('<i class="fas fa-heart"></i>&nbsp;&nbsp;' + data);
+    		        				}
+    		        			});
+    		    			}
+    		    		}
+    				});
+    			} else {
+    				$.ajax({
+    					url: "${pageContext.request.contextPath}/favorite/cancelFavorite",
+    					data: {
+    						userNo : userNo,
+    		    			bNo : bNo
+    					},
+    					async: false,
+    					success: function(data){
+    						if(data == 1) {
+    							alert("좋아요를 취소하였습니다.");
+    		        			$("#favorite").css("color", "#0099AE");
+    		        			
+    		        			$.ajax({
+    		        				url: "${pageContext.request.contextPath}/favorite/favoriteNumber",
+    		        				data: {
+    		        					bNo : bNo
+    		        				},
+    		        				async: false,
+    		        				success: function(data){
+    		        					$('#favorite').html('<i class="fas fa-heart"></i>&nbsp;&nbsp;' + data);
+    		        				}
+    		        			});
+    						}
+    					}
+    				});
+    			}
+    		}
+    	});
+    });
+    	
     </script>
     
     <c:import url="../common/footer.jsp"/>
 </body>
 </html>
+
+
+
+
+
+
+

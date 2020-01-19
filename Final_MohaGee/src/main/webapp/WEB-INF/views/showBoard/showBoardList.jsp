@@ -102,7 +102,7 @@
 								
 								<!--  제목 -->
 								<h2 class="post-title bold">
-									<a href="${ pageContext.request.contextPath }/showBoardDetail.do?bNo=${showBoard.bNo}">${ showBoard.bTitle }</a>
+									<a href="${ pageContext.request.contextPath }/showBoard/showBoardDetail.do?bNo=${showBoard.bNo}">${ showBoard.bTitle }</a>
 								</h2>
 
 								<div class="post-bottom overflow">

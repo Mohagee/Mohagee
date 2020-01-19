@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.mohagee.favorite.model.service.FavoriteService;
 import com.kh.mohagee.showBoard.model.service.ShowBoardService;
 import com.kh.mohagee.showBoard.model.vo.ShowAttachment;
 import com.kh.mohagee.showBoard.model.vo.ShowBoard;
@@ -32,6 +33,9 @@ public class ShowBoardController {
 	 
 	@Autowired
 	ShowBoardService showBoardService;
+	
+	@Autowired
+	FavoriteService favoriteService;
 
 	@RequestMapping("/showBoard/showBoardList.do")
 	public String showBoardList(Model model) {
@@ -55,7 +59,20 @@ public class ShowBoardController {
 	public String InsertShowBoard(ShowBoard board, Model model,
 			@RequestParam(value="upFile", required=false) MultipartFile[] upFiles,
 			HttpServletRequest request) {
-		System.out.println(board);
+		
+		String[] tagArray = board.getbTag().split(",");
+		
+		for(int i = 0; i < tagArray.length; i++) {
+			tagArray[i] = "#" + tagArray[i] + ",";
+		}
+		
+		String tagArrayToString = Arrays.toString(tagArray);
+
+		String tag = tagArrayToString.substring(1, tagArrayToString.lastIndexOf(']'));
+
+		System.out.println("tag : " + tag);
+		
+		board.setbTag(tag);
 		
 		  // 1. 저장할 폴더 설정 
 		String savePath = request.getSession().getServletContext().getRealPath("resources/showUpload");
@@ -161,6 +178,8 @@ public class ShowBoardController {
 
 		List<ShowAttachment> list = showBoardService.selectAttachment(bNo);
 		
+		int favoriteCount = favoriteService.favoriteCount(bNo);
+		
 		System.out.println(sb);
 		for(int i = 0; i < list.size(); i++) {
 			System.out.println(list.get(i));
@@ -168,7 +187,9 @@ public class ShowBoardController {
 		
 		System.out.println(list.size());
 		
-		model.addAttribute("ShowBoard", sb).addAttribute("ShowAttachment", list);
+		model.addAttribute("ShowBoard", sb)
+		.addAttribute("ShowAttachment", list)
+		.addAttribute("favoriteCount", favoriteCount);
 
 		return "showBoard/showBoardDetail";
 	}
