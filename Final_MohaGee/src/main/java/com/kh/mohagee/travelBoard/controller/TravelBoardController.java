@@ -197,8 +197,17 @@ public class TravelBoardController {
    // 게시판 수정하기 (수정하기 버튼)
    @RequestMapping("/travelBoard/travelBoardUpdateView.do")
 	public String boardUpdateView(@RequestParam int bNo, Model model) {
+	   
+	   TravelBoard tb = travelBoardService.selectOne(bNo);
+	   
+
+	   String bTags = tb.getbTag().replaceAll("#", "");
+	   
+	   String bTag = bTags.replaceAll(" ", "");
+	      
+	   tb.setbTag(bTag);
 		
-		model.addAttribute("TravelBoard", travelBoardService.selectOne(bNo))
+		model.addAttribute("TravelBoard", tb)
 		     .addAttribute("TravelAttachment", travelBoardService.selectAttachment(bNo));
 		
 		return "travelBoard/travelBoardUpdateForm";
@@ -382,4 +391,5 @@ public class TravelBoardController {
 			
 			return result;
 		}
+		
 }

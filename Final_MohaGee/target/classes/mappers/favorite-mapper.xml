@@ -29,11 +29,11 @@
 		WHERE USERNO = #{userNo} AND BNO = #{bNo}
 	</update>
 	
-	<select id="selectFavoriteList" resultType="Favorite">
-		SELECT B.* , A.* FROM FAVORITE F
+	<select id="selectFavoriteList" resultType="FavoriteBoard">
+		SELECT B.*, A.BFILENAME TITLEFILENAME, A.BFILETYPE FROM FAVORITE F
 		JOIN BOARD B ON(F.BNO = B.BNO)
 		JOIN B_ATTACHMENT A ON(F.BNO = A.BNO AND A.BFILELEVEL = 0 AND BFILESTATUS= 'N')
-		WHERE F.USERNO = #{userNo}
+		WHERE F.USERNO = #{userNo} AND F.FSTATUS = 'Y'
 	</select>
 	
 </mapper> 

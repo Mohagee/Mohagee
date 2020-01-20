@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.mohagee.favorite.model.service.FavoriteService;
@@ -160,7 +161,7 @@ public class GymBoardController {
 	}
 	
 	// 건하 운동 게시판 상세보기
-	@RequestMapping("gymBoardDetail.do")
+	@RequestMapping("/gymBoard/gymBoardDetail.do")
 	public String selectOne(@RequestParam("bNo") int bNo,
 											Model model) {
 		
@@ -193,7 +194,15 @@ public class GymBoardController {
 	@RequestMapping("/gymBoard/gymBoardUpdateView.do")
 	public String gymBoardUpdateView(@RequestParam int bNo, Model model) {
 		
-		model.addAttribute("gymBoard", GymBoardService.selectOneGymBoard(bNo))
+		GymBoard gb = GymBoardService.selectOneGymBoard(bNo);
+		
+		String bTags = gb.getbTag().replaceAll("#", "");
+		   
+		String bTag = bTags.replaceAll(" ", "");
+		      
+		gb.setbTag(bTag);
+		
+		model.addAttribute("gymBoard", gb)
 		     .addAttribute("GymAttachmentList", GymBoardService.selectAttachment(bNo));
 		
 		return "gymBoard/gymBoardUpdateView";
@@ -212,7 +221,18 @@ public class GymBoardController {
 		String[] tagArray = board.getbTag().split(",");
 		
 		for(int i = 0; i < tagArray.length; i++) {
-			tagArray[i] = "#" + tagArray[i];
+			
+			if(tagArray[i].charAt(1) != '#') {
+				
+				tagArray[i] = "#" + tagArray[i];	
+				
+				if(i == 0) {
+					tagArray[i].replaceAll(" ", "");
+				}
+				
+			}
+			
+			
 		}
 		
 		String tagArrayToString = Arrays.toString(tagArray);
@@ -368,7 +388,20 @@ public class GymBoardController {
 		return "common/util";
 	}
 	
-	
+	@RequestMapping("/board/gymFileDelete.do")
+	@ResponseBody
+	public boolean fileDelete(int attNo, String attFile, HttpSession session) {
+		
+		// 첨부파일 한 개 삭제해야 한다.
+		String savePath
+		    = session.getServletContext().getRealPath("/resources/upload");
+		
+		boolean result = GymBoardService.deleteFile(attNo) != 0 ? true : false;
+		
+		if(result) new File(savePath + "/" + attFile).delete();
+		
+		return result;
+	}
 	
 	
 	

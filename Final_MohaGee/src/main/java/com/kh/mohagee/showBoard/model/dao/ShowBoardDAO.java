@@ -1,8 +1,6 @@
 package com.kh.mohagee.showBoard.model.dao;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,6 +62,18 @@ public class ShowBoardDAO {
 
 	public int deleteShowAttachment(int bNo) {
 		return sqlSession.update("ShowBoard-mapper.deleteShowAttachment", bNo);
+	}
+
+	public ShowAttachment getAttachmentOne(int attNo) {
+		return sqlSession.selectOne("ShowBoard-mapper.selectOne", attNo);
+	}
+
+	public int setNextTitleImage(int getbNo) {
+		return sqlSession.update("ShowBoard-mapper.updateTitleImage", getbNo);
+	}
+
+	public int deleteFile(int attNo) {
+		return sqlSession.update("ShowBoard-mapper.deleteShowFile", attNo);
 	}
 
 

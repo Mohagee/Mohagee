@@ -1,9 +1,13 @@
 package com.kh.mohagee.member.model.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.mohagee.favorite.model.vo.Favorite;
+import com.kh.mohagee.member.model.vo.FavoriteBoard;
 import com.kh.mohagee.member.model.vo.Member;
 import com.kh.mohagee.member.model.vo.Profile;
 
@@ -63,6 +67,10 @@ public class MemberDAO {
 
 	public int updateProfile(Profile profile) {
 		return sqlSession.insert("member-mapper.updateProfile", profile);
+	}
+
+	public List<FavoriteBoard> selectMyBoardList(int userNo) {
+		return sqlSession.selectList("member-mapper.selectMyBoardList", userNo);
 	}
 
 }

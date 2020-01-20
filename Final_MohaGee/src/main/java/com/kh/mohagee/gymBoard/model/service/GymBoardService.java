@@ -11,6 +11,7 @@ import com.kh.mohagee.gymBoard.model.dao.GymBoardDAO;
 import com.kh.mohagee.gymBoard.model.vo.GymAttachment;
 import com.kh.mohagee.gymBoard.model.vo.GymBoard;
 import com.kh.mohagee.gymBoard.model.vo.gbComment;
+import com.kh.mohagee.travelBoard.model.vo.TravelAttachment;
 
 @Service
 public class GymBoardService {
@@ -111,5 +112,18 @@ public class GymBoardService {
       
       return GymBoardDAO.deleteGymBoard(bNo);
    }
+
+
+public int deleteFile(int attNo) {
+	// 만약 지우려는 파일이 메인 사진 일 경우
+	// 메인 사진을 지우면 다음의 사진이 메인 역할을 해야 한다.
+	GymAttachment ta = GymBoardDAO.getAttachmentOne(attNo);
+	if(ta.getbFileLevel() == 0 ) {
+		GymBoardDAO.setNextTitleImage(ta.getbNo());
+	}
+	
+	// 그렇지 않을 경우
+	return GymBoardDAO.deleteFile(attNo);
+}
    
 }

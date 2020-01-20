@@ -207,19 +207,7 @@ $("#tag").tagsinput({
 	   maxTags: 5,
 	   
 	   itemText: function(item) {
-		   
-		   $('#tag').on('beforeItemAdd', function(event) {
-				
-				var tag = '#' + event.item;
-				
-				  return tag;
-			});
-		   
-		   $('#tag').on('itemAddedOnInit', function(event) {
-			     return '#' + event.item.label;
-			});
-		   
-		   return item;
+		   return "#" + item;
 	   },
 	   
 	   cancelConfirmKeysOnEmpty: false
@@ -290,19 +278,7 @@ $("#tag").tagsinput({
           reader.readAsDataURL(f);
           
       });
-  }  
-  /*
-     function deleteImageAction(index){
-        console.log("index : " + index);
-        sel_files.splice(index, 1);
-        
-        var img_id = "#img_id" + index;
-        $(img_id).remove();
-        
-        console.log(sel_files);
-     }
-  */
-  
+  }
   function fileDelete(obj, attNo, attFile){
 	  $.ajax({
 		  url : '${pageContext.request.contextPath}/board/travelFileDelete.do',

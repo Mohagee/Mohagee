@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.mohagee.favorite.model.vo.Favorite;
+import com.kh.mohagee.member.model.vo.FavoriteBoard;
 
 @Repository
 public class FavoriteDAO {
@@ -34,7 +35,7 @@ public class FavoriteDAO {
 		return sqlSession.update("favorite-mapper.cancelFavorite", favorite);
 	}
 
-	public List<Favorite> selectFavoriteList(int userNo) {
+	public List<FavoriteBoard> selectFavoriteList(int userNo) {
 		return sqlSession.selectList("favorite-mapper.selectFavoriteList", userNo);
 	}
 	

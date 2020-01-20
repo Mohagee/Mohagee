@@ -145,12 +145,12 @@
         </p>
         <div class="content" style="position: relative;height: auto; width: auto;">
           <div class="social-description" style="height: auto; width: auto;">
-          	<c:if test="${ !empty introduce }">
+          	
 	            <h3>자기 소개</h3>
 	            <div style="margin: auto;">
 	            	<textarea name="introduce" id="introduce">${ member.introduce }</textarea>
 	            </div>
-            </c:if>
+
           </div>
         </div>
       </div>

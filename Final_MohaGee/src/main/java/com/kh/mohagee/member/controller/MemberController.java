@@ -21,8 +21,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.mohagee.email.model.service.EmailService;
 import com.kh.mohagee.favorite.model.service.FavoriteService;
-import com.kh.mohagee.favorite.model.vo.Favorite;
 import com.kh.mohagee.member.model.service.MemberService;
+import com.kh.mohagee.member.model.vo.FavoriteBoard;
 import com.kh.mohagee.member.model.vo.Member;
 import com.kh.mohagee.member.model.vo.Profile;
 
@@ -235,7 +235,9 @@ public class MemberController {
 			
 		}
 		
-		List<Favorite> list = favoriteService.selectFavoriteList(userNo);
+		List<FavoriteBoard> favoriteList = favoriteService.selectFavoriteList(userNo);
+		
+		List<FavoriteBoard> myBoardList = memberService.selectMyBoardList(userNo);
 		
 		String msg = "";
 		String loc = "";
@@ -252,7 +254,8 @@ public class MemberController {
 
 		session.setAttribute("myPageMember", m);
 		session.setAttribute("myPageProfile", profile);
-		session.setAttribute("favoriteList", list);
+		session.setAttribute("favoriteList", favoriteList);
+		session.setAttribute("myBoardList", myBoardList);
 
 		return "member/myPage";
 	}
