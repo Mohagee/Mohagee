@@ -71,6 +71,13 @@
 	<insert id="updateProfile">
 		INSERT INTO PROFILEPHOTO VALUES(SEQ_PNO.NEXTVAL, #{userNo}, #{pOriginalFileName}, #{pRenamedFileName}, #{pFilePath}, DEFAULT,DEFAULT)
 	</insert>
+	
+	<select id="selectMyBoardList" resultType="FavoriteBoard">
+		SELECT B.*, A.BFILENAME TITLEFILENAME, A.BFILETYPE
+		FROM BOARD B
+		JOIN B_ATTACHMENT A ON(B.BNO = A.BNO AND A.BFILELEVEL = 0 AND BFILESTATUS = 'N')
+		WHERE B.USERNO = #{userNo}
+	</select>
 </mapper>
 
 

@@ -171,42 +171,37 @@
             <div class="tab-pane active" id="home" role="tabpanel">
               <div class="col-md-10 ml-auto mr-auto">
                 <div class="row collections">
-                  	<div class="col-md-6">
-                    <img src="${ pageContext.request.contextPath }/resources/myPageResources/img/bg6.jpg" class="img-raised">
-                    <img src="${ pageContext.request.contextPath }/resources/myPageResources/img/bg11.jpg" alt="" class="img-raised">
-                  </div>
-                  <div class="col-md-6">
-                    <img src="${ pageContext.request.contextPath }/resources/myPageResources/img/bg7.jpg" alt="" class="img-raised">
-                    <img src="${ pageContext.request.contextPath }/resources/myPageResources/img/bg8.jpg" alt="" class="img-raised">
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="tab-pane" id="profile" role="tabpanel">
-              <div class="col-md-10 ml-auto mr-auto">
-                <div class="row collections">
-                  <div class="col-md-6">
-                    <img src="${ pageContext.request.contextPath }/resources/myPageResources/img/bg6.jpg" class="img-raised">
-                    <img src="${ pageContext.request.contextPath }/resources/myPageResources/img/bg11.jpg" alt="" class="img-raised">
-                  </div>
-                  <div class="col-md-6">
-                    <img src="${ pageContext.request.contextPath }/resources/myPageResources/img/bg7.jpg" alt="" class="img-raised">
-                    <img src="${ pageContext.request.contextPath }/resources/myPageResources/img/bg8.jpg" alt="" class="img-raised">
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="tab-pane" id="messages" role="tabpanel">
-              <div class="col-md-10 ml-auto mr-auto">
-                <div class="row collections">
-                  <div class="col-md-6">
-                    <img src="${ pageContext.request.contextPath }/resources/myPageResources/img/bg3.jpg" alt="" class="img-raised">
-                    <img src="${ pageContext.request.contextPath }/resources/myPageResources/img/bg8.jpg" alt="" class="img-raised">
-                  </div>
-                  <div class="col-md-6">
-                    <img src="${ pageContext.request.contextPath }/resources/myPageResources/img/bg7.jpg" alt="" class="img-raised">
-                    <img src="${ pageContext.request.contextPath }/resources/myPageResources/img/bg6.jpg" class="img-raised">
-                  </div>
+	                <c:forEach var="favoriteList" items="${favoriteList}">
+	                
+	                <c:set value="${ favoriteList.bKind }" var="FbKind"/>
+	                
+	                <script>
+	                	console.log("${ FbKind }");
+	                </script>
+	                
+             <div class="col-md-6">
+             
+               <div class="post-thumb">
+               		<c:if test="${ FbKind eq 'T '}">
+	                   <a href="${ pageContext.request.contextPath }/travelBoard/travelBoardDetail.do?bNo=${favoriteList.bNo}">
+	                   		<img src="${ pageContext.request.contextPath }/resources/upload/${favoriteList.titleFilename}" class="img-responsive">
+	                   </a> 
+                   	</c:if>
+                   	<c:if test="${ FbKind eq 'S '}">
+	                   <a href="${ pageContext.request.contextPath }/showBoard/showBoardDetail.do?bNo=${favoriteList.bNo}">
+	                   		<img src="${ pageContext.request.contextPath }/resources/upload/${favoriteList.titleFilename}" class="img-responsive">
+	                   </a> 
+                   	</c:if>
+                   	<c:if test="${ FbKind eq 'G '}">
+	                   <a href="${ pageContext.request.contextPath }/gymBoard/gymBoardDetail.do?bNo=${favoriteList.bNo}">
+	                   		<img src="${ pageContext.request.contextPath }/resources/upload/${favoriteList.titleFilename}" class="img-responsive">
+	                   </a> 
+                   	</c:if>
+	               </div>
+	               
+	             </div>
+	                  
+	                </c:forEach>
                 </div>
               </div>
             </div>

@@ -12,8 +12,10 @@ public class FavoriteBoard {
 	private int cNo;
 	private String bUrl;
 	private String bCategory;
+	private String bKind;
 	private int bCount;
 	private Date bDate;
+	private String bStatus;
 	private String titleFilename;
 	private String bFileType;
 	
@@ -22,7 +24,8 @@ public class FavoriteBoard {
 	}
 
 	public FavoriteBoard(int bNo, int userNo, String bTitle, String bTag, String bContent, int cNo, String bUrl,
-			String bCategory, int bCount, Date bDate, String titleFilename, String bFileType) {
+			String bCategory, String bKind, int bCount, Date bDate, String bStatus, String titleFilename,
+			String bFileType) {
 		super();
 		this.bNo = bNo;
 		this.userNo = userNo;
@@ -32,8 +35,10 @@ public class FavoriteBoard {
 		this.cNo = cNo;
 		this.bUrl = bUrl;
 		this.bCategory = bCategory;
+		this.bKind = bKind;
 		this.bCount = bCount;
 		this.bDate = bDate;
+		this.bStatus = bStatus;
 		this.titleFilename = titleFilename;
 		this.bFileType = bFileType;
 	}
@@ -41,9 +46,9 @@ public class FavoriteBoard {
 	@Override
 	public String toString() {
 		return "FavoriteBoard [bNo=" + bNo + ", userNo=" + userNo + ", bTitle=" + bTitle + ", bTag=" + bTag
-				+ ", bContent=" + bContent + ", cNo=" + cNo + ", bUrl=" + bUrl + ", bCategory=" + bCategory
-				+ ", bCount=" + bCount + ", bDate=" + bDate + ", titleFilename=" + titleFilename + ", bFileType="
-				+ bFileType + "]";
+				+ ", bContent=" + bContent + ", cNo=" + cNo + ", bUrl=" + bUrl + ", bCategory=" + bCategory + ", bKind="
+				+ bKind + ", bCount=" + bCount + ", bDate=" + bDate + ", bStatus=" + bStatus + ", titleFilename="
+				+ titleFilename + ", bFileType=" + bFileType + "]";
 	}
 
 	public int getbNo() {
@@ -110,6 +115,14 @@ public class FavoriteBoard {
 		this.bCategory = bCategory;
 	}
 
+	public String getbKind() {
+		return bKind;
+	}
+
+	public void setbKind(String bKind) {
+		this.bKind = bKind;
+	}
+
 	public int getbCount() {
 		return bCount;
 	}
@@ -124,6 +137,14 @@ public class FavoriteBoard {
 
 	public void setbDate(Date bDate) {
 		this.bDate = bDate;
+	}
+
+	public String getbStatus() {
+		return bStatus;
+	}
+
+	public void setbStatus(String bStatus) {
+		this.bStatus = bStatus;
 	}
 
 	public String getTitleFilename() {

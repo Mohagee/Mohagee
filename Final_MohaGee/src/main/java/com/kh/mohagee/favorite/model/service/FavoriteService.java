@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.mohagee.favorite.model.dao.FavoriteDAO;
 import com.kh.mohagee.favorite.model.vo.Favorite;
+import com.kh.mohagee.member.model.vo.FavoriteBoard;
 
 @Service
 public class FavoriteService {
@@ -34,7 +35,7 @@ public class FavoriteService {
 		return favoriteDao.cancelFavorite(favorite);
 	}
 
-	public List<Favorite> selectFavoriteList(int userNo) {
+	public List<FavoriteBoard> selectFavoriteList(int userNo) {
 		return favoriteDao.selectFavoriteList(userNo);
 	}
 

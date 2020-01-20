@@ -1,8 +1,6 @@
 package com.kh.mohagee.gymBoard.model.dao;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +68,18 @@ public class GymBoardDAO {
 	
 	public int deleteGymBoardComment(int bcNo) {
 		return sqlSession.insert("GymBoard-mapper.deleteGymBoardComment", bcNo);
+	}
+
+	public GymAttachment getAttachmentOne(int attNo) {
+		return sqlSession.selectOne("GymBoard-mapper.selectOne", attNo);
+	}
+
+	public int setNextTitleImage(int getbNo) {
+		return sqlSession.update("GymBoard-mapper.updateTitleImage", getbNo);
+	}
+
+	public int deleteFile(int attNo) {
+		return sqlSession.update("GymBoard-mapper.deleteGymFile", attNo);
 	}
 	
 	

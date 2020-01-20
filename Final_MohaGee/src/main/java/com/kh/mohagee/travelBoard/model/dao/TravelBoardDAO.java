@@ -60,4 +60,17 @@ public class TravelBoardDAO {
    public int deleteTravelAttachment(int bNo) {
       return sqlSession.update("TravelBoard-mapper.deleteTravelAttachment", bNo);
    }
+
+	public int deleteFile(int attNo) {
+		
+		return sqlSession.update("TravelBoard-mapper.deleteTravelFile", attNo);
+	}
+
+	public TravelAttachment getAttachmentOne(int attNo) {
+		return sqlSession.selectOne("TravelBoard-mapper.selectOne", attNo);
+	}
+
+	public int setNextTitleImage(int bNo) {
+		return sqlSession.update("TravelBoard-mapper.updateTitleImage", bNo);
+	}
 }

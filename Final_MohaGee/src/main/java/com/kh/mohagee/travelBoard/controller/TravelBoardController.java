@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.mohagee.favorite.model.service.FavoriteService;
@@ -196,8 +197,17 @@ public class TravelBoardController {
    // 게시판 수정하기 (수정하기 버튼)
    @RequestMapping("/travelBoard/travelBoardUpdateView.do")
 	public String boardUpdateView(@RequestParam int bNo, Model model) {
+	   
+	   TravelBoard tb = travelBoardService.selectOne(bNo);
+	   
+
+	   String bTags = tb.getbTag().replaceAll("#", "");
+	   
+	   String bTag = bTags.replaceAll(" ", "");
+	      
+	   tb.setbTag(bTag);
 		
-		model.addAttribute("TravelBoard", travelBoardService.selectOne(bNo))
+		model.addAttribute("TravelBoard", tb)
 		     .addAttribute("TravelAttachment", travelBoardService.selectAttachment(bNo));
 		
 		return "travelBoard/travelBoardUpdateForm";
@@ -213,7 +223,18 @@ public class TravelBoardController {
 		String[] tagArray = board.getbTag().split(",");
 		
 		for(int i = 0; i < tagArray.length; i++) {
-			tagArray[i] = "#" + tagArray[i];
+			
+			if(tagArray[i].charAt(1) != '#') {
+				
+				tagArray[i] = "#" + tagArray[i];	
+				
+				if(i == 0) {
+					tagArray[i].replaceAll(" ", "");
+				}
+				
+			}
+			
+			
 		}
 		
 		String tagArrayToString = Arrays.toString(tagArray);
@@ -355,4 +376,20 @@ public class TravelBoardController {
 			
 			return "common/util";
 		}
+		
+		@RequestMapping("/board/travelFileDelete.do")
+		@ResponseBody
+		public boolean fileDelete(int attNo, String attFile, HttpSession session) {
+			
+			// 첨부파일 한 개 삭제해야 한다.
+			String savePath
+			    = session.getServletContext().getRealPath("/resources/upload");
+			
+			boolean result = travelBoardService.deleteFile(attNo) != 0 ? true : false;
+			
+			if(result) new File(savePath + "/" + attFile).delete();
+			
+			return result;
+		}
+		
 }

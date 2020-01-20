@@ -88,7 +88,7 @@
                   <!-- 사진파일 -->
                   <c:if test="${ fn:trim(gymBoard.bFileType)  == 'I'}">
                      <div class="post-thumb">
-                        <a href="${pageContext.request.contextPath }/gymBoardDetail.do?bNo=${gymBoard.bNo}">
+                        <a href="${pageContext.request.contextPath }/gymBoard/gymBoardDetail.do?bNo=${gymBoard.bNo}">
                            <img src="${pageContext.request.contextPath }/resources/upload/${gymBoard.titleFilename}"
                                  class="img-responsive" alt=""></a>                  
                      </div>
@@ -101,7 +101,7 @@
                         
                         <!--  제목 -->
                         <h2 class="post-title bold">
-                           <a href="${ pageContext.request.contextPath }/gymBoardDetail.do?bNo=${gymBoard.bNo}"
+                           <a href="${ pageContext.request.contextPath }/gymBoard/gymBoardDetail.do?bNo=${gymBoard.bNo}"
                            style="font-family:cookierun;">${ gymBoard.bTitle }</a>
                         </h2>
 

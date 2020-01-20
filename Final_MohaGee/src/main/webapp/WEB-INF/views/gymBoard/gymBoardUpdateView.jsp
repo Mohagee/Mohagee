@@ -156,7 +156,11 @@
 
 	<div>
         <div class="imgs_wrap" style="width:900px">
-            <img id="img" />
+        <c:forEach items="${GymAttachmentList}" var="att">
+            <img onclick="fileDelete(this, ${att.bFileNo}, '${att.bFileName}');" id="img" src="${ pageContext.request.contextPath }/resources/upload/${att.bFileName}"/>
+            <!--  이미지 개별 삭제  -->
+            <!-- <button type="button" class="btn btn-danger" >X</button> -->
+        </c:forEach>
         </div>
     </div> 
       
@@ -213,16 +217,13 @@
 
 $("#tag").tagsinput({
 	   maxTags: 5,
+	   
 	   itemText: function(item) {
-	       return '#' + item;
+		   return "#" + item;
 	   },
 	   
 	   cancelConfirmKeysOnEmpty: false
 	   
-	});
-
-	$('#tag').on('itemAddedOnInit', function(event) {
-	     return '#' + event.item.label;
 	});
 	
 	
@@ -291,16 +292,22 @@ $("#tag").tagsinput({
           
       });
   }  
-     function deleteImageAction(index){
-        console.log("index : " + index);
-        sel_files.splice(index, 1);
-        
-        var img_id = "#img_id" + index;
-        $(img_id).remove();
-        
-        console.log(sel_files);
-     }
-     /* -------------------------------------------------------------- */
+  function fileDelete(obj, attNo, attFile){
+	  $.ajax({
+		  url : '${pageContext.request.contextPath}/board/gymFileDelete.do',
+		  data : {attNo : attNo, attFile : attFile},
+		  dataType : 'json',
+		  success : function(data){
+			  if(data ==true){
+				  alert('삭제 완료!');
+				  obj.remove();
+				  obj.prev().remove();
+			  }
+		  }, error : function(data){
+			  console.log(data);
+		  }
+	  });
+  }
    
 </script>
 
