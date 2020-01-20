@@ -11,6 +11,9 @@
 <c:import url="../common/commonUtil.jsp" />
 
 <script>
+
+	$("input").tagsinput('items')
+	
 	function showBoardInsert(){
 		location.href = "JQ{ pageContext.request.contextPath}/showBoard/showBoardInsert.do";
 	}
@@ -28,6 +31,22 @@
 	
 	
 </script>
+
+<style>
+	.bootstrap-tagsinput input{
+		display: none;
+	}
+	
+	span[data-role = remove]{
+		display: none;
+	}
+	
+	.bootstrap-tagsinput{
+		display: initial;
+		border: none;
+		box-shadow: none;
+	}
+</style>
 
 </head>
 <body>
@@ -95,7 +114,7 @@
 									<li><a href="#"><i class="fa fa-tag">${ ShowBoard.bTag }</i></a></li>
 								</ul> --%>
 							<div class="post-content overflow">	
-								<i class="fa fa-tag">${ ShowBoard.bTag }</i>
+								<i style="color: #0099AE" class="fas fa-tags"></i>&nbsp;&nbsp;<input style="color: #0099AE" type="text" data-role="tagsinput" value="${ showBoard.bTag }"/>
 								
 								<!--  제목 -->
 								<h2 class="post-title bold">
@@ -103,10 +122,10 @@
 								</h2>
 
 								<div class="post-bottom overflow">
-									<ul class="nav nav-justified post-nav">
-										<li><a href="#"><i class="fa fa-heart"></i>좋아요</a></li>
-										
-										<li><a href="#"><i class="fa fa-comments"></i>댓글</a></li>
+									<ul class="nav nav-justified post-nav">	
+		                                <li id="favorite" style="color: #0099AE"><i class="fas fa-heart"></i>&nbsp;&nbsp;${ showBoard.favoriteCount }</li>
+		                                  
+		                                <li style="color: #0099AE"><i class="fas fa-comments"></i>&nbsp;&nbsp;댓글 숫자</li>
 									</ul>
 								</div>
 							</div>
