@@ -1,5 +1,6 @@
 package com.kh.mohagee.gymBoard.controller;
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,74 +25,78 @@ public class gbCommentController {
 	GymBoardService GymBoardService;
 	
 	// 댓글 리스트보기
+	/*
 	@RequestMapping("/gbComment/gbCommentSelectList.do")
 	@ResponseBody
-	public Map<String, Object> gbCommentSelectList (@RequestParam int bNo){
-		Map<String, Object> data = new HashMap<>();
+	public List<gbComment> gbCommentSelectList (@RequestParam int bNo){
 		
-		data.put("gymBoard", GymBoardService.selectOneGymBoard(bNo));
-		data.put("gbCommentList", gbCommentService.selectListgbComment(bNo));
+		return gbCommentService.selectListgbComment(bNo);
 		
-		return data;
 	}
+	*/
 	
 	// 댓글 등록
 	@RequestMapping("/gbComment/gbCommentInsert.do")
 	@ResponseBody
-	public List<GymBoard> gbCommentInsert (@RequestParam int userNo ,
-																		   @RequestParam int bNo ,
-																		   @RequestParam String bcContent){
-		List<GymBoard> data = null;
+	public int gbCommentInsert (
+																			  @RequestParam int bNo ,
+																			  @RequestParam int userNo,
+																			  @RequestParam String bcContent,
+																			  @RequestParam(value="bbcNo", defaultValue = "0" ) int bbcNo
+																			  //@RequestParam Date bcDate,
+																			  //@RequestParam int bcLevel,
+																			  //@RequestParam String bcStatus,
+																			  ){
+		
+		System.out.println("bNo : " + bNo);
+		System.out.println("userNo :" + userNo);
+		System.out.println("bcCentent : " + bcContent);
+		System.out.println("bbcNo : " + bbcNo);
+		
+		gbComment gbComment = null;
 		// insert
-		gbComment gbComment = new gbComment();
+		if(bbcNo == 0) {
+			gbComment = new gbComment(bNo, userNo, bcContent);
+		} else {
+			gbComment = new gbComment(bNo, userNo, bcContent, bbcNo);
+		}
 		
 		int result = gbCommentService.insertgbComment(gbComment);
-		
+		int data = 0;
 		if(result>0) {
 			// selectList
-			data = gbCommentService.selectListgbComment(bNo);
+			data = gbCommentService.selectLastgbComment(bNo);
+			System.out.println(data);
 		}
 		return data;
-	}	
-	
+	}
 	
 	// 댓글 수정
 	@RequestMapping("/gbComment/gbCommentUpdate.do")
 	@ResponseBody
-	public List<GymBoard> gbCommentUpdatet (@RequestParam int bcNo ,
-																			  @RequestParam int bNo ,
-																			  @RequestParam String bcContent){
-		List<GymBoard> data = null;
-		// insert
-		gbComment gbComment = new gbComment();
-		gbComment.setbcNo(bcNo);
-		gbComment.setbNo(bNo);
-		gbComment.setBcContent(bcContent);
+	public int gbCommentUpdate(@RequestParam int bcNo ,
+													 @RequestParam int userNo,
+													 @RequestParam String bcContent){
+
+		gbComment gbc = new gbComment();
 		
-		int result = gbCommentService.updategbComment(gbComment);
+		gbc.setBcNo(bcNo);
+		gbc.setUserNo(userNo);
+		gbc.setBcContent(bcContent);
 		
-		if(result>0) {
-			// selectList
-			data = gbCommentService.selectListgbComment(bNo);
-		}
-		return data;
+		int result = gbCommentService.updategbComment(gbc);
+		
+		return result;
 	}	
 	
 	// 댓글 삭제
 	@RequestMapping("/gbComment/gbCommentDelete.do")
 	@ResponseBody
-	public List<GymBoard> gbCommentDeleteSelect (@RequestParam int bcNo,
-												@RequestParam int bNo){
-		List<GymBoard> data = null;
+	public int gbCommentDeleteSelect (@RequestParam int bcNo){
 	
 		int result = gbCommentService.deletegbComment(bcNo);
 		
-		if(result>0) {
-			// selectList
-			data = gbCommentService.selectListgbComment(bNo);
-		}
-		return data;
+		return result;
 	}	
-	
 	
 }

@@ -48,6 +48,22 @@
 		</beans:property>
 	</beans:bean>
 	
+	<!-- Spring 과 json과의  연동 설정 -->   
+	<beans:bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+	    <beans:property name="messageConverters">
+	    <beans:list>    
+	        <beans:bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+	            <beans:property name="supportedMediaTypes">
+	                <beans:list>
+	                    <beans:value>text/html;charset=UTF-8</beans:value>
+	                    <beans:value>application/json;charset=UTF-8</beans:value>
+	                </beans:list>
+	            </beans:property>
+	        </beans:bean>            
+	    </beans:list>
+	    </beans:property>                        
+	</beans:bean>  
+	
 	<aop:config proxy-target-class="true">
 		<aop:pointcut id="servicePC" 
 		              expression="execution(* com.kh.mohagee..*Service.*(..))"/>

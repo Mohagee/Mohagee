@@ -1,5 +1,6 @@
 package com.kh.mohagee.gymBoard.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -18,16 +19,17 @@ public class gbCommentService {
 	@Autowired
 	gbCommentDAO gbCommentDAO;
 	
-	public int insertgbComment(gbComment gbc) throws GymBoardException{
+	public int insertgbComment(gbComment gbComment) throws GymBoardException{
 		int result = 0;
 		
-		result = gbCommentDAO.insertgbComment(gbc);
+		System.out.println("서비스에gbComment 는 : " + gbComment);
+		result = gbCommentDAO.insertgbComment(gbComment);
 		if(result < 1) throw new GymBoardException("게시글 추가 중 에러 발생!");
 		
 		return result;
 	}
 
-	public List<GymBoard> selectListgbComment(int bNo) {
+	public List<gbComment> selectListgbComment(int bNo) {
 		
 		return gbCommentDAO.selectListgbComment(bNo);
 	}
@@ -50,7 +52,8 @@ public class gbCommentService {
 		return result;
 	}
 
-
-
-
+	public int selectLastgbComment(int bNo) {
+		
+		return gbCommentDAO.selectLastgbComment(bNo);
+	}
 }

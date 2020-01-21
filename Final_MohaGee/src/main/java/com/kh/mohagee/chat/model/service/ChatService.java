@@ -2,34 +2,35 @@ package com.kh.mohagee.chat.model.service;
 
 import java.util.List;
 
+
 import com.kh.mohagee.chat.model.vo.Chat;
-import com.kh.mohagee.chat.model.vo.ChatRoom;
-import com.kh.mohagee.member.model.vo.Member;
+import com.kh.mohagee.chat.model.vo.ChatMember;
+
 
 public interface ChatService {
-
-	List<ChatRoom> selectChatRoomList(int userNo);
-
-	List<Chat> selectRecentChat(int userNo);
-
-	void insertChat(Chat chat);
-
-	List<Integer> selectCroomUser(int croomNo);
 	
-	List<Chat> selectChatList(int croomNo);
+	public Chat checkRoom(String name) throws Exception;
+	
+	public void createChatRoom(Chat ch) throws Exception;
 
-	ChatRoom selectCroom(ChatRoom cr);
+	public List<Chat> getRoomList() throws Exception;
+	
+	public void addRoomMember(ChatMember mem) throws Exception;
+	
+	public ChatMember getRoomMember(ChatMember mem) throws Exception;
+	
+	public List<ChatMember> sameRoomList(ChatMember mem) throws Exception;
 
-	int insertChatRoom(List<ChatRoom> crList);
+	public void updateRoomMember(ChatMember ch) throws Exception;
 
-	int insertChatRoom(ChatRoom cr);
+	public void deleteRoomMember(ChatMember ch) throws Exception;
+	
+	public void updateChatCountInc(Chat ch) throws Exception;
+	
+	public void updateChatCountDec(Chat ch) throws Exception;
 
-	void deleteChatRoom(int croomIndex);
+	public void deleteChat() throws Exception;
 
-	void updateCroom(ChatRoom cr);
-
-	List<Member> selectChatUser(int croomNo);
-
-	int inviteChatRoom(List<ChatRoom> crList);
+	public List<Chat> searchRoomList(String name) throws Exception;
 
 }

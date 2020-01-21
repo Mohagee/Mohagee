@@ -403,10 +403,6 @@ public class GymBoardController {
 		return result;
 	}
 	
-	
-	
-	
-	
 }
 
 

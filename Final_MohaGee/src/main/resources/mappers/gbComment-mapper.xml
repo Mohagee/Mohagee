@@ -9,18 +9,33 @@
 	</select>
 	
 	<select id="selectListgbComment" parameterType = "int" resultType="gbComment">
-		SELECT * FROM BCOMMENT JOIN MEMBER USING(USERNO) 
-		WHERE BSTATUS = 'N' AND BNO = #{bNo} ORDER BY BCDATE DESC
+		SELECT * FROM (SELECT C.*, M.NICKNAME, p.prenamedfilename
+						FROM BCOMMENT C
+						JOIN MEMBER M ON(C.USERNO = M.USERNO) 
+						LEFT JOIN PROFILEPHOTO P ON(M.USERNO = P.USERNO)
+						WHERE C.BCSTATUS = 'N' AND BNO = #{bNo}
+						ORDER BY BCDATE DESC)
+		START WITH BCLEVEL = 0 
+		CONNECT BY PRIOR BCNO = BBCNO
 	</select>
 
+	<!--  댓글 참조번호(bbcNo) 유무를 비교하여  없다면 원래대로, 있다면 참조 댓글 번호와 레벨 함께 지정하기 -->
 	<insert id="insertgbComment" parameterType="gbComment">
 		INSERT INTO BCOMMENT VALUES(SEQ_BCNO.NEXTVAL,
 									 #{bNo}, 
 									 #{userNo}, 
 									 #{bcContent}, 
 									 DEFAULT,
+									 
+		<if test = "bbcNo == 0">
+									DEFAULT,
+									DEFAULT,
+									DEFAULT)
+		</if><if test = "bbcNo != 0">
+									(SELECT BCLEVEL FROM BCOMMENT WHERE BCNO = #{bbcNo}) + 1,
 									 DEFAULT,
-									 DEFAULT)
+									#{bbcNo})
+		</if>
 	</insert>
 	<update id="updategbComment" parameterType="gbComment">
 		UPDATE BCOMMENT
@@ -34,9 +49,12 @@
 		</update>
 		
 	<update id="deletegbComment" parameterType="int">
-		UPDATE BCCOMMENT SET BSTATUS = 'Y' WHERE BCNO = #{bcNo}
+		UPDATE BCOMMENT SET BCSTATUS = 'Y' WHERE BCNO = #{bcNo} OR BBCNO = #{bcNo}
 	</update>
 	
+	<select id="selectLastComment" parameterType="int" resultType="int">
+		SELECT MAX(BCNO) FROM BCOMMENT WHERE BBCNO IS NULL AND BNO = #{bNo}
+	</select>
 </mapper>
 
 

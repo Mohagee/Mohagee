@@ -117,7 +117,7 @@
             <input type="hidden" name="userNo" value="${member.userNo}" />
             <input type="hidden" name="bNo" value="${TravelBoard.bNo}" />     
 
-    <!-- 카테고리선택 칸 -->
+      <!-- 카테고리선택 칸 -->
       <select id = "bCategory" name="bCategory" class="input-group mb-3" style="width:900px; border:1px solid lightblue;" required>
          <option value="" disabled selected >카테고리를 선택해주세요 (필수!)</option>
          <option value="korea" >국내</option>
@@ -127,6 +127,31 @@
          <option value="oceania" >오세아니아</option>
          <option value="africa" >아프리카</option>
       </select>
+      
+      <!-- 위치 선택  -->
+	  <select id = "mNo" name="mNo" class="input-group mb-3" style="width:900px; border:1px solid lightgrey; color:gray;" required>
+         <option disabled selected >위치선택</option>
+         <option value="1" >Seoul</option>
+         <option value="2" >Suwon</option>
+         <option value="3" >Busan</option>
+         <option value="4" >Jeonju</option>
+         <option value="5">Jeju</option>
+         <option value="6">Las Vegas</option>
+         <option value="7">Valley of Fire</option>
+         <option value="8">Death Valley</option>
+         <option value="9">Grand Canyon National Park</option>
+         <option value="10">Antelope Canyon</option>
+         <option value="11">Los Angeles</option>
+         <option value="12">San Francisco</option>
+         <option value="13">San Diego</option>
+         <option value="14">Seattle</option>
+         <option value="15">Chicago</option>
+         <option value="16">NewYork</option>
+         <option value="17">Singapore</option>
+         <option value="18">Bali</option>
+         <option value="19">Taipei</option>
+         <option value="20">Osaka</option>
+	</select>
 
             <!-- 제목 입력 칸 -->
             <div class="input-group mb-3" style="width: 900px"><br /> 

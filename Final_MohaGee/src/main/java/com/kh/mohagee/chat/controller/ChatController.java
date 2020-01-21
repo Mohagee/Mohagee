@@ -1,112 +1,139 @@
 package com.kh.mohagee.chat.controller;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.gson.Gson;
 import com.kh.mohagee.chat.model.service.ChatService;
 import com.kh.mohagee.chat.model.vo.Chat;
-import com.kh.mohagee.chat.model.vo.ChatRoom;
-import com.kh.mohagee.member.model.service.MemberService;
+import com.kh.mohagee.chat.model.vo.ChatMember;
 import com.kh.mohagee.member.model.vo.Member;
 
 @Controller
 public class ChatController {
-
+	
+	private static final Logger logger = LoggerFactory.getLogger(ChatController.class);
+	
 	@Autowired
-	private ChatService chatService;
-
-	@RequestMapping("/chat/croom/{croomNo}")
-	public String chatView(@PathVariable int croomNo, Model model, HttpServletRequest request) {
-		Member loginMember = (Member) request.getSession().getAttribute("member");
-
-		List<Chat> cList = chatService.selectRecentChat(loginMember.getUserNo());
-
-		model.addAttribute("croomList", cList);
-		if (cList.size() != 0 && croomNo == 0)
-			croomNo = cList.get(0).getCroomNo();
-
-		model.addAttribute("chatList", new Gson().toJson(chatService.selectChatList(croomNo)));
-		ChatRoom cr = new ChatRoom();
-		cr.setUserNo(loginMember.getUserNo());
-		cr.setCroomNo(croomNo);
-		model.addAttribute("croom", chatService.selectCroom(cr));
-		/* model.addAttribute("memList", MemberService.selectMemberList(member)); */
-		model.addAttribute("chatUser", new Gson().toJson(chatService.selectChatUser(croomNo)));
-
-		return "chat/chatting";
-	}
-
-	@RequestMapping("/chat/chatview2.do")
-	public String chatView2() {
-		return "chat/chatting2";
-	}
-
-	@RequestMapping("/chat/insertChatRoom")
-	public String insertChatRoom(@RequestParam String croomTitle, @RequestParam int[] userNo,
-			HttpServletRequest request) {
-		Member mem = (Member) request.getSession().getAttribute("member");
-		List<ChatRoom> crList = new ArrayList<ChatRoom>();
-
-		for (int uno : userNo) {
-			ChatRoom cr = new ChatRoom();
-			cr.setCroomTitle(croomTitle);
-			cr.setUserNo(uno);
-			crList.add(cr);
-		}
-		ChatRoom cr = new ChatRoom();
-		cr.setCroomTitle(croomTitle);
-		cr.setUserNo(mem.getUserNo());
-		crList.add(cr);
-
-		int croom_no = chatService.insertChatRoom(crList);
-
-		return "redirect:/chat/croom/" + croom_no;
-	}
-
-	@RequestMapping("/chat/inviteUser")
-	public String inviteUser(@RequestParam int croomNo, @RequestParam int[] userNo, @RequestParam String croomTitle) {
-		List<ChatRoom> crList = new ArrayList<ChatRoom>();
+	ChatService chatService;
+	
+	//전체채팅룸으로 이동
+	@RequestMapping(value="chat.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public String chat(Model model, HttpServletRequest req) throws Exception {
 		
-		for (int uno : userNo) {
-			ChatRoom cr = new ChatRoom();
-			cr.setCroomNo(croomNo);
-			cr.setUserNo(uno);
-			cr.setCroomTitle(croomTitle);
-			crList.add(cr);
+		logger.info("hat.do Run! / Run Time : " + new Date());
+		
+		Member login = (Member)req.getSession().getAttribute("member");
+		
+		if(login == null) {
+			return "redirect:/loginNull.do";
 		}
-
-		int result = chatService.inviteChatRoom(crList);
-
-		return "redirect:/chat/croom/" + croomNo;
+		
+		System.out.println(login);
+		//DB에 현재 아이디로 어떤 방에 들어가있는지 조사 후, 세팅하기
+		ChatMember chatM = chatService.getRoomMember(new ChatMember(0, login.getUserId(), "", ""));
+		
+		if(chatM == null) {
+			chatService.addRoomMember(new ChatMember(0, login.getUserId(), "all", "all"));
+			
+			chatM = chatService.getRoomMember(new ChatMember(0, login.getUserId(), "", ""));
+			logger.info("아이디 정보 추가 성공!" + new Date());
+			
+		} else {
+			chatService.updateRoomMember(new ChatMember(0, login.getUserId(), "all", ""));
+		}
+		
+		model.addAttribute("room", "all");
+		
+		return "chat/chatting";
+		
+	} 
+	
+	//방 만들기
+	@RequestMapping(value="createChatRoom.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public String createChatRoom(Model model, HttpServletRequest req, Chat chat) throws Exception{
+		
+		logger.info("createChatRoom.do Run! / Run Time : " + new Date());
+		
+		Member login = (Member)req.getSession().getAttribute("member");
+		
+		if(login == null) {
+			return "redirect:/loginNull.do";
+		}
+		
+		logger.info(chat.toString());
+		
+		Chat ch = chatService.checkRoom(chat.getName());
+		
+		if(ch == null) {
+			chatService.createChatRoom(ch);
+			
+		}
+		
+		chatService.updateRoomMember(new ChatMember(0, login.getUserId(), chat.getName(), ""));
+		
+		model.addAttribute("room", chat.getName());
+		
+		return "chat/chatting";
+		
 	}
-
-	@RequestMapping("/chat/exitCroom/{croomIndex}")
-	public String exitCroom(@PathVariable int croomIndex) {
-		chatService.deleteChatRoom(croomIndex);
-
-		return "redirect:/chat/croom/0";
+	
+	// 중복 확인
+	@ResponseBody
+	@RequestMapping(value = "checkRoom.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public int checkRoom(Model model, String name) throws Exception{
+		
+		System.out.println("name = " + name);
+		
+		Chat ch = chatService.checkRoom(name);
+		
+		if(ch == null) {
+			
+			return 1;
+			
+		} else {
+			
+			return 0;
+			
+		}
+		
+		
 	}
-
-	@RequestMapping("/chat/renameCroom")
-	public String renameCroom(@RequestParam int croomIndex, @RequestParam String croomTitle,
-			@RequestParam int croomNo) {
-		ChatRoom cr = new ChatRoom();
-		cr.setCroomIndex(croomIndex);
-		cr.setCroomTitle(croomTitle);
-
-		chatService.updateCroom(cr);
-
-		return "redirect:/chat/croom/" + croomNo;
+	
+	
+	// 방 이동
+	@RequestMapping(value="MoveChatRoom.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public String MoveChatRoom(Model model, HttpServletRequest req, String roomName) throws Exception {
+		
+		logger.info("MoveChatRoom.do RUN! / Run Time : " + new Date());
+		
+		Member login = (Member)req.getSession().getAttribute("member");
+		
+		if(login == null) {
+			return "redirect:/loginNull.do";
+		}
+		
+		logger.info("이동할 방이름 : " + roomName);
+		
+		//이동할 방 이름으로 수정
+		chatService.updateRoomMember(new ChatMember(0, login.getUserId(), roomName, ""));
+		
+		// 방이동
+		model.addAttribute("room", roomName);
+		
+		return "chat/chatting";
+		
 	}
+	
+	
 
 }

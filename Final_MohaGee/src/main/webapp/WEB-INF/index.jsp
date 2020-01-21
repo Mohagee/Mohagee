@@ -16,28 +16,28 @@
 
 <body>
 
-	<c:import url="views/common/header.jsp"/>
-	
+   <c:import url="views/common/header.jsp"/>
+   
     <section id="home-slider">
         <div class="container">
             <div class="row">
                 <div class="main-slider">
                     <div class="slide-text">
-                    					
+                                   
                         <h1 id="indexMyMenu" style="font-family:cookierun;">
-							<c:if test="${!empty member}">  
-							<a href="#" >${ member.nickName } </a>
-						</c:if> Mohagee</h1>
-		
-						
+                     <c:if test="${!empty member}">  
+                     <a href="#" >${ member.nickName } </a>
+                  </c:if> Mohagee</h1>
+      
+                  
                    <!-- 검색 창 -->     
-						<form class="form-inline mr-auto">
-						  <input class="form-control mr-sm-2" type="text" placeholder="내용 입력" 
-						  style="font-family:cookierun; font-size : 15px;"  aria-label="Search">
-						  <button class="btn btn-success btn-rounded btn-sm my-0" type="submit">Search</button>
-						</form>  
-					<!--  검색 창 끝 -->
-					
+                  <form class="form-inline mr-auto" action="${ pageContext.request.contextPath }/search/indexSearch.do">
+                       <input name="indexSearch" class="form-control mr-sm-2" type="text" placeholder="아직 구현 미완성" 
+                           style="font-family: cookierun; font-size : 15px; "  aria-label="Search">
+                       <button class="btn btn-success btn-rounded btn-sm my-0" type="submit">Search</button>
+                  </form>  
+               <!--  검색 창 끝 -->
+               
                   </div>
                   
                     <img src="${ pageContext.request.contextPath }/resources/images/home/slider/hill.png" class="slider-hill" alt="slider image">
@@ -86,6 +86,7 @@
     </section>
     <!--/#services-->
 
+
     <section id="action">
         <div class="vertical-center">
              <div class="container">
@@ -93,19 +94,19 @@
                     <div class="action count">
                         <div class="col-sm-3 text-center wow bounceIn" data-wow-duration="1000ms" data-wow-delay="300ms">
                             <h1 class="timer bold" data-to="99999" data-speed="3000" data-from="0"></h1>   
-                            <h3>Happy Clients</h3>
+                            <h3>총 게시글 수</h3>
                         </div>
                         <div class="col-sm-3 text-center wow bounceIn" data-wow-duration="1000ms" data-wow-delay="300ms">
                             <h1 class="timer bold" data-to="12" data-speed="3000" data-from="0"></h1>   
-                            <h3>Years in Business</h3> 
+                            <h3>공연게시판</h3> 
                         </div>
                         <div class="col-sm-3 text-center wow bounceIn" data-wow-duration="1000ms" data-wow-delay="300ms">
                             <h1 class="timer bold" data-to="432" data-speed="3000" data-from="0"></h1> 
-                            <h3>Cups of Coffee</h3>
+                            <h3>운동 게시판</h3>
                         </div>
                         <div class="col-sm-3 text-center wow bounceIn" data-wow-duration="1000ms" data-wow-delay="300ms">
                             <h1 class="timer bold" data-to="145" data-speed="3000" data-from="0"></h1> 
-                            <h3>Total Project</h3>
+                            <h3>여행 게시판</h3>
                         </div>
                     </div>
                 </div>
@@ -114,34 +115,43 @@
    </section>
     <!--/#action-->
 
+
+   <!-- TOP3 영역 -->  
     <section id="features">
         <div class="container">
-            <div class="row">
+            <div class="row" id="boardTop3">
+         <!-- TOP1 -->
                 <div class="single-features">
-                    <div class="col-sm-5 wow fadeInLeft" data-wow-duration="500ms" data-wow-delay="300ms">
-                        <img src="${ pageContext.request.contextPath }/resources/images/home/image1.png" class="img-responsive" alt="">
+                    <div class="col-sm-7 wow fadeInLeft">
+                        <img src="${ pageContext.request.contextPath }/resources/upload/웃는남자1.jpg" class="img-responsive" >
                     </div>
-                    <div class="col-sm-6 wow fadeInRight" data-wow-duration="500ms" data-wow-delay="300ms">
-                        <h2>공연</h2>
-                        <P>아름다운 공연의 세레나데를</P>
+                    <div class="col-sm-4 wow fadeInRight">
+                        <h2>top1 제목</h2>
+                        <P>최근게시글</P>
                     </div>
                 </div>
+                
+               <!--  TOP2  -->
                 <div class="single-features">
-                    <div class="col-sm-6 col-sm-offset-1 align-right wow fadeInLeft" data-wow-duration="500ms" data-wow-delay="300ms">
-                        <h2>뿌뿌뿌</h2>
-                        <P>빠빠빠</P>
+                    <div class="col-sm-4 col-sm-offset-1 align-right wow fadeInLeft">
+                        <h2>top2 제목</h2>
+                        <P>최근게시글</P>
                     </div>
-                    <div class="col-sm-5 wow fadeInRight" data-wow-duration="500ms" data-wow-delay="300ms">
-                        <img src="${ pageContext.request.contextPath }/resources/images/home/image2.png" class="img-responsive" alt="">
+                    <div class="col-sm-7 wow fadeInRight" >
+                        <img src="${ pageContext.request.contextPath }/resources/upload/수정-2-1.png" class="img-responsive" >
                     </div>
                 </div>
+                
+              <!--  TOP3  -->
                 <div class="single-features">
-                    <div class="col-sm-5 wow fadeInLeft" data-wow-duration="500ms" data-wow-delay="300ms">
-                        <img src="${ pageContext.request.contextPath }/resources/images/home/image3.png" class="img-responsive" alt="">
+                    <div class="col-sm-7 wow fadeInLeft" >
+                        <img src="${ pageContext.request.contextPath }/resources/upload/수정-5.jpg" class="img-responsive" >
                     </div>
-                    <div class="col-sm-6 wow fadeInRight" data-wow-duration="500ms" data-wow-delay="300ms">
-                        <h2>Happiness</h2>
-                        <P>랄랄라랄랄라~~ 해피니스~~~ 내가 행복하게 사는 비결을 좀 말핼볼까~~</P>
+                    <div class="col-sm-4 wow fadeInRight" >
+                        <h2>top3 제목</h2>
+                        <P>최근게시글최근게시글최근게시글최근게시글최근게시글최근게시글최근게시글
+                        최근게시글최근게시글최근게시글최근게시글최근게시글최근게시글최근게시글
+                        최근게시글최근게시글최근게시글최근게시글최근게시글최근게시글</P>
                     </div>
                 </div>
             </div>
@@ -149,47 +159,47 @@
     </section>
      <!--/#features-->
 
-    <section id="clients">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="clients text-center wow fadeInUp" data-wow-duration="500ms" data-wow-delay="300ms">
-                        <p><img src="${ pageContext.request.contextPath }/resources/images/home/clients.png" class="img-responsive" alt=""></p>
-                        <h1 class="title">여기에 차트넣으면 될거같아요</h1>
-                        <p>금주의 인기 취미!!<br> 여러분의 선택은? </p>
-                    </div>
-                    <div class="clients-logo wow fadeIn" data-wow-duration="1000ms" data-wow-delay="600ms">
-                        <div class="col-xs-3 col-sm-2">
-                            <a href="#"><img src="${ pageContext.request.contextPath }/resources/images/home/client1.png" class="img-responsive" alt=""></a>
-                        </div>
-                        <div class="col-xs-3 col-sm-2">
-                            <a href="#"><img src="${ pageContext.request.contextPath }/resources/images/home/client2.png" class="img-responsive" alt=""></a>
-                        </div>
-                         <div class="col-xs-3 col-sm-2">
-                            <a href="#"><img src="${ pageContext.request.contextPath }/resources/images/home/client3.png" class="img-responsive" alt=""></a>
-                        </div>
-                         <div class="col-xs-3 col-sm-2">
-                            <a href="#"><img src="${ pageContext.request.contextPath }/resources/images/home/client4.png" class="img-responsive" alt=""></a>
-                        </div>
-                         <div class="col-xs-3 col-sm-2">
-                            <a href="#"><img src="${ pageContext.request.contextPath }/resources/images/home/client5.png" class="img-responsive" alt=""></a>
-                        </div>
-                         <div class="col-xs-3 col-sm-2">
-                            <a href="#"><img src="${ pageContext.request.contextPath }/resources/images/home/client6.png" class="img-responsive" alt=""></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-     </section>
-    <!--/#clients-->
+   <script>   
+   $(function(){
+         $.ajax({
+            url : '${pageContext.request.contextPath}/top5/top5List.do', // ROWNUM 으로 가져오기 디비에서
+            type : 'POST',
+            success : function(data) {
+               console.log(data);
+               var $div = $('#boardTop3'); // 맨 위 div 아이디로 
+               $div.empty();
+               for(var i in data){ 
+                  var div1 = $('<div class="single-features">');
+                  var div1_1 = $('<div class="col-sm-7 wow fadeInLeft">');
+                  var imgTag = $('<img src="${ pageContext.request.contextPath }/resources/upload/' + data[i].titleFilename + '" class="img-responsive" >');
+                  var div1_2 = $('<div class="col-sm-4 wow fadeInRight">');
+                  var h2Tag = $('<h2>').text(data[i].bTitle);
+                  var pTag = $('<p>').text(data[i].bContent);
+                  
+                  div1_1.append(imgTag);
+                  div1_2.append(h2Tag).append(pTag);
+                  
+                  div1.append(div1_1).append(div1_2);
+                  
+                  $div.append(div1);
+               }
+               
+            } , error : function(request) {
+               console.log("힘내세요");
+               console.log(request);
+            }
+         });
+   });
 
+   </script>
+  
+  
+  
     <section id="team">
         <div class="container">
             <div class="row">
                 <h1 class="title text-center wow fadeInDown" data-wow-duration="500ms" data-wow-delay="300ms">개발진 소개</h1>
-                <p class="text-center wow fadeInDown" data-wow-duration="400ms" data-wow-delay="400ms">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <br>
-                Ut enim ad minim veniam, quis nostrud </p>
+                <p class="text-center wow fadeInDown" data-wow-duration="400ms" data-wow-delay="400ms"></p>
                 <div id="team-carousel" class="carousel slide wow fadeIn" data-ride="carousel" data-wow-duration="400ms" data-wow-delay="400ms">
                     <!-- Indicators -->
                     <ol class="carousel-indicators visible-xs">
@@ -204,19 +214,21 @@
                                     <div class="team-single">
                                         <div class="person-thumb">
                                             <img src="${ pageContext.request.contextPath }/resources/images/aboutus/1.jpg" class="img-responsive" alt="">
-                                        </div>
+                                        </div>                                        
                                         <div class="social-profile">
                                             <ul class="nav nav-pills">
-                                                <li><a href="#">개발자 프로필로 이동</a></li>
+                                                <li><a href="#"></a></li><!-- 개발자 프로필로 이동시키기 -->
                                             </ul>
                                         </div>
-                                    </div>
+                                    </div>                                   
                                     <div class="person-info">
                                         <h2>Howl</h2>
                                         <p>Developer &nbsp; 김건하</p>
                                     </div>
                                 </div>
                             </div>
+                            
+                            
                             <div class="col-sm-3 col-xs-6">
                                 <div class="team-single-wrapper">
                                     <div class="team-single">
@@ -230,6 +242,8 @@
                                     </div>
                                 </div>
                             </div>
+                            
+                            
                             <div class="col-sm-3 col-xs-6">
                                 <div class="team-single-wrapper">
                                     <div class="team-single">
@@ -238,11 +252,13 @@
                                         </div>
                                     </div>
                                     <div class="person-info">
-                                        <h2>John Doe</h2>
-                                        <p>CEO &amp; Developer</p>
+                                        <h2>jjju</h2>
+                                        <p>Developer &nbsp; 전영주</p>
                                     </div>
                                 </div>
                             </div>
+                            
+                            
                             <div class="col-sm-3 col-xs-6">
                                 <div class="team-single-wrapper">
                                     <div class="team-single">
@@ -251,12 +267,14 @@
                                         </div>
                                     </div>
                                     <div class="person-info">
-                                        <h2>John Doe</h2>
-                                        <p>CEO &amp; Developer</p>
+                                        <h2>RSPD</h2>
+                                        <p> Developer  &nbsp; 유소현</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        
+                        
                         <div class="item">
                             <div class="col-sm-3 col-xs-6">
                                 <div class="team-single-wrapper">
@@ -266,8 +284,8 @@
                                         </div>
                                     </div>
                                     <div class="person-info">
-                                        <h2>John Doe</h2>
-                                        <p>CEO &amp; Developer</p>
+                                        <h2>HaON</h2>
+                                        <p>Developer &nbsp; 송승훈</p>
                                     </div>
                                 </div>
                             </div>
@@ -282,7 +300,23 @@
         </div>
     </section>
 
-	<c:import url="views/common/footer.jsp"/>
-	
+   <c:import url="views/common/footer.jsp"/>
+   
+   <script>
+      /* $(function(){
+         $.ajax({
+            url: "각 게시글 수 뽑아오는 컨트롤러 링크",
+            data: {
+               "갖고갈 데이터 필요한거 쓰심 되여"
+            },
+            dataType: "json",
+            success: function(data){
+               "데이터로 갖고오는값이 각 보드별 게시글수"
+               
+               "갖고 온 데이터를 각 위치에 맞게 적어주심되요"
+            }
+         });
+      }) */
+   </script>
 </body>
 </html>

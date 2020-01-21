@@ -1,5 +1,6 @@
 package com.kh.mohagee.gymBoard.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -16,11 +17,11 @@ public class gbCommentDAO {
 	SqlSessionTemplate sqlSession;
 	
 	
-	public int insertgbComment(gbComment gbc) {
-		return sqlSession.insert("gbComment-mapper.insertgbComment", gbc);
+	public int insertgbComment(gbComment gbComment) {
+		return sqlSession.insert("gbComment-mapper.insertgbComment", gbComment);
 	}
 
-	public List<GymBoard> selectListgbComment(int bNo) {
+	public List<gbComment> selectListgbComment(int bNo) {
 		return sqlSession.selectList("gbComment-mapper.selectListgbComment", bNo);
 	}
 
@@ -30,6 +31,11 @@ public class gbCommentDAO {
 
 	public int deletegbComment(int bcNo) {
 		return sqlSession.update("gbComment-mapper.deletegbComment", bcNo);
+	}
+
+	public int selectLastgbComment(int bNo) {
+		
+		return sqlSession.selectOne("gbComment-mapper.selectLastComment", bNo);
 	}
 
 }

@@ -7,6 +7,7 @@
 <link href="${ pageContext.request.contextPath }/resources/myPageResources/css/bootstrap.min.css" rel="stylesheet">
 <link href="${ pageContext.request.contextPath }/resources/myPageResources/css/now-ui-kit.min.css" rel="stylesheet">
 <link href="${ pageContext.request.contextPath }/resources/myPageResources/scss/now-ui-kit.scss" rel="stylesheet">
+<link href="${ pageContext.request.contextPath }/resources/css/bootstrap-tagsinput.css" rel="stylesheet"> 
 
 <!-- favicon -->
 <link rel="shortcut icon" href="${ pageContext.request.contextPath }/resources/images/favicon.png">
@@ -29,3 +30,4 @@
 <script type="text/javascript" src="${ pageContext.request.contextPath }/resources/myPageResources/js/plugins/nouislider.min.js"></script>
 <script type="text/javascript" src="${ pageContext.request.contextPath }/resources/myPageResources/js/plugins/bootstrap-datepicker.js"></script>
 <script type="text/javascript" src="${ pageContext.request.contextPath }/resources/myPageResources/js/now-ui-kit.min.js"></script>
+<script type="text/javascript" src="${ pageContext.request.contextPath }/resources/js/bootstrap-tagsinput.js"></script>

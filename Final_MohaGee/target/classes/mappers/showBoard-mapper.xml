@@ -13,6 +13,7 @@
          #{bTag},
          #{bContent},
          #{cNo},
+         DEFAULT,
          #{bUrl},
          #{bCategory},
          #{bKind},
@@ -37,7 +38,7 @@
    
    <!--  게시글 리스트  -->
    <select id="selectList" resultType="ShowBoard">
-      SELECT B.*, A.BFILENAME TITLEFILENAME, A.BFILETYPE, (SELECT COUNT(*) FROM FAVORITE F WHERE B.BNO = F.BNO ) FAVORITECOUNT FROM BOARD B
+      SELECT B.*, A.BFILENAME TITLEFILENAME, A.BFILETYPE, (SELECT COUNT(*) FROM FAVORITE F WHERE B.BNO = F.BNO AND F.FSTATUS = 'Y') FAVORITECOUNT FROM BOARD B
       LEFT JOIN B_ATTACHMENT A ON(B.BNO = A.BNO AND A.BFILELEVEL = 0 AND BFILESTATUS= 'N')
       WHERE BSTATUS = 'N' AND BKIND = 'S'
       ORDER BY BDATE DESC

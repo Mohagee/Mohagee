@@ -8,34 +8,38 @@
 <!-- 로그인 버튼 부분 헤더 -->
 <header id="header">
 
+
 <c:url var="pUpFile" value="/resources/profile/"/>
 <!-- 마이페이지 메뉴 버튼 -->
 <c:if test="${!empty member}">
-	<div class="row">
+	<div class="dropdown">
 		<div class="col-md-10" align="right" >
-			<div class="btn-group">
-				<button style="border: none;" type="button" class="btn btn-default  .rounded-circle dropdown-toggle"  id="dropdownMenu" 
+			<button onclick="gotoSearchForm();" class="btn btn-info btn-rounded btn-sm my-0">Search</button>
+			<div class="dropdown btn-group"> 
+				<button style="border: none;" type="button" class="dropdown-button  btn btn-default .rounded-circle "  id="dropdownMenu" 
 					  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					  <img style="height: 50px; width: 50px; border-top-right-radius : 50%; border-top-left-radius : 50%; border-bottom-right-radius : 50%; border-bottom-left-radius : 50%;"
 					  			src="${ pUpFile }${profile.pRenamedFileName}"/>
 				</button>	 			 
 	 			  			 
-	  				<div class="dropdown-menu dropdown-info"  >
-					    <a class="dropdown-item" style="font-family : binggrea; color: black; " href="${ pageContext.request.contextPath }/member/myPage.do?userNo=${member.userNo}">마이페이지</a>
+	 			<div class="dropdown-menu" >
+	 					<div class="dropdown-content">
+	 				<div align=center >
+					    <a class="dropdown-item" 
+					    		href="${ pageContext.request.contextPath }/member/myPage.do?userNo=${member.userNo}">마이페이지</a>
 					    <br />	
-					    <a class="dropdown-item" style="font-family : binggrea; color: black; " href="#">알람</a>
+					    <a class="dropdown-item" 
+					    		href="${ pageContext.request.contextPath }/member/logOut.do">로그아웃</a>
 					    <br />
-					    <a class="dropdown-item" style="font-family : binggrea; color: black; " href="${ pageContext.request.contextPath }/member/logOut.do">로그아웃</a>
-					    <br />
-					    <div class="dropdown-divider"></div>
-	  				</div>
-				</div>
+				    </div>
+				    </div>
+	  			</div>  						
+			</div>
 		</div>
 	</div>
 </c:if>	
+
 <!-- 메인 페이지 메뉴 버튼 끝 -->
-
-
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12 overflow">
@@ -43,10 +47,10 @@
 					<div class="text-center" style="font-family: biggrea;">
 						<ul>
  
-
 						<!-- 로그인 상태가 아닐때 (조인 버튼) --> 
 							<span> 
 							<c:if test="${empty member}">
+						<button onclick="gotoSearchForm();" class="btn btn-info btn-rounded btn-sm my-0">Search</button>
 									<a href="" class="btn btn-success btn-rounded mb-4"
 										data-toggle="modal" data-target="#modalJoinForm"> Join </a>
 								</c:if>
@@ -202,7 +206,7 @@
                         			style="font-family:cookierun; font-size : 20px;">여행</a>
                         </li> 
                         <li class="category">
-                        	<a href="${ pageContext.request.contextPath }/TalkBoardList.do"
+                        	<a href="${ pageContext.request.contextPath }/talkBoard/talkBoardList.do"
                         			 style="font-family:cookierun; font-size : 20px;">수다방</a>
                         </li>
                         <li class="category">
@@ -213,6 +217,10 @@
             </div>
         </div>
         <script>
+        
+        	function gotoSearchForm(){
+        		location.href = "${pageContext.request.contextPath}/search/gotoSearchForm.do";
+        	}
         
 	        JQ("#checkEmail").on("click", function(){
 	        	

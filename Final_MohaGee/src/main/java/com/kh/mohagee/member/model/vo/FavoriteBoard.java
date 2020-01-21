@@ -18,6 +18,7 @@ public class FavoriteBoard {
 	private String bStatus;
 	private String titleFilename;
 	private String bFileType;
+	private int favoriteCount;
 	
 	public FavoriteBoard() {
 		super();
@@ -25,7 +26,7 @@ public class FavoriteBoard {
 
 	public FavoriteBoard(int bNo, int userNo, String bTitle, String bTag, String bContent, int cNo, String bUrl,
 			String bCategory, String bKind, int bCount, Date bDate, String bStatus, String titleFilename,
-			String bFileType) {
+			String bFileType, int favoriteCount) {
 		super();
 		this.bNo = bNo;
 		this.userNo = userNo;
@@ -41,6 +42,7 @@ public class FavoriteBoard {
 		this.bStatus = bStatus;
 		this.titleFilename = titleFilename;
 		this.bFileType = bFileType;
+		this.favoriteCount = favoriteCount;
 	}
 
 	@Override
@@ -48,7 +50,7 @@ public class FavoriteBoard {
 		return "FavoriteBoard [bNo=" + bNo + ", userNo=" + userNo + ", bTitle=" + bTitle + ", bTag=" + bTag
 				+ ", bContent=" + bContent + ", cNo=" + cNo + ", bUrl=" + bUrl + ", bCategory=" + bCategory + ", bKind="
 				+ bKind + ", bCount=" + bCount + ", bDate=" + bDate + ", bStatus=" + bStatus + ", titleFilename="
-				+ titleFilename + ", bFileType=" + bFileType + "]";
+				+ titleFilename + ", bFileType=" + bFileType + ", favoriteCount=" + favoriteCount + "]";
 	}
 
 	public int getbNo() {
@@ -161,6 +163,14 @@ public class FavoriteBoard {
 
 	public void setbFileType(String bFileType) {
 		this.bFileType = bFileType;
+	}
+
+	public int getFavoriteCount() {
+		return favoriteCount;
+	}
+
+	public void setFavoriteCount(int favoriteCount) {
+		this.favoriteCount = favoriteCount;
 	}
 
 }
