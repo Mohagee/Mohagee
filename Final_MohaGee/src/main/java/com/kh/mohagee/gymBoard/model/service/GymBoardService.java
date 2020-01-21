@@ -31,17 +31,21 @@ public class GymBoardService {
       
       // 1. 게시글 추가
       result = GymBoardDAO.insertGymBoard(board);
-      if(result < 1)
+      if(result < 1) {
          throw new GymBoardException("게시글 추가 중 에러 발생!");
-      
+      }
       // 2. 추가된 게시글의 번호를 가져와
       //    첨부파일 추가하기
       if(list.size() > 0) {
            for(int i = 0; i < list.size(); i++) {
               GymAttachment a = list.get(i);
               
-              if(i== 0) a.setbFileLevel(0);
-              else  a.setbFileLevel(1);
+              if(i== 0) {
+            	  a.setbFileLevel(0);
+              }
+              else  {
+            	  a.setbFileLevel(1);
+              }
               
               System.out.println("check : "+a);
             result = GymBoardDAO.insertGymAttachment(a);

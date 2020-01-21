@@ -10,30 +10,63 @@ public class gbComment implements Serializable{
 	private int userNo;
 	private String bcContent;
 	private Date bcDate;
+	private int bcLevel;
 	private String bcStatus;
 	private int bbcNo;
+	private String nickName;
+	private String pRenamedFileName;
 	
 	public gbComment() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public gbComment(int bcNo, int bNo, int userNo, String bcContent, Date bcDate, String bcStatus, int bbcNo) {
+	public gbComment(int bcNo, int bNo, int userNo, String bcContent, Date bcDate, int bcLevel, String bcStatus,
+			int bbcNo, String nickName, String pRenamedFileName) {
 		super();
 		this.bcNo = bcNo;
 		this.bNo = bNo;
 		this.userNo = userNo;
 		this.bcContent = bcContent;
 		this.bcDate = bcDate;
+		this.bcLevel = bcLevel;
 		this.bcStatus = bcStatus;
+		this.bbcNo = bbcNo;
+		this.nickName = nickName;
+		this.pRenamedFileName = pRenamedFileName;
+	}
+
+	
+	
+	
+	
+	public gbComment(int bNo, int userNo, String bcContent) {
+		super();
+		this.bNo = bNo;
+		this.userNo = userNo;
+		this.bcContent = bcContent;
+	}
+
+
+	public gbComment(int bNo, int userNo, String bcContent, int bbcNo) {
+		super();
+		this.bNo = bNo;
+		this.userNo = userNo;
+		this.bcContent = bcContent;
 		this.bbcNo = bbcNo;
 	}
 
-	public int getbcNo() {
+	@Override
+	public String toString() {
+		return "gbComment [bcNo=" + bcNo + ", bNo=" + bNo + ", userNo=" + userNo + ", bcContent=" + bcContent
+				+ ", bcDate=" + bcDate + ", bcLevel=" + bcLevel + ", bcStatus=" + bcStatus + ", bbcNo=" + bbcNo
+				+ ", nickName=" + nickName + ", pRenamedFileName=" + pRenamedFileName + "]";
+	}
+
+	public int getBcNo() {
 		return bcNo;
 	}
 
-	public void setbcNo(int bcNo) {
+	public void setBcNo(int bcNo) {
 		this.bcNo = bcNo;
 	}
 
@@ -69,6 +102,14 @@ public class gbComment implements Serializable{
 		this.bcDate = bcDate;
 	}
 
+	public int getBcLevel() {
+		return bcLevel;
+	}
+
+	public void setBcLevel(int bcLevel) {
+		this.bcLevel = bcLevel;
+	}
+
 	public String getBcStatus() {
 		return bcStatus;
 	}
@@ -77,19 +118,28 @@ public class gbComment implements Serializable{
 		this.bcStatus = bcStatus;
 	}
 
-	public int getbbcNo() {
+	public int getBbcNo() {
 		return bbcNo;
 	}
 
-	public void setbbcNo(int bbcNo) {
+	public void setBbcNo(int bbcNo) {
 		this.bbcNo = bbcNo;
 	}
 
-	@Override
-	public String toString() {
-		return "GymBoardComment [bcNo=" + bcNo + ", bNo=" + bNo + ", userNo=" + userNo + ", bcContent=" + bcContent
-				+ ", bcDate=" + bcDate + ", bcStatus=" + bcStatus + ", bbcNo=" + bbcNo + "]";
+	public String getNickName() {
+		return nickName;
 	}
-	
+
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+
+	public String getpRenamedFileName() {
+		return pRenamedFileName;
+	}
+
+	public void setpRenamedFileName(String pRenamedFileName) {
+		this.pRenamedFileName = pRenamedFileName;
+	}
 	
 }

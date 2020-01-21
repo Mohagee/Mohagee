@@ -138,7 +138,7 @@
          <br />
               <input type="text" class="form-control" 
               aria-label="Text input with dropdown button" 
-              id = "bUrl" name="bUrl" placeholder="link입력 ex) www.naver.com" value="${gymBoard.bUrl }">
+              id = "bUrl" name="bUrl" placeholder="유튜브-공유-퍼가기-ifram코드 넣기" value="${gymBoard.bUrl }">
       </div>
 
       <!-- 카테고리선택 칸 -->
@@ -154,7 +154,7 @@
       
       <br />
 
-	<div>
+   <div>
         <div class="imgs_wrap" style="width:900px">
         <c:forEach items="${GymAttachmentList}" var="att">
             <img onclick="fileDelete(this, ${att.bFileNo}, '${att.bFileName}');" id="img" src="${ pageContext.request.contextPath }/resources/upload/${att.bFileName}"/>

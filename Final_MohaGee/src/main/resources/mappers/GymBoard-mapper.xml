@@ -35,7 +35,7 @@
       	    #{bNo}, 
             #{bFileName}, 
             #{bFilePath},
-            DEFAULT, DEFAULT, DEFAULT,
+            DEFAULT, #{bFileLevel}, DEFAULT,
             #{bFileType})
 	</insert>
 	
@@ -66,7 +66,7 @@
       VALUES (SEQ_BFILENO.NEXTVAL, #{bNo}, 
             #{bFileName}, 
 	   #{bFilePath},
-            DEFAULT, DEFAULT, DEFAULT, #{bFileType})
+            DEFAULT, #{bFileLevel}, DEFAULT, #{bFileType})
 	</insert>
 	
 	<update id="deleteGymBoard" parameterType="int">

@@ -284,5 +284,21 @@
 
 	<c:import url="views/common/footer.jsp"/>
 	
+	<script>
+		$(function(){
+			$.ajax({
+				url: "각 게시글 수 뽑아오는 컨트롤러 링크",
+				data: {
+					"갖고갈 데이터 필요한거 쓰심 되여"
+				},
+				dataType: "json",
+				success: function(data){
+					"데이터로 갖고오는값이 각 보드별 게시글수"
+					
+					"갖고 온 데이터를 각 위치에 맞게 적어주심되요"
+				}
+			});
+		})
+	</script>
 </body>
 </html>

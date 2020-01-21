@@ -79,10 +79,133 @@ html, body {
 	#favorite:hover{
 		cursor: pointer;
 	}
+	.label{
+	   font-size: 85%;
+	}
+/* 댓글 css */
+#commentDivider {
+  width: 120%;
+}
+#comments-container {
+  overflow: auto;
+  height: 350px;
+}
+#comments {
+  text-align: -webkit-center;
+  list-style-type: none;
+  width: 120%;
+  padding: 0;
+}
+#post {
+    width: 50%;
+    height: 300px;
+    /* border: 1px solid; */
+    border-radius: 20px;
+    margin-left: 25%;
+    display: flex;
+   background-image: linear-gradient(45deg, #08bb81, #0300e08a);
+  
+  /* position: relative; */
+}
+#post h1 {
+  margin: auto;
+}
+.commentButtons {
+  display: flex;
+  
+}
+#newCommentButton {
+	box-shadow:inset -1px 0px 15px -12px #fce2c1;
+	background-color:#faa700;
+	border-radius:6px;
+	border:1px solid #eeb44f;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:cookierun;
+	font-size:20px;
+	padding:8px 5px;
+	text-decoration:none;
+	width : 100px;
+}
+#addComment {
+  display: flex;
+  justify-content: center;
+  height: 40px;
+  /* position: initial; */
+  margin-top: 2%;
+  width: 70%;
+  margin-left: 15%;
+ 
+}
+#addComment input {
+  width: 150%;
+  height: 35px;
+  border-radius: 20px;
+  border:1px;
+  background:#ffffffb0;
+  padding-left: 10px;
+  font-size: 15px;
+  
+}
+/* 대댓글버튼 css */
+.commentDiv {
+  width: 50%;
+  margin-top: 1%;
+  display: flex;
+  height: 25px;
+  font-family:cookierun;
+}
 
+.commentDiv button {
+  flex: 1;
+  margin-left: 5px;
+  border-radius: 10px;
+  background-color:#faa700;
+  border: 1px;
+  color: white;
+}
+.commentDiv input {
+  flex: 7;
+  border:none;
+  border-radius: 20px;
+    background:#ffffffb0;
+}
+.commentContent {
+  background: #F9C804;
+  width: 60%;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 10px;
+  margin-top: 1%;
+}
+.commentContent p {
+  padding-left: 5px;
+  font-family:cookierun;
+  color : white;
+}
+.reply {
+  background: border-box;
+  border: none;
+  cursor: pointer;
+  color : white;
+  font-weight:bold;
+  font-family:cookierun;
+}
 
+textarea {
+      width: 300px;
+      height: auto;
+      background: center center no-repeat; /* This ruins default border */
+      border: none;
+      resize: none;
+      color: white;
+      overflow: auto;
+   }
 
-
+.post-nav > li {
+	cursor : pointer;
+}
 </style>
     
     
@@ -185,477 +308,45 @@ html, body {
                         <p>${ gymBoard.introduce }</p>
                     </div>
                 </div>
-            </div>
-                                    
-                                    <div align="right" >
-					<a href=""><button type="button" class="btn btn-success" id="reply" data-toggle="modal" data-target="layerpop">댓글달기</button></a>   
-			    	    </div> <br />  
-                           
-<!--  =================댓글 시작 =================================-->                                    
-<div class="footer">
-  <a href="#"></a> 
-  <div class="row">
-    <div class="write-comment">
-      <input type="text" name="bcContent" id="bcContent" placeholder="댓글을 입력하세요.">
-      <button type="button" id="addReply" onclick="insertConmment();"><i class="fas fa-feather-alt"></i></button>
- </div>
-  </div>
+            </div>                                     
+
+	    <div id="addComment">
+		    <input type="text"></input><button id="newCommentButton" onclick="submitNewComment(this)">댓글</button>
+	    </div>
+    <hr id="commentDivider"/>
+        <div class="response-area">
+               <ul class="media-list">
+               <c:forEach var="gbc" items="${gbcList }">
+                   <li class="reply${ gbc.bcLevel }" style="padding-left : ${ gbc.bcLevel * 7 }%" for="${ gbc.bbcNo }">
+                       <div class="post-comment">
+                           <a class="pull-left" href="${pageContext.request.contextPath}/member/myPage.do?userNo=${gbc.userNo }">
+                               <img class="media-object" src="${pageContext.request.contextPath }/resources/profile/${gbc.pRenamedFileName}" alt="">
+                           </a>
+                           <div class="media-body">
+                               <span><a href="${pageContext.request.contextPath}/member/myPage.do?userNo=${gbc.userNo }">${gbc.nickName }</a>  ${gbc.bcDate }</span><br>
+                               <textarea class="contentUpdateForm" id="${ gbc.bcNo }" style="color: black;" readonly>${gbc.bcContent }</textarea>
+                               <ul class="nav navbar-nav post-nav">
+                                   <li><i class="fa fa-wrench"></i>수정</li>
+                                   <li><i class="fa fa-eraser"></i>삭제</li>
+                               </ul>
+                           </div>
+                       </div>
+                       <!-- 대댓글 작성 창 -->
+                       <div id="addComment"><input type="text"></input><button id="newCommentButton" onclick="submitNewReplyComment(this, ${ gbc.bcNo })">댓글</button></div>
+                       
+                   </li>
+               </c:forEach>
+               </ul>                   
+               </div><!--/Response-area-->
+               </div>
+           </div>
+       </div>
+   </div>
 </div>
-
-
-
-
-                                    <!--  댓글 부분  -->
-                                    <div class="response-area">                         
-                                        <!-- 댓글창 시작 -->
-                                            <div class="post-comment">
-                                                <a class="pull-left" href="#">
-                                                    <img class="media-object" src="${ pageContext.request.contextPath }/resources/images/blogdetails/2.png" alt="">
-                                                </a>
-                                                <div class="media-body">
-                                                    <span><i class="fa fa-user"></i>댓글 작성자 <a href="#">댓글 작성일</a></span>                                                   
-                                                    <p>댓글 내용3333</p>                                                  
-                                                       <div align="right">
-                                                       <a href=""><button type="button" class="btn btn-primary" id="rewriteBtn">수정</button></a>                           
-                                                       <a href=""><button type="button" class="btn btn-danger" id="deleteBtn">삭제</button></a>                                     
-                                                       <a href=""><button type="button" class="btn btn-success" id="reply">댓글</button></a>                                    
-                                                        </div>                                                   
-                                                </div>
-                                            </div>                  
-                                  </div>
-                                  <!--/Response-area-->
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                 </div>
-            </div>
-
-
-
+</div>
 
 
 </section>
-
-<!-- 댓글 스크립트 시작 -->
-
-
-  <script>
-  
-//태그 관련 스크립트
-	$("input").tagsinput('items')
-// 좋아요 기능
-
-$(function(){
-	
-	var userNo = "${member.userNo}";
-	var bNo = "${gymBoard.bNo}";
-	
-	$.ajax({
-		url: "${pageContext.request.contextPath}/favorite/checkFavorite",
-		data: {
-			userNo : userNo,
-			bNo : bNo
-		},
-		dataType: "json",
-		async: false,
-		success: function(data){
-			
-			if(data.Favorite.fStatus == 'Y'){
-				$("#favorite").css("color", "red");
-			}
-			
-		}
-	});
-	
-});
-
-$("#favorite").on("click", function(){
-	
-	var userNo = "${member.userNo}";
-	var bNo = "${gymBoard.bNo}";
-	
-	$.ajax({
-		url: "${pageContext.request.contextPath}/favorite/checkFavorite",
-		data: {
-			userNo : userNo,
-			bNo : bNo
-		},
-		dataType: "json",
-		async: false,
-		success: function(data){
-			
-			/* console.log(data);
-			console.log(data.Favorite);
-			console.log(data.Favorite.fStatus); */
-			
-			var fStatus = data.Favorite.fStatus;
-			
-			if(fStatus == null || fStatus == 'N'){
-				$.ajax({
-					url: "${pageContext.request.contextPath}/favorite/doFavorite",
-					data: {
-						fStatus : fStatus,
-		    			userNo : userNo,
-		    			bNo : bNo
-		    		},
-		    		async: false,
-		    		success: function(data){
-		    			if(data == 1){
-		    				alert("좋아요를 눌러주셔서 감사합니다.");
-		        			$("#favorite").css("color", "red");
-		        			
-		        			var text = $('#favorite').text();
-		        			
-		        			$.ajax({
-		        				url: "${pageContext.request.contextPath}/favorite/favoriteNumber",
-		        				data: {
-		        					bNo : bNo
-		        				},
-		        				async: false,
-		        				success: function(data){
-		        					$('#favorite').html('<i class="fas fa-heart"></i>&nbsp;&nbsp;' + data);
-		        				}
-		        			});
-		    			}
-		    		}
-				});
-			} else {
-				$.ajax({
-					url: "${pageContext.request.contextPath}/favorite/cancelFavorite",
-					data: {
-						userNo : userNo,
-		    			bNo : bNo
-					},
-					async: false,
-					success: function(data){
-						if(data == 1) {
-							alert("좋아요를 취소하였습니다.");
-		        			$("#favorite").css("color", "#0099AE");
-		        			
-		        			$.ajax({
-		        				url: "${pageContext.request.contextPath}/favorite/favoriteNumber",
-		        				data: {
-		        					bNo : bNo
-		        				},
-		        				async: false,
-		        				success: function(data){
-		        					$('#favorite').html('<i class="fas fa-heart"></i>&nbsp;&nbsp;' + data);
-		        				}
-		        			});
-						}
-					}
-				});
-			}
-		}
-	});
-});
-  
-	$('#ccontent').keyup(function(e) {
-		console.log(e.key);
-		if(e.key == 'Enter'){
-			insertConmment();
-		}
-	});
-	
-	function insertConmment(){
-        var contentt = $('#ccontent').val().trim();
-        var talkno = Number($('#talkno').val().trim());
-        var userno = Number($('#userno').val());
-        
-        if(contentt.length == 0) {
-        	alert("내용을 입력하세요.");
-        	return;
-        	
-        } else {
-	        $.ajax({
-	            url  : "${pageContext.request.contextPath}/talk/talkCommentInsertSelect.do",
-	            data : {talkno: talkno , userno : '${member.userNo}' , ccontent : contentt},
-	            dataType: "json",
-	            success : function(data){
-								// data : List<TalkComment>
-        				var contentt = $('#ccontent').val('');
-						$('.footer').find('.replySelectArea').remove();
-						
-	            		
-	            
-
-	            		for ( var tt in data) {
-	            		var $replySelectArea = $('<div>').addClass('replySelectArea');
-	            		
-	            		var $table = $('<table>').addClass('replySelectTable replyList');
-	            		
-	            		var $tr1 = $('<tr>');
-	            		var $tr2 = $('<tr>').addClass('search');
-	            		
-	            		var $td1 = $('<td>').attr("rowspan","2");
-	            		var $td2 = $('<td>').append(  $('<b>').text(data[tt].nickname)  );
-	            		var $td3 = $('<td>').text(new Date(data[tt].cdate).format('yyyy-MM-dd a/p hh:mm:ss'));
-	            		var $td4 = $('<td>').attr("align","right");
-
-	            		var $input = $('<input>').attr("type","hidden").attr("name","cno").val(data[tt].commentno);
-	            		var $button1 = $('<button>').attr("type", "button").addClass("updateBtn").attr("onclick", "updateReply(this);").text("수정하기");
-	            		var $button2 = $('<button>').attr("type", "button").addClass("updateConfirm").attr("onclick", "updateConfirm(this);").css("display","none").text("수정완료");
-	            		var $button3 = $('<button>').attr("type", "button").addClass("deleteBtn").attr("onclick", "deleteReply(this);").text("삭제하기");
-	            		
-	            		var $td5 = $('<td>').attr("colspan","3").css("background", "transparent")
-	            		var $textarea = $('<textarea>').addClass("reply-content").attr('cols','71%').attr('rows','3').attr('readonly','readonly').text(data[tt].ccontent);
-	            		
-	            		$replySelectArea.append($table);
-	            		$table.append($tr1).append($tr2);
-	            		$tr1.append($td1).append($td2).append($td3).append($td4);
-	            		$td4.append($input).append($button1).append($button2).append('&nbsp;&nbsp;').append($button3);
-	            		
-	            		$tr2.append($td5)
-	            		$td5.append($textarea);
-	            		
-	            		$('.footer').append($replySelectArea);
-	            		
-	            		}
-	            		
-	            		cilckEvent();
-	            }, error : function(jqxhr, textStatus, errorThrown){
-	                console.log("ajax 처리 실패");
-	                //에러로그
-	                console.log(jqxhr);
-	                console.log(textStatus);
-	                console.log(errorThrown);
-	            }
-        	});
-     	}
-	}
-	// 댓글 수정하는 AJAX
-	function updateReply(obj) {
-		// updateReply(this) → $(obj)
-		// 수정하기 -> 수정완료 버튼수정
-		$(obj).parent().parent().parent().find("textarea").attr("readonly", false);
-		$(obj).css("display", 'none');
-		$(obj).next().css("display", 'inline-block');
-		
-	}
-	// 수정을 완료 실행
-	function updateConfirm(obj){
-		var contentt = $(obj).parent().parent().parent().find("textarea").val().trim();
-		var commentno = Number($(obj).parent().find("input").val().trim());
-        var talkno = Number($('#talkno').val().trim());
-        // var userno = Number($('#userno').val());
-        
-        if(contentt.length == 0) {
-        	alert("내용을 입력하세요.");
-        	return;
-        	
-        } else {
-	        $.ajax({
-	            url  : "${pageContext.request.contextPath}/talk/talkCommentUpdateSelect.do",
-	            data : {commentno : commentno , talkno: talkno , ccontent : contentt},
-	            dataType: "json",
-	            success : function(data){
-								// data : List<TalkComment>
-        				var contentt = $('#ccontent').val('');
-						$('.footer').find('.replySelectArea').remove();
-
-
-	            		for ( var tt in data) {
-	            		var $replySelectArea = $('<div>').addClass('replySelectArea');
-	            		
-	            		var $table = $('<table>').addClass('replySelectTable replyList');
-	            		
-	            		var $tr1 = $('<tr>');
-	            		var $tr2 = $('<tr>').addClass('search');
-	            		
-	            		var $td1 = $('<td>').attr("rowspan","2");
-	            		var $td2 = $('<td>').append(  $('<b>').text(data[tt].nickname)  );
-	            		var $td3 = $('<td>').text(new Date(data[tt].cdate).format('yyyy-MM-dd a/p hh:mm:ss'));
-	            		var $td4 = $('<td>').attr("align","right");
-
-	            		var $input = $('<input>').attr("type","hidden").attr("name","cno").val(data[tt].commentno);
-	            		var $button1 = $('<button>').attr("type", "button").addClass("updateBtn").attr("onclick", "updateReply(this);").text("수정하기");
-	            		var $button2 = $('<button>').attr("type", "button").addClass("updateConfirm").attr("onclick", "updateConfirm(this);").css("display","none").text("수정완료");
-	            		var $button3 = $('<button>').attr("type", "button").addClass("deleteBtn").attr("onclick", "deleteReply(this);").text("삭제하기");
-	            		
-	            		var $td5 = $('<td>').attr("colspan","3").css("background", "transparent")
-	            		var $textarea = $('<textarea>').addClass("reply-content").attr('cols','71%').attr('rows','3').attr('readonly','readonly').text(data[tt].ccontent);
-	            		
-	            		$replySelectArea.append($table);
-	            		$table.append($tr1).append($tr2);
-	            		$tr1.append($td1).append($td2).append($td3).append($td4);
-	            		$td4.append($input).append($button1).append($button2).append('&nbsp;&nbsp;').append($button3);
-	            		
-	            		$tr2.append($td5)
-	            		$td5.append($textarea);
-	            		
-	            		$('.footer').append($replySelectArea);
-	            		
-	            		}
-	            		
-	            		cilckEvent();
-	            }, error : function(jqxhr, textStatus, errorThrown){
-	                console.log("ajax 처리 실패");
-	                //에러로그
-	                console.log(jqxhr);
-	                console.log(textStatus);
-	                console.log(errorThrown);
-	            }
-        	});
-     	}
-	}
-	function deleteReply(obj){
-        var talkno = Number($('#talkno').val().trim());
-		var commentno = Number($(obj).parent().find("input").val().trim());
-        // var userno = Number($('#userno').val());
-        
-        if(confirm("정말 삭제하시겠습니까?") == true){
-	        $.ajax({
-	            url  : "${pageContext.request.contextPath}/talk/talkCommentDeleteSelect.do",
-	            data : {commentno : commentno, talkno : talkno},
-	            dataType: "json",
-	            success : function(data){
-								// data : List<TalkComment>
-        				var contentt = $('#ccontent').val('');
-						$('.footer').find('.replySelectArea').remove();
-
-
-	            		for ( var tt in data) {
-	            		var $replySelectArea = $('<div>').addClass('replySelectArea');
-	            		
-	            		var $table = $('<table>').addClass('replySelectTable replyList');
-	            		
-	            		var $tr1 = $('<tr>');
-	            		var $tr2 = $('<tr>').addClass('search');
-	            		
-	            		var $td1 = $('<td>').attr("rowspan","2");
-	            		var $td2 = $('<td>').append(  $('<b>').text(data[tt].nickname)  );
-	            		var $td3 = $('<td>').text(new Date(data[tt].cdate).format('yyyy-MM-dd a/p hh:mm:ss'));
-	            		var $td4 = $('<td>').attr("align","right");
-
-	            		var $input = $('<input>').attr("type","hidden").attr("name","cno").val(data[tt].commentno);
-	            		var $button1 = $('<button>').attr("type", "button").addClass("updateBtn").attr("onclick", "updateReply(this);").text("수정하기");
-	            		var $button2 = $('<button>').attr("type", "button").addClass("updateConfirm").attr("onclick", "updateConfirm(this);").css("display","none").text("수정완료");
-	            		var $button3 = $('<button>').attr("type", "button").addClass("deleteBtn").attr("onclick", "deleteReply(this);").text("삭제하기");
-	            		
-	            		var $td5 = $('<td>').attr("colspan","3").css("background", "transparent")
-	            		var $textarea = $('<textarea>').addClass("reply-content").attr('cols','71%').attr('rows','3').attr('readonly','readonly').text(data[tt].ccontent);
-	            		
-	            		$replySelectArea.append($table);
-	            		$table.append($tr1).append($tr2);
-	            		$tr1.append($td1).append($td2).append($td3).append($td4);
-	            		$td4.append($input).append($button1).append($button2).append('&nbsp;&nbsp;').append($button3);
-	            		
-	            		$tr2.append($td5)
-	            		$td5.append($textarea);
-	            		
-	            		$('.footer').append($replySelectArea);
-	            		
-	            		}
-	            		
-	            		cilckEvent();
-	            }, error : function(jqxhr, textStatus, errorThrown){
-	                console.log("ajax 처리 실패");
-	                //에러로그
-	                console.log(jqxhr);
-	                console.log(textStatus);
-	                console.log(errorThrown);
-	            }
-        	});
-     	}
-	}
-	
-	Date.prototype.format = function (f) {
-
-	    if (!this.valueOf()) return " ";
-
-
-
-	    var weekKorName = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
-
-	    var weekKorShortName = ["일", "월", "화", "수", "목", "금", "토"];
-
-	    var weekEngName = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-
-	    var weekEngShortName = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-
-	    var d = this;
-
-
-
-	    return f.replace(/(yyyy|yy|MM|dd|KS|KL|ES|EL|HH|hh|mm|ss|a\/p)/gi, function ($1) {
-
-	        switch ($1) {
-
-	            case "yyyy": return d.getFullYear(); // 년 (4자리)
-
-	            case "yy": return (d.getFullYear() % 1000).zf(2); // 년 (2자리)
-
-	            case "MM": return (d.getMonth() + 1).zf(2); // 월 (2자리)
-
-	            case "dd": return d.getDate().zf(2); // 일 (2자리)
-
-	            case "KS": return weekKorShortName[d.getDay()]; // 요일 (짧은 한글)
-
-	            case "KL": return weekKorName[d.getDay()]; // 요일 (긴 한글)
-
-	            case "ES": return weekEngShortName[d.getDay()]; // 요일 (짧은 영어)
-
-	            case "EL": return weekEngName[d.getDay()]; // 요일 (긴 영어)
-
-	            case "HH": return d.getHours().zf(2); // 시간 (24시간 기준, 2자리)
-
-	            case "hh": return ((h = d.getHours() % 12) ? h : 12).zf(2); // 시간 (12시간 기준, 2자리)
-
-	            case "mm": return d.getMinutes().zf(2); // 분 (2자리)
-
-	            case "ss": return d.getSeconds().zf(2); // 초 (2자리)
-
-	            case "a/p": return d.getHours() < 12 ? "오전" : "오후"; // 오전/오후 구분
-
-	            default: return $1;
-
-	        }
-
-	    });
-
-	};
-
-
-
-	String.prototype.string = function (len) { var s = '', i = 0; while (i++ < len) { s += this; } return s; };
-
-	String.prototype.zf = function (len) { return "0".string(len - this.length) + this; };
-
-	Number.prototype.zf = function (len) { return this.toString().zf(len); };
-	
-	</script>
-
-
-<!-- 댓글 스크립트 끝 -->
-
-
-
-<div class="modal fade" id="layerpop" >
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <!-- header -->
-      <div class="modal-header">
-        <!-- 닫기(x) 버튼 -->
-        <button type="button" class="close" data-dismiss="modal">×</button>
-        <!-- header title -->
-        <h4 class="modal-title">Header</h4>
-      </div>
-      <!-- body -->
-      <div class="modal-body">
-            Body
-      </div>
-      <!-- Footer -->
-      <div class="modal-footer">
-        Footer
-        <button type="button" class="btn btn-primary" data-dismiss="modal">등록</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 
 
 <!-- ===========동영상 모달 시작 ===========-->
@@ -691,7 +382,198 @@ $("#favorite").on("click", function(){
 <!--Modal: modalVM-->    
 <!-- ===========동영상 모달 끝 ===========-->    
     
+<script>
+/* 댓글 만들기 스크립트 시작 */
+ /**
+ 	obj : 클릭된 버튼 자신
+ */
+function submitNewComment(obj){
+	$.ajax({
+		url : '${ pageContext.request.contextPath }/gbComment/gbCommentInsert.do',
+		  data : {
+			  bNo : '${gymBoard.bNo}',
+			  userNo : '${member.userNo}',
+			  bcContent : $(obj).siblings('input').val()
+		  }, success : function(data){
+			  alert("댓글 추가 성공!");
+			  location.href='${pageContext.request.contextPath}/gymBoardDetail.do?bNo=${gymBoard.bNo}';
+		  }
+	});
+}
 
+/**
+	obj : 클릭된 버튼 자신
+	parentBcNo : 누구의 대댓글인지 확인하기 위한 원본 댓글의 번호
+*/
+function submitNewReplyComment(obj, parentBcNo){
+	$.ajax({
+		url : '${ pageContext.request.contextPath }/gbComment/gbCommentInsert.do',
+		  data : {
+			  bNo : '${gymBoard.bNo}',
+			  userNo : '${member.userNo}',
+			  bcContent : $(obj).siblings('input').val(),
+			  bbcNo : parentBcNo
+		  }, success : function(data){
+			  alert("댓글 추가 성공!");
+			  location.href='${pageContext.request.contextPath}/gymBoardDetail.do?bNo=${gymBoard.bNo}';
+		  }
+	});
+}
+
+$('.fa-wrench').parent().each(function(){
+	$(this).on('click', function(){
+		var textArea = $(this).parent().parent().children('textarea');
+		if(textArea.prop('readonly')){
+			textArea.prop('readonly', false);
+		} else {
+			textArea.prop('readonly', true);
+			$.ajax({
+				url : '${ pageContext.request.contextPath }/gbComment/gbCommentUpdate.do',
+				  data : {
+					  bcNo : textArea.attr('id'),
+					  userNo : '${member.userNo}',
+					  bcContent : textArea.val()
+				  }, success : function(data){
+					  if(data != 0){
+						  alert("댓글 변경 성공!");		
+					  } else {
+						  alert("댓글 수정 실패!");
+					  }
+				  }
+			});
+		}
+	});
+});
+
+$('.fa-eraser').parent().each(function(){
+	$(this).on('click', function(){
+		var obj =  $(this);
+		var textArea = $(this).parent().parent().children('textarea');
+		
+		$.ajax({
+			url : '${ pageContext.request.contextPath }/gbComment/gbCommentDelete.do',
+			  data : {
+				  bcNo : textArea.attr('id')
+			  }, success : function(data){
+				  if(data != 0){
+					  alert("댓글 삭제 성공!");		
+					  obj.parents('li').remove();
+					  $('[for=' + textArea.attr('id') + ']').remove();
+				  } else {
+					  alert("댓글 삭제 실패!");
+				  }
+			  }
+		});
+	});
+});
+
+$(function(){
+	$.ajax({
+		url : '${ pageContext.request.contextPath }/gbComment/gbCommentSelectList.do',
+		data : {bNo : '${gymBoard.bNo}'},
+		success : function(data){
+			
+			  for(var i in data){
+				  let comments = document.getElementById("comments");
+				  createNewComment(data[i].bcContent, data[i].bcNo);
+				  while (comments.firstChild) {
+					     comments.removeChild(comments.firstChild);
+				 }
+				  displayComments(listOfComments, 0);
+			  };
+		  }
+	});
+});
+ 
+
+/* 댓글만들기 스크립트 끝! */
+ /* 좋아요 스크립트 시작 */
+ 
+ 
+ $("#favorite").on("click", function(){
+   
+   var userNo = "${member.userNo}";
+   var bNo = "${gymBoard.bNo}";
+   
+   $.ajax({
+      url: "${pageContext.request.contextPath}/favorite/checkFavorite",
+      data: {
+         userNo : userNo,
+         bNo : bNo
+      },
+      dataType: "json",
+      async: false,
+      success: function(data){
+         
+         /* console.log(data);
+         console.log(data.Favorite);
+         console.log(data.Favorite.fStatus); */
+         
+         var fStatus = data.Favorite.fStatus;
+         
+         if(fStatus == null || fStatus == 'N'){
+            $.ajax({
+               url: "${pageContext.request.contextPath}/favorite/doFavorite",
+               data: {
+                  fStatus : fStatus,
+                   userNo : userNo,
+                   bNo : bNo
+                },
+                async: false,
+                success: function(data){
+                   if(data == 1){
+                      alert("좋아요를 눌러주셔서 감사합니다.");
+                       $("#favorite").css("color", "red");
+                       
+                       var text = $('#favorite').text();
+                       
+                       $.ajax({
+                          url: "${pageContext.request.contextPath}/favorite/favoriteNumber",
+                          data: {
+                             bNo : bNo
+                          },
+                          async: false,
+                          success: function(data){
+                             $('#favorite').html('<i class="fas fa-heart"></i>&nbsp;&nbsp;' + data);
+                          }
+                       });
+                   }
+                }
+            });
+         } else {
+            $.ajax({
+               url: "${pageContext.request.contextPath}/favorite/cancelFavorite",
+               data: {
+                  userNo : userNo,
+                   bNo : bNo
+               },
+               async: false,
+               success: function(data){
+                  if(data == 1) {
+                     alert("좋아요를 취소하였습니다.");
+                       $("#favorite").css("color", "#0099AE");
+                       
+                       $.ajax({
+                          url: "${pageContext.request.contextPath}/favorite/favoriteNumber",
+                          data: {
+                             bNo : bNo
+                          },
+                          async: false,
+                          success: function(data){
+                             $('#favorite').html('<i class="fas fa-heart"></i>&nbsp;&nbsp;' + data);
+                          }
+                       });
+                  }
+               }
+            });
+         }
+      }
+   });
+});
+ 
+ 
+ /* 좋아요 스크립트 끝 */
+</script>
     
     
     <c:import url="../common/footer.jsp"/>
