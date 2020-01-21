@@ -23,6 +23,10 @@ public class TravelBoard implements Serializable {
 	private String introduce;
 	private String pRenamedFileName;
 	private int favoriteCount;
+	private int mNo;
+	private String cityName;
+	private double mapY;
+	private double mapX;
    
 	private int bFileno;
 

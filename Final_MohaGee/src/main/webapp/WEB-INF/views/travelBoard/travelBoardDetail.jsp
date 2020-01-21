@@ -91,6 +91,12 @@
                                 </div>
                                 
                       </c:forEach>
+                      
+                      
+				    <!-- Google Map : The div element for the map -->
+				    <div id="map"></div>
+				    
+                             
                              
                                 <div class="post-content overflow">                                                 
                                     <p class="form-control" id="board_content" name="bContent"><b>${TravelBoard.bContent }</b></p>
@@ -173,6 +179,28 @@
     </section>
     
     <c:import url="../common/footer.jsp"/>
+    
+    <script>
+    	// Google Map
+	    // Initialize and add the map
+		function initMap() {
+		  // The location of Uluru
+		  var location = { lat: parseFloat('${TravelBoard.mapY}'), lng: parseFloat('${TravelBoard.mapX}')};
+		  // The map, centered at Uluru
+		  var map = new google.maps.Map(
+		      document.getElementById('map'), {zoom: 4, center: location});
+		  // The marker, positioned at Uluru
+		  var marker = new google.maps.Marker({position: location, map: map});
+		}
+	    </script>
+	    <!--Load the API from the specified URL
+	    * The async attribute allows the browser to render the page while the API loads
+	    * The key parameter will contain your own API key (which is not needed for this tutorial)
+	    * The callback parameter executes the initMap() function
+	    -->
+	    <script async defer
+	    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAdVJlcXLgyChvr_TkNor9fpVvPXPQW8E&callback=initMap">
+	</script>
     
     <script>
   //태그 관련 스크립트

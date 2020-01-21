@@ -13,6 +13,7 @@
          #{bTag},
          #{bContent},
          #{cNo},
+         #{mNo},
          #{bUrl},
          #{bCategory},
          #{bKind},
@@ -44,10 +45,10 @@
    
    <!-- 게시글 상세보기 -->
    <select id="selectTravelBoard" parameterType="_int" resultType="travelBoard">
-   		SELECT B.*, M.NICKNAME, M.INTRODUCE , P.PRENAMEDFILENAME,  C.CLAT, C.CLNG FROM BOARD B
+   		SELECT B.*, M.NICKNAME, M.INTRODUCE , P.PRENAMEDFILENAME,  A.MAPY, A.MAPX FROM BOARD B
 		JOIN MEMBER M ON(B.USERNO = M.USERNO)
 		LEFT JOIN PROFILEPHOTO P ON(B.USERNO = P.USERNO)
-		JOIN COORDINATES C ON(B.CNO = C.CNO)
+		JOIN MAP A ON(B.MNO = A.MNO)
 		WHERE BNO = #{bNo}
    </select>
    
