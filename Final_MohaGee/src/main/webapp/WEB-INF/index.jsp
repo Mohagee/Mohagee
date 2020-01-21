@@ -16,28 +16,28 @@
 
 <body>
 
-	<c:import url="views/common/header.jsp"/>
-	
+   <c:import url="views/common/header.jsp"/>
+   
     <section id="home-slider">
         <div class="container">
             <div class="row">
                 <div class="main-slider">
                     <div class="slide-text">
-                    					
+                                   
                         <h1 id="indexMyMenu" style="font-family:cookierun;">
-							<c:if test="${!empty member}">  
-							<a href="#" >${ member.nickName } </a>
-						</c:if> Mohagee</h1>
-		
-						
+                     <c:if test="${!empty member}">  
+                     <a href="#" >${ member.nickName } </a>
+                  </c:if> Mohagee</h1>
+      
+                  
                    <!-- 검색 창 -->     
-						<form class="form-inline mr-auto" action="${ pageContext.request.contextPath }/search/indexSearch.do">
-							  <input name="indexSearch" class="form-control mr-sm-2" type="text" placeholder="아직 구현 미완성" 
-							  	style="font-family:cookierun; font-size : 15px;"  aria-label="Search">
-							  <button class="btn btn-success btn-rounded btn-sm my-0" type="submit">Search</button>
-						</form>  
-					<!--  검색 창 끝 -->
-					
+                  <form class="form-inline mr-auto" action="${ pageContext.request.contextPath }/search/indexSearch.do">
+                       <input name="indexSearch" class="form-control mr-sm-2" type="text" placeholder="아직 구현 미완성" 
+                           style="font-family: cookierun; font-size : 15px; "  aria-label="Search">
+                       <button class="btn btn-success btn-rounded btn-sm my-0" type="submit">Search</button>
+                  </form>  
+               <!--  검색 창 끝 -->
+               
                   </div>
                   
                     <img src="${ pageContext.request.contextPath }/resources/images/home/slider/hill.png" class="slider-hill" alt="slider image">
@@ -116,13 +116,13 @@
     <!--/#action-->
 
 
-	<!-- TOP3 영역 -->  
+   <!-- TOP3 영역 -->  
     <section id="features">
         <div class="container">
             <div class="row" id="boardTop3">
          <!-- TOP1 -->
-                <div class="single-features" >
-                    <div class="col-sm-7 wow fadeInLeft" data-wow-duration="500ms" data-wow-delay="300ms">
+                <div class="single-features">
+                    <div class="col-sm-7 wow fadeInLeft">
                         <img src="${ pageContext.request.contextPath }/resources/upload/웃는남자1.jpg" class="img-responsive" >
                     </div>
                     <div class="col-sm-4 wow fadeInRight">
@@ -159,47 +159,39 @@
     </section>
      <!--/#features-->
 
-	<script>	
-	$(function(){
-	      $.ajax({
-	         url : '${pageContext.request.contextPath}/noticelisttop5.do', // ROWNUM 으로 가져오기 디비에서
-	         type : 'POST',
-	         success : function(data) {
-	            // console.log(data);
-	            
+   <script>   
+   $(function(){
+         $.ajax({
+            url : '${pageContext.request.contextPath}/top5/top5List.do', // ROWNUM 으로 가져오기 디비에서
+            type : 'POST',
+            success : function(data) {
+               console.log(data);
+               var $div = $('#boardTop3'); // 맨 위 div 아이디로 
+               $div.empty();
+               for(var i in data){ 
+                  var div1 = $('<div class="single-features">');
+                  var div1_1 = $('<div class="col-sm-7 wow fadeInLeft">');
+                  var imgTag = $('<img src="${ pageContext.request.contextPath }/resources/upload/' + data[i].titleFilename + '" class="img-responsive" >');
+                  var div1_2 = $('<div class="col-sm-4 wow fadeInRight">');
+                  var h2Tag = $('<h2>').text(data[i].bTitle);
+                  var pTag = $('<p>').text(data[i].bContent);
+                  
+                  div1_1.append(imgTag);
+                  div1_2.append(h2Tag).append(pTag);
+                  
+                  div1.append(div1_1).append(div1_2);
+                  
+                  $div.append(div1);
+               }
+               
+            } , error : function(request) {
+               console.log("힘내세요");
+               console.log(request);
+            }
+         });
+   });
 
-	            var $div = $('#boardTop3'); // 맨 위 div 아이디로 
-	            
-	            for(var i in data){   // 인덱스에 들어갈 폼 만들기
-	               console.log(data);
-	            
-	            // var favorite =    // 좋아요 많이 누른 순 조건 걸기?
-	            		
-	            
-	               if( i < 4 ){
-	               var $tr = $('<tr>');
-	               var $input = $('<input type="hidden" value="' + data[i].ntNo + '">');
-	               var $ntNo = $('<td class="selectOne">').text(parseInt(i)+parseInt(1));
-	               var $ntTitle = $('<td class="selectOne" onclick="selectNOne('+ data[i].ntNo+');">').text(data[i].ntTitle);
-	               var $gm = $('<td class="selectOne">').text(data[i].gm);
-	               
-	               $tr.appendTo($input);
-	               $tr.appendTo($ntNo);
-	               $tr.appendTo($ntTitle);
-	               $tr.appendTo($gm);
-	               
-	               $table.append($tr);
-	               }
-	            }
-	            
-	            
-	         } , error : function(request) {
-	            console.log("힘내세요");
-	            console.log(request);
-	         }
-	      });
-
-	</script>
+   </script>
   
   
   
@@ -308,23 +300,23 @@
         </div>
     </section>
 
-	<c:import url="views/common/footer.jsp"/>
-	
-	<script>
-		/* $(function(){
-			$.ajax({
-				url: "각 게시글 수 뽑아오는 컨트롤러 링크",
-				data: {
-					"갖고갈 데이터 필요한거 쓰심 되여"
-				},
-				dataType: "json",
-				success: function(data){
-					"데이터로 갖고오는값이 각 보드별 게시글수"
-					
-					"갖고 온 데이터를 각 위치에 맞게 적어주심되요"
-				}
-			});
-		}) */
-	</script>
+   <c:import url="views/common/footer.jsp"/>
+   
+   <script>
+      /* $(function(){
+         $.ajax({
+            url: "각 게시글 수 뽑아오는 컨트롤러 링크",
+            data: {
+               "갖고갈 데이터 필요한거 쓰심 되여"
+            },
+            dataType: "json",
+            success: function(data){
+               "데이터로 갖고오는값이 각 보드별 게시글수"
+               
+               "갖고 온 데이터를 각 위치에 맞게 적어주심되요"
+            }
+         });
+      }) */
+   </script>
 </body>
 </html>
