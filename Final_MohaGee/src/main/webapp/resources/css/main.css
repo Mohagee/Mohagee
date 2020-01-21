@@ -32,7 +32,7 @@
   a:hover {
     outline: none;
     text-decoration:none;
-    color:#4fcccd;
+    color:#2c9898;
   }
 
   a:focus {
@@ -203,7 +203,7 @@
   color: #818285;
   font-weight: 300;
   outline: none;
-  border: 1px solid #00aeef;
+  border: 2px solid #00aeef;
   margin-top: 20px;
   border-radius: 4px;
 }
@@ -288,7 +288,7 @@
 .navbar-inverse .navbar-nav > .open > a {
   background-color: inherit;
   border: 0;
-  color: #00aeef;
+  color: #0a69c9;
 }
 
 #header .navbar-inverse .navbar-nav  li a:hover{
@@ -297,7 +297,7 @@
 
 
 /*  Dropdown menu*/
-
+	
 ul.sub-menu {
   display: none;
   list-style: none;
@@ -339,6 +339,7 @@ ul.sub-menu {
   background: #00aeef;
   color: #fff;
 }
+
 
 .fa-angle-down{
   padding-left: 5px; 

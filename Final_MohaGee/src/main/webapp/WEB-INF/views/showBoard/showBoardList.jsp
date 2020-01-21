@@ -39,6 +39,11 @@
 	.label{
 		font-size: 85%;
 	}
+	.post-title{
+  		font-family : bingrae;
+  		font-size : 20px;
+  		color : black;
+  	}
 </style>
 
 </head>

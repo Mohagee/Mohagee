@@ -84,17 +84,56 @@
                          <div class="col-md-12 col-sm-12">
                             <div class="single-blog blog-details two-column">
                                   <h2 class="post-title bold" id="board_title"><b>${ ShowBoard.bTitle }</b></h2><br />
-                            
-                    <!--  게시글 상세보기 영역 -->
-   				 	<c:forEach var="ShowAttachment" items="${ShowAttachment}"> 				 			
-                                <div class="post-thumb">                           
-                                     <img src="${ pageContext.request.contextPath }/resources/upload/${ShowAttachment.bFileName}" class="img-responsive">                                    
-                                </div><br />                                           
-                      </c:forEach>
-                      
-                      <!-- 동영상 영역 -->
+
+		<!-- 게시글 사진 슬라이드 영역 -->
+   <div id="carousel-example-generic" class="carousel slide carousel-fade" data-ride="carousel">
+
+		  <ol class="carousel-indicators">
+			  <c:forEach var="att" items="${ShowAttachment}" varStatus="status"> 
+				  	<c:if test="${status.index == 0}">
+				   		<li data-target="#carousel-example-generic" data-slide-to="${status.index}" class="active"></li>
+				    </c:if>
+				    <c:if test="${status.index != 0}">
+				    	<li data-target="#carousel-example-generic" data-slide-to="${status.index}"></li>
+				  	</c:if>
+			  	</c:forEach>
+		  </ol>  
+		
+		  <!-- Wrapper for slides -->
+  	  <div class="carousel-inner" role="listbox">
+		   <c:forEach var="att" items="${ShowAttachment}" varStatus="status"> 
+		  		<c:if test="${status.index == 0}">
+			   		 <div class="item active">
+			     		 <img class="d-block w-100" src="${ pageContext.request.contextPath }/resources/upload/${att.bFileName}" class="img-responsive" alt="slide${status.index }">
+		    		</div>
+		     </c:if><c:if test="${status.index != 0}">
+		  	    <div class="item">
+		  	    <img class="d-block w-100" src="${ pageContext.request.contextPath }/resources/upload/${att.bFileName}" class="img-responsive" alt="slide${status.index }">
+		  </div>
+		</c:if>
+		  </c:forEach>
+		  </div>  
+		  
+		 
+		  <!-- Controls -->
+ 	 	<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+			    <span class="icon-prev" aria-hidden="true" ></span>
+				<span class="sr-only">Previous</span>
+		  </a>
+		  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+				<span class="icon-next" aria-hidden="true"></span>
+				<span class="sr-only">Next</span>
+		  </a> 
+
+		</div><br />                 
+		
+		<!-- --------------------------------------------------- --!>
+
+       <!-- 동영상 영역 -->
        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalVM">
 			<i class="fas fa-caret-square-right"></i>&nbsp;&nbsp; 누르면 영상이 나옵니다</button><br /><br />
+			
+		<!-- 본문 내용 영역 -->	
           <div class="post-content overflow">                                  					
 			<pre class="form-control" id="board_content" name="bContent"><b>${ShowBoard.bContent }</b></pre><br />
 					
@@ -102,43 +141,44 @@
         <div id="map" style="width:500px;height:400px;"></div>   
         
 
-                      <div class="post-content overflow">                                  					
-                          <div class="post-bottom overflow">
-                              <ul class="nav navbar-nav post-nav">
-                                  <li style="color: #0099AE"><i class="fas fa-clock"></i>&nbsp;&nbsp;${ShowBoard.bDate}</li>
-             
-                                  <li style="color: #0099AE"><i class="fas fa-tags"></i>&nbsp;&nbsp;<input type="text" data-role="tagsinput" value="${ ShowBoard.bTag }"/></li>
-                                	
-                                  <li id="favorite" style="color: #0099AE"><i class="fas fa-heart"></i>&nbsp;&nbsp;${ favoriteCount }</li>
-                                  
-                                  <li style="color: #0099AE"><i class="fas fa-comments"></i>&nbsp;&nbsp;댓글 숫자</li>
-                              </ul>
-                          </div>
-                         <div class="blog-share">
-                             <span class='st_facebook_hcount'></span>
-                             <span class='st_twitter_hcount'></span>
-<!--                              <span class='st_linkedin_hcount'></span>
-                             <span class='st_pinterest_hcount'></span> -->
-                             <span class='st_email_hcount'></span>
-                             <!-- <span>이거 살리면 기능 자동으로 되요</span> -->
-                         </div>			                        
-                     </div>
-    				<br />				
+          <div class="post-content overflow">                                  					
+              <div class="post-bottom overflow">
+                  <ul class="nav navbar-nav post-nav">
+                      <li style="color: #0099AE"><i class="fas fa-clock"></i>&nbsp;&nbsp;${ShowBoard.bDate}</li>
+ 
+                      <li style="color: #0099AE"><i class="fas fa-tags"></i>&nbsp;&nbsp;<input type="text" data-role="tagsinput" value="${ ShowBoard.bTag }"/></li>
+                    	
+                      <li id="favorite" style="color: #0099AE"><i class="fas fa-heart"></i>&nbsp;&nbsp;${ favoriteCount }</li>
+                      
+                      <li style="color: #0099AE"><i class="fas fa-comments"></i>&nbsp;&nbsp;댓글 숫자</li>
+                  </ul>
+              </div>
+        <div class="blog-share">
+            <span class='st_facebook_hcount'></span>
+            <span class='st_twitter_hcount'></span>
+            <span class='st_linkedin_hcount'></span>
+            <span class='st_pinterest_hcount'></span>
+            <span class='st_email_hcount'></span>
+            </div>			                        
+        </div>
+<br />				
 
 
-			<!-- 게시글 수정 버튼  -->
-			<div>
-			<a href="${ pageContext.request.contextPath }/showBoard/showBoardList.do">
-				<button type="button" class="btn btn-warning btn-rounded btn-sm" id="listBtn">목록이동</button>
-			</a>&nbsp;			
+	<!-- 게시글 수정 버튼  -->
+	<div>
+		<a href="${ pageContext.request.contextPath }/showBoard/showBoardList.do">
+			<button type="button" class="btn btn-warning btn-rounded" id="listBtn">목록이동</button>
+		</a>&nbsp;			
 
-			<button type="button" class="btn btn-success"
-			onclick="location.href='${pageContext.request.contextPath}/showBoard/showBoardUpdateForm.do?bNo=${ShowBoard.bNo}'" >수정 하기</button>&nbsp;
+ <a href="${ pageContext.request.contextPath }/showBoard/showBoardList.do" class="btn orange"><span class="btn-lg">button</span></a>
 
-				<button type="button" class="btn btn-danger" 
-					onclick="location.href='${pageContext.request.contextPath}/showBoard/showBoardDelete.do?bNo=${ShowBoard.bNo}'">삭제 하기</button>				
-				
-	<br /><br />
+		<button type="button" class="btn btn-primary btn-rounded"
+		onclick="location.href='${pageContext.request.contextPath}/showBoard/showBoardUpdateForm.do?bNo=${ShowBoard.bNo}'" >수정 하기</button>&nbsp;
+
+		<button type="button" class="btn btn-danger btn-rounded" 
+			onclick="location.href='${pageContext.request.contextPath}/showBoard/showBoardDelete.do?bNo=${ShowBoard.bNo}'">삭제 하기</button>				
+			
+<br /><br />
 
              <div class="author-profile padding">
                  <div class="row">
@@ -161,12 +201,8 @@
 		<div class="col-sm-2" align="right">	
 			<button type="button" class="btn btn-success btn-rounded btn-sm"  
 				onclick="location.href='${pageContext.request.contextPath}/showBoard/showBoardUpdateForm.do?bNo=${ShowBoard.bNo}'" >댓글작성</button>&nbsp;					
-		</div>
-    		<div class="col-sm-2" align="right">	
-				    <button type="button" class="btn btn-success btn-rounded btn-sm"
-							onclick="location.href='${pageContext.request.contextPath}/showBoard/showBoardUpdateForm.do?bNo=${ShowBoard.bNo}'" >댓글 작성</button>&nbsp;					
-   			 </div>
-   </div>	
+		</div> 
+   </div><br />
 
     <ul class="media-list"> <!-- 댓글영역 -->
     <!-- 댓글 하나 영역 -->
@@ -191,7 +227,7 @@
     </ul>                   
   </div><!--/Response-area-->
 
-                    </div>
+
                 </div>
             </div>
         </div>
@@ -226,8 +262,6 @@
 </div>
 <!--Modal: modalVM-->    
 <!-- ===========동영상 모달 끝 ===========-->    
-    
-
 <script>
 		/*  카카오 지도 구현  */
 		var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스

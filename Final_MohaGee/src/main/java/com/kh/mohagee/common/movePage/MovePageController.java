@@ -16,27 +16,7 @@ public class MovePageController {
 		return "common/404";
 	}
 
-	@RequestMapping("/gotoBlogdetails.do")
-	public String gotoBlogdetails() {
-
-		return "blogdetails";
-	}
-
-	@RequestMapping("/gotoComingSoon.do")
-	public String gotoComingSoon() {
-		return "comingsoon";
-	}
-
-	@RequestMapping("/gotoPortfolioDetails.do")
-	public String gotoPortfolioDetails() {
-		return "portfolioDetails";
-	}
-
-	@RequestMapping("/gotoPortfolio.do")
-	public String gotoPortfolio() {
-		return "portfolio";
-	}
-
+	
 	@RequestMapping("/gotoTravelBoardList.do")
 	public String gotoTravelBoardList() {
 		return "travelBoard/travelBoardList";
