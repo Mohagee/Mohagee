@@ -13,6 +13,7 @@
          #{bTag},
          #{bContent},
          #{cNo},
+         DEFAULT,
          #{bUrl},
          #{bCategory},
          #{bKind},
