@@ -140,7 +140,7 @@ input[type=file]{
       
       <!-- 카테고리선택 칸 -->
       <select id = "bCategory" name="bCategory" class="input-group mb-3" style="width:900px; border:1px solid lightgrey; color:gray; font-family: bingrae;" >
-         <option disabled selected >카테고리를 선택해주세요 (필수!)</option>
+         <option value="" disabled selected >카테고리를 선택해주세요 (필수!)</option>
          <option value="musical" >라이센스</option>
          <option value="create" >창작 뮤지컬</option>
          <option value="original" >오리지널 내한</option>

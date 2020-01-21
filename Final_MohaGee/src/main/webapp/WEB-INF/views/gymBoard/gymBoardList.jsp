@@ -13,23 +13,36 @@
 <c:import url="../common/commonUtil.jsp" />
 
 <script>
-   function gymBoardInsert(){
-      location.href = "JQ{ pageContext.request.contextPath}/gymBoard/gymBoardInsertForm.do";
-   }
+
+	$("input").tagsinput('items');
+
+	function gymBoardInsert(){
+	   location.href = "JQ{ pageContext.request.contextPath}/gymBoard/gymBoardInsertForm.do";
+	}
    
-   JQ(function(){
-      
-      JQ("").on("click", function(){
-         
-         var bNo = JQ(this).attr("id");
-         console.log("bNo = " + bNo);
-         location.href = "JQ{pageContext.request.contextPath}/gymBoard/gymBoardDetail.do?no=" + bNo;
-      });
-      
-   });
+	
    
    
 </script>
+
+<style>
+	.bootstrap-tagsinput input{
+		display: none;
+	}
+	
+	span[data-role = remove]{
+		display: none;
+	}
+	
+	.bootstrap-tagsinput{
+		display: initial;
+		border: none;
+		box-shadow: none;
+	}
+	.label{
+		font-size: 85%;
+	}
+</style>
 
 </head>
 <body>
@@ -95,10 +108,6 @@
                      </c:if>
                      <!-- 태그  -->
                      <div class="post-content overflow">
-                        <ul class="nav nav-justified post-nav">
-                           <li><a href="#" style="font-family:cookierun;"><i class="fa fa-tag"></i>&nbsp;&nbsp;${gymBoard.bTag}</a></li>
-                        </ul>
-                        
                         <!--  제목 -->
                         <h2 class="post-title bold">
                            <a href="${ pageContext.request.contextPath }/gymBoard/gymBoardDetail.do?bNo=${gymBoard.bNo}"
@@ -106,11 +115,15 @@
                         </h2>
 
                         <div class="post-bottom overflow">
-                           <ul class="nav nav-justified post-nav">
-                              <li><a href="#" style="font-family:cookierun;"><i class="fa fa-heart" ></i>&nbsp;&nbsp;20</a></li>
-                              
-                              <li><a href="#" style="font-family:cookierun;"><i class="fa fa-comments"></i>&nbsp;&nbsp;30</a></li>
-                           </ul>
+                           <ul class="nav nav-justified post-nav">	
+		                      <li id="favorite" style="color: #0099AE"><i class="fas fa-heart"></i>&nbsp;&nbsp;${ gymBoard.favoriteCount }</li>
+		                                  
+		                      <li style="color: #0099AE"><i class="fas fa-comments"></i>&nbsp;&nbsp;댓글 숫자</li>
+							</ul>
+							<div class="post-content overflow">   
+				               <i style="color: #0099AE" class="fas fa-tags"></i>&nbsp;&nbsp;
+				               <input style="color: #0099AE" type="text" data-role="tagsinput" value="${ gymBoard.bTag }"/>
+				            </div>
                         </div>
                      </div>
                   </div>

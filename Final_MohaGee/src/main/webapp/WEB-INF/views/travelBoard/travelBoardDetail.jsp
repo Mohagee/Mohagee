@@ -42,6 +42,11 @@
 	#favorite:hover{
 		cursor: pointer;
 	}
+	
+	.label{
+		font-size: 85%;
+	}
+	
     </style>
     
     
@@ -171,7 +176,7 @@
     
     <script>
   //태그 관련 스크립트
-	$("input").tagsinput('items')
+	$("input").tagsinput('items');
 // 좋아요 기능
 
 $(function(){

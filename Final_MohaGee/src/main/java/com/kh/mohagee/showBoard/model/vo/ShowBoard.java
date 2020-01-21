@@ -24,7 +24,7 @@ public class ShowBoard implements Serializable {
 	   private String pRenamedFileName;
 	   private String cLat;
 	   private String cLng;
-	   private String favoriteCount;
+	   private int favoriteCount;
 	   
 	   private int bFileno;
 
@@ -35,7 +35,7 @@ public class ShowBoard implements Serializable {
 		public ShowBoard(int bNo, int userNo, String bTitle, String bTag, String bContent, int cNo, String bUrl,
 				String bCategory, String bKind, int bCount, Date bDate, String titleFilename, String bFileType,
 				String bStatus, String nickName, String introduce, String pRenamedFileName, String cLat, String cLng,
-				String favoriteCount, int bFileno) {
+				int favoriteCount, int bFileno) {
 			super();
 			this.bNo = bNo;
 			this.userNo = userNo;
@@ -222,11 +222,11 @@ public class ShowBoard implements Serializable {
 			this.cLng = cLng;
 		}
 
-		public String getFavoriteCount() {
+		public int getFavoriteCount() {
 			return favoriteCount;
 		}
 
-		public void setFavoriteCount(String favoriteCount) {
+		public void setFavoriteCount(int favoriteCount) {
 			this.favoriteCount = favoriteCount;
 		}
 

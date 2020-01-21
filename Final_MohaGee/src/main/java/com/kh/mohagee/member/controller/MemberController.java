@@ -237,7 +237,19 @@ public class MemberController {
 		
 		List<FavoriteBoard> favoriteList = favoriteService.selectFavoriteList(userNo);
 		
+		for(FavoriteBoard f : favoriteList) {
+			if(f.getTitleFilename() == null) {
+				f.setTitleFilename("defaultImage.png");
+			}
+		}
+		
 		List<FavoriteBoard> myBoardList = memberService.selectMyBoardList(userNo);
+		
+		for(FavoriteBoard f : myBoardList) {
+			if(f.getTitleFilename() == null) {
+				f.setTitleFilename("defaultImage.png");
+			}
+		}
 		
 		String msg = "";
 		String loc = "";

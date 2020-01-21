@@ -31,10 +31,10 @@
 		
 						
                    <!-- 검색 창 -->     
-						<form class="form-inline mr-auto">
-						  <input class="form-control mr-sm-2" type="text" placeholder="내용 입력" 
-						  style="font-family:cookierun; font-size : 15px;"  aria-label="Search">
-						  <button class="btn btn-success btn-rounded btn-sm my-0" type="submit">Search</button>
+						<form class="form-inline mr-auto" action="${ pageContext.request.contextPath }/search/indexSearch.do">
+							  <input name="indexSearch" class="form-control mr-sm-2" type="text" placeholder="아직 구현 미완성" 
+							  	style="font-family:cookierun; font-size : 15px;"  aria-label="Search">
+							  <button class="btn btn-success btn-rounded btn-sm my-0" type="submit">Search</button>
 						</form>  
 					<!--  검색 창 끝 -->
 					

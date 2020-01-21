@@ -5,9 +5,10 @@
 <mapper namespace="GymBoard-mapper">
 
 	<select id="selectList" resultType="GymBoard">
-      SELECT B.*, a.bfilename titleFilename, a.bFileType FROM BOARD B
-      LEFT JOIN B_ATTACHMENT A ON(B.BNO = A.BNO AND A.BFILELEVEL = 0 AND BFILESTATUS = 'N') 
-      WHERE BSTATUS = 'N' AND BKIND = 'G' ORDER BY BDATE DESC
+      SELECT B.*, A.BFILENAME TITLEFILENAME, A.BFILETYPE, (SELECT COUNT(*) FROM FAVORITE F WHERE B.BNO = F.BNO AND F.FSTATUS = 'Y') FAVORITECOUNT FROM BOARD B
+      LEFT JOIN B_ATTACHMENT A ON(B.BNO = A.BNO AND A.BFILELEVEL = 0 AND BFILESTATUS= 'N')
+      WHERE BSTATUS = 'N' AND BKIND = 'G'
+      ORDER BY BDATE DESC
 	</select>
 	
 	<insert id="insertGymBoard" parameterType="GymBoard">

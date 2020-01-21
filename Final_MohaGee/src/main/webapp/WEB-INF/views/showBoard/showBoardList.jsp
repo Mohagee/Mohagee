@@ -12,22 +12,11 @@
 
 <script>
 
-	$("input").tagsinput('items')
+	$("input").tagsinput('items');
 	
 	function showBoardInsert(){
 		location.href = "JQ{ pageContext.request.contextPath}/showBoard/showBoardInsert.do";
 	}
-	
-	JQ(function(){
-		
-		JQ("").on("click", function(){
-			
-			var bNo = JQ(this).attr("id");
-			console.log("bNo = " + bNo);
-			location.href = "JQ{pageContext.request.contextPath}/showBoard/showBoardDetail.do?no=" + bNo;
-		});
-		
-	});
 	
 	
 </script>
@@ -45,6 +34,10 @@
 		display: initial;
 		border: none;
 		box-shadow: none;
+	}
+	
+	.label{
+		font-size: 85%;
 	}
 </style>
 
@@ -93,8 +86,6 @@
 
 <!--  글 목록  -->		
 <div class="masonery-items masonery_area">
-
-
 	<c:forEach var="showBoard" items="${list}">
 				<!--  글 리스트 1 -->
 					<div class="col-md-3 col-sm-4 masonery-item branded mobile ${ showBoard.bCategory} ">
@@ -107,14 +98,7 @@
 									<img src="${ pageContext.request.contextPath }/resources/upload/${showBoard.titleFilename}" class="img-responsive"></a>				
 							</div>
 						</c:if>
-							
-							<!-- 태그  -->
-<%-- 							<div class="post-content overflow">
-								<ul class="nav nav-justified post-nav">
-									<li><a href="#"><i class="fa fa-tag">${ ShowBoard.bTag }</i></a></li>
-								</ul> --%>
 							<div class="post-content overflow">	
-								<i style="color: #0099AE" class="fas fa-tags"></i>&nbsp;&nbsp;<input style="color: #0099AE" type="text" data-role="tagsinput" value="${ showBoard.bTag }"/>
 								
 								<!--  제목 -->
 								<h2 class="post-title bold">
@@ -127,6 +111,10 @@
 		                                  
 		                                <li style="color: #0099AE"><i class="fas fa-comments"></i>&nbsp;&nbsp;댓글 숫자</li>
 									</ul>
+									<div class="post-content overflow">   
+						               <i style="color: #0099AE" class="fas fa-tags"></i>&nbsp;&nbsp;
+						               <input style="color: #0099AE" type="text" data-role="tagsinput" value="${ showBoard.bTag }"/>
+						            </div>
 								</div>
 							</div>
 						</div>

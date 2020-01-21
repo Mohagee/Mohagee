@@ -46,6 +46,10 @@
 	#favorite:hover{
 		cursor: pointer;
 	}
+	
+	.label{
+		font-size: 85%;
+	}
     	
     </style>
     
