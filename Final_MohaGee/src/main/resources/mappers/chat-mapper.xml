@@ -4,84 +4,97 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="chat">
 
-	<select id="selectChatRoomList" resultType="chatRoom">
-		SELECT * FROM
-		CHATROOM WHERE USERNO = #{userNo}
-	</select>
-
-	<select id="selectChatRoomOne" resultType="chat">
+	<!-- 방 존재 여부, 방 정보 가져오기 -->
+	<select id="getRoom" parameterType="java.lang.String" resultType="com.kh.mohagee.chat.model.vo.Chat">
 		SELECT * FROM CHAT
-		WHERE CROOMNO = #{croomNo} ORDER BY CHATSENDTIME DESC
+		WHERE NAME =#{name} AND REMAINCOUNT != 0
 	</select>
-
-	<select id="selectRecentChat" resultType="chat" parameterType="_int">
-		SELECT * FROM (
-		SELECT ROW_NUMBER() 
-		OVER( PARTITION BY CR.CROOMNO
-		ORDER BY CHATSENDTIME DESC) RNUM,
-		C.CHATNO, C.CHATSENDNO, C.CHATCONTENT, C.CHATSENDTIME,
-		CR.CROOMNO, CR.CROOMTITLE
-		FROM CHAT C, CHATROOM CR
-		WHERE
-		CR.CROOMNO = C.CROOMNO (+)
-		AND CR.USERNO = #{userNo}
-		)
-		WHERE RNUM = 1
-		ORDER BY
-		CASE WHEN CHATSENDTIME IS NULL THEN 1
-		ELSE 0 
-		END,
-		CHATSENDTIME DESC
-	</select>
-
-	<select id="selectCroomUser" parameterType="_int" resultType="int">
-		SELECT USERNO FROM CHATROOM WHERE CROOMNO = #{croomNo}
-	</select>
-
-	<select id="selectChatList" parameterType="_int" resultType="chat">
-		SELECT C.*, NICKNAME SENDERNAME FROM CHAT C, MEMBER M
-		WHERE CROOMNO=#{croomNo} AND M.USERNO = C.CHATSENDNO 
-		ORDER BY CHATSENDTIME
-	</select>
-
-	<select id="selectCroom" parameterType="chatRoom" resultType="chatRoom">
-		SELECT * FROM CHATROOM 
-		WHERE CROOMNO = #{croomNo} AND USERNO = #{userNo}
-	</select>
-
-	<select id="selectChatRoomSeq" resultType="_int">
-		SELECT
-		SEQ_CRNO.NEXTVAL FROM DUAL
-	</select>
-
-	<select id="selectChatUser" parameterType="_int" resultType="Member">
-		SELECT E.*
-		FROM CHATROOM CR,
-		MEMBER M
-		WHERE CR.USERNO = M.USERNO
-		and CR.CROOMNO = #{croomNo}
-	</select>
-
-	<insert id="insertChat">
-		INSERT INTO CHAT
-		(CHATNO,CROOMNO,CHATSENDNO,CHATCONTENT,CHATSENDTIME) VALUES
-		(SEQ_CHAT.NEXTVAL,#{croomNo},#{chatsendNo}
-		 ,#{chatContent},#{chatsendTime})
+	
+	<!-- 방 생성 -->
+	<insert id="createChatRoom" parameterType="com.kh.mohagee.chat.model.vo.Chat">
+		INSERT INTO CHAT (CHATNO, NAME, PWD, TOTALCOUNT, REMAINCOUNT, CONTENT)
+		VALUES(SEQ_CHAT.NEXTVAL, #{name}, #{pwd}, #{totalcount}, 0, #{content})
 	</insert>
-
-	<insert id="insertChatRoom">
-		INSERT INTO CHATROOM
-		(CROOMINDEX,CROOMNO,USERNO,CROOMTITLE) VALUES
-		(SEQ_CRINDEX.NEXTVAL,#{croomNo},#{userNo},#{croomTitle})
+	
+	<!-- 존재하는 방 리스트 가져오기 -->
+	<select id="getRoomList" resultType="com.kh.mohagee.chat.model.vo.Chat">
+		SELECT * FROM CHAT
+		WHERE REMAINCOUNT != 0
+	</select>
+	
+	<!-- 현재 어떤 방에 있는지 데이터 추가 -->
+	<insert id="addRoomMember" parameterType="com.kh.mohagee.chat.model.vo.ChatMember">
+		INSERT INTO CHATMEMBER (CHMEMNO, ID, ROOM, PRIROOM)
+		VALUES(SEQ_CHMEM.NEXTVAL, #{id}, #{room}, #{priroom})
 	</insert>
-
-	<delete id="deleteChatRoom" parameterType="_int">
-		DELETE FROM CHATROOM WHERE CROOMINDEX = #{croomIndex}
-	</delete>
-
-	<update id="updateCroom">
-		UPDATE CHATROOM SET CROOMTITLE = #{croomTitle} WHERE CROOMINDEX = #{croomIndex}
+	
+	<!-- 현재 아이디가 어떤 방에 들어가있는지 확인 -->
+	<select id="getRoomMember" parameterType="com.kh.mohagee.chat.model.vo.ChatMember" resultType="com.kh.mohagee.chat.model.vo.ChatMember">
+		SELECT ID, ROOM, PRIROOM
+		FROM CHATMEMBER
+		WHERE ID = #{id}
+	</select>
+	
+	<!-- 같은 방에 존재하는 사람 정보 모두 가져오기 -->
+	<select id="sameRoomList" parameterType="com.kh.mohagee.chat.model.vo.ChatMember" resultType="com.kh.mohagee.chat.model.vo.ChatMember">
+		SELECT ID, ROOM, PRIROOM
+		FROM CHATMEMBER
+		WHERE ROOM = #{room}
+	</select>
+	
+	<!-- 방 변경 -->
+	<update id="updateRoomMember" parameterType="com.kh.mohagee.chat.model.vo.ChatMember">
+	
+		<if test="room != null and room != '' ">
+			UPDATE CHATMEMBER SET ROOM = #{room}
+			WHERE ID = #{id}
+		</if>
+		
+		<if test="priroom != null and priroom != '' ">
+			UPDATE CHATMEMBER SET PRIROOM = #{priroom}
+			WHERE ID = #{id}
+		</if>
+	
 	</update>
+	
+	<!-- 방 정보 제거 -->
+	<delete id="deleteRoomMember" parameterType="com.kh.mohagee.chat.model.vo.ChatMember">
+		DELETE FROM CHATMEMBER
+		WHERE ID = #{id}
+	</delete>
+	
+	<!-- 채팅방 입장 count 증가 : controller에서 처리 -->
+	<update id="updateChatCountInc" parameterType="com.kh.mohagee.chat.model.vo.Chat">
+		UPDATE CHAT
+		SET REMAINCOUNT = REMAINCOUNT + 1
+		WHERE NAME = #{name}
+	</update>
+	
+	<!-- 채팅방 입장 count 감소 : controller에서 처리 -->
+	<update id="updateChatCountDec" parameterType="com.kh.mohagee.chat.model.vo.Chat">
+		UPDATE CHAT
+		SET REMAINCOUNT = REMAINCOUNT - 1
+		WHERE NAME = #{name}
+	</update>
+	
+	<!-- 채팅방 삭제 : remaincount가 0이 되면 삭제 -->
+	<delete id="deleteChat">
+		DELETE FROM CHAT
+		WHERE REMAINCOUNT = 0
+	</delete>
+	
+	<!-- 검색한 방 리스트 가져오기 -->
+	<select id="searchRoomList" resultType="com.kh.mohagee.chat.model.vo.Chat" parameterType="java.lang.String">
+		SELECT * FROM CHAT
+		WHERE REMAINCOUNT !=0 AND NAME LIKE '%'||#{name}||'%'
+	</select>
+	
+	
+	
+	
+	
+	
+	
 
 </mapper>
 

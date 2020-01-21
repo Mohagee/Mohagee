@@ -206,7 +206,7 @@
                         			style="font-family:cookierun; font-size : 20px;">여행</a>
                         </li> 
                         <li class="category">
-                        	<a href="${ pageContext.request.contextPath }/TalkBoardList.do"
+                        	<a href="${ pageContext.request.contextPath }/talkBoard/talkBoardList.do"
                         			 style="font-family:cookierun; font-size : 20px;">수다방</a>
                         </li>
                         <li class="category">

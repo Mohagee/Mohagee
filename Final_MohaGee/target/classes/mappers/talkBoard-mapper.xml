@@ -5,41 +5,42 @@
 <mapper namespace="talkBoard-mapper">
 	
 	<select id="selectList" resultType="Talk">
-		SELECT * FROM TALK
+	  SELECT T.*, A.TFILENAME TITLEFILENAME, A.TFILETYPE
+	  FROM TALK T
+      LEFT JOIN T_ATTACHMENT A ON(T.TNO = A.TNO AND A.TFILELEVEL = 0 AND TFILESTATUS = 'N') 
+      WHERE TSTATUS = 'N' ORDER BY TDATE DESC
 	</select>
 	
 	<insert id="insertTalk" parameterType="Talk">
-		INSERT INTO TALK 
-		VALUES(SEQ_TNO.NEXTVAL, 
-				#{tTitle},
-		       #{tWriter}, 
-		       #{tContent},
-		       DEFAULT, DEFAULT)
+	  INSERT INTO TALK 
+      VALUES(SEQ_TNO.NEXTVAL, 
+         	#{tWriter}, #{tTitle}, #{tContent},
+          	DEFAULT, DEFAULT, DEFAULT, #{tTag})
 	</insert>
 	
 	<insert id="insertAttachment" parameterType="TalkAttachment">
 		<selectKey keyProperty="tno" resultType="int" order="BEFORE">
-			SELECT SEQ_TNO.CURRVAL FROM DUAL
-		</selectKey>
-		INSERT INTO T_ATTACHMENT
-		VALUES (SEQ_TFILENO.NEXTVAL, #{tno}, 
-				#{tFileName}, 
-				#{tFilePath},
-				DEFAULT, DEFAULT, DEFAULT)
+         SELECT SEQ_TNO.CURRVAL FROM DUAL
+	      </selectKey>
+	      INSERT INTO T_ATTACHMENT
+	      VALUES (SEQ_TFILENO.NEXTVAL, 
+	      		#{tno}, #{tFileName}, #{tFilePath},
+	            DEFAULT, #{tFileLevel}, DEFAULT, #{tFileType})
 	</insert>
 	
-	<select id="selectBoard" parameterType="_int" resultType="Talk">
+	<select id="selectTalk" parameterType="_int" resultType="Talk">
 		SELECT * FROM TALK WHERE TNO = #{tno}
 	</select>
 	
 	<select id="selectAttachment" parameterType="int" resultType="TalkAttachment">
-		SELECT * FROM T_ATTACHMENT WHERE TNO = #{tno}
+		SELECT * FROM T_ATTACHMENT WHERE TNO = #{tno} AND TFILESTATUS = 'N'
 	</select>
 	
 	<update id="updateBoard" parameterType="Talk">
 		UPDATE TALK
 		SET TTITLE = #{tTitle},
-		    TCONTENT = #{tContent}
+		    TCONTENT = #{tContent},
+		    TTAG = #{tTag}
 		WHERE TNO = #{tno}
 	</update>
 	
@@ -48,17 +49,21 @@
 		VALUES (SEQ_TFILENO.NEXTVAL, #{tno}, 
 				#{tFileName}, 
 				#{tFilePath},
-				DEFAULT, DEFAULT, DEFAULT)
+				DEFAULT, DEFAULT, DEFAULT, #{tFileType})
 	</insert>
 	
-	<update id="deleteBoard" parameterType="int">
-		UPDATE FROM TALK
-      	SET TSTATUS=${tStatus}
+	<update id="deleteTalk" parameterType="int">
+		UPDATE TALK SET TSTATUS = 'Y' WHERE TNO = #{tno}
 	</update>
 	
-	<delete id="deleteAttachment" parameterType="int">
-		UPDATE FROM T_ATTACHMENT SET TFILESTATUS = #{tFileStatus}
-	</delete>
+	<update id="deleteTalkAttachment">
+		UPDATE T_ATTACHMENT
+		SET TFILESTATUS = 'Y'
+		WHERE TNO = #{tno}
+	</update>
+	
+	
+	
 </mapper>
 
 

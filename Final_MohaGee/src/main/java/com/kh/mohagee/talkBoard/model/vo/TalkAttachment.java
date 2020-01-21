@@ -3,6 +3,7 @@ package com.kh.mohagee.talkBoard.model.vo;
 import java.io.Serializable;
 import java.sql.Date;
 
+
 public class TalkAttachment implements Serializable {
 	
 	private int tFileno;
@@ -12,6 +13,7 @@ public class TalkAttachment implements Serializable {
 	private Date tFileDate;
 	private int tFileLevel;
 	private String tFileStatus;
+	private String tFileType;
 	
 	
 	public TalkAttachment() {
@@ -21,7 +23,7 @@ public class TalkAttachment implements Serializable {
 
 
 	public TalkAttachment(int tFileno, int tno, String tFileName, String tFilePath, Date tFileDate, int tFileLevel,
-			String tFileStatus) {
+			String tFileStatus, String tFileType) {
 		super();
 		this.tFileno = tFileno;
 		this.tno = tno;
@@ -30,6 +32,7 @@ public class TalkAttachment implements Serializable {
 		this.tFileDate = tFileDate;
 		this.tFileLevel = tFileLevel;
 		this.tFileStatus = tFileStatus;
+		this.tFileType = tFileType;
 	}
 
 
@@ -103,13 +106,24 @@ public class TalkAttachment implements Serializable {
 	}
 
 
+	public String gettFileType() {
+		return tFileType;
+	}
+
+
+	public void settFileType(String tFileType) {
+		this.tFileType = tFileType;
+	}
+
+
 	@Override
 	public String toString() {
-		return "TalkAttatchment [tFileno=" + tFileno + ", tno=" + tno + ", tFileName=" + tFileName + ", tFilePath="
+		return "TalkAttachment [tFileno=" + tFileno + ", tno=" + tno + ", tFileName=" + tFileName + ", tFilePath="
 				+ tFilePath + ", tFileDate=" + tFileDate + ", tFileLevel=" + tFileLevel + ", tFileStatus=" + tFileStatus
-				+ "]";
+				+ ", tFileType=" + tFileType + "]";
 	}
-		
+
+	
 	
 
 }

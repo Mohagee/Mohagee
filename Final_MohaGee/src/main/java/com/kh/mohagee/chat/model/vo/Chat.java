@@ -1,109 +1,98 @@
 package com.kh.mohagee.chat.model.vo;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 
-import org.springframework.stereotype.Component;
-
-@Component
 public class Chat implements Serializable {
 	
-	private int chatNo;
-	private int croomNo;
-	private int chatsendNo;
-	private String chatContent;
-	private Timestamp chatsendTime;
-	private String chatIsRead;
+	private int chatno;
+	private String name;
+	private String pwd;
+	private int totalcount;
+	private int remaincount;
+	private String content;
 	
-	private String senderName;
-	private String croomTitle;
-
+	
 	public Chat() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Chat(int chatNo, int croomNo, int chatsendNo, String chatContent, Timestamp chatsendTime, String chatIsRead,
-			String senderName) {
+
+	public Chat(int chatno, String name, String pwd, int totalcount, int remaincount, String content) {
 		super();
-		this.chatNo = chatNo;
-		this.croomNo = croomNo;
-		this.chatsendNo = chatsendNo;
-		this.chatContent = chatContent;
-		this.chatsendTime = chatsendTime;
-		this.chatIsRead = chatIsRead;
-		this.senderName = senderName;
+		this.chatno = chatno;
+		this.name = name;
+		this.pwd = pwd;
+		this.totalcount = totalcount;
+		this.remaincount = remaincount;
+		this.content = content;
 	}
 
-	public int getChatNo() {
-		return chatNo;
+
+	public int getChatno() {
+		return chatno;
 	}
 
-	public void setChatNo(int chatNo) {
-		this.chatNo = chatNo;
+
+	public void setChatno(int chatno) {
+		this.chatno = chatno;
 	}
 
-	public int getCroomNo() {
-		return croomNo;
+
+	public String getName() {
+		return name;
 	}
 
-	public void setCroomNo(int croomNo) {
-		this.croomNo = croomNo;
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public int getChatsendNo() {
-		return chatsendNo;
+
+	public String getPwd() {
+		return pwd;
 	}
 
-	public void setChatsendNo(int chatsendNo) {
-		this.chatsendNo = chatsendNo;
+
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
 	}
 
-	public String getChatContent() {
-		return chatContent;
+
+	public int getTotalcount() {
+		return totalcount;
 	}
 
-	public void setChatContent(String chatContent) {
-		this.chatContent = chatContent;
+
+	public void setTotalcount(int totalcount) {
+		this.totalcount = totalcount;
 	}
 
-	public Timestamp getChatsendTime() {
-		return chatsendTime;
+
+	public int getRemaincount() {
+		return remaincount;
 	}
 
-	public void setChatsendTime(Timestamp chatsendTime) {
-		this.chatsendTime = chatsendTime;
+
+	public void setRemaincount(int remaincount) {
+		this.remaincount = remaincount;
 	}
 
-	public String getChatIsRead() {
-		return chatIsRead;
+
+	public String getContent() {
+		return content;
 	}
 
-	public void setChatIsRead(String chatIsRead) {
-		this.chatIsRead = chatIsRead;
+
+	public void setContent(String content) {
+		this.content = content;
 	}
 
-	public String getSenderName() {
-		return senderName;
-	}
-
-	public void setSenderName(String senderName) {
-		this.senderName = senderName;
-	}
-
-	public String getCroomTitle() {
-		return croomTitle;
-	}
-
-	public void setCroomTitle(String croomTitle) {
-		this.croomTitle = croomTitle;
-	}
 
 	@Override
 	public String toString() {
-		return "Chat [chatNo=" + chatNo + ", croomNo=" + croomNo + ", chatsendNo=" + chatsendNo + ", chatContent="
-				+ chatContent + ", chatsendTime=" + chatsendTime + ", chatIsRead=" + chatIsRead + ", senderName="
-				+ senderName + "]";
+		return "Chat [chatno=" + chatno + ", name=" + name + ", pwd=" + pwd + ", totalcount=" + totalcount
+				+ ", remaincount=" + remaincount + ", content=" + content + "]";
 	}
 	
 	

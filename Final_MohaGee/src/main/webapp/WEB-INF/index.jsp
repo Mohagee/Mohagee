@@ -120,7 +120,7 @@
     <section id="features">
         <div class="container">
             <div class="row" id="boardTop3">
-			<!-- TOP1 -->
+         <!-- TOP1 -->
                 <div class="single-features" >
                     <div class="col-sm-7 wow fadeInLeft" data-wow-duration="500ms" data-wow-delay="300ms">
                         <img src="${ pageContext.request.contextPath }/resources/upload/웃는남자1.jpg" class="img-responsive" >
@@ -292,7 +292,7 @@
                                         </div>
                                     </div>
                                     <div class="person-info">
-                                        <h2>HaOn</h2>
+                                        <h2>HaON</h2>
                                         <p>Developer &nbsp; 송승훈</p>
                                     </div>
                                 </div>
@@ -311,7 +311,7 @@
 	<c:import url="views/common/footer.jsp"/>
 	
 	<script>
-		$(function(){
+		/* $(function(){
 			$.ajax({
 				url: "각 게시글 수 뽑아오는 컨트롤러 링크",
 				data: {
@@ -324,7 +324,7 @@
 					"갖고 온 데이터를 각 위치에 맞게 적어주심되요"
 				}
 			});
-		})
+		}) */
 	</script>
 </body>
 </html>
