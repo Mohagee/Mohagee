@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.mohagee.favorite.model.service.FavoriteService;
 import com.kh.mohagee.gymBoard.model.service.GymBoardService;
+import com.kh.mohagee.gymBoard.model.service.gbCommentService;
 import com.kh.mohagee.gymBoard.model.vo.GymAttachment;
 import com.kh.mohagee.gymBoard.model.vo.GymBoard;
 
@@ -40,6 +41,10 @@ public class GymBoardController {
 	@Autowired
 	FavoriteService favoriteService;
 	
+	@Autowired
+	gbCommentService gbCommentService;
+
+
 	   @RequestMapping("/gymBoard/gymBoardList.do")
 	   public String GymBoardList(Model model) {
 	      
@@ -49,7 +54,8 @@ public class GymBoardController {
 	      
 	      return "gymBoard/gymBoardList";
 	   }	
-	
+
+	   
 	// 글쓰기 버튼 함수가 이동할곳
 	@RequestMapping("/gymBoard/gymBoardInsertForm.do")
 	public String gymBoardInsertForm() {
@@ -150,9 +156,9 @@ public class GymBoardController {
 		String loc = "/gymBoard/gymBoardList.do";//운동 게시판으로 가기
 		
 		if(result > 0) {
-			msg = "게시글 추가 성공해버렸네?ㅋㅋ";
+			msg = "게시글 추가 성공해버렸네?";
 		}else {
-			msg = "게시글 추가 실패해버렸네?ㅗㅗ";
+			msg = "게시글 추가 실패해버렸네?";
 		}
 		
 		model.addAttribute("msg", msg).addAttribute("loc", loc);
@@ -163,16 +169,14 @@ public class GymBoardController {
 	// 건하 운동 게시판 상세보기
 	@RequestMapping("/gymBoard/gymBoardDetail.do")
 	public String selectOne(@RequestParam("bNo") int bNo,
-											Model model) {
+																		Model model) {
 		
-		GymBoard gb = GymBoardService.selectOneGymBoard(bNo);
+		GymBoard gymBoard = GymBoardService.selectOneGymBoard(bNo);
 		
-		if(gb.getpRenamedFileName() == null) {
-			gb.setpRenamedFileName("profile.png");
+		if(gymBoard.getpRenamedFileName() == null) {
+			gymBoard.setpRenamedFileName("profile.png");
 	     }
 		
-		//ArrayList<Gym>
-		//List<gbComment> cList = GymBoardService.selectOneGymBoard(bcNo)
 		List<GymAttachment> list = GymBoardService.selectAttachment(bNo);
 		
 		int favoriteCount = favoriteService.favoriteCount(bNo);
@@ -183,11 +187,12 @@ public class GymBoardController {
 		
 		
 		// gymBoard라는 이름에(키) gb에 담긴 값을 담는다(값)
-		model.addAttribute("gymBoard", gb)
-			.addAttribute("GymAttachmentList", list)
-			.addAttribute("favoriteCount", favoriteCount);
-		
-		return "gymBoard/gymBoardDetail";
+		model.addAttribute("gymBoard", gymBoard)
+		.addAttribute("GymAttachmentList", list)
+		.addAttribute("favoriteCount", favoriteCount)
+		.addAttribute("gbcList",gbCommentService.selectListgbComment(bNo));
+	
+	return "gymBoard/gymBoardDetail";
 	}
 	
 	// 건하 게시판 수정하러가기 (수정버튼에 넣기)
