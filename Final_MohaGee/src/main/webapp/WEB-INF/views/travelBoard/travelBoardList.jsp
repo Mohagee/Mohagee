@@ -12,7 +12,7 @@
 
 <script>
 
-	$("input").tagsinput('items');
+	$("#tag").tagsinput('items');
 
    function travelBoardInsert(){
       location.href = "JQ{ pageContext.request.contextPath}/travelBoard/travelBoardInsertForm.do";
@@ -118,7 +118,7 @@
 							</ul>
 							<div class="post-content overflow">   
 				               <i style="color: #0099AE" class="fas fa-tags"></i>&nbsp;&nbsp;
-				               <input style="color: #0099AE" type="text" data-role="tagsinput" value="${ travelBoard.bTag }"/>
+				               <input id="tag" style="color: #0099AE" type="text" data-role="tagsinput" value="${ travelBoard.bTag }"/>
 				            </div>
                         </div>
                      </div>

@@ -12,7 +12,7 @@
 
 <script>
 
-	$("input").tagsinput('items');
+	$("#tag").tagsinput('items');
 	
 	function showBoardInsert(){
 		location.href = "JQ{ pageContext.request.contextPath}/showBoard/showBoardInsert.do";
@@ -81,7 +81,7 @@
 
 	<!-- 태그 리스트  -->
 	<div class="row">
-			<ul class="masonery-filter text-center" style="font-family:cookierun;">
+	<ul class="masonery-filter text-center" style="font-family:cookierun;">
 		<li><a class="btn btn-default active" href="#" data-filter="*">All</a></li>
 		<li><a class="btn btn-default" href="#" data-filter=".musical">라이센스</a></li>
 		<li><a class="btn btn-default" href="#" data-filter=".create">창작 뮤지컬</a></li>
@@ -118,7 +118,7 @@
 									</ul>
 									<div class="post-content overflow">   
 						               <i style="color: #0099AE" class="fas fa-tags"></i>&nbsp;&nbsp;
-						               <input style="color: #0099AE" type="text" data-role="tagsinput" value="${ showBoard.bTag }"/>
+						               <input id="tag" style="color: #0099AE" type="text" data-role="tagsinput" value="${ showBoard.bTag }"/>
 						            </div>
 								</div>
 							</div>
