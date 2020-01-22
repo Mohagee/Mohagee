@@ -195,24 +195,24 @@
                     <ul class="nav navbar-nav navbar-right" >
                         <li class="category" >
                         	<a href="${ pageContext.request.contextPath }/showBoard/showBoardList.do" 
-									style="font-family:cookierun; font-size : 20px;">공연</a>
+									style="font-family:cookierun; font-size : 30px;">공연</a>
                         </li>                                                                 
                         <li class="category">
                         	<a href="${ pageContext.request.contextPath }/gymBoard/gymBoardList.do"
-                        			style="font-family:cookierun; font-size : 20px;">운동</a>
+                        			style="font-family:cookierun; font-size : 30px;">운동</a>
                         </li>                  
                         <li class="category">
                         	<a href="${ pageContext.request.contextPath }/travelBoard/travelBoardList.do"  
-                        			style="font-family:cookierun; font-size : 20px;">여행</a>
+                        			style="font-family:cookierun; font-size : 30px;">여행</a>
                         </li> 
                         <li class="category">
                         	<a href="${ pageContext.request.contextPath }/talkBoard/talkBoardList.do"
-                        			 style="font-family:cookierun; font-size : 20px;">수다방</a>
+                        			 style="font-family:cookierun; font-size : 30px;">수다방</a>
                         </li>
-                        <li class="category">
+<%--                         <li class="category">
                         	<a href="${ pageContext.request.contextPath }/gotoPortfolio.do"
                         			 style="font-family:cookierun; font-size : 20px;">공지사항</a>
-                        </li>
+                        </li> --%>
                     </ul>
             </div>
         </div>

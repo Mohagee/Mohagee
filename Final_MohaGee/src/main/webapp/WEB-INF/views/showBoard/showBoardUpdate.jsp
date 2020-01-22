@@ -196,14 +196,13 @@ input[type=file]{
           </div>
    </div>
 
-				<!-- 내용 입력칸 -->
-				<div class="editorArea" style="margin-top: 5px;">
-					<textarea id="summernote" name="bContent"
-						required placeholder="글 내용" maxlength="1000" rows="7">${ShowBoard.bContent}</textarea>
-					<span class="help-block"><p id="characterLeft" class="help-block ">더 이상 작성할 수 없습니다.</p></span>
-				</div>
+		<!-- 내용 입력칸 -->
+      <div class="editorArea"  style="margin-top:5px;">
+       <textarea  id="summernote" name="bContent" placeholder="글 내용" maxlength="1000" rows="7" required></textarea>
+      <span class="help-block"><p id="characterLeft" class="help-block ">더 이상 작성할 수 없습니다.</p></span>
+      </div>
 
-				<!--  수정, 삭제 버튼  -->
+	<!--  수정, 삭제 버튼  -->
 	<div align="center">
 		<button type="submit" class="btn btn-danger" id="btnSubmit">수정완료</button>
 

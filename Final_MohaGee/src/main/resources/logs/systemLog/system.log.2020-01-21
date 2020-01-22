@@ -1,0 +1,98 @@
+INFO :[2020-01-08 16:04:57] Root WebApplicationContext: initialization started
+INFO :[2020-01-08 16:04:58] Root WebApplicationContext initialized in 1876 ms
+INFO :[2020-01-08 16:04:59] Initializing Servlet 'appServlet'
+INFO :[2020-01-08 16:05:02] Completed initialization in 3788 ms
+INFO :[2020-01-08 16:06:01] Root WebApplicationContext: initialization started
+INFO :[2020-01-08 16:06:03] Root WebApplicationContext initialized in 1731 ms
+INFO :[2020-01-08 16:06:03] Initializing Servlet 'appServlet'
+INFO :[2020-01-08 16:06:07] Completed initialization in 3555 ms
+INFO :[2020-01-08 16:09:44] Root WebApplicationContext: initialization started
+INFO :[2020-01-08 16:09:46] Root WebApplicationContext initialized in 1816 ms
+INFO :[2020-01-08 16:09:46] Initializing Servlet 'appServlet'
+INFO :[2020-01-08 16:09:50] Completed initialization in 3773 ms
+INFO :[2020-01-08 16:12:14] Root WebApplicationContext: initialization started
+INFO :[2020-01-08 16:12:15] Root WebApplicationContext initialized in 1721 ms
+INFO :[2020-01-08 16:12:15] Initializing Servlet 'appServlet'
+INFO :[2020-01-08 16:12:19] Completed initialization in 3575 ms
+INFO :[2020-01-08 16:13:52] Root WebApplicationContext: initialization started
+INFO :[2020-01-08 16:13:53] Root WebApplicationContext initialized in 1751 ms
+INFO :[2020-01-08 16:13:54] Initializing Servlet 'appServlet'
+INFO :[2020-01-08 16:13:57] Completed initialization in 3577 ms
+INFO :[2020-01-08 16:33:25] Root WebApplicationContext: initialization started
+INFO :[2020-01-08 16:33:27] Root WebApplicationContext initialized in 1861 ms
+INFO :[2020-01-08 16:33:27] Initializing Servlet 'appServlet'
+INFO :[2020-01-08 16:33:31] Completed initialization in 3829 ms
+INFO :[2020-01-08 16:38:06] Root WebApplicationContext: initialization started
+INFO :[2020-01-08 16:38:08] Root WebApplicationContext initialized in 1792 ms
+INFO :[2020-01-08 16:38:08] Initializing Servlet 'appServlet'
+INFO :[2020-01-08 16:38:12] Completed initialization in 4030 ms
+INFO :[2020-01-21 17:28:44] Root WebApplicationContext: initialization started
+INFO :[2020-01-21 17:28:46] Root WebApplicationContext initialized in 1816 ms
+INFO :[2020-01-21 17:28:46] Initializing Servlet 'appServlet'
+INFO :[2020-01-21 17:28:50] Completed initialization in 3841 ms
+INFO :[2020-01-21 17:32:48] Root WebApplicationContext: initialization started
+WARN :[2020-01-21 17:32:49] Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactoryBean' defined in ServletContext resource [/WEB-INF/spring/root-context.xml]: Invocation of init method failed; nested exception is org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [C:\Users\bhy08\Desktop\Git-Mohagee\Mohagee\Final_MohaGee\target\classes\mappers\top5-mapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error creating document instance.  Cause: org.xml.sax.SAXParseException; lineNumber: 16; columnNumber: 4; 요소 유형 "mapper"은(는) 짝이 맞는 종료 태그 "</mapper>"(으)로 종료되어야 합니다.
+ERROR:[2020-01-21 17:32:49] Context initialization failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactoryBean' defined in ServletContext resource [/WEB-INF/spring/root-context.xml]: Invocation of init method failed; nested exception is org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [C:\Users\bhy08\Desktop\Git-Mohagee\Mohagee\Final_MohaGee\target\classes\mappers\top5-mapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error creating document instance.  Cause: org.xml.sax.SAXParseException; lineNumber: 16; columnNumber: 4; 요소 유형 "mapper"은(는) 짝이 맞는 종료 태그 "</mapper>"(으)로 종료되어야 합니다.
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1771)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:593)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:828)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:877)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:549)
+	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:401)
+	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:292)
+	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:103)
+	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4699)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5165)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1412)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1402)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [C:\Users\bhy08\Desktop\Git-Mohagee\Mohagee\Final_MohaGee\target\classes\mappers\top5-mapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error creating document instance.  Cause: org.xml.sax.SAXParseException; lineNumber: 16; columnNumber: 4; 요소 유형 "mapper"은(는) 짝이 맞는 종료 태그 "</mapper>"(으)로 종료되어야 합니다.
+	at org.mybatis.spring.SqlSessionFactoryBean.buildSqlSessionFactory(SqlSessionFactoryBean.java:596)
+	at org.mybatis.spring.SqlSessionFactoryBean.afterPropertiesSet(SqlSessionFactoryBean.java:475)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1830)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1767)
+	... 21 more
+Caused by: org.apache.ibatis.builder.BuilderException: Error creating document instance.  Cause: org.xml.sax.SAXParseException; lineNumber: 16; columnNumber: 4; 요소 유형 "mapper"은(는) 짝이 맞는 종료 태그 "</mapper>"(으)로 종료되어야 합니다.
+	at org.apache.ibatis.parsing.XPathParser.createDocument(XPathParser.java:260)
+	at org.apache.ibatis.parsing.XPathParser.<init>(XPathParser.java:126)
+	at org.apache.ibatis.builder.xml.XMLMapperBuilder.<init>(XMLMapperBuilder.java:80)
+	at org.mybatis.spring.SqlSessionFactoryBean.buildSqlSessionFactory(SqlSessionFactoryBean.java:593)
+	... 24 more
+Caused by: org.xml.sax.SAXParseException; lineNumber: 16; columnNumber: 4; 요소 유형 "mapper"은(는) 짝이 맞는 종료 태그 "</mapper>"(으)로 종료되어야 합니다.
+	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.createSAXParseException(ErrorHandlerWrapper.java:203)
+	at com.sun.org.apache.xerces.internal.util.ErrorHandlerWrapper.fatalError(ErrorHandlerWrapper.java:177)
+	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(XMLErrorReporter.java:400)
+	at com.sun.org.apache.xerces.internal.impl.XMLErrorReporter.reportError(XMLErrorReporter.java:327)
+	at com.sun.org.apache.xerces.internal.impl.XMLScanner.reportFatalError(XMLScanner.java:1472)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanEndElement(XMLDocumentFragmentScannerImpl.java:1749)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl$FragmentContentDriver.next(XMLDocumentFragmentScannerImpl.java:2967)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentScannerImpl.next(XMLDocumentScannerImpl.java:602)
+	at com.sun.org.apache.xerces.internal.impl.XMLDocumentFragmentScannerImpl.scanDocument(XMLDocumentFragmentScannerImpl.java:505)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:842)
+	at com.sun.org.apache.xerces.internal.parsers.XML11Configuration.parse(XML11Configuration.java:771)
+	at com.sun.org.apache.xerces.internal.parsers.XMLParser.parse(XMLParser.java:141)
+	at com.sun.org.apache.xerces.internal.parsers.DOMParser.parse(DOMParser.java:243)
+	at com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderImpl.parse(DocumentBuilderImpl.java:339)
+	at org.apache.ibatis.parsing.XPathParser.createDocument(XPathParser.java:258)
+	... 27 more
+INFO :[2020-01-21 17:33:22] Root WebApplicationContext: initialization started
+INFO :[2020-01-21 17:33:24] Root WebApplicationContext initialized in 1875 ms
+INFO :[2020-01-21 17:33:24] Initializing Servlet 'appServlet'
+INFO :[2020-01-21 17:33:28] Completed initialization in 4133 ms
+WARN :[2020-01-21 17:34:02] No mapping for GET /mohagee/gbComment/gbCommentSelectList.do
+WARN :[2020-01-21 17:36:13] No mapping for GET /mohagee/gbComment/gbCommentSelectList.do
+WARN :[2020-01-21 17:41:41] No mapping for GET /mohagee/gotoPortfolio.do
+INFO :[2020-01-21 18:26:16] Root WebApplicationContext: initialization started
+INFO :[2020-01-21 18:26:18] Root WebApplicationContext initialized in 1950 ms
+INFO :[2020-01-21 18:26:18] Initializing Servlet 'appServlet'
+INFO :[2020-01-21 18:26:22] Completed initialization in 4319 ms

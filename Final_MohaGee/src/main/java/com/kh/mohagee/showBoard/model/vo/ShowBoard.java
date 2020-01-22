@@ -5,7 +5,7 @@ import java.sql.Date;
 
 public class ShowBoard implements Serializable {
 
-		private int bNo;
+	   private int bNo;
 	   private int userNo;
 	   private String bTitle;
 	   private String bTag;

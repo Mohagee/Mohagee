@@ -16,28 +16,28 @@
 
 <body>
 
-   <c:import url="views/common/header.jsp"/>
-   
+	<c:import url="views/common/header.jsp"/>
+	
     <section id="home-slider">
         <div class="container">
             <div class="row">
                 <div class="main-slider">
                     <div class="slide-text">
-                                   
+                    					
                         <h1 id="indexMyMenu" style="font-family:cookierun;">
-                     <c:if test="${!empty member}">  
-                     <a href="#" >${ member.nickName } </a>
-                  </c:if> Mohagee</h1>
-      
-                  
+							<c:if test="${!empty member}">  
+							<a href="#" >${ member.nickName } </a>
+						</c:if> Mohagee</h1>
+		
+						
                    <!-- 검색 창 -->     
-                  <form class="form-inline mr-auto" action="${ pageContext.request.contextPath }/search/indexSearch.do">
-                       <input name="indexSearch" class="form-control mr-sm-2" type="text" placeholder="아직 구현 미완성" 
-                           style="font-family: cookierun; font-size : 15px; "  aria-label="Search">
-                       <button class="btn btn-success btn-rounded btn-sm my-0" type="submit">Search</button>
-                  </form>  
-               <!--  검색 창 끝 -->
-               
+						<form class="form-inline mr-auto" action="${ pageContext.request.contextPath }/search/indexSearch.do">
+							  <input name="indexSearch" class="form-control mr-sm-2" type="text" placeholder="아직 구현 미완성" 
+							  	 style="font-family: cookierun; font-size : 15px; "  aria-label="Search">
+							  <button class="btn btn-success btn-rounded btn-sm my-0" type="submit">Search</button>
+						</form>  
+					<!--  검색 창 끝 -->
+					
                   </div>
                   
                     <img src="${ pageContext.request.contextPath }/resources/images/home/slider/hill.png" class="slider-hill" alt="slider image">
@@ -50,42 +50,6 @@
         </div>
     </section>
     <!--/#home-slider-->
-
-    <section id="services">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-4 text-center padding wow fadeIn" data-wow-duration="1000ms" data-wow-delay="300ms">
-                    <div class="single-service">
-                        <div class="wow scaleIn" data-wow-duration="500ms" data-wow-delay="300ms">
-                            <img src="${ pageContext.request.contextPath }/resources/images/home/icon1.png" alt="">
-                        </div>
-                        <h2>공연</h2>
-                        <p>여러분의 단조로운 일상에 공연의 풍부함을!</p>
-                    </div>
-                </div>
-                <div class="col-sm-4 text-center padding wow fadeIn" data-wow-duration="1000ms" data-wow-delay="600ms">
-                    <div class="single-service">
-                        <div class="wow scaleIn" data-wow-duration="500ms" data-wow-delay="600ms">
-                            <img src="${ pageContext.request.contextPath }/resources/images/home/icon2.png" alt="">
-                        </div>
-                        <h2>음악</h2>
-                        <p>여러분의 조용한 일상에 음악의 빵빵한 사운드를!</p>
-                    </div>
-                </div>
-                <div class="col-sm-4 text-center padding wow fadeIn" data-wow-duration="1000ms" data-wow-delay="900ms">
-                    <div class="single-service">
-                        <div class="wow scaleIn" data-wow-duration="500ms" data-wow-delay="900ms">
-                            <img src="${ pageContext.request.contextPath }/resources/images/home/icon3.png" alt="">
-                        </div>
-                        <h2>액티비티</h2>
-                        <p>여러분의 무료한 일상에 액티비티의 흥분을!</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--/#services-->
-
 
     <section id="action">
         <div class="vertical-center">
@@ -116,7 +80,7 @@
     <!--/#action-->
 
 
-   <!-- TOP3 영역 -->  
+	<!-- TOP3 영역 -->  
     <section id="features">
         <div class="container">
             <div class="row" id="boardTop3">
@@ -127,71 +91,129 @@
                     </div>
                     <div class="col-sm-4 wow fadeInRight">
                         <h2>top1 제목</h2>
-                        <P>최근게시글</P>
+                        <pre>최근게시글</pre>
                     </div>
                 </div>
                 
                <!--  TOP2  -->
-                <div class="single-features">
+<%--                 <div class="single-features">
                     <div class="col-sm-4 col-sm-offset-1 align-right wow fadeInLeft">
                         <h2>top2 제목</h2>
-                        <P>최근게시글</P>
+                        <pre>최근게시글</pre>
                     </div>
                     <div class="col-sm-7 wow fadeInRight" >
                         <img src="${ pageContext.request.contextPath }/resources/upload/수정-2-1.png" class="img-responsive" >
                     </div>
-                </div>
+                </div> --%>
                 
               <!--  TOP3  -->
-                <div class="single-features">
+  <%--               <div class="single-features">
                     <div class="col-sm-7 wow fadeInLeft" >
                         <img src="${ pageContext.request.contextPath }/resources/upload/수정-5.jpg" class="img-responsive" >
                     </div>
                     <div class="col-sm-4 wow fadeInRight" >
                         <h2>top3 제목</h2>
-                        <P>최근게시글최근게시글최근게시글최근게시글최근게시글최근게시글최근게시글
-                        최근게시글최근게시글최근게시글최근게시글최근게시글최근게시글최근게시글
-                        최근게시글최근게시글최근게시글최근게시글최근게시글최근게시글</P>
+                        <pre>최근게시글</pre>
                     </div>
-                </div>
+                </div> --%>
             </div>
         </div>
-    </section>
+    </section> 
      <!--/#features-->
 
-   <script>   
-   $(function(){
-         $.ajax({
-            url : '${pageContext.request.contextPath}/top5/top5List.do', // ROWNUM 으로 가져오기 디비에서
-            type : 'POST',
-            success : function(data) {
-               console.log(data);
-               var $div = $('#boardTop3'); // 맨 위 div 아이디로 
-               $div.empty();
-               for(var i in data){ 
-                  var div1 = $('<div class="single-features">');
-                  var div1_1 = $('<div class="col-sm-7 wow fadeInLeft">');
-                  var imgTag = $('<img src="${ pageContext.request.contextPath }/resources/upload/' + data[i].titleFilename + '" class="img-responsive" >');
-                  var div1_2 = $('<div class="col-sm-4 wow fadeInRight">');
-                  var h2Tag = $('<h2>').text(data[i].bTitle);
-                  var pTag = $('<p>').text(data[i].bContent);
-                  
-                  div1_1.append(imgTag);
-                  div1_2.append(h2Tag).append(pTag);
-                  
-                  div1.append(div1_1).append(div1_2);
-                  
-                  $div.append(div1);
-               }
-               
-            } , error : function(request) {
-               console.log("힘내세요");
-               console.log(request);
-            }
-         });
-   });
+	<script>	
+	$(function(){
+	      $.ajax({
+	         url : '${pageContext.request.contextPath}/top5/top5List.do', // ROWNUM 으로 가져오기 디비에서
+	         type : 'POST',
+	         success : function(data) {
+	        	 console.log(data);
+	            var $div = $('#boardTop3'); // 맨 위 div 아이디로 
+	            $div.empty();
+	            	
+		               var div1 = $('<div class="single-features">');
+		               var div1_1 = $('<div class="col-sm-7 wow fadeInLeft">');
+		               var imgTag = $('<img src="${ pageContext.request.contextPath }/resources/upload/' + data[0].titleFilename + '" class="img-responsive" >');
+		               var div1_2 = $('<div class="col-sm-4 wow fadeInRight">');
+		               var h2Tag = $('<h2>').text(data[0].bTitle);
+		               var pTag = $('<p>').text(data[0].bContent);
+		               
+		               div1_1.append(imgTag);
+		               div1_2.append(h2Tag).append(pTag);           
+		               
+		               div1.append(div1_1).append(div1_2);
+		               
+		               $div.append(div1);
 
-   </script>
+		               var div2 = $('<div class="single-features">');
+		               var div2_1 = $('<div class="col-sm-4 col-sm-offset-1 align-right wow fadeInLeft">');
+		               var h2Tag = $('<h2>').text(data[1].bTitle);
+		               var pTag = $('<p>').text(data[1].bContent);             
+		               var div2_2 = $('<div class="col-sm-7 wow fadeInRight">');
+		               var imgTag = $('<img src="${ pageContext.request.contextPath }/resources/upload/' + data[1].titleFilename + '" class="img-responsive" >');
+		               
+		               div2_1.append(h2Tag).append(pTag); 
+		               div2_2.append(imgTag);
+		               
+		               div2.append(div2_1).append(div2_2);
+		               
+		               $div.append(div2);
+
+		               var div3 = $('<div class="single-features">');
+		               var div3_1 = $('<div class="col-sm-7 wow fadeInLeft">');
+		               var imgTag = $('<img src="${ pageContext.request.contextPath }/resources/upload/' + data[2].titleFilename + '" class="img-responsive" >');
+		               var div3_2 = $('<div class="col-sm-4 wow fadeInRight">');
+		               var h2Tag = $('<h2>').text(data[2].bTitle);
+		               var pTag = $('<p>').text(data[2].bContent);
+		               
+		               div3_1.append(imgTag);
+		               div3_2.append(h2Tag).append(pTag);
+		               
+		               div3.append(div3_1).append(div3_2);
+		               
+		               
+		               $div.append(div3); 
+		            
+		               var div4 = $('<div class="single-features">');
+		               var div4_1 = $('<div class="col-sm-4 col-sm-offset-1 align-right wow fadeInLeft">');
+		               var h2Tag = $('<h2>').text(data[3].bTitle);
+		               var pTag = $('<p>').text(data[3].bContent);             
+		               var div4_2 = $('<div class="col-sm-7 wow fadeInRight">');
+		               var imgTag = $('<img src="${ pageContext.request.contextPath }/resources/upload/' + data[3].titleFilename + '" class="img-responsive" >');
+		               
+		               div4_1.append(h2Tag).append(pTag); 
+		               div4_2.append(imgTag);
+		               
+		               div4.append(div4_1).append(div4_2);
+		               
+		               $div.append(div4);
+		               
+		               
+		               var div5 = $('<div class="single-features">');
+		               var div5_1 = $('<div class="col-sm-7 wow fadeInLeft">');
+		               var imgTag = $('<img src="${ pageContext.request.contextPath }/resources/upload/' + data[4].titleFilename + '" class="img-responsive" >');
+		               var div5_2 = $('<div class="col-sm-4 wow fadeInRight">');
+		               var h2Tag = $('<h2>').text(data[4].bTitle);
+		               var pTag = $('<p>').text(data[4].bContent);
+		               
+		               div5_1.append(imgTag);
+		               div5_2.append(h2Tag).append(pTag);
+		               
+		               div5.append(div5_1).append(div5_2);
+		               
+		               
+		               $div.append(div5); 
+		               
+	            
+	         } , error : function(request) {
+	            console.log("힘내세요");
+	            console.log(request);
+	         }
+	      });
+	});
+
+
+	</script>
   
   
   
@@ -300,23 +322,23 @@
         </div>
     </section>
 
-   <c:import url="views/common/footer.jsp"/>
-   
-   <script>
-      /* $(function(){
-         $.ajax({
-            url: "각 게시글 수 뽑아오는 컨트롤러 링크",
-            data: {
-               "갖고갈 데이터 필요한거 쓰심 되여"
-            },
-            dataType: "json",
-            success: function(data){
-               "데이터로 갖고오는값이 각 보드별 게시글수"
-               
-               "갖고 온 데이터를 각 위치에 맞게 적어주심되요"
-            }
-         });
-      }) */
-   </script>
+	<c:import url="views/common/footer.jsp"/>
+	
+	<script>
+		/* $(function(){
+			$.ajax({
+				url: "각 게시글 수 뽑아오는 컨트롤러 링크",
+				data: {
+					"갖고갈 데이터 필요한거 쓰심 되여"
+				},
+				dataType: "json",
+				success: function(data){
+					"데이터로 갖고오는값이 각 보드별 게시글수"
+					
+					"갖고 온 데이터를 각 위치에 맞게 적어주심되요"
+				}
+			});
+		}) */
+	</script>
 </body>
 </html>

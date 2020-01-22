@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.mohagee.favorite.model.service.FavoriteService;
 import com.kh.mohagee.showBoard.model.service.ShowBoardService;
+import com.kh.mohagee.showBoard.model.service.sbCommentService;
 import com.kh.mohagee.showBoard.model.vo.ShowAttachment;
 import com.kh.mohagee.showBoard.model.vo.ShowBoard;
 
@@ -37,6 +38,9 @@ public class ShowBoardController {
 	
 	@Autowired
 	FavoriteService favoriteService;
+	
+	@Autowired
+	sbCommentService sbCommentService;
 
 	@RequestMapping("/showBoard/showBoardList.do")
 	public String showBoardList(Model model) {
@@ -186,6 +190,7 @@ public class ShowBoardController {
 		int favoriteCount = favoriteService.favoriteCount(bNo);
 		
 		System.out.println(sb);
+		
 		for(int i = 0; i < list.size(); i++) {
 			System.out.println(list.get(i));
 		}
@@ -194,7 +199,8 @@ public class ShowBoardController {
 		
 		model.addAttribute("ShowBoard", sb)
 		.addAttribute("ShowAttachment", list)
-		.addAttribute("favoriteCount", favoriteCount);
+		.addAttribute("favoriteCount", favoriteCount)
+		.addAttribute("sbcList",sbCommentService.selectListsbComment(bNo));
 
 		return "showBoard/showBoardDetail";
 	}

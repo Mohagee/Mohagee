@@ -66,23 +66,6 @@
           }    
           
 
-/* named upload */
-/* .filebox .upload-name {
-    display: inline-block;
-    padding: .5em .75em;
-    font-size: inherit;
-    font-family: inherit;
-    line-height: normal;
-    vertical-align: middle;
-    background-color: #f5f5f5;
-  border: 1px solid #ebebeb;
-  border-bottom-color: #e2e2e2;
-  border-radius: .25em;
-  -webkit-appearance: none; /* 네이티브 외형 감추기 
-  -moz-appearance: none;
-  appearance: none;
-} */
-
 input[type=file]{
    display: none;
 }
@@ -184,7 +167,7 @@ input[type=file]{
       <!-- 태그 입력 칸 -->
       <div class="input-group mb-3" style="display: table-cell; text-align: center; vertical-align: middle; width:900px;"><br />
               <input  type="text" class="form-control" aria-label="Text input with dropdown button" 
-              id = "tag" name="bTag" placeholder="최대 5개" required>
+              id = "tag" name="bTag" placeholder="태그를 입력하세요 (최대 5개 입력 가능)" required>
       </div>
            <!-- URL 입력 칸 -->
       <div class="input-group mb-3" style="width:900px;"><br />
