@@ -49,9 +49,8 @@
               <button type="button" class="btn btn-success" id="writerBtn">글쓰기</button>
              </a>
              &nbsp;&nbsp;&nbsp;
-             <a class="btn btn-primary" href="${ pageContext.request.contextPath }/chat.do" role="button">
-             	<i class="fas fa-paper-plane"></i>&nbsp;&nbsp; 쪽지
-             </a>
+              <button type="button" class="btn btn-primary" onclick="chattingBtn();">채팅</button>
+
             </c:if> 
         	</div>
              <br /><br /><br />
@@ -100,19 +99,14 @@
     </section>
     
     <script>
-	
-	JQ(function(){
-		
-		JQ("").on("click", function(){
-			
-			var tno = JQ(this).attr("id");
-			console.log("tno = " + tno);
-			location.href = "JQ{pageContext.request.contextPath}/talkBoard/talkBoardDetail.do?no=" + tno;
-		});
-		
-	});
-    
-    </script>
+		function chattingBtn(){
+		 	var title = 'chatting';
+		 	var url = '${pageContext.request.contextPath}/chatting.do';
+		 	var status = 'width=500px,height=700px';
+		 	
+		 	var popup = window.open(url, title, status);
+		 	}
+	</script>
     
     <!-- <script>
 	    $(function() {

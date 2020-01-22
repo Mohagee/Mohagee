@@ -10,6 +10,7 @@
 		<config>src/main/resources/mappers/member-mapper.xml</config>
 		<config>src/main/resources/mappers/email-mapper.xml</config>
 		<config>src/main/resources/mappers/nickName-mapper.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/appServlet/websocket-context.xml</config>
 	</configs>
 	<autoconfigs>
 		<config>src/main/webapp/WEB-INF/spring/security-context.xml</config>
