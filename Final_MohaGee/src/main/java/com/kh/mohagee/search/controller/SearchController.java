@@ -50,6 +50,7 @@ public class SearchController {
 		} else if(select == 4) {
 			list = searchService.searchContent(searchInput2);
 		} else if(select == 5) {
+			
 			searchInput2 ="%#" + searchInput + ",%";
 			
 			list = searchService.searchTag(searchInput2);
