@@ -104,7 +104,7 @@
                                         <ul class="nav navbar-nav post-nav">
                                             <li style="color: #0099AE"><i class="fas fa-clock"></i>&nbsp;&nbsp;${TravelBoard.bDate}</li>
              
-                                  			<li style="color: #0099AE"><i class="fas fa-tags"></i>&nbsp;&nbsp;<input type="text" data-role="tagsinput" value="${ TravelBoard.bTag }"/></li>
+                                  			<li style="color: #0099AE"><i class="fas fa-tags"></i>&nbsp;&nbsp;<input id="tag" type="text" data-role="tagsinput" value="${ TravelBoard.bTag }"/></li>
                                 	
                                   			<li id="favorite" style="color: #0099AE"><i class="fas fa-heart"></i>&nbsp;&nbsp;${ favoriteCount }</li>
                                   
@@ -204,7 +204,7 @@
     
     <script>
   //태그 관련 스크립트
-	$("input").tagsinput('items');
+	$("#tag").tagsinput('items');
 // 좋아요 기능
 
 $(function(){

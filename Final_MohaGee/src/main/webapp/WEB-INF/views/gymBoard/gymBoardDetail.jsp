@@ -265,7 +265,7 @@ textarea {
                                         <ul class="nav navbar-nav post-nav">
                                             <li style="color: #0099AE"><i class="fas fa-clock"></i>&nbsp;&nbsp;${gymBoard.bDate}</li>
              
-			                                <li style="color: #0099AE"><i class="fas fa-tags"></i>&nbsp;&nbsp;<input type="text" data-role="tagsinput" value="${gymBoard.bTag}"/></li>
+			                                <li style="color: #0099AE"><i class="fas fa-tags"></i>&nbsp;&nbsp;<input id="tag" type="text" data-role="tagsinput" value="${gymBoard.bTag}"/></li>
 			                                	
 			                                <li id="favorite" style="color: #0099AE"><i class="fas fa-heart"></i>&nbsp;&nbsp;${ favoriteCount }</li>
 			                                  

@@ -14,7 +14,7 @@
 
 <script>
 
-	$("input").tagsinput('items');
+	$("#tag").tagsinput('items');
 
 	function gymBoardInsert(){
 	   location.href = "JQ{ pageContext.request.contextPath}/gymBoard/gymBoardInsertForm.do";
@@ -122,7 +122,7 @@
 							</ul>
 							<div class="post-content overflow">   
 				               <i style="color: #0099AE" class="fas fa-tags"></i>&nbsp;&nbsp;
-				               <input style="color: #0099AE" type="text" data-role="tagsinput" value="${ gymBoard.bTag }"/>
+				               <input id="#tag" style="color: #0099AE" type="text" data-role="tagsinput" value="${ gymBoard.bTag }"/>
 				            </div>
                         </div>
                      </div>
