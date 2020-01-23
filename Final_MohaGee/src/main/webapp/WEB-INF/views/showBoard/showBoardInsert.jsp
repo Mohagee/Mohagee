@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title style="font-family:cookierun;">ALICE's MOHAGEE</title>
 
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">   
@@ -167,7 +168,7 @@ input[type=file]{
        <div class="input-group mb-3" style="width:900px;"><br />
               <input type="text" class="form-control" 
               aria-label="Text input with dropdown button" 
-              id = "bUrl" name="bUrl" placeholder="link입력 ex) www.naver.com">
+              id = "bUrl" name="bUrl" placeholder="유튜브영상-공유-퍼가기-iframe복사후 붙여넣기">
       </div>
       
 <!--  업로드 사진 미리보기 칸 -->

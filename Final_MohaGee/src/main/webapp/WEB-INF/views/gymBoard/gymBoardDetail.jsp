@@ -340,13 +340,17 @@ textarea {
 				<div>
 					<a href="${ pageContext.request.contextPath }/gymBoard/gymBoardList.do">
 					   <button type="button" class="btn btn-warning" id="rewriteBtn">목록으로</button>
-					</a>&nbsp;                           
+					</a>&nbsp;
+					<c:set value="${member.userNo} " var="memberUserNo"/>
+			                 <c:set value="${gymBoard.userNo} " var="gymBoardUserNo"/>
+			                 <c:if test="${ memberUserNo eq gymBoardUserNo }">                  
 					<a href="${ pageContext.request.contextPath }/gymBoard/gymBoardUpdateView.do?bNo=${gymBoard.bNo}">
 					   <button type="button" class="btn btn-primary" id="rewriteBtn">수정하기</button>
 					</a>&nbsp;
 					<a href="${ pageContext.request.contextPath }/gymBoard/gymBoardDelete.do?bNo=${gymBoard.bNo}">
 					   <button type="button" class="btn btn-danger" id="deleteBtn">삭제하기</button>
 					</a>
+					</c:if>
 				 </div><br />
                                </div>
                                

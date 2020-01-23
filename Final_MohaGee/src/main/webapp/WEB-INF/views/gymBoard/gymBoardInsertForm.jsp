@@ -139,14 +139,14 @@
       <!-- 태그 입력 칸 -->
       <div class="input-group mb-3" style="display: table-cell; text-align: center; vertical-align: middle; width:900px;"><br />
               <input  type="text" class="form-control" aria-label="Text input with dropdown button" 
-              id = "tag" name="bTag" placeholder="최대 5개" required>
+              id = "tag" name="bTag" placeholder="태그를 입력하세요 (최대 5개)" required>
       </div>
            <!-- URL 입력 칸 -->
       <div class="input-group mb-3" style="width:900px;">
          <br />
               <input type="text" class="form-control" 
               aria-label="Text input with dropdown button" 
-              id = "bUrl" name="bUrl" placeholder="link입력 ex) www.naver.com">
+              id = "bUrl" name="bUrl" placeholder="유튜브영상-공유-퍼가기-iframe복사후 붙여넣기">
       </div>
 
 <!--  업로드 사진 미리보기 칸 -->

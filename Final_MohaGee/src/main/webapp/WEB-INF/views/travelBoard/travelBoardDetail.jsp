@@ -339,16 +339,21 @@
                                     </div>
                                     
                                     <!-- 게시글 수정 버튼  -->
+                                    
+                                    <c:set value="${member.userNo} " var="memberUserNo"/>
+                                    <c:set value="${TravelBoard.userNo} " var="travelBoardUserNo"/>
 		                            <div>
 		                            <a href="${ pageContext.request.contextPath }/travelBoard/travelBoardList.do">
 		                               <button type="button" class="btn btn-warning" id="rewriteBtn">목록으로</button>
-		                            </a>&nbsp;                           
+		                            </a>&nbsp;    
+		                            <c:if test = "${ memberUserNo eq travelBoardUserNo }">                       
 		                            <a href="${ pageContext.request.contextPath }/travelBoard/travelBoardUpdateView.do?bNo=${TravelBoard.bNo}">
 		                               <button type="button" class="btn btn-primary" id="rewriteBtn">수정하기</button>
 		                            </a>&nbsp;
 		                            <a href="${ pageContext.request.contextPath }/travelBoard/travelBoardDelete.do?bNo=${TravelBoard.bNo}">
 		                               <button type="button" class="btn btn-danger" id="deleteBtn">삭제하기</button>
 		                            </a>
+		                            </c:if>
 		                            </div><br />
                                     <div class="blog-share">
                                         <span class='st_facebook_hcount'></span>

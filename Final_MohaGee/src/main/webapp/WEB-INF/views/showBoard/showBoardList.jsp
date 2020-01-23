@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title style="font-family:cookierun;">ALICE's MOHAGEE</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <c:import url="../common/commonUtil.jsp" />
@@ -71,13 +72,17 @@
 	<div class="container">
 	
 	<!--  글쓰기 버튼  -->
-	<div align="right">
-		<c:if test="${ !empty member}">
-			<a href="${ pageContext.request.contextPath }/showBoard/showBoardInsert.do">
-				<button type="button" class="btn btn-success" id="writerBtn">글쓰기</button>
-			</a>
+	<c:set value="${ member.userGrade }" var="userGrade"/>
+   
+	<c:if test="${ !empty member}">
+   		<c:if test = "${ userGrade eq 'E' }">
+			<div align="right">
+					<a href="${ pageContext.request.contextPath }/showBoard/showBoardInsert.do">
+						<button type="button" class="btn btn-success" id="writerBtn">글쓰기</button>
+					</a>
+			</div>
 		</c:if>
-	</div>
+	</c:if>
 
 	<!-- 태그 리스트  -->
 	<div class="row">

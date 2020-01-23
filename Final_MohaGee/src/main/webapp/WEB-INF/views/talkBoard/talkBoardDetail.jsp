@@ -16,6 +16,19 @@
 </head><!--/head-->
 
 <style>
+    	#board_content{
+    		width : 1300px;
+    		border : none;
+    		font-size : 20px;
+    		height : auto;
+    			font-family:cookierun;
+    	}
+    	
+    	#board_title{
+    		/* font-family : ; */
+    		font-size : 30px;
+    			font-family:cookierun;
+    	}
 	html, body {
 	  height: 100%;
 	}
@@ -103,8 +116,8 @@
                           </c:forEach>      
                                 
                                 <div class="post-content overflow">
-                                    <h2 class="post-title bold">${talkBoard.tTitle}</h2>
-                                    <span> ${talkBoard.tContent} </span>
+                                    <h2 class="post-title bold"><p style="font-family:cookierun;">${talkBoard.tTitle} </p></h2>
+                                    <pre class="form-control" id="board_content" name="bContent"> ${talkBoard.tContent} </pre>
                                     <div class="post-bottom overflow">
                                         <ul class="nav navbar-nav post-nav">
                                          	<li><a href="#"><i class="far fa-clock" style="font-family:cookierun;"></i>&nbsp;&nbsp;${talkBoard.tDate}</a></li>
@@ -127,42 +140,6 @@
 					
 				 </div>
                                     </div>
-                                    
-                     
-			      <!-- 댓글 작성 부분 -->           
-			       <div id="addComment">
-			          <input type="text" placeholder="댓글을 달아주세요" style="font-family:binggrae;"></input>&nbsp;&nbsp;&nbsp;<button id="newCommentButton" onclick="submitNewComment(this)">&nbsp;댓 글&nbsp;</button>
-			       </div><br />                 
-			                 
-			    <!--  댓글 시작 영역 -->
-			    <div class="response-area"  style="font-family:binggrae;">
-			    
-			  <ul class="media-list">
-			               <c:forEach var="sbc" items="${tcList }">
-			                   <li class="reply${ tc.tcLevel }" style="padding-left : ${ tc.bcLevel * 7 }%" for="${ tc.ttcNo }">
-			                       <div class="post-comment">
-			                           <a class="pull-left" href="${pageContext.request.contextPath}/member/myPage.do?userNo=${tc.userNo }">
-			                               <img class="media-object" src="${pageContext.request.contextPath }/resources/profile/${tc.pRenamedFileName}" alt="">
-			                           </a>
-			                           <div class="media-body">
-			                               <span style="font-family:cookierun;"><a href="${pageContext.request.contextPath}/member/myPage.do?userNo=${tc.userNo }" style="font-family:cookierun;">${tc.nickName }이</a>  ${tc.tcDate }에 작성</span>
-			                               <br /><br>
-			                               <textarea class="contentUpdateForm" id="${ tc.tcNo }" style="color: black;" readonly>${tc.bcContent }</textarea>
-			                               <ul class="nav navbar-nav post-nav">
-			                                   <li style="font-family:cookierun;"><i class="fa fa-wrench" ></i>&nbsp;&nbsp;수정</li>
-			                                   <li style="font-family:cookierun;"><i class="fa fa-eraser" ></i>&nbsp;&nbsp;삭제</li>
-			                               </ul>
-			                           </div>
-			                       </div>
-			                       <!-- 대댓글 작성 창 -->
-			                       <div id="addComment"><input type="text" placeholder="대댓글 달고싶지?" style="font-family:cookierun;"></input>&nbsp;&nbsp;&nbsp;<button id="newCommentButton" onclick="submitNewReplyComment(this, ${ tc.tcNo })">댓글</button></div>
-			                       
-			                   </li>
-			               </c:forEach>
-			               </ul>                                 
-			  </div><!--/Response-area-->
-                                    
-                                    
                                 </div>
                             </div>
                         </div>
@@ -175,108 +152,7 @@
     
     <script>
     	
-    /* 댓글 만들기 스크립트 시작 */
-    /**
-    	obj : 클릭된 버튼 자신
-    */
-   function submitNewComment(obj){
-   	$.ajax({
-   		url : '${ pageContext.request.contextPath }/tComment/tCommentInsert.do',
-   		  data : {
-   			  bNo : '${talkBoard.tno}',
-   			  userNo : '${member.userNo}',
-   			  bcContent : $(obj).siblings('input').val()
-   		  }, success : function(data){
-   			  alert("댓글 추가 성공!");
-   			  location.href='${pageContext.request.contextPath}/talkBoard/talkBoardDetail.do?tno=${talkBoard.tno}';
-   		  }
-   	});
-   }
-
-   /**
-   	obj : 클릭된 버튼 자신
-   	parentBcNo : 누구의 대댓글인지 확인하기 위한 원본 댓글의 번호
-   */
-   function submitNewReplyComment(obj, parentBcNo){
-   	$.ajax({
-   		url : '${ pageContext.request.contextPath }/tComment/tCommentInsert.do',
-   		  data : {
-   			  bNo : '${talkBoard.tno}',
- 			  userNo : '${member.userNo}',
-   			  bcContent : $(obj).siblings('input').val(),
-   			  bbcNo : parentBcNo
-   		  }, success : function(data){
-   			  alert("댓글 추가 성공!");
-   			  location.href='${pageContext.request.contextPath}/talkBoard/talkBoardDetail.do?tno=${talkBoard.tno}';
-   		  }
-   	});
-   }
-
-   $('.fa-wrench').parent().each(function(){
-   	$(this).on('click', function(){
-   		var textArea = $(this).parent().parent().children('textarea');
-   		if(textArea.prop('readonly')){
-   			textArea.prop('readonly', false);
-   		} else {
-   			textArea.prop('readonly', true);
-   			$.ajax({
-   				url : '${ pageContext.request.contextPath }/tComment/tCommentUpdate.do',
-   				  data : {
-   					  bcNo : textArea.attr('id'),
-   					  userNo : '${member.userNo}',
-   					  bcContent : textArea.val()
-   				  }, success : function(data){
-   					  if(data != 0){
-   						  alert("댓글 변경 성공!");		
-   					  } else {
-   						  alert("댓글 수정 실패!");
-   					  }
-   				  }
-   			});
-   		}
-   	});
-   });
-
-   $('.fa-eraser').parent().each(function(){
-   	$(this).on('click', function(){
-   		var obj =  $(this);
-   		var textArea = $(this).parent().parent().children('textarea');
-   		
-   		$.ajax({
-   			url : '${ pageContext.request.contextPath }/tComment/tCommentDelete.do',
-   			  data : {
-   				  bcNo : textArea.attr('id')
-   			  }, success : function(data){
-   				  if(data != 0){
-   					  alert("댓글 삭제 성공!");		
-   					  obj.parents('li').remove();
-   					  $('[for=' + textArea.attr('id') + ']').remove();
-   				  } else {
-   					  alert("댓글 삭제 실패!");
-   				  }
-   			  }
-   		});
-   	});
-   });
-
-
-   $(function(){
-   	$.ajax({
-   		url : '${ pageContext.request.contextPath }/tComment/tCommentSelectList.do',
-   		data : {bNo : '${talkBoard.tno}'},
-   		success : function(data){
-   			
-   			  for(var i in data){
-   				  let comments = document.getElementById("comments");
-   				  createNewComment(data[i].bcContent, data[i].bcNo);
-   				  while (comments.firstChild) {
-   					     comments.removeChild(comments.firstChild);
-   				 }
-   				  displayComments(listOfComments, 0);
-   			  };
-   		  }
-   	});
-   });
+    
     
 
    /* 댓글만들기 스크립트 끝! */

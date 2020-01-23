@@ -8,15 +8,21 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    	
     <c:import url="../common/commonUtil.jsp"/>
-
+	
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 	
 	<title>수다방</title>
+	
+	<style>
+		body{
+			font-family:cookierun;
+		}
+	</style>
 
 </head>
 
@@ -30,7 +36,7 @@
                 <div class="row">
                     <div class="action">
                         <div class="col-sm-12">
-                            <h1 class="title">수다방</h1>
+                            <h1 class="title" style="font-family:cookierun;">수다방</h1>
                             <p>Anywhere in our Universe</p>
                         </div>
                     </div>
@@ -70,16 +76,10 @@
 						</div>
 					</c:if>
                             <div class="post-content overflow">
-                               <h2 class="post-title bold">
-									<a href="${ pageContext.request.contextPath }/talkBoard/talkBoardDetail.do?tno=${talkBoard.tno}">
-												${ talkBoard.tTitle }</a>
+                               <h2 class="post-title bold" >
+									<a href="${ pageContext.request.contextPath }/talkBoard/talkBoardDetail.do?tno=${talkBoard.tno}" >
+												<p style="font-family:cookierun;">${talkBoard.tTitle} </p></a>
 								</h2>
-                                <div class="post-bottom overflow">
-                                    <ul class="nav nav-justified post-nav">
-                                        <li><a href="#"><i class="fa fa-heart"></i> Love</a></li>
-                                        <li><a href="#"><i class="fa fa-comments"></i> Comments</a></li>
-                                    </ul>
-                                </div>
                             </div>
                         </div>
                     </div>

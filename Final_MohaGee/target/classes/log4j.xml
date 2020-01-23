@@ -12,7 +12,7 @@
 	
 	<!-- 서버의 실행 기록들을 파일로 남기는 어펜더 -->
 	<appender name="fileAppender" class="org.apache.log4j.DailyRollingFileAppender">
-		<param name="file" value="C:/Users/persons/Desktop/Final_Project/FinalGit/Final_MohaGee/src/main/resources/logs/systemLog/system.log" />
+		<param name="file" value="C:/Users/lolih/Desktop/gitMohagee/Mohagee/Final_MohaGee/src/main/resources/logs/systemLog/system.log" />
 		<param name="Append" value="true"/>
 		<param name="datePattern" value=".yyyy-MM-dd"/>
 		<layout class="org.apache.log4j.PatternLayout">
@@ -21,7 +21,7 @@
 	</appender>
 	
 	<appender name="loginAppender" class="org.apache.log4j.DailyRollingFileAppender">
-		<param name="file" value="C:/Users/persons/Desktop/Final_Project/FinalGit/Final_MohaGee/src/main/resources/logs/loginLog/login.log" />
+		<param name="file" value="C:/Users/lolih/Desktop/gitMohagee/Mohagee/Final_MohaGee/src/main/resources/logs/loginLog/login.log" />
 		<param name="Append" value="true"/>
 		<param name="datePattern" value=".yyyy-MM-dd"/>
 		<layout class="org.apache.log4j.PatternLayout">

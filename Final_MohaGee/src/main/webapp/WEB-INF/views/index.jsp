@@ -11,6 +11,12 @@
     <title>뭐하지?</title>
     
     <c:import url="common/commonUtil.jsp"/>
+     
+    <style>
+    	body{
+			font-family:cookierun;
+	}
+    </style>
     
 </head>
 
@@ -32,8 +38,8 @@
                   
                    <!-- 검색 창 -->     
                   <form class="form-inline mr-auto" action="${ pageContext.request.contextPath }/search/indexSearch.do">
-                       <input name="indexSearch" class="form-control mr-sm-2" type="text" placeholder="아직 구현 미완성" 
-                           style="font-family: cookierun; font-size : 15px; "  aria-label="Search">
+                       <input name="indexSearch" class="form-control mr-sm-2" type="text" 
+                           style="font-family: cookierun; font-size : 15px; "  aria-label="Search" placeholder="제목 + 내용">
                        <button class="btn btn-success btn-rounded btn-sm my-0" type="submit">Search</button>
                   </form>  
                <!--  검색 창 끝 -->
@@ -147,10 +153,10 @@
 		               
 		               var div2 = $('<div class="single-features">');
 		               var div2_1 = $('<div class="col-sm-4 col-sm-offset-1 align-right wow fadeInLeft" data-wow-duration="500ms" data-wow-delay="300ms">');
-		               var h2Tag = $('<h2>').text(data[0].bTitle);
-		               var pTag = $('<p>').text(data[0].bContent);             
+		               var h2Tag = $('<h2>').text(data[1].bTitle);
+		               var pTag = $('<p>').text(data[1].bContent);             
 		               var div2_2 = $('<div class="col-sm-7 wow fadeInRight">');
-		               var imgTag = $('<img src="${ pageContext.request.contextPath }/resources/upload/' + data[0].titleFilename + '" class="img-responsive" >');
+		               var imgTag = $('<img src="${ pageContext.request.contextPath }/resources/upload/' + data[1].titleFilename + '" class="img-responsive" >');
 		               
 		               div2_1.append(h2Tag).append(pTag); 
 		               div2_2.append(imgTag);
@@ -161,10 +167,10 @@
 
 		               var div3 = $('<div class="single-features">');
 		               var div3_1 = $('<div class="col-sm-7 wow fadeInLeft" data-wow-duration="500ms" data-wow-delay="300ms">');
-		               var imgTag = $('<img src="${ pageContext.request.contextPath }/resources/upload/' + data[1].titleFilename + '" class="img-responsive" >');
+		               var imgTag = $('<img src="${ pageContext.request.contextPath }/resources/upload/' + data[2].titleFilename + '" class="img-responsive" >');
 		               var div3_2 = $('<div class="col-sm-4 wow fadeInRight">');
-		               var h2Tag = $('<h2>').text(data[1].bTitle);
-		               var pTag = $('<p>').text(data[1].bContent);
+		               var h2Tag = $('<h2>').text(data[2].bTitle);
+		               var pTag = $('<p>').text(data[2].bContent);
 		               
 		               div3_1.append(imgTag);
 		               div3_2.append(h2Tag).append(pTag);
@@ -176,10 +182,10 @@
 		            
 		               var div4 = $('<div class="single-features">');
 		               var div4_1 = $('<div class="col-sm-4 col-sm-offset-1 align-right wow fadeInLeft">');
-		               var h2Tag = $('<h2>').text(data[2].bTitle);
-		               var pTag = $('<p>').text(data[2].bContent);             
+		               var h2Tag = $('<h2>').text(data[3].bTitle);
+		               var pTag = $('<p>').text(data[3].bContent);             
 		               var div4_2 = $('<div class="col-sm-7 wow fadeInRight">');
-		               var imgTag = $('<img src="${ pageContext.request.contextPath }/resources/upload/' + data[2].titleFilename + '" class="img-responsive" >');
+		               var imgTag = $('<img src="${ pageContext.request.contextPath }/resources/upload/' + data[3].titleFilename + '" class="img-responsive" >');
 		               
 		               div4_1.append(h2Tag).append(pTag); 
 		               div4_2.append(imgTag);
@@ -191,10 +197,10 @@
 		               
 		               var div5 = $('<div class="single-features">');
 		               var div5_1 = $('<div class="col-sm-7 wow fadeInLeft">');
-		               var imgTag = $('<img src="${ pageContext.request.contextPath }/resources/upload/' + data[3].titleFilename + '" class="img-responsive" >');
+		               var imgTag = $('<img src="${ pageContext.request.contextPath }/resources/upload/' + data[4].titleFilename + '" class="img-responsive" >');
 		               var div5_2 = $('<div class="col-sm-4 wow fadeInRight">');
-		               var h2Tag = $('<h2>').text(data[3].bTitle);
-		               var pTag = $('<p>').text(data[3].bContent);
+		               var h2Tag = $('<h2>').text(data[4].bTitle);
+		               var pTag = $('<p>').text(data[4].bContent);
 		               
 		               div5_1.append(imgTag);
 		               div5_2.append(h2Tag).append(pTag);

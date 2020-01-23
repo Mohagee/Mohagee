@@ -10,15 +10,15 @@
 <!-- 부트스트랩적용 -->
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
-		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" 
-		integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+      integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" 
-		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+      integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <meta charset="UTF-8">
 <title>실시간 채팅</title>
 <script>
@@ -27,7 +27,7 @@
     /* /info : https://github.com/sockjs/sockjs-protocol/blob/master/sockjs-protocol.py#L250-L263 */
     
     sock.onmessage=onMessage;
-	sock.onclose=onClose;
+   sock.onclose=onClose;
     
     var today=null;
     
@@ -60,7 +60,7 @@
         
         //전송된 데이터 출력해보기
         for(var i=0;i<strArray.length;i++) {
-            console.log('str['+i+'] :' + strArray[i]);	 		
+            console.log('str['+i+'] :' + strArray[i]);          
         }
         
         if(strArray.length>1) {
@@ -109,7 +109,7 @@
             printHTML+="<strong>[서버관리자] : "+message+"</strong>";
             printHTML+="</div>";
             printHTML+="</div>";
-            $('#chatdata').append(printHTML);	
+            $('#chatdata').append(printHTML);   
         }
     };
     
@@ -124,15 +124,62 @@ div { padding:5%; }
 </head>
 <body>
 <div class='form-group'>
-    <label id='sessionuserid'><h3>${member.nickName}님, 어서오세요!</h3></label><br/>
-    <!-- 대화내용이 출력되는 부분 -->
-    <div class='panel panel-default'>
-        <div id='chatdata' class='panel-body'></div>
-    </div>
-    <!-- 메세지 작성부분 -->
-    <textarea name='message' id='message' style="width:100%;"></textarea><br/>
-    <button class='btn btn-primary' type="button" id='sendBtn'>전송</button>
-    <button class='btn btn-primary' type="button" id='exitBtn'>나가기</button>
+    <table style="width: 900px; margin : auto; background-image: url(${ pageContext.request.contextPath }/resources/images/chat_Background.jpg);">
+    
+    
+    <tr>
+       <td align="center" style="width: 600px; color: white;">
+          <!-- 방 이름 -->
+          <h2 style = "color : lightyellow;">
+             ${member.nickName}님, 채팅방입니다^^
+          </h2>
+       </td>   
+       <td align="center" style="width: 300px;"> 
+          <!-- 방 나가기 버튼 -->
+          <button class='btn btn-primary' type="button" id='exitBtn'>나가기</button>
+       </td>
+    
+    </tr>
+    
+    </table>
+    
+    <!-- 채팅방 구현 부분 -->
+    <table style="height : 600px; width: 900px; 
+       margin: auto; margin-bottom: 10px; padding: 0; background-color: rgb(170, 224, 206);"
+         class='panel panel-default' >
+    
+    <!-- 채팅창 부분 -->
+    <col width="400px;" /><!-- 메세지 입력 영역 -->
+    
+    <!-- 오른쪽 리스트 출력영역 -->
+    <col width="300px;"/> <!-- 보내기 영역 -->    
+    
+    <tr height="600px;">
+       <!-- 채팅 내용 출력 -->
+       <td style="width:550px;" colspan="2" >
+          
+          <div style="width:100%; height: 550px; background-color:rgba(237, 241, 243, 0.8); 
+                   over-flow-y:scroll; over-flow-x:inherit; 
+                   margin: 3px; border-radius:3px;" id='chatdata' class='panel-body' ></div>
+          
+       </td>
+    
+    </tr>
+    
+    <!-- 입력 창 -->
+    <tr height="100px;">
+       
+       <td>
+          <input type="text"  name='message' id='message' size="50" value="" style="width: 100%; height: 80px; border-radius:5px;
+                font-weight: bold; margin:auto; box-shadow: 0.5px 0.5px 0.5px 0.5px #A0A0C8 inset;" 
+                class="form-control form-control-lg" placeholder="내용 입력" />
+       </td>
+       
+       <td>
+          <button class='btn btn-primary' type="button" id='sendBtn' style="width:100%; height:70px;">전송</button>
+       </td>
+    </tr>
+    </table>
 </div>
 
 </body>
