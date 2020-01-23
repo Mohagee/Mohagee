@@ -54,7 +54,7 @@
             <div class="row">
                <div class="action">
                   <div class="col-sm-12">
-                     <h1 class="title" style="font-family:cookierun;">HOWL's GYM BOARD</h1>
+                     <h1 class="title" style="font-family:cookierun;">어떤 운동 해볼까?</h1>
                   </div>
                </div>
             </div>
@@ -69,13 +69,18 @@
    <div class="container">
    
    <!--  글쓰기 버튼  -->
-   <div align="right">
+   
+   <c:set value="${ member.userGrade }" var="userGrade"/>
+   
       <c:if test="${ !empty member}">
+   <c:if test = "${ userGrade eq 'E' }">
+   <div align="right">
          <a href="${ pageContext.request.contextPath }/gymBoard/gymBoardInsertForm.do">
             <button type="button" class="btn btn-success" id="writerBtn" style="font-family:cookierun;">글쓰기</button>
          </a>
-      </c:if>
    </div>
+   </c:if>
+      </c:if>
       
       <!-- 태그 리스트  -->
       <div class="row">

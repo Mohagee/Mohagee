@@ -45,7 +45,7 @@ public class EmailService {
 		
 		sendMail.setSubject("뭐하지? 이메일 인증");
 		sendMail.setText("<h1>메일인증</h1>" +
-				"<a href='http://192.168.20.161:8088/mohagee/email/emailConfirm?userId=" + userId +
+				"<a href='http://192.168.20.182:8088/mohagee/email/emailConfirm?userId=" + userId +
 				"&key=" + key +
 				"' target='_blenk'>이메일 인증 확인</a>");
 		sendMail.setFrom("cainchel357@naver.com", "뭐하지?");

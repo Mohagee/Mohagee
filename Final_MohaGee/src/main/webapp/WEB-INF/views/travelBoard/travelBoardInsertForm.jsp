@@ -122,7 +122,7 @@ input[type=file]{
                 <div class="row">
                     <div class="action">
                         <div class="col-sm-12">
-                            <h1 class="title" style="font-family:cookierun;">EDITOR  YOUNGJU's Travel BOARD </h1>       
+                            <h1 class="title" style="font-family:cookierun;">EDITOR  JJUUU's Travel BOARD </h1>       
                         </div>
                     </div>
                 </div>
@@ -184,7 +184,7 @@ input[type=file]{
       <!-- 태그 입력 칸 -->
       <div class="input-group mb-3" style="display: table-cell; text-align: center; vertical-align: middle; width:900px;"><br />
               <input  type="text" class="form-control" aria-label="Text input with dropdown button" 
-              id = "tag" name="bTag" placeholder="최대 5개" required>
+              id = "tag" name="bTag" placeholder="태그를 입력하세요 (최대 5개)" required>
       </div>
            <!-- URL 입력 칸 -->
       <div class="input-group mb-3" style="width:900px;"><br />

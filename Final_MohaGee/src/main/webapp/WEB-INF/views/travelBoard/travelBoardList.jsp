@@ -6,6 +6,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title style="font-family:cookierun;">JJUUU's MOHAGEE</title>
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <c:import url="../common/commonUtil.jsp" />
@@ -35,6 +37,9 @@
 	.label{
 		font-size: 85%;
 	}
+	body{
+	font-family : cookierun;
+	}
 </style>
 
 </head>
@@ -47,7 +52,7 @@
             <div class="row">
                <div class="action">
                   <div class="col-sm-12">
-                     <h1 class="title">어딜 가볼까?</h1>
+                     <h1 class="title" style="font-family:cookierun;">어딜 가볼까?</h1>
                   </div>
                </div>
             </div>
@@ -62,24 +67,28 @@
    <div class="container">
    
    <!--  글쓰기 버튼  -->
+   
+   <c:set value="${ member.userGrade }" var="userGrade"/>
+   
+   <c:if test = "${ userGrade eq 'E' }">
    <div align="right">
       <c:if test="${ !empty member}">
-         <a href="${ pageContext.request.contextPath }/travelBoard/travelBoardInsertForm.do">
-            <button type="button" class="btn btn-success" id="writerBtn">글쓰기</button>
+         <a href="${ pageContext.request.contextPath }/travelBoard/travelBoardInsertForm.do" style="font-family:cookierun;">
+            <button type="button" class="btn btn-success" id="writerBtn" >글쓰기</button>
          </a>
       </c:if>
    </div>
-      
+      </c:if>
       <!-- 태그 리스트  -->
       <div class="row">
             <ul class="masonery-filter text-center">
-               <li><a class="btn btn-default active" href="#" data-filter="*">ALL</a></li>
-               <li><a class="btn btn-default" href="#" data-filter=".korea">국내</a></li>
-               <li><a class="btn btn-default" href="#" data-filter=".asia">아시아</a></li>
-               <li><a class="btn btn-default" href="#" data-filter=".america">아메리카</a></li>
-               <li><a class="btn btn-default" href="#" data-filter=".europe">유럽</a></li>
-               <li><a class="btn btn-default" href="#" data-filter=".oceania">오세아니아</a></li>
-               <li><a class="btn btn-default" href="#" data-filter=".africa">아프리카</a></li>
+               <li><a class="btn btn-default active" href="#" data-filter="*" style="font-family:cookierun;">ALL</a></li>
+               <li><a class="btn btn-default" href="#" data-filter=".korea" style="font-family:cookierun;">국내</a></li>
+               <li><a class="btn btn-default" href="#" data-filter=".asia" style="font-family:cookierun;">아시아</a></li>
+               <li><a class="btn btn-default" href="#" data-filter=".america" style="font-family:cookierun;">아메리카</a></li>
+               <li><a class="btn btn-default" href="#" data-filter=".europe" style="font-family:cookierun;">유럽</a></li>
+               <li><a class="btn btn-default" href="#" data-filter=".oceania" style="font-family:cookierun;">오세아니아</a></li>
+               <li><a class="btn btn-default" href="#" data-filter=".africa" style="font-family:cookierun;">아프리카</a></li>
             </ul>
             
 
@@ -107,7 +116,8 @@
                      <div class="post-content overflow">                        
                         <!--  제목 -->
                         <h2 class="post-title bold">
-                           <a href="${ pageContext.request.contextPath }/travelBoard/travelBoardDetail.do?bNo=${travelBoard.bNo}">${ travelBoard.bTitle }</a>
+                           <a href="${ pageContext.request.contextPath }/travelBoard/travelBoardDetail.do?bNo=${travelBoard.bNo}"
+                           style="font-family:cookierun;">${ travelBoard.bTitle }</a>
                         </h2>
 
                         <div class="post-bottom overflow">

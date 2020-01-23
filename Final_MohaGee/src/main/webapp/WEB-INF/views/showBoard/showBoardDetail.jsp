@@ -12,7 +12,7 @@
     
     <c:import url="../common/commonUtil.jsp"/>
     
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3484c416ab1339a45db9fa79d4fa15c5"></script> 
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=135a70e3453c8576818a0ca901d2a3f2"></script> 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=APIKEY&libraries=services,clusterer,drawing"></script>
 
     <style>
@@ -318,7 +318,7 @@ textarea {
 			
 		<!-- 본문 내용 영역 -->	
           <div class="post-content overflow">                                  					
-			<pre class="form-control" id="board_content" name="bContent"><b>${ShowBoard.bContent }</b></pre><br />
+			<pre class="form-control" id="board_content" name="bContent" ><b>${ShowBoard.bContent }</b></pre><br />
 					
         <!-- 지도 담을 영역 -->
         <div id="map" style="width:500px;height:400px;"></div>   
@@ -352,13 +352,15 @@ textarea {
 		<a href="${ pageContext.request.contextPath }/showBoard/showBoardList.do">
 			<button type="button" class="btn btn-warning btn-rounded" id="listBtn">목록이동</button>
 		</a>&nbsp;			
-
+		 <c:set value="${member.userNo} " var="memberUserNo"/>
+                 <c:set value="${ShowBoard.userNo} " var="showBoardUserNo"/>
+                 <c:if test="${ memberUserNo eq showBoardUserNo }">
 		<button type="button" class="btn btn-primary btn-rounded"
 		onclick="location.href='${pageContext.request.contextPath}/showBoard/showBoardUpdateForm.do?bNo=${ShowBoard.bNo}'" >수정 하기</button>&nbsp;
 
 		<button type="button" class="btn btn-danger btn-rounded" 
 			onclick="location.href='${pageContext.request.contextPath}/showBoard/showBoardDelete.do?bNo=${ShowBoard.bNo}'">삭제 하기</button>				
-			
+		</c:if>
 <br /><br />
 
              <div class="author-profile padding">

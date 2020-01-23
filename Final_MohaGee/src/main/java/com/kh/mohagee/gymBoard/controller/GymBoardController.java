@@ -26,7 +26,7 @@ import com.kh.mohagee.gymBoard.model.vo.GymBoard;
 @Controller
 public class GymBoardController {
 	
-    private String[] imgExt = {"jpg", "png", "PNG", "gif", "GIF", "bmp", "svg", "jpeg", "webp"};
+    private String[] imgExt = {"jpg", "png", "PNG", "gif", "GIF", "bmp", "svg", "jpeg", "webp", "jfif"};
     private String[] videoExt = {"mp4", "avi", "mkv", "wmv", "flv", "asf", "ts", "mpg"};
     private String[] audioExt = {"mp3", "ogg", "wav", "flac"};
 

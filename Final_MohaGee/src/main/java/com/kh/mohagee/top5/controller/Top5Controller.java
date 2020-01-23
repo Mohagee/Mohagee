@@ -20,7 +20,26 @@ public class Top5Controller {
 	@ResponseBody
 	public List<FavoriteBoard> top5List(){
 		
-		return top5Service.selectList();
+		List<FavoriteBoard> list = top5Service.selectList();
+		
+		
+		for(FavoriteBoard f : list) {
+			
+			if(f.getbContent().length() > 300) {
+				
+				String splitContent = f.getbContent().substring(0, 300);
+				
+				String content = splitContent + "...";
+				
+				f.setbContent(content);
+				
+				System.out.println(f);
+				
+			}
+			
+		}
+		
+		return list;
 	}
 
 }
