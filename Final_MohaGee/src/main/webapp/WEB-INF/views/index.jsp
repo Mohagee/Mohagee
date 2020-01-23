@@ -265,11 +265,11 @@
                                 <div class="team-single-wrapper">
                                     <div class="team-single">
                                         <div class="person-thumb">
-                                            <img src="${ pageContext.request.contextPath }/resources/developerImage/jjju.png" class="img-responsive" alt="">
+                                            <img src="${ pageContext.request.contextPath }/resources/developerImage/jjuuu.png" class="img-responsive" alt="">
                                         </div>
                                     </div>
                                     <div class="person-info">
-                                        <h2>jjju</h2>
+                                        <h2>jjuuu</h2>
                                         <p>Developer &nbsp; 전영주</p>
                                     </div>
                                 </div>

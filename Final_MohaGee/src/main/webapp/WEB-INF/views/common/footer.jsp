@@ -4,31 +4,33 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <footer id="footer">
-	<div class="container">
-	    <div class="row">
-	        <div class="col-sm-12 text-center bottom-separator">
-	            <img src="${ pageContext.request.contextPath }/resources/images/home/under.png" class="${ pageContext.request.contextPath }/resources/img-responsive inline" alt="">
-	        </div>
-	        <div class="col-md-4 col-sm-6">
+   <div class="container">
+       <div class="row">
+           <div class="col-sm-12 text-center bottom-separator">
+               <img src="${ pageContext.request.contextPath }/resources/images/home/under.png" class="${ pageContext.request.contextPath }/resources/img-responsive inline" alt="">
+           </div>
+           <div class="col-md-4 col-sm-6">
             <div class="testimonial bottom">
                 <!-- 이거 살리는게 나을거같아요 -->
-                    <h2>Testimonial</h2>
+                    <h2 style="font-family:cookierun;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MOHAGEE?</h2>
                     <div class="media">
                         <div class="pull-left">
-                            <a href="#"><img src="${ pageContext.request.contextPath }/resources/images/home/profile1.png" alt=""></a>
+                            <a href="#"><img src="${ pageContext.request.contextPath }/resources/images/footer.png" alt=""></a>
                         </div>
                         <div class="media-body">
-                            <blockquote>Nisi commodo bresaola, leberkas venison eiusmod bacon occaecat labore tail.</blockquote>
-                            <h3><a href="#">- Jhon Kalis</a></h3>
+                            <blockquote>어제와 같은 오늘을 보내고 오늘과 다른 내일을 기대하는것은 정신병 초기증세다</blockquote>
+                            <h3><a href="#">- EDITOR HOWL</a></h3>
                         </div>
                      </div>
                     <div class="media">
                         <div class="pull-left">
-                            <a href="#"><img src="${ pageContext.request.contextPath }/resources/images/home/profile2.png" alt=""></a>
+                            <a href="#"><img src="${ pageContext.request.contextPath }/resources/developerImage/reaven.gif" alt=""></a>
                         </div>
                         <div class="media-body">
-                            <blockquote>Capicola nisi flank sed minim sunt aliqua rump pancetta leberkas venison eiusmod.</blockquote>
-                            <h3><a href="">- Abraham Josef</a></h3>
+                            <blockquote>NEVER EVER GIVE UP</blockquote>
+                            <h3><a href="">- EDITOR ALICE</a></h3>
                         </div>
                     </div>   
                 </div> 
@@ -37,17 +39,17 @@
                 <div class="contact-info bottom">
                     <h2>Contacts</h2>
                     <address>
-                    E-mail: <a href="mailto:someone@example.com">email@email.com</a> <br> 
-                    Phone: +1 (123) 456 7890 <br> 
-                    Fax: +1 (123) 456 7891 <br> 
+                    E-mail :  <a href="mailto:someone@example.com">MOGAHEE@google.com</a> <br> 
+                    Phone :  +8210 - ???? - ???? <br> 
+                    Fax :  +822 - ???? - ???? <br> 
                     </address>
 
                     <h2>Address</h2>
                     <address>
-                    Unit C2, St.Vincent's Trading Est., <br> 
-                    Feeder Road, <br> 
-                    Bristol, BS2 0UY <br> 
-                    United Kingdom <br> 
+                    대한민국 <br> 
+                    서울 역삼동 <br> 
+                    KH학원 <br> 
+                    352CLASS <br> 
                     </address>
                 </div>
             </div>
@@ -72,7 +74,7 @@
             </div>
             <div class="col-sm-12">
                 <div class="copyright-text text-center">
-                    <p>&copy; Your Company 2014. All Rights Reserved.</p>
+                    <p>&copy; 352CLASS FINAL PROJECT TEAM MOHAGEE</p>
                     <p>Designed by <a target="_blank" href="http://www.themeum.com">Themeum</a></p>
                 </div>
             </div>
