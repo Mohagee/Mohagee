@@ -181,11 +181,6 @@ public class GymBoardController {
 		
 		int favoriteCount = favoriteService.favoriteCount(bNo);
 		
-		for(int i = 0; i < list.size(); i++) {
-			System.out.println(list.get(i));
-		}
-		
-		
 		// gymBoard라는 이름에(키) gb에 담긴 값을 담는다(값)
 		model.addAttribute("gymBoard", gymBoard)
 		.addAttribute("GymAttachmentList", list)

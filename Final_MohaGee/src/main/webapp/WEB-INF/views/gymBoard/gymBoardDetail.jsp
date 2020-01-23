@@ -333,7 +333,7 @@ textarea {
 			                                	
 			                                <li id="favorite" style="color: #0099AE"><i class="fas fa-heart"></i>&nbsp;&nbsp;${ favoriteCount }</li>
 			                                  
-			                                <li style="color: #0099AE"><i class="fas fa-comments"></i>&nbsp;&nbsp;댓글 숫자</li>
+			                                <li style="color: #0099AE"><i class="fas fa-comments"></i>&nbsp;&nbsp;${gymBoard.commentCount}</li>
                                         </ul>
                                     </div>
                                 <!-- 게시글 수정 버튼  -->
@@ -551,6 +551,30 @@ $(function(){
 
 /* 댓글만들기 스크립트 끝! */
  /* 좋아요 스크립트 시작 */
+ 
+ $(function(){
+    	
+    	var userNo = "${member.userNo}";
+    	var bNo = "${gymBoard.bNo}";
+    	
+    	$.ajax({
+    		url: "${pageContext.request.contextPath}/favorite/checkFavorite",
+    		data: {
+    			userNo : userNo,
+    			bNo : bNo
+    		},
+    		dataType: "json",
+    		async: false,
+    		success: function(data){
+    			
+    			if(data.Favorite.fStatus == 'Y'){
+    				$("#favorite").css("color", "red");
+    			}
+    			
+    		}
+    	});
+    	
+   });
 
 
  $("#favorite").on("click", function(){
@@ -574,7 +598,7 @@ $(function(){
             $.ajax({
                url: "${pageContext.request.contextPath}/favorite/doFavorite",
                data: {
-                  fStatus : fStatus,
+                   fStatus : fStatus,
                    userNo : userNo,
                    bNo : bNo
                 },

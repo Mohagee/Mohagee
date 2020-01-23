@@ -10,13 +10,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>뭐하지?</title>
     
-    <c:import url="views/common/commonUtil.jsp"/>
+    <c:import url="common/commonUtil.jsp"/>
     
 </head>
 
 <body>
 
-   <c:import url="views/common/header.jsp"/>
+   <c:import url="common/header.jsp"/>
    
     <section id="home-slider">
         <div class="container">
@@ -57,19 +57,19 @@
                 <div class="row">
                     <div class="action count">
                         <div class="col-sm-3 text-center wow bounceIn" data-wow-duration="1000ms" data-wow-delay="300ms">
-                            <h1 class="timer bold" data-to="99999" data-speed="3000" data-from="0"></h1>   
+                            <h1 class="timer bold" data-to="${ total }" data-speed="3000" data-from="0"></h1>   
                             <h3>총 게시글 수</h3>
                         </div>
                         <div class="col-sm-3 text-center wow bounceIn" data-wow-duration="1000ms" data-wow-delay="300ms">
-                            <h1 class="timer bold" data-to="12" data-speed="3000" data-from="0"></h1>   
+                            <h1 class="timer bold" data-to="${ showBoard }" data-speed="3000" data-from="0"></h1>   
                             <h3>공연게시판</h3> 
                         </div>
                         <div class="col-sm-3 text-center wow bounceIn" data-wow-duration="1000ms" data-wow-delay="300ms">
-                            <h1 class="timer bold" data-to="432" data-speed="3000" data-from="0"></h1> 
+                            <h1 class="timer bold" data-to="${ gymBoard }" data-speed="3000" data-from="0"></h1> 
                             <h3>운동 게시판</h3>
                         </div>
                         <div class="col-sm-3 text-center wow bounceIn" data-wow-duration="1000ms" data-wow-delay="300ms">
-                            <h1 class="timer bold" data-to="145" data-speed="3000" data-from="0"></h1> 
+                            <h1 class="timer bold" data-to="${ travelBoard }" data-speed="3000" data-from="0"></h1> 
                             <h3>여행 게시판</h3>
                         </div>
                     </div>
@@ -132,7 +132,7 @@
 	            $div.empty();
 	            	
 		               var div1 = $('<div class="single-features">');
-		               var div1_1 = $('<div class="col-sm-7 wow fadeInLeft">');
+		               var div1_1 = $('<div class="col-sm-7 wow fadeInLeft" data-wow-duration="500ms" data-wow-delay="300ms">');
 		               var imgTag = $('<img src="${ pageContext.request.contextPath }/resources/upload/' + data[0].titleFilename + '" class="img-responsive" >');
 		               var div1_2 = $('<div class="col-sm-4 wow fadeInRight">');
 		               var h2Tag = $('<h2>').text(data[0].bTitle);
@@ -144,13 +144,13 @@
 		               div1.append(div1_1).append(div1_2);
 		               
 		               $div.append(div1);
-
+		               
 		               var div2 = $('<div class="single-features">');
-		               var div2_1 = $('<div class="col-sm-4 col-sm-offset-1 align-right wow fadeInLeft">');
-		               var h2Tag = $('<h2>').text(data[1].bTitle);
-		               var pTag = $('<p>').text(data[1].bContent);             
+		               var div2_1 = $('<div class="col-sm-4 col-sm-offset-1 align-right wow fadeInLeft" data-wow-duration="500ms" data-wow-delay="300ms">');
+		               var h2Tag = $('<h2>').text(data[0].bTitle);
+		               var pTag = $('<p>').text(data[0].bContent);             
 		               var div2_2 = $('<div class="col-sm-7 wow fadeInRight">');
-		               var imgTag = $('<img src="${ pageContext.request.contextPath }/resources/upload/' + data[1].titleFilename + '" class="img-responsive" >');
+		               var imgTag = $('<img src="${ pageContext.request.contextPath }/resources/upload/' + data[0].titleFilename + '" class="img-responsive" >');
 		               
 		               div2_1.append(h2Tag).append(pTag); 
 		               div2_2.append(imgTag);
@@ -160,11 +160,11 @@
 		               $div.append(div2);
 
 		               var div3 = $('<div class="single-features">');
-		               var div3_1 = $('<div class="col-sm-7 wow fadeInLeft">');
-		               var imgTag = $('<img src="${ pageContext.request.contextPath }/resources/upload/' + data[2].titleFilename + '" class="img-responsive" >');
+		               var div3_1 = $('<div class="col-sm-7 wow fadeInLeft" data-wow-duration="500ms" data-wow-delay="300ms">');
+		               var imgTag = $('<img src="${ pageContext.request.contextPath }/resources/upload/' + data[1].titleFilename + '" class="img-responsive" >');
 		               var div3_2 = $('<div class="col-sm-4 wow fadeInRight">');
-		               var h2Tag = $('<h2>').text(data[2].bTitle);
-		               var pTag = $('<p>').text(data[2].bContent);
+		               var h2Tag = $('<h2>').text(data[1].bTitle);
+		               var pTag = $('<p>').text(data[1].bContent);
 		               
 		               div3_1.append(imgTag);
 		               div3_2.append(h2Tag).append(pTag);
@@ -176,10 +176,10 @@
 		            
 		               var div4 = $('<div class="single-features">');
 		               var div4_1 = $('<div class="col-sm-4 col-sm-offset-1 align-right wow fadeInLeft">');
-		               var h2Tag = $('<h2>').text(data[3].bTitle);
-		               var pTag = $('<p>').text(data[3].bContent);             
+		               var h2Tag = $('<h2>').text(data[2].bTitle);
+		               var pTag = $('<p>').text(data[2].bContent);             
 		               var div4_2 = $('<div class="col-sm-7 wow fadeInRight">');
-		               var imgTag = $('<img src="${ pageContext.request.contextPath }/resources/upload/' + data[3].titleFilename + '" class="img-responsive" >');
+		               var imgTag = $('<img src="${ pageContext.request.contextPath }/resources/upload/' + data[2].titleFilename + '" class="img-responsive" >');
 		               
 		               div4_1.append(h2Tag).append(pTag); 
 		               div4_2.append(imgTag);
@@ -191,10 +191,10 @@
 		               
 		               var div5 = $('<div class="single-features">');
 		               var div5_1 = $('<div class="col-sm-7 wow fadeInLeft">');
-		               var imgTag = $('<img src="${ pageContext.request.contextPath }/resources/upload/' + data[4].titleFilename + '" class="img-responsive" >');
+		               var imgTag = $('<img src="${ pageContext.request.contextPath }/resources/upload/' + data[3].titleFilename + '" class="img-responsive" >');
 		               var div5_2 = $('<div class="col-sm-4 wow fadeInRight">');
-		               var h2Tag = $('<h2>').text(data[4].bTitle);
-		               var pTag = $('<p>').text(data[4].bContent);
+		               var h2Tag = $('<h2>').text(data[3].bTitle);
+		               var pTag = $('<p>').text(data[3].bContent);
 		               
 		               div5_1.append(imgTag);
 		               div5_2.append(h2Tag).append(pTag);
@@ -235,13 +235,8 @@
                                 <div class="team-single-wrapper">
                                     <div class="team-single">
                                         <div class="person-thumb">
-                                            <img src="${ pageContext.request.contextPath }/resources/images/aboutus/1.jpg" class="img-responsive" alt="">
+                                            <img src="${ pageContext.request.contextPath }/resources/developerImage/Howl.png" class="img-responsive" alt="">
                                         </div>                                        
-                                        <div class="social-profile">
-                                            <ul class="nav nav-pills">
-                                                <li><a href="#"></a></li><!-- 개발자 프로필로 이동시키기 -->
-                                            </ul>
-                                        </div>
                                     </div>                                   
                                     <div class="person-info">
                                         <h2>Howl</h2>
@@ -255,7 +250,7 @@
                                 <div class="team-single-wrapper">
                                     <div class="team-single">
                                         <div class="person-thumb">
-                                            <img src="${ pageContext.request.contextPath }/resources/images/aboutus/1.jpg" class="img-responsive" alt="">
+                                            <img src="${ pageContext.request.contextPath }/resources/developerImage/Alice.png" class="img-responsive" alt="">
                                         </div>
                                     </div>
                                     <div class="person-info">
@@ -270,7 +265,7 @@
                                 <div class="team-single-wrapper">
                                     <div class="team-single">
                                         <div class="person-thumb">
-                                            <img src="${ pageContext.request.contextPath }/resources/images/aboutus/1.jpg" class="img-responsive" alt="">
+                                            <img src="${ pageContext.request.contextPath }/resources/developerImage/jjju.png" class="img-responsive" alt="">
                                         </div>
                                     </div>
                                     <div class="person-info">
@@ -285,7 +280,7 @@
                                 <div class="team-single-wrapper">
                                     <div class="team-single">
                                         <div class="person-thumb">
-                                            <img src="${ pageContext.request.contextPath }/resources/images/aboutus/1.jpg" class="img-responsive" alt="">
+                                            <img src="${ pageContext.request.contextPath }/resources/developerImage/RSPD.png" class="img-responsive" alt="">
                                         </div>
                                     </div>
                                     <div class="person-info">
@@ -302,7 +297,7 @@
                                 <div class="team-single-wrapper">
                                     <div class="team-single">
                                         <div class="person-thumb">
-                                            <img src="${ pageContext.request.contextPath }/resources/images/aboutus/1.jpg" class="img-responsive" alt="">
+                                            <img src="${ pageContext.request.contextPath }/resources/developerImage/HaON.png" class="img-responsive" alt="">
                                         </div>
                                     </div>
                                     <div class="person-info">
@@ -322,7 +317,7 @@
         </div>
     </section>
 
-	<c:import url="views/common/footer.jsp"/>
+	<c:import url="common/footer.jsp"/>
 	
 	<script>
 		/* $(function(){

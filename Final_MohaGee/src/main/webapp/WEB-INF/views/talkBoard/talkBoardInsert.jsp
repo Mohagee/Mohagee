@@ -141,13 +141,7 @@
 	      <div class="input-group mb-3" style="width:900px" ><br />
 	          <input type="text" class="form-control" aria-label="Text input with dropdown button" 
 	              id = "title" name="tTitle" placeholder="제목 입력" required>
-	      </div>      
-	
-	      <!-- 태그 입력 칸 -->
-	      <div class="input-group mb-3" style="width:900px;"><br />
-	              <input type="text" class="form-control" aria-label="Text input with dropdown button" 
-	              id = "tag" name="tTag" placeholder="ex) #공연, #액티비티, #여행" required>
-	      </div>
+	      </div>   
 	      
 	<!--  업로드 사진 미리보기 칸 -->
 	    <div>

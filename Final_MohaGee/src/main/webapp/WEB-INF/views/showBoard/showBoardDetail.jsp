@@ -333,7 +333,7 @@ textarea {
                     	
                       <li id="favorite" style="color: #0099AE"><i class="fas fa-heart"></i>&nbsp;&nbsp;${ favoriteCount }</li>
                       
-                      <li style="color: #0099AE"><i class="fas fa-comments"></i>&nbsp;&nbsp;댓글 숫자</li>
+                      <li style="color: #0099AE"><i class="fas fa-comments"></i>&nbsp;&nbsp;${ShowBoard.commentCount}</li>
                   </ul>
               </div>
         <div class="blog-share">

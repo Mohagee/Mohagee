@@ -1,10 +1,33 @@
 package com.kh.mohagee.common.movePage;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.kh.mohagee.common.movePage.model.service.IndexService;
 
 @Controller
 public class MovePageController {
+	
+	@Autowired
+	IndexService indexService;
+	
+	
+	@RequestMapping("/index.do")
+	public String gotoIndexMain(Model model) {
+			
+		int total = indexService.totalBoard();
+		int showBoard = indexService.showBoard();
+		int travelBoard = indexService.travelBoard();
+		int gymBoard = indexService.gymBoard();
+		
+		model.addAttribute("total", total).addAttribute("showBoard", showBoard)
+		.addAttribute("travelBoard", travelBoard).addAttribute("gymBoard", gymBoard);
+		
+		return "index";
+	}
+	
 	@RequestMapping("/gotoIndex.do")
 	public String gotoIndex() {
 

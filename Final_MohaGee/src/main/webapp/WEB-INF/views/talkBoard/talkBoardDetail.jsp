@@ -108,8 +108,6 @@
                                     <div class="post-bottom overflow">
                                         <ul class="nav navbar-nav post-nav">
                                          	<li><a href="#"><i class="far fa-clock" style="font-family:cookierun;"></i>&nbsp;&nbsp;${talkBoard.tDate}</a></li>
-                                            <li><a href="#"><i class="fa fa-tag"></i>${talkBoard.tTag}</a></li>
-                                            <li><a href="#"><i class="fa fa-comments"></i> Comments</a></li>
                                         </ul>
                                         
                                         <br /><br /><br />

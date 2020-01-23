@@ -329,10 +329,11 @@
                                             <li style="color: #0099AE"><i class="fas fa-clock"></i>&nbsp;&nbsp;${TravelBoard.bDate}</li>
              
                                   			<li style="color: #0099AE"><i class="fas fa-tags"></i>&nbsp;&nbsp;<input id="tag" type="text" data-role="tagsinput" value="${ TravelBoard.bTag }"/></li>
+                                  			
                                 	
                                   			<li id="favorite" style="color: #0099AE"><i class="fas fa-heart"></i>&nbsp;&nbsp;${ favoriteCount }</li>
                                   
-                                  			<li style="color: #0099AE"><i class="fas fa-comments"></i>&nbsp;&nbsp;댓글 숫자</li>
+                                  			<li style="color: #0099AE"><i class="fas fa-comments"></i>&nbsp;&nbsp;${TravelBoard.commentCount}</li>
                                         </ul>
                                     </div>
                                     </div>
@@ -355,7 +356,6 @@
                                         <span class='st_linkedin_hcount'></span>
                                         <span class='st_pinterest_hcount'></span>
                                         <span class='st_email_hcount'></span>
-                                        <span>이거 살리면 기능 자동으로 되요</span>
                                     </div>
                                     
                                     <div class="author-profile padding">
@@ -374,7 +374,7 @@
                                     
             <!--  댓글 부분  -->
 			<div id="addComment">
-					    <input type="text" placeholder="댓글 달고싶지?" style="font-family:cookierun;"></input>&nbsp;&nbsp;&nbsp;<button id="newCommentButton" onclick="submitNewComment(this)">&nbsp;댓 글&nbsp;</button>
+					    <input type="text" placeholder="댓글 달고싶지?" style="font-family:cookierun;"/>&nbsp;&nbsp;&nbsp;<button id="newCommentButton" onclick="submitNewComment(this)">&nbsp;댓 글&nbsp;</button>
 				    </div><br />
 				    
 			   <!--  <hr id="commentDivider"/> -->
@@ -397,7 +397,7 @@
 			                           </div>
 			                       </div>
 			                       <!-- 대댓글 작성 창 -->
-			                       <div id="addComment"><input type="text" placeholder="대댓글 달고싶지?" style="font-family:cookierun;"></input>&nbsp;&nbsp;&nbsp;<button id="newCommentButton" onclick="submitNewReplyComment(this, ${ tbc.bcNo })">댓글</button></div>
+			                       <div id="addComment"><input type="text" placeholder="대댓글 달고싶지?" style="font-family:cookierun;"/>&nbsp;&nbsp;&nbsp;<button id="newCommentButton" onclick="submitNewReplyComment(this, ${ tbc.bcNo })">댓글</button></div>
 			                       
 			                   </li>
 			               </c:forEach>
@@ -522,25 +522,6 @@
 		});
 	});
 	
-	
-	/* $(function(){
-		$.ajax({
-			url : '${ pageContext.request.contextPath }/tbComment/tbCommentSelectList.do',
-			data : {bNo : '${TravelBoard.bNo}'},
-			success : function(data){
-				
-				  for(var i in data){
-					  let comments = document.getElementById("comments");
-					  createNewComment(data[i].bcContent, data[i].bcNo);
-					  while (comments.firstChild) {
-						     comments.removeChild(comments.firstChild);
-					 }
-					  displayComments(listOfComments, 0);
-				  };
-			  }
-		});
-	}); */
-	
 	/* 댓글만들기 스크립트 끝! */
     
     	// Google Map
@@ -560,7 +541,7 @@
 	    * The key parameter will contain your own API key (which is not needed for this tutorial)
 	    * The callback parameter executes the initMap() function
 	    -->
-	    <script async defer
+	<script async defer
 	    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDAdVJlcXLgyChvr_TkNor9fpVvPXPQW8E&callback=initMap">
 	</script>
     
@@ -568,8 +549,6 @@
   //태그 관련 스크립트
 	$("#tag").tagsinput('items');
 // 좋아요 기능
-
-$(function(){
 	
 	$(function(){
 		
@@ -610,10 +589,6 @@ $(function(){
 			dataType: "json",
 			async: false,
 			success: function(data){
-				
-				/* console.log(data);
-				console.log(data.Favorite);
-				console.log(data.Favorite.fStatus); */
 				
 				var fStatus = data.Favorite.fStatus;
 				

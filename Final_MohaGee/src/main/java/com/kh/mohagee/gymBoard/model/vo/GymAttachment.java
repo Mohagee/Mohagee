@@ -114,12 +114,15 @@ public class GymAttachment implements Serializable {
    }
 
 
-   @Override
-   public String toString() {
-      return "ShowAttachment [bFileNo=" + bFileNo + ", bNo=" + bNo + ", bFileName=" + bFileName + ", bFileType="
-            + bFileType + ", bFilePath=" + bFilePath + ", bFileDate=" + bFileDate + ", bFileLevel=" + bFileLevel
-            + ", bFileStatus=" + bFileStatus + "]";
-   }
+	@Override
+	public String toString() {
+		return "GymAttachment [bFileNo=" + bFileNo + ", bNo=" + bNo + ", bFileName=" + bFileName + ", bFileType="
+				+ bFileType + ", bFilePath=" + bFilePath + ", bFileDate=" + bFileDate + ", bFileLevel=" + bFileLevel
+				+ ", bFileStatus=" + bFileStatus + "]";
+	}
+
+
+   
 
 
       

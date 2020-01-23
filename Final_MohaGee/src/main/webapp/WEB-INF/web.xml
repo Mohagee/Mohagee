@@ -5,7 +5,7 @@
 
 	<welcome-file-list>
 		<welcome-file>
-			/WEB-INF/index.jsp
+			/WEB-INF/intro.jsp
 		</welcome-file>
 	</welcome-file-list>
 	

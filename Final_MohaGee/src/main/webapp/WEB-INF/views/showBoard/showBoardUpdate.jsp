@@ -198,7 +198,7 @@ input[type=file]{
 
 		<!-- 내용 입력칸 -->
       <div class="editorArea"  style="margin-top:5px;">
-       <textarea  id="summernote" name="bContent" placeholder="글 내용" maxlength="1000" rows="7" required></textarea>
+       <textarea  id="summernote" name="bContent" placeholder="글 내용" maxlength="1000" rows="7" required>${ShowBoard.bContent}</textarea>
       <span class="help-block"><p id="characterLeft" class="help-block ">더 이상 작성할 수 없습니다.</p></span>
       </div>
 

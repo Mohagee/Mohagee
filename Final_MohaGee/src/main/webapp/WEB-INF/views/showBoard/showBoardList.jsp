@@ -114,7 +114,7 @@
 									<ul class="nav nav-justified post-nav">	
 		                                <li id="favorite" style="color: #0099AE"><i class="fas fa-heart"></i>&nbsp;&nbsp;${ ShowBoard.favoriteCount }</li>
 		                                  
-		                                <li style="color: #0099AE"><i class="fas fa-comments"></i>&nbsp;&nbsp;댓글 숫자</li>
+		                                <li style="color: #0099AE"><i class="fas fa-comments"></i>&nbsp;&nbsp;${ ShowBoard.commentCount }</li>
 									</ul>
 									<div class="post-content overflow">   
 						               <i style="color: #0099AE" class="fas fa-tags"></i>&nbsp;&nbsp;

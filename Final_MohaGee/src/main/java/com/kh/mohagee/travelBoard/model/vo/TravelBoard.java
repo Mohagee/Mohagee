@@ -27,6 +27,7 @@ public class TravelBoard implements Serializable {
 	private String cityName;
 	private double mapY;
 	private double mapX;
+	private int commentCount;
    
 	private int bFileno;
 
@@ -38,7 +39,7 @@ public class TravelBoard implements Serializable {
 	public TravelBoard(int bNo, int userNo, String bTitle, String bTag, String bContent, int cNo, String bUrl,
 			String bCategory, String bKind, int bCount, Date bDate, String titleFilename, String bFileType,
 			String bStatus, String nickName, String introduce, String pRenamedFileName, int favoriteCount, int mNo,
-			String cityName, double mapY, double mapX, int bFileno) {
+			String cityName, double mapY, double mapX, int commentCount, int bFileno) {
 		super();
 		this.bNo = bNo;
 		this.userNo = userNo;
@@ -62,7 +63,19 @@ public class TravelBoard implements Serializable {
 		this.cityName = cityName;
 		this.mapY = mapY;
 		this.mapX = mapX;
+		this.commentCount = commentCount;
 		this.bFileno = bFileno;
+	}
+
+	@Override
+	public String toString() {
+		return "TravelBoard [bNo=" + bNo + ", userNo=" + userNo + ", bTitle=" + bTitle + ", bTag=" + bTag
+				+ ", bContent=" + bContent + ", cNo=" + cNo + ", bUrl=" + bUrl + ", bCategory=" + bCategory + ", bKind="
+				+ bKind + ", bCount=" + bCount + ", bDate=" + bDate + ", titleFilename=" + titleFilename
+				+ ", bFileType=" + bFileType + ", bStatus=" + bStatus + ", nickName=" + nickName + ", introduce="
+				+ introduce + ", pRenamedFileName=" + pRenamedFileName + ", favoriteCount=" + favoriteCount + ", mNo="
+				+ mNo + ", cityName=" + cityName + ", mapY=" + mapY + ", mapX=" + mapX + ", commentCount="
+				+ commentCount + ", bFileno=" + bFileno + "]";
 	}
 
 	public int getbNo() {
@@ -241,6 +254,14 @@ public class TravelBoard implements Serializable {
 		this.mapX = mapX;
 	}
 
+	public int getCommentCount() {
+		return commentCount;
+	}
+
+	public void setCommentCount(int commentCount) {
+		this.commentCount = commentCount;
+	}
+
 	public int getbFileno() {
 		return bFileno;
 	}
@@ -248,16 +269,5 @@ public class TravelBoard implements Serializable {
 	public void setbFileno(int bFileno) {
 		this.bFileno = bFileno;
 	}
-
-	@Override
-	public String toString() {
-		return "TravelBoard [bNo=" + bNo + ", userNo=" + userNo + ", bTitle=" + bTitle + ", bTag=" + bTag
-				+ ", bContent=" + bContent + ", cNo=" + cNo + ", bUrl=" + bUrl + ", bCategory=" + bCategory + ", bKind="
-				+ bKind + ", bCount=" + bCount + ", bDate=" + bDate + ", titleFilename=" + titleFilename
-				+ ", bFileType=" + bFileType + ", bStatus=" + bStatus + ", nickName=" + nickName + ", introduce="
-				+ introduce + ", pRenamedFileName=" + pRenamedFileName + ", favoriteCount=" + favoriteCount + ", mNo="
-				+ mNo + ", cityName=" + cityName + ", mapY=" + mapY + ", mapX=" + mapX + ", bFileno=" + bFileno + "]";
-	}
-	
 	
 }

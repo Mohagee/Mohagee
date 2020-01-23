@@ -70,9 +70,6 @@
 						</div>
 					</c:if>
                             <div class="post-content overflow">
-                               <ul class="nav nav-justified post-nav">
-                                   <li><a href="#"><i class="fa fa-tag"></i>${talkBoard.tTag}</a></li>
-                               </ul>
                                <h2 class="post-title bold">
 									<a href="${ pageContext.request.contextPath }/talkBoard/talkBoardDetail.do?tno=${talkBoard.tno}">
 												${ talkBoard.tTitle }</a>

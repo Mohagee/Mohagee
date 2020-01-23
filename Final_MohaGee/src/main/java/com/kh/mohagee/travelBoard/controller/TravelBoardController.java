@@ -263,6 +263,7 @@ public class TravelBoardController {
 		originBoard.setbTag(board.getbTag());
 		originBoard.setbUrl(board.getbUrl());
 		originBoard.setbCategory(board.getbCategory());
+		originBoard.setmNo(board.getmNo());
 		
 		// 첨부파일 내용을 수정하는 부분
 		// 1.파일을 저장할 경로 생성
