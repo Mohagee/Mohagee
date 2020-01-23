@@ -15,6 +15,55 @@
 
 </head><!--/head-->
 
+<style>
+	html, body {
+	  height: 100%;
+	}
+	
+	.wrap {
+	  height: 100%;
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+	}
+	
+	.btn btn-success {
+	  width: 140px;
+	  height: 45px;
+	  font-family: 'Roboto', sans-serif;
+	  font-size: 11px;
+	  text-transform: uppercase;
+	  letter-spacing: 2.5px;
+	  font-weight: 500;
+	  color: #000;
+	  background-color: #fff;
+	  border: none;
+	  border-radius: 45px;
+	  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+	  transition: all 0.3s ease 0s;
+	  cursor: pointer;
+	  outline: none;
+	  }
+	
+	.btn btn-success:hover {
+	  background-color: #2EE59D;
+	  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+	  color: #fff;
+	  transform: translateY(-7px);
+	}    
+	    
+	
+	
+	.facebook-box .footer .write-comment input[type="text"] {
+	  background: #fff;
+	  border: 1px solid #dcdee3;
+	  padding: 7px 7px 7px 5px;
+	  min-height: 16px;
+	  width: calc(95% - 32px - 22px);
+	  float: left;
+	}
+</style>
+
 <body>
 
 	<c:import url="../common/header.jsp"/>
@@ -59,130 +108,181 @@
                                     <div class="post-bottom overflow">
                                         <ul class="nav navbar-nav post-nav">
                                          	<li><a href="#"><i class="far fa-clock" style="font-family:cookierun;"></i>&nbsp;&nbsp;${talkBoard.tDate}</a></li>
-                                            <li><a href="#"><i class="fa fa-tag"></i>${talkBoard.tTag}</a></li>
-                                            <li><a href="#"><i class="fa fa-heart"></i> Love</a></li>
-                                            <li><a href="#"><i class="fa fa-comments"></i> Comments</a></li>
                                         </ul>
                                         
                                         <br /><br /><br />
                   <div>
 					<a href="${ pageContext.request.contextPath }/talkBoard/talkBoardList.do">
 					   <button type="button" class="btn btn-warning" id="rewriteBtn">목록으로</button>
-					</a>&nbsp;                           
+					</a>&nbsp;    
+					
+					 <c:if test="${member.userNo eq talkBoard.tWriter}">                       
 					<a href="${ pageContext.request.contextPath }/talkBoard/talkUpdate.do?tno=${talkBoard.tno}">
 					   <button type="button" class="btn btn-primary" id="rewriteBtn">수정하기</button>
 					</a>&nbsp;
 					<a href="${ pageContext.request.contextPath }/talkBoard/talkBoardDelete.do?tno=${talkBoard.tno}">
 					   <button type="button" class="btn btn-danger" id="deleteBtn">삭제하기</button>
 					</a>
+					</c:if>
+					
 				 </div>
                                     </div>
-                                    <!-- <div class="author-profile padding">
-                                        <div class="row">
-                                            <div class="col-sm-2">
-                                                <img src="images/blogdetails/1.png" alt="">
-                                            </div>
-                                            <div class="col-sm-10">
-                                                <h3>Rodrix Hasel</h3>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliq Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi</p>
-                                                <span>Website:<a href="www.jooomshaper.com"> www.jooomshaper.com</a></span>
-                                            </div>
-                                        </div>
-                                    </div> -->
-                                    <!-- <div class="response-area">
-                                    <h2 class="bold">Comments</h2>
-                                    <ul class="media-list">
-                                        <li class="media">
-                                            <div class="post-comment">
-                                                <a class="pull-left" href="#">
-                                                    <img class="media-object" src="images/blogdetails/2.png" alt="">
-                                                </a>
-                                                <div class="media-body">
-                                                    <span><i class="fa fa-user"></i>Posted by <a href="#">Endure</a></span>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliq Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.</p>
-                                                    <ul class="nav navbar-nav post-nav">
-                                                        <li><a href="#"><i class="fa fa-clock-o"></i>February 11,2014</a></li>
-                                                        <li><a href="#"><i class="fa fa-reply"></i>Reply</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="parrent">
-                                                <ul class="media-list">
-                                                    <li class="post-comment reply">
-                                                        <a class="pull-left" href="#">
-                                                            <img class="media-object" src="images/blogdetails/3.png" alt="">
-                                                        </a>
-                                                        <div class="media-body">
-                                                            <span><i class="fa fa-user"></i>Posted by <a href="#">Endure</a></span>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut </p>
-                                                            <ul class="nav navbar-nav post-nav">
-                                                                <li><a href="#"><i class="fa fa-clock-o"></i>February 11,2014</a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                        <li class="media">
-                                            <div class="post-comment">
-                                                <a class="pull-left" href="#">
-                                                    <img class="media-object" src="images/blogdetails/4.png" alt="">
-                                                </a>
-                                                <div class="media-body">
-                                                    <span><i class="fa fa-user"></i>Posted by <a href="#">Endure</a></span>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliq Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.</p>
-                                                    <ul class="nav navbar-nav post-nav">
-                                                        <li><a href="#"><i class="fa fa-clock-o"></i>February 11,2014</a></li>
-                                                        <li><a href="#"><i class="fa fa-reply"></i>Reply</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        
-                                    </ul>                   
-                                </div>/Response-area -->
+                                    
+                     
+			      <!-- 댓글 작성 부분 -->           
+			       <div id="addComment">
+			          <input type="text" placeholder="댓글을 달아주세요" style="font-family:binggrae;"></input>&nbsp;&nbsp;&nbsp;<button id="newCommentButton" onclick="submitNewComment(this)">&nbsp;댓 글&nbsp;</button>
+			       </div><br />                 
+			                 
+			    <!--  댓글 시작 영역 -->
+			    <div class="response-area"  style="font-family:binggrae;">
+			    
+			  <ul class="media-list">
+			               <c:forEach var="sbc" items="${tcList }">
+			                   <li class="reply${ tc.tcLevel }" style="padding-left : ${ tc.bcLevel * 7 }%" for="${ tc.ttcNo }">
+			                       <div class="post-comment">
+			                           <a class="pull-left" href="${pageContext.request.contextPath}/member/myPage.do?userNo=${tc.userNo }">
+			                               <img class="media-object" src="${pageContext.request.contextPath }/resources/profile/${tc.pRenamedFileName}" alt="">
+			                           </a>
+			                           <div class="media-body">
+			                               <span style="font-family:cookierun;"><a href="${pageContext.request.contextPath}/member/myPage.do?userNo=${tc.userNo }" style="font-family:cookierun;">${tc.nickName }이</a>  ${tc.tcDate }에 작성</span>
+			                               <br /><br>
+			                               <textarea class="contentUpdateForm" id="${ tc.tcNo }" style="color: black;" readonly>${tc.bcContent }</textarea>
+			                               <ul class="nav navbar-nav post-nav">
+			                                   <li style="font-family:cookierun;"><i class="fa fa-wrench" ></i>&nbsp;&nbsp;수정</li>
+			                                   <li style="font-family:cookierun;"><i class="fa fa-eraser" ></i>&nbsp;&nbsp;삭제</li>
+			                               </ul>
+			                           </div>
+			                       </div>
+			                       <!-- 대댓글 작성 창 -->
+			                       <div id="addComment"><input type="text" placeholder="대댓글 달고싶지?" style="font-family:cookierun;"></input>&nbsp;&nbsp;&nbsp;<button id="newCommentButton" onclick="submitNewReplyComment(this, ${ tc.tcNo })">댓글</button></div>
+			                       
+			                   </li>
+			               </c:forEach>
+			               </ul>                                 
+			  </div><!--/Response-area-->
+                                    
+                                    
                                 </div>
                             </div>
                         </div>
                     </div>
                  </div>
-             <!--    <div class="col-md-3 col-sm-5">
-                    <div class="sidebar blog-sidebar">
-                        <div class="sidebar-item  recent">
-                            <h3>Comments</h3>
-                            <div class="media">
-                                <div class="pull-left">
-                                    <a href="#"><img src="images/portfolio/project1.jpg" alt=""></a>
-                                </div>
-                                <div class="media-body">
-                                    <h4><a href="#">Lorem ipsum dolor sit amet consectetur adipisicing elit,</a></h4>
-                                    <p>posted on  07 March 2014</p>
-                                </div>
-                            </div>
-                            <div class="media">
-                                <div class="pull-left">
-                                    <a href="#"><img src="images/portfolio/project2.jpg" alt=""></a>
-                                </div>
-                                <div class="media-body">
-                                    <h4><a href="#">Lorem ipsum dolor sit amet consectetur adipisicing elit,</a></h4>
-                                    <p>posted on  07 March 2014</p>
-                                </div>
-                            </div>
-                            <div class="media">
-                                <div class="pull-left">
-                                    <a href="#"><img src="images/portfolio/project3.jpg" alt=""></a>
-                                </div>
-                                <div class="media-body">
-                                    <h4><a href="#">Lorem ipsum dolor sit amet consectetur adipisicing elit,</a></h4>
-                                    <p>posted on  07 March 2014</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
+             
             </div>
         </div>
     </section>
+    
+    <script>
+    	
+    /* 댓글 만들기 스크립트 시작 */
+    /**
+    	obj : 클릭된 버튼 자신
+    */
+   function submitNewComment(obj){
+   	$.ajax({
+   		url : '${ pageContext.request.contextPath }/tComment/tCommentInsert.do',
+   		  data : {
+   			  bNo : '${talkBoard.tno}',
+   			  userNo : '${member.userNo}',
+   			  bcContent : $(obj).siblings('input').val()
+   		  }, success : function(data){
+   			  alert("댓글 추가 성공!");
+   			  location.href='${pageContext.request.contextPath}/talkBoard/talkBoardDetail.do?tno=${talkBoard.tno}';
+   		  }
+   	});
+   }
+
+   /**
+   	obj : 클릭된 버튼 자신
+   	parentBcNo : 누구의 대댓글인지 확인하기 위한 원본 댓글의 번호
+   */
+   function submitNewReplyComment(obj, parentBcNo){
+   	$.ajax({
+   		url : '${ pageContext.request.contextPath }/tComment/tCommentInsert.do',
+   		  data : {
+   			  bNo : '${talkBoard.tno}',
+ 			  userNo : '${member.userNo}',
+   			  bcContent : $(obj).siblings('input').val(),
+   			  bbcNo : parentBcNo
+   		  }, success : function(data){
+   			  alert("댓글 추가 성공!");
+   			  location.href='${pageContext.request.contextPath}/talkBoard/talkBoardDetail.do?tno=${talkBoard.tno}';
+   		  }
+   	});
+   }
+
+   $('.fa-wrench').parent().each(function(){
+   	$(this).on('click', function(){
+   		var textArea = $(this).parent().parent().children('textarea');
+   		if(textArea.prop('readonly')){
+   			textArea.prop('readonly', false);
+   		} else {
+   			textArea.prop('readonly', true);
+   			$.ajax({
+   				url : '${ pageContext.request.contextPath }/tComment/tCommentUpdate.do',
+   				  data : {
+   					  bcNo : textArea.attr('id'),
+   					  userNo : '${member.userNo}',
+   					  bcContent : textArea.val()
+   				  }, success : function(data){
+   					  if(data != 0){
+   						  alert("댓글 변경 성공!");		
+   					  } else {
+   						  alert("댓글 수정 실패!");
+   					  }
+   				  }
+   			});
+   		}
+   	});
+   });
+
+   $('.fa-eraser').parent().each(function(){
+   	$(this).on('click', function(){
+   		var obj =  $(this);
+   		var textArea = $(this).parent().parent().children('textarea');
+   		
+   		$.ajax({
+   			url : '${ pageContext.request.contextPath }/tComment/tCommentDelete.do',
+   			  data : {
+   				  bcNo : textArea.attr('id')
+   			  }, success : function(data){
+   				  if(data != 0){
+   					  alert("댓글 삭제 성공!");		
+   					  obj.parents('li').remove();
+   					  $('[for=' + textArea.attr('id') + ']').remove();
+   				  } else {
+   					  alert("댓글 삭제 실패!");
+   				  }
+   			  }
+   		});
+   	});
+   });
+
+
+   $(function(){
+   	$.ajax({
+   		url : '${ pageContext.request.contextPath }/tComment/tCommentSelectList.do',
+   		data : {bNo : '${talkBoard.tno}'},
+   		success : function(data){
+   			
+   			  for(var i in data){
+   				  let comments = document.getElementById("comments");
+   				  createNewComment(data[i].bcContent, data[i].bcNo);
+   				  while (comments.firstChild) {
+   					     comments.removeChild(comments.firstChild);
+   				 }
+   				  displayComments(listOfComments, 0);
+   			  };
+   		  }
+   	});
+   });
+    
+
+   /* 댓글만들기 스크립트 끝! */
+    
+    </script>
+    
     
     <c:import url="../common/footer.jsp"/>
     

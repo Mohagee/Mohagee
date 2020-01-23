@@ -12,7 +12,7 @@
 
 <script>
 
-	$("input").tagsinput('items');
+	$("#tag").tagsinput('items');
 	
 	function showBoardInsert(){
 		location.href = "JQ{ pageContext.request.contextPath}/showBoard/showBoardInsert.do";
@@ -91,34 +91,34 @@
 
 <!--  글 목록  -->		
 <div class="masonery-items masonery_area">
-	<c:forEach var="showBoard" items="${list}">
+	<c:forEach var="ShowBoard" items="${list}">
 				<!--  글 리스트 1 -->
-					<div class="col-md-3 col-sm-4 masonery-item branded mobile ${ showBoard.bCategory} ">
+					<div class="col-md-3 col-sm-4 masonery-item branded mobile ${ ShowBoard.bCategory} ">
 						<div class="single-blog two-column">
 						
 						<!-- 사진파일 -->
-						<c:if test="${ fn:trim(showBoard.bFileType)  == 'I'}">
+						<c:if test="${ fn:trim(ShowBoard.bFileType)  == 'I'}">
 							<div class="post-thumb">
-								<a href="${ pageContext.request.contextPath }/showBoard/showBoardDetail.do?bNo=${showBoard.bNo}">
-									<img src="${ pageContext.request.contextPath }/resources/upload/${showBoard.titleFilename}" class="img-responsive"></a>				
+								<a href="${ pageContext.request.contextPath }/showBoard/showBoardDetail.do?bNo=${ShowBoard.bNo}">
+									<img src="${ pageContext.request.contextPath }/resources/upload/${ShowBoard.titleFilename}" class="img-responsive"></a>				
 							</div>
 						</c:if>
 							<div class="post-content overflow">	
 								
 								<!--  제목 -->
 								<h2 class="post-title bold">
-									<a href="${ pageContext.request.contextPath }/showBoard/showBoardDetail.do?bNo=${showBoard.bNo}">${ showBoard.bTitle }</a>
+									<a href="${ pageContext.request.contextPath }/showBoard/showBoardDetail.do?bNo=${ShowBoard.bNo}">${ ShowBoard.bTitle }</a>
 								</h2>
 
 								<div class="post-bottom overflow">
 									<ul class="nav nav-justified post-nav">	
-		                                <li id="favorite" style="color: #0099AE"><i class="fas fa-heart"></i>&nbsp;&nbsp;${ showBoard.favoriteCount }</li>
+		                                <li id="favorite" style="color: #0099AE"><i class="fas fa-heart"></i>&nbsp;&nbsp;${ ShowBoard.favoriteCount }</li>
 		                                  
-		                                <li style="color: #0099AE"><i class="fas fa-comments"></i>&nbsp;&nbsp;댓글 숫자</li>
+		                                <li style="color: #0099AE"><i class="fas fa-comments"></i>&nbsp;&nbsp;${ ShowBoard.commentCount }</li>
 									</ul>
 									<div class="post-content overflow">   
 						               <i style="color: #0099AE" class="fas fa-tags"></i>&nbsp;&nbsp;
-						               <input style="color: #0099AE" type="text" data-role="tagsinput" value="${ showBoard.bTag }"/>
+						               <input id="tag" style="color: #0099AE" type="text" data-role="tagsinput" value="${ ShowBoard.bTag }"/>
 						            </div>
 								</div>
 							</div>

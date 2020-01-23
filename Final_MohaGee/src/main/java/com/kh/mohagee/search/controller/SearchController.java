@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.mohagee.member.model.vo.FavoriteBoard;
 import com.kh.mohagee.search.model.service.SearchService;
@@ -27,6 +26,8 @@ public class SearchController {
 	@RequestMapping("/search/indexSearch.do")
 	public String indexSearch(@RequestParam String indexSearch, Model model) {
 		
+		indexSearch = "%" + indexSearch + "%";
+		
 		List<FavoriteBoard> indexSearchList = searchService.indexSearch(indexSearch);
 		
 		model.addAttribute("indexSearchList", indexSearchList);
@@ -35,13 +36,31 @@ public class SearchController {
 	}
 	
 	@RequestMapping("/search/formSearch.do")
-	@ResponseBody
-	public List<FavoriteBoard> formSearch(){
+	public String formSearch(@RequestParam int select, @RequestParam String searchInput, Model model){
 		List<FavoriteBoard> list = new ArrayList<>();
 		
+		String searchInput2 = "%" + searchInput + "%";
+		
+		if(select == 1) {
+			list = searchService.searchTotal(searchInput2);
+		} else if(select == 2) {
+			list = searchService.indexSearch(searchInput2);
+		} else if(select == 3) {
+			list = searchService.searchTitle(searchInput2);
+		} else if(select == 4) {
+			list = searchService.searchContent(searchInput2);
+		} else if(select == 5) {
+			
+			searchInput2 ="%#" + searchInput + ",%";
+			
+			list = searchService.searchTag(searchInput2);
+
+		}
+		
+		model.addAttribute("indexSearchList", list);
 		
 		
-		return list;
+		return "search/searchForm";
 	}
 	
 }

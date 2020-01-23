@@ -50,6 +50,189 @@
 	.label{
 		font-size: 85%;
 	}
+	
+	/* 댓글 css */
+	html, body {
+  height: 100%;
+}
+
+.wrap {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn btn-success {
+  width: 140px;
+  height: 45px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  }
+
+.btn btn-success:hover {
+  background-color: #2EE59D;
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  color: #fff;
+  transform: translateY(-7px);
+}    
+    
+
+
+.facebook-box .footer .write-comment input[type="text"] {
+  background: #fff;
+  border: 1px solid #dcdee3;
+  padding: 7px 7px 7px 5px;
+  min-height: 16px;
+  width: calc(95% - 32px - 22px);
+  float: left;
+}
+	
+	
+#commentDivider {
+  width: 120%;
+}
+#comments-container {
+  overflow: auto;
+  height: 350px;
+}
+#comments {
+  text-align: -webkit-center;
+  list-style-type: none;
+  width: 120%;
+  padding: 0;
+}
+#post {
+    width: 50%;
+    height: 300px;
+    /* border: 1px solid; */
+    border-radius: 20px;
+    margin-left: 25%;
+    display: flex;
+   background-image: linear-gradient(45deg, #08bb81, #0300e08a);
+  
+  /* position: relative; */
+}
+#post h1 {
+  margin: auto;
+}
+.commentButtons {
+  display: flex;
+  
+}
+#newCommentButton {
+	box-shadow:inset -1px 0px 15px -12px #fce2c1;
+	background-color : gold ;/* #faa700 */
+	border-radius:6px;
+	border:1px solid #eeb44f;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:cookierun;
+	font-size:15px;
+	padding:8px 5px;
+	text-decoration:none;
+	width : 70px;
+}
+#addComment {
+  display: flex;
+  justify-content: center;
+  height: 40px;
+  /* position: initial; */
+  margin-top: 2%;
+  width: 70%;
+  margin-left: 15%;
+ 
+}
+#addComment input {
+  width: 50%;
+  height: 35px;
+  border-radius: 20px;
+  border:1px solid lightgray;
+  background:#ffffffb0;
+  padding-left: 10px;
+  font-size: 15px;
+  
+}
+/* 대댓글버튼 css */
+.commentDiv {
+  width: 50%;
+  margin-top: 1%;
+  display: flex;
+  height: 25px;
+  font-family:cookierun;
+}
+
+.commentDiv button {
+  flex: 1;
+  margin-left: 5px;
+  border-radius: 10px;
+  background-color:#faa700;
+  border: 1px;
+  color: white;
+}
+.commentDiv input {
+  flex: 7;
+  border:none;
+  border-radius: 20px;
+    background:#ffffffb0;
+}
+.commentContent {
+  background: #F9C804;
+  width: 60%;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 10px;
+  margin-top: 1%;
+}
+.commentContent p {
+  padding-left: 5px;
+  font-family:cookierun;
+  color : white;
+}
+.reply {
+  background: border-box;
+  border: none;
+  cursor: pointer;
+  color : white;
+  font-weight:bold;
+  font-family:cookierun;
+}
+
+textarea {
+      width: 500px;
+      height: auto;
+      background: center center no-repeat; /* This ruins default border */
+      border: none;
+      resize: none;
+      color: white;
+      overflow: auto;
+      font-size : 20px;
+      font-family:배달의민족 주아;
+   }
+
+.post-nav > li {
+	cursor : pointer;
+}
+
+.media-object{
+	width : 120px;
+	height : 150px;
+	
+	
+} 
+
     	
     </style>
     
@@ -104,11 +287,11 @@
 		   <c:forEach var="att" items="${ShowAttachment}" varStatus="status"> 
 		  		<c:if test="${status.index == 0}">
 			   		 <div class="item active">
-			     		 <img class="d-block w-100" src="${ pageContext.request.contextPath }/resources/upload/${att.bFileName}" class="img-responsive" alt="slide${status.index }">
+			     		 <img style="width:100%" class="d-block w-100" src="${ pageContext.request.contextPath }/resources/upload/${att.bFileName}" class="img-responsive" alt="slide${status.index }">
 		    		</div>
 		     </c:if><c:if test="${status.index != 0}">
 		  	    <div class="item">
-		  	    <img class="d-block w-100" src="${ pageContext.request.contextPath }/resources/upload/${att.bFileName}" class="img-responsive" alt="slide${status.index }">
+		  	    <img style="width:100%" class="d-block w-100" src="${ pageContext.request.contextPath }/resources/upload/${att.bFileName}" class="img-responsive" alt="slide${status.index }">
 		  </div>
 		</c:if>
 		  </c:forEach>
@@ -150,7 +333,7 @@
                     	
                       <li id="favorite" style="color: #0099AE"><i class="fas fa-heart"></i>&nbsp;&nbsp;${ favoriteCount }</li>
                       
-                      <li style="color: #0099AE"><i class="fas fa-comments"></i>&nbsp;&nbsp;댓글 숫자</li>
+                      <li style="color: #0099AE"><i class="fas fa-comments"></i>&nbsp;&nbsp;${ShowBoard.commentCount}</li>
                   </ul>
               </div>
         <div class="blog-share">
@@ -169,8 +352,6 @@
 		<a href="${ pageContext.request.contextPath }/showBoard/showBoardList.do">
 			<button type="button" class="btn btn-warning btn-rounded" id="listBtn">목록이동</button>
 		</a>&nbsp;			
-
- <a href="${ pageContext.request.contextPath }/showBoard/showBoardList.do" class="btn orange"><span class="btn-lg">button</span></a>
 
 		<button type="button" class="btn btn-primary btn-rounded"
 		onclick="location.href='${pageContext.request.contextPath}/showBoard/showBoardUpdateForm.do?bNo=${ShowBoard.bNo}'" >수정 하기</button>&nbsp;
@@ -191,47 +372,44 @@
                     </div>
                 </div>
             </div>
+      
+                </div>
+                <!-- 댓글 작성 부분 -->           
+	    <div id="addComment">
+		    <input type="text" placeholder="댓글 달고싶지?" style="font-family:binggrae;"></input>&nbsp;&nbsp;&nbsp;<button id="newCommentButton" onclick="submitNewComment(this)">&nbsp;댓 글&nbsp;</button>
+	    </div><br />                 
                  
     <!--  댓글 시작 영역 -->
-    <div class="response-area"  style="font-family:binggrae;">
+<div class="response-area"  style="font-family:binggrae;">
     
-    <!--  댓글 제목 & 버튼 부분 -->
-<div class="row">
-	<div class="col-sm-10"></div>	
-		<div class="col-sm-2" align="right">	
-			<button type="button" class="btn btn-success btn-rounded btn-sm"  
-				onclick="location.href='${pageContext.request.contextPath}/showBoard/showBoardUpdateForm.do?bNo=${ShowBoard.bNo}'" >댓글작성</button>&nbsp;					
-		</div> 
-   </div><br />
-
-    <ul class="media-list"> <!-- 댓글영역 -->
-    <!-- 댓글 하나 영역 -->
-        <li class="media">   
-            <div class="post-comment">
-                <a class="pull-left" href="#"><!-- <== 작성자 프로필로 이동하기? -->
-                    <img class="media-object" src="<%-- ${ pageContext.request.contextPath }/resources/images/blogdetails/2.png --%>" alt="작성자프로필사진">
-                </a>
-                <div class="media-body">
-                    <span><i class="fa fa-user"></i>&nbsp;댓글 작성자</span>
-                    	<p>댓글 내용</p>
-                    	<i class="far fa-clock"></i> 댓글 작성일
-                    	<div align="right">	
-				    		<button type="button" class="btn btn-info btn-rounded btn-sm"
-							onclick="location.href='${pageContext.request.contextPath}/showBoard/showBoardUpdateForm.do?bNo=${ShowBoard.bNo}'">댓글작성</button>&nbsp;					
-   			 </div>
-                    
-                </div>
-            </div>
-        </li>     
-                                       
-    </ul>                   
+  <ul class="media-list">
+               <c:forEach var="sbc" items="${sbcList }">
+                   <li class="reply${ sbc.bcLevel }" style="padding-left : ${ sbc.bcLevel * 7 }%" for="${ sbc.bbcNo }">
+                       <div class="post-comment">
+                           <a class="pull-left" href="${pageContext.request.contextPath}/member/myPage.do?userNo=${sbc.userNo }">
+                               <img class="media-object" src="${pageContext.request.contextPath }/resources/profile/${sbc.pRenamedFileName}" alt="">
+                           </a>
+                           <div class="media-body">
+                               <span style="font-family:cookierun;"><a href="${pageContext.request.contextPath}/member/myPage.do?userNo=${sbc.userNo }" style="font-family:cookierun;">${sbc.nickName }이</a>  ${sbc.bcDate }에 작성</span>
+                               <br /><br>
+                               <textarea class="contentUpdateForm" id="${ sbc.bcNo }" style="color: black;" readonly>${sbc.bcContent }</textarea>
+                               <ul class="nav navbar-nav post-nav">
+                                   <li style="font-family:cookierun;"><i class="fa fa-wrench" ></i>&nbsp;&nbsp;수정</li>
+                                   <li style="font-family:cookierun;"><i class="fa fa-eraser" ></i>&nbsp;&nbsp;삭제</li>
+                               </ul>
+                           </div>
+                       </div>
+                       <!-- 대댓글 작성 창 -->
+                       <div id="addComment"><input type="text" placeholder="대댓글 달고싶지?" style="font-family:cookierun;"></input>&nbsp;&nbsp;&nbsp;<button id="newCommentButton" onclick="submitNewReplyComment(this, ${ sbc.bcNo })">댓글</button></div>
+                       
+                   </li>
+               </c:forEach>
+               </ul>                                 
   </div><!--/Response-area-->
-
-
-                </div>
             </div>
         </div>
      </div>
+</div>
 </div>
 </div>
 </div>
@@ -290,7 +468,7 @@
 		
     
     // 태그 관련 스크립트
-    	$("input").tagsinput('items')
+    	$("#tag").tagsinput('items')
     // 좋아요 기능
     
     $(function(){
@@ -332,9 +510,6 @@
     		async: false,
     		success: function(data){
     			
-    			/* console.log(data);
-    			console.log(data.Favorite);
-    			console.log(data.Favorite.fStatus); */
     			
     			var fStatus = data.Favorite.fStatus;
     			
@@ -398,6 +573,115 @@
     	});
     });
     	
+   
+    /* 댓글 만들기 스크립트 시작 */
+     /**
+     	obj : 클릭된 버튼 자신
+     */
+    function submitNewComment(obj){
+    	$.ajax({
+    		url : '${ pageContext.request.contextPath }/sbComment/sbCommentInsert.do',
+    		  data : {
+    			  bNo : '${ShowBoard.bNo}',
+    			  userNo : '${member.userNo}',
+    			  bcContent : $(obj).siblings('input').val()
+    		  }, success : function(data){
+    			  alert("댓글 추가 성공!");
+    			  location.href='${pageContext.request.contextPath}/showBoard/showBoardDetail.do?bNo=${ShowBoard.bNo}';
+    		  }
+    	});
+    }
+
+    /**
+    	obj : 클릭된 버튼 자신
+    	parentBcNo : 누구의 대댓글인지 확인하기 위한 원본 댓글의 번호
+    */
+    function submitNewReplyComment(obj, parentBcNo){
+    	$.ajax({
+    		url : '${ pageContext.request.contextPath }/sbComment/sbCommentInsert.do',
+    		  data : {
+    			  bNo : '${ShowBoard.bNo}',
+    			  userNo : '${member.userNo}',
+    			  bcContent : $(obj).siblings('input').val(),
+    			  bbcNo : parentBcNo
+    		  }, success : function(data){
+    			  alert("댓글 추가 성공!");
+    			  location.href='${pageContext.request.contextPath}/showBoard/showBoardDetail.do?bNo=${ShowBoard.bNo}';
+    		  }
+    	});
+    }
+
+    $('.fa-wrench').parent().each(function(){
+    	$(this).on('click', function(){
+    		var textArea = $(this).parent().parent().children('textarea');
+    		if(textArea.prop('readonly')){
+    			textArea.prop('readonly', false);
+    		} else {
+    			textArea.prop('readonly', true);
+    			$.ajax({
+    				url : '${ pageContext.request.contextPath }/sbComment/sbCommentUpdate.do',
+    				  data : {
+    					  bcNo : textArea.attr('id'),
+    					  userNo : '${member.userNo}',
+    					  bcContent : textArea.val()
+    				  }, success : function(data){
+    					  if(data != 0){
+    						  alert("댓글 변경 성공!");		
+    					  } else {
+    						  alert("댓글 수정 실패!");
+    					  }
+    				  }
+    			});
+    		}
+    	});
+    });
+
+    $('.fa-eraser').parent().each(function(){
+    	$(this).on('click', function(){
+    		var obj =  $(this);
+    		var textArea = $(this).parent().parent().children('textarea');
+    		
+    		$.ajax({
+    			url : '${ pageContext.request.contextPath }/sbComment/sbCommentDelete.do',
+    			  data : {
+    				  bcNo : textArea.attr('id')
+    			  }, success : function(data){
+    				  if(data != 0){
+    					  alert("댓글 삭제 성공!");		
+    					  obj.parents('li').remove();
+    					  $('[for=' + textArea.attr('id') + ']').remove();
+    				  } else {
+    					  alert("댓글 삭제 실패!");
+    				  }
+    			  }
+    		});
+    	});
+    });
+
+
+    $(function(){
+    	$.ajax({
+    		url : '${ pageContext.request.contextPath }/sbComment/sbCommentSelectList.do',
+    		data : {bNo : '${ShowBoard.bNo}'},
+    		success : function(data){
+    			
+    			  for(var i in data){
+    				  let comments = document.getElementById("comments");
+    				  createNewComment(data[i].bcContent, data[i].bcNo);
+    				  while (comments.firstChild) {
+    					     comments.removeChild(comments.firstChild);
+    				 }
+    				  displayComments(listOfComments, 0);
+    			  };
+    		  }
+    	});
+    });
+     
+
+    /* 댓글만들기 스크립트 끝! */    
+    
+    
+    
     </script>
     
     <c:import url="../common/footer.jsp"/>

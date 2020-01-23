@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.mohagee.favorite.model.service.FavoriteService;
 import com.kh.mohagee.travelBoard.model.service.TravelBoardService;
+import com.kh.mohagee.travelBoard.model.service.tbCommentService;
 import com.kh.mohagee.travelBoard.model.vo.TravelAttachment;
 import com.kh.mohagee.travelBoard.model.vo.TravelBoard;
 
@@ -37,6 +38,9 @@ public class TravelBoardController {
    
    @Autowired
    FavoriteService favoriteService;
+   
+   @Autowired
+   tbCommentService tbCommentService;
 
    @RequestMapping("/travelBoard/travelBoardList.do")
    public String travelBoardList(Model model) {
@@ -187,8 +191,15 @@ public class TravelBoardController {
       
       int favoriteCount = favoriteService.favoriteCount(bNo);
       
+      for(int i = 0; i < list.size(); i++) {
+			System.out.println(list.get(i));
+		}
+      
    // travelBoard라는 이름에(키) gb에 담긴 값을 담는다(값)
-      model.addAttribute("TravelBoard", tb).addAttribute("TravelAttachment", list).addAttribute("favoriteCount", favoriteCount);
+      model.addAttribute("TravelBoard", tb)
+      .addAttribute("TravelAttachment", list)
+      .addAttribute("favoriteCount", favoriteCount)
+      .addAttribute("tbcList",tbCommentService.selectListtbComment(bNo));
 
       return "travelBoard/travelBoardDetail";
    }
@@ -252,6 +263,7 @@ public class TravelBoardController {
 		originBoard.setbTag(board.getbTag());
 		originBoard.setbUrl(board.getbUrl());
 		originBoard.setbCategory(board.getbCategory());
+		originBoard.setmNo(board.getmNo());
 		
 		// 첨부파일 내용을 수정하는 부분
 		// 1.파일을 저장할 경로 생성

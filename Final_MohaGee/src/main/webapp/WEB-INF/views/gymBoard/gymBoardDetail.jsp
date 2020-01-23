@@ -60,10 +60,21 @@ html, body {
   width: calc(95% - 32px - 22px);
   float: left;
 }
-
-.bootstrap-tagsinput input{
-		display: none;
-	}
+       #board_content{
+          width : 1300px;
+          border : none;
+          font-size : 20px;
+          height : auto;
+       }
+       
+       #board_title{
+          /* font-family : ; */
+          font-size : 30px;
+       }
+       
+	.bootstrap-tagsinput input{
+			display: none;
+		}
 	
 	li span[data-role = remove]{
 		display: none;
@@ -82,6 +93,7 @@ html, body {
 	.label{
 	   font-size: 85%;
 	}
+	
 /* 댓글 css */
 #commentDivider {
   width: 120%;
@@ -116,17 +128,17 @@ html, body {
 }
 #newCommentButton {
 	box-shadow:inset -1px 0px 15px -12px #fce2c1;
-	background-color:#faa700;
+	background-color : gold ;
 	border-radius:6px;
 	border:1px solid #eeb44f;
 	display:inline-block;
 	cursor:pointer;
 	color:#ffffff;
 	font-family:cookierun;
-	font-size:20px;
+	font-size:15px;
 	padding:8px 5px;
 	text-decoration:none;
-	width : 100px;
+	width : 70px;
 }
 #addComment {
   display: flex;
@@ -139,10 +151,10 @@ html, body {
  
 }
 #addComment input {
-  width: 150%;
+  width: 50%;
   height: 35px;
   border-radius: 20px;
-  border:1px;
+  border:1px solid lightgray;
   background:#ffffffb0;
   padding-left: 10px;
   font-size: 15px;
@@ -194,18 +206,27 @@ html, body {
 }
 
 textarea {
-      width: 300px;
+      width: 500px;
       height: auto;
       background: center center no-repeat; /* This ruins default border */
       border: none;
       resize: none;
       color: white;
       overflow: auto;
+      font-size : 20px;
+      font-family:배달의민족 주아;
    }
 
 .post-nav > li {
 	cursor : pointer;
 }
+
+.media-object{
+	width : 120px;
+	height : 150px;
+	
+	
+} 
 </style>
     
     
@@ -221,7 +242,7 @@ textarea {
                 <div class="row">
                     <div class="action">
                         <div class="col-sm-12">
-                            <h1 class="title" style="font-family:cookierun;">HOWL's</h1>
+                            <h1 class="title" style="font-family:cookierun;">EDITOR HOWL's GYM BOARD</h1>
                         </div>                                                                                
                     </div>
                 </div>
@@ -231,8 +252,6 @@ textarea {
     <!--/#page-breadcrumb-->
 
     <section id="blog-details">
-    
-    
         <div class="container">
             <div class="row">
                 <div class="col-md-9 col-sm-7">
@@ -241,9 +260,52 @@ textarea {
                     <!--  게시글  -->
                          <div class="col-md-12 col-sm-12">
                             <div class="single-blog blog-details two-column">
-                            <h2 class="post-title bold"><a href="#" style="font-family:cookierun; font-size:30px;">${gymBoard.bTitle } <br/><br/></a></h2>
-                            
-                   <c:forEach var="GymAttachment" items="${GymAttachmentList}">
+                            <h2 class="post-title bold" id="board_title"><a href="#" style="font-family:cookierun; font-size:30px;">${gymBoard.bTitle } <br/><br/></a></h2>
+
+
+      <!-- 게시글 사진 슬라이드 영역 -->
+   <div id="carousel-example-generic" class="carousel slide carousel-fade" data-ride="carousel">
+
+        <ol class="carousel-indicators">
+           <c:forEach var="att" items="${GymAttachmentList}" varStatus="status"> 
+                 <c:if test="${status.index == 0}">
+                     <li data-target="#carousel-example-generic" data-slide-to="${status.index}" class="active"></li>
+                </c:if>
+                <c:if test="${status.index != 0}">
+                   <li data-target="#carousel-example-generic" data-slide-to="${status.index}"></li>
+                 </c:if>
+              </c:forEach>
+        </ol>  
+      
+        <!-- Wrapper for slides -->
+       <div class="carousel-inner" role="listbox">
+         <c:forEach var="att" items="${GymAttachmentList}" varStatus="status"> 
+              <c:if test="${status.index == 0}">
+                   <div class="item active">
+                     <img style="width:100%" class="d-block w-100" src="${ pageContext.request.contextPath }/resources/upload/${att.bFileName}" class="img-responsive" alt="slide${status.index }">
+                </div>
+           </c:if><c:if test="${status.index != 0}">
+               <div class="item">
+               <img style="width:100%" class="d-block w-100" src="${ pageContext.request.contextPath }/resources/upload/${att.bFileName}" class="img-responsive" alt="slide${status.index }">
+        </div>
+      </c:if>
+        </c:forEach>
+        </div>  
+        
+       
+        <!-- Controls -->
+        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev" >
+            <span class="icon-prev" aria-hidden="true" ></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+            <span class="icon-next" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a> 
+
+      </div><br />                               
+                          
+<%--                    <c:forEach var="GymAttachment" items="${GymAttachmentList}">
                          
                             <!--  게시글 상세보기 영역 -->
                                 <div class="post-thumb">
@@ -254,22 +316,24 @@ textarea {
                                 </div>
                                 <hr />
                       </c:forEach>
-                             
+ --%>                     
+		    		<!-- 동영상 버튼 -->	
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalVM">
+                                <i class="fas fa-caret-square-right"></i>&nbsp;&nbsp; PlayVedio</button>
+                             	
+                             	<!-- 본문 내용 -->
                                 <div class="post-content overflow">
-                                    <p style="font-family:cookierun; font-size:30px;">
-                                    	${gymBoard.bContent }
-                                    </p>
-					<br />
-                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalVM"><i class="fas fa-caret-square-right"></i>&nbsp;&nbsp; PlayVedio</button>
+                                    <pre class="form-control" id="board_content" style="font-family:cookierun; font-size:30px;">${gymBoard.bContent }</pre><br />
+					                                
                                     <div class="post-bottom overflow">
                                         <ul class="nav navbar-nav post-nav">
                                             <li style="color: #0099AE"><i class="fas fa-clock"></i>&nbsp;&nbsp;${gymBoard.bDate}</li>
              
-			                                <li style="color: #0099AE"><i class="fas fa-tags"></i>&nbsp;&nbsp;<input type="text" data-role="tagsinput" value="${gymBoard.bTag}"/></li>
+			                                <li style="color: #0099AE"><i class="fas fa-tags"></i>&nbsp;&nbsp;<input id="tag" type="text" data-role="tagsinput" value="${gymBoard.bTag}"/></li>
 			                                	
 			                                <li id="favorite" style="color: #0099AE"><i class="fas fa-heart"></i>&nbsp;&nbsp;${ favoriteCount }</li>
 			                                  
-			                                <li style="color: #0099AE"><i class="fas fa-comments"></i>&nbsp;&nbsp;댓글 숫자</li>
+			                                <li style="color: #0099AE"><i class="fas fa-comments"></i>&nbsp;&nbsp;${gymBoard.commentCount}</li>
                                         </ul>
                                     </div>
                                 <!-- 게시글 수정 버튼  -->
@@ -286,16 +350,12 @@ textarea {
 				 </div><br />
                                </div>
                                
-                               
-                               
-                                    <div class="blog-share">
-                                    
+                                    <div class="blog-share">                                  
                                         <span class='st_facebook_hcount'></span>
                                         <span class='st_twitter_hcount'></span>
                                         <span class='st_linkedin_hcount'></span>
                                         <span class='st_pinterest_hcount'></span>
-                                        <span class='st_email_hcount'></span>
-                                      
+                                        <span class='st_email_hcount'></span>                                      
                                     </div>
                                     
                                     <div class="author-profile padding">
@@ -304,16 +364,17 @@ textarea {
                          <img src="${ pageContext.request.contextPath }/resources/profile/${gymBoard.pRenamedFileName}">
                     </div>
                     <div class="col-sm-10" style="font-family:binggrae;">
-                        <h3 style="font-family:binggrae;">${ gymBoard.nickName }</h3>
-                        <p>${ gymBoard.introduce }</p>
+                        <h3 style="font-family:cookierun;">EDITOR&nbsp;&nbsp;${ gymBoard.nickName }</h3>
+                        <p style="font-family:cookierun;">${ gymBoard.introduce }</p>
                     </div>
                 </div>
             </div>                                     
 
 	    <div id="addComment">
-		    <input type="text"></input><button id="newCommentButton" onclick="submitNewComment(this)">댓글</button>
-	    </div>
-    <hr id="commentDivider"/>
+		    <input type="text" placeholder="댓글 달고싶지?" style="font-family:cookierun;"></input>&nbsp;&nbsp;&nbsp;<button id="newCommentButton" onclick="submitNewComment(this)">&nbsp;댓 글&nbsp;</button>
+	    </div><br />
+	    
+   <!--  <hr id="commentDivider"/> -->
         <div class="response-area">
                <ul class="media-list">
                <c:forEach var="gbc" items="${gbcList }">
@@ -323,16 +384,17 @@ textarea {
                                <img class="media-object" src="${pageContext.request.contextPath }/resources/profile/${gbc.pRenamedFileName}" alt="">
                            </a>
                            <div class="media-body">
-                               <span><a href="${pageContext.request.contextPath}/member/myPage.do?userNo=${gbc.userNo }">${gbc.nickName }</a>  ${gbc.bcDate }</span><br>
+                               <span style="font-family:cookierun;"><a href="${pageContext.request.contextPath}/member/myPage.do?userNo=${gbc.userNo }" style="font-family:cookierun;">${gbc.nickName }이</a>  ${gbc.bcDate }에 작성</span>
+                               <br /><br>
                                <textarea class="contentUpdateForm" id="${ gbc.bcNo }" style="color: black;" readonly>${gbc.bcContent }</textarea>
                                <ul class="nav navbar-nav post-nav">
-                                   <li><i class="fa fa-wrench"></i>수정</li>
-                                   <li><i class="fa fa-eraser"></i>삭제</li>
+                                   <li style="font-family:cookierun;"><i class="fa fa-wrench" ></i>&nbsp;&nbsp;수정</li>
+                                   <li style="font-family:cookierun;"><i class="fa fa-eraser" ></i>&nbsp;&nbsp;삭제</li>
                                </ul>
                            </div>
                        </div>
                        <!-- 대댓글 작성 창 -->
-                       <div id="addComment"><input type="text"></input><button id="newCommentButton" onclick="submitNewReplyComment(this, ${ gbc.bcNo })">댓글</button></div>
+                       <div id="addComment"><input type="text" placeholder="대댓글 달고싶지?" style="font-family:cookierun;"></input>&nbsp;&nbsp;&nbsp;<button id="newCommentButton" onclick="submitNewReplyComment(this, ${ gbc.bcNo })">댓글</button></div>
                        
                    </li>
                </c:forEach>
@@ -396,7 +458,7 @@ function submitNewComment(obj){
 			  bcContent : $(obj).siblings('input').val()
 		  }, success : function(data){
 			  alert("댓글 추가 성공!");
-			  location.href='${pageContext.request.contextPath}/gymBoardDetail.do?bNo=${gymBoard.bNo}';
+			  location.href='${pageContext.request.contextPath}/gymBoard/gymBoardDetail.do?bNo=${gymBoard.bNo}';
 		  }
 	});
 }
@@ -415,7 +477,7 @@ function submitNewReplyComment(obj, parentBcNo){
 			  bbcNo : parentBcNo
 		  }, success : function(data){
 			  alert("댓글 추가 성공!");
-			  location.href='${pageContext.request.contextPath}/gymBoardDetail.do?bNo=${gymBoard.bNo}';
+			  location.href='${pageContext.request.contextPath}/gymBoard/gymBoardDetail.do?bNo=${gymBoard.bNo}';
 		  }
 	});
 }
@@ -467,6 +529,7 @@ $('.fa-eraser').parent().each(function(){
 	});
 });
 
+/*
 $(function(){
 	$.ajax({
 		url : '${ pageContext.request.contextPath }/gbComment/gbCommentSelectList.do',
@@ -484,12 +547,36 @@ $(function(){
 		  }
 	});
 });
- 
+*/
 
 /* 댓글만들기 스크립트 끝! */
  /* 좋아요 스크립트 시작 */
  
- 
+ $(function(){
+    	
+    	var userNo = "${member.userNo}";
+    	var bNo = "${gymBoard.bNo}";
+    	
+    	$.ajax({
+    		url: "${pageContext.request.contextPath}/favorite/checkFavorite",
+    		data: {
+    			userNo : userNo,
+    			bNo : bNo
+    		},
+    		dataType: "json",
+    		async: false,
+    		success: function(data){
+    			
+    			if(data.Favorite.fStatus == 'Y'){
+    				$("#favorite").css("color", "red");
+    			}
+    			
+    		}
+    	});
+    	
+   });
+
+
  $("#favorite").on("click", function(){
    
    var userNo = "${member.userNo}";
@@ -504,18 +591,14 @@ $(function(){
       dataType: "json",
       async: false,
       success: function(data){
-         
-         /* console.log(data);
-         console.log(data.Favorite);
-         console.log(data.Favorite.fStatus); */
-         
+              
          var fStatus = data.Favorite.fStatus;
          
          if(fStatus == null || fStatus == 'N'){
             $.ajax({
                url: "${pageContext.request.contextPath}/favorite/doFavorite",
                data: {
-                  fStatus : fStatus,
+                   fStatus : fStatus,
                    userNo : userNo,
                    bNo : bNo
                 },
@@ -570,7 +653,6 @@ $(function(){
       }
    });
 });
- 
  
  /* 좋아요 스크립트 끝 */
 </script>

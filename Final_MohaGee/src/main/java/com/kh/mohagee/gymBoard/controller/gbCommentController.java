@@ -24,17 +24,6 @@ public class gbCommentController {
 	@Autowired
 	GymBoardService GymBoardService;
 	
-	// 댓글 리스트보기
-	/*
-	@RequestMapping("/gbComment/gbCommentSelectList.do")
-	@ResponseBody
-	public List<gbComment> gbCommentSelectList (@RequestParam int bNo){
-		
-		return gbCommentService.selectListgbComment(bNo);
-		
-	}
-	*/
-	
 	// 댓글 등록
 	@RequestMapping("/gbComment/gbCommentInsert.do")
 	@ResponseBody

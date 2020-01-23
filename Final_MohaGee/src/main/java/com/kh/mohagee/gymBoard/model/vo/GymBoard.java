@@ -23,17 +23,19 @@ public class GymBoard implements Serializable {
 	private String introduce;
 	private String pRenamedFileName;
 	private int favoriteCount;
+	private int commentCount;
       
 	private int bFileno;
 
 	public GymBoard() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	public GymBoard(int bNo, int userNo, String bTitle, String bTag, String bContent, int cNo, String bUrl,
 			String bCategory, String bKind, int bCount, Date bDate, String titleFilename, String bFileType,
 			String bStatus, String nickName, String introduce, String pRenamedFileName, int favoriteCount,
-			int bFileno) {
+			int commentCount, int bFileno) {
 		super();
 		this.bNo = bNo;
 		this.userNo = userNo;
@@ -53,6 +55,7 @@ public class GymBoard implements Serializable {
 		this.introduce = introduce;
 		this.pRenamedFileName = pRenamedFileName;
 		this.favoriteCount = favoriteCount;
+		this.commentCount = commentCount;
 		this.bFileno = bFileno;
 	}
 
@@ -62,8 +65,8 @@ public class GymBoard implements Serializable {
 				+ bContent + ", cNo=" + cNo + ", bUrl=" + bUrl + ", bCategory=" + bCategory + ", bKind=" + bKind
 				+ ", bCount=" + bCount + ", bDate=" + bDate + ", titleFilename=" + titleFilename + ", bFileType="
 				+ bFileType + ", bStatus=" + bStatus + ", nickName=" + nickName + ", introduce=" + introduce
-				+ ", pRenamedFileName=" + pRenamedFileName + ", favoriteCount=" + favoriteCount + ", bFileno=" + bFileno
-				+ "]";
+				+ ", pRenamedFileName=" + pRenamedFileName + ", favoriteCount=" + favoriteCount + ", commentCount="
+				+ commentCount + ", bFileno=" + bFileno + "]";
 	}
 
 	public int getbNo() {
@@ -208,6 +211,14 @@ public class GymBoard implements Serializable {
 
 	public void setFavoriteCount(int favoriteCount) {
 		this.favoriteCount = favoriteCount;
+	}
+
+	public int getCommentCount() {
+		return commentCount;
+	}
+
+	public void setCommentCount(int commentCount) {
+		this.commentCount = commentCount;
 	}
 
 	public int getbFileno() {

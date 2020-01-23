@@ -12,7 +12,7 @@
 
 <script>
 
-	$("input").tagsinput('items');
+	$("#tag").tagsinput('items');
 
    function travelBoardInsert(){
       location.href = "JQ{ pageContext.request.contextPath}/travelBoard/travelBoardInsertForm.do";
@@ -114,11 +114,11 @@
                            <ul class="nav nav-justified post-nav">	
 		                      <li id="favorite" style="color: #0099AE"><i class="fas fa-heart"></i>&nbsp;&nbsp;${ travelBoard.favoriteCount }</li>
 		                                  
-		                      <li style="color: #0099AE"><i class="fas fa-comments"></i>&nbsp;&nbsp;댓글 숫자</li>
+		                      <li style="color: #0099AE"><i class="fas fa-comments"></i>&nbsp;&nbsp;${ travelBoard.commentCount }</li>
 							</ul>
 							<div class="post-content overflow">   
 				               <i style="color: #0099AE" class="fas fa-tags"></i>&nbsp;&nbsp;
-				               <input style="color: #0099AE" type="text" data-role="tagsinput" value="${ travelBoard.bTag }"/>
+				               <input id="tag" style="color: #0099AE" type="text" data-role="tagsinput" value="${ travelBoard.bTag }"/>
 				            </div>
                         </div>
                      </div>

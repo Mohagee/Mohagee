@@ -14,7 +14,7 @@
 
 <script>
 
-	$("input").tagsinput('items');
+	$("#tag").tagsinput('items');
 
 	function gymBoardInsert(){
 	   location.href = "JQ{ pageContext.request.contextPath}/gymBoard/gymBoardInsertForm.do";
@@ -118,11 +118,11 @@
                            <ul class="nav nav-justified post-nav">	
 		                      <li id="favorite" style="color: #0099AE"><i class="fas fa-heart"></i>&nbsp;&nbsp;${ gymBoard.favoriteCount }</li>
 		                                  
-		                      <li style="color: #0099AE"><i class="fas fa-comments"></i>&nbsp;&nbsp;댓글 숫자</li>
+		                      <li style="color: #0099AE"><i class="fas fa-comments"></i>&nbsp;&nbsp;${ gymBoard.commentCount }</li>
 							</ul>
 							<div class="post-content overflow">   
 				               <i style="color: #0099AE" class="fas fa-tags"></i>&nbsp;&nbsp;
-				               <input style="color: #0099AE" type="text" data-role="tagsinput" value="${ gymBoard.bTag }"/>
+				               <input id="#tag" style="color: #0099AE" type="text" data-role="tagsinput" value="${ gymBoard.bTag }"/>
 				            </div>
                         </div>
                      </div>

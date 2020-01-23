@@ -5,10 +5,11 @@
 <mapper namespace="GymBoard-mapper">
 
 	<select id="selectList" resultType="GymBoard">
-      SELECT B.*, A.BFILENAME TITLEFILENAME, A.BFILETYPE, (SELECT COUNT(*) FROM FAVORITE F WHERE B.BNO = F.BNO AND F.FSTATUS = 'Y') FAVORITECOUNT FROM BOARD B
+      SELECT B.*, A.BFILENAME TITLEFILENAME, A.BFILETYPE, (SELECT COUNT(*) FROM FAVORITE F WHERE B.BNO = F.BNO AND F.FSTATUS = 'Y') FAVORITECOUNT,
+      (SELECT COUNT(*) FROM BCOMMENT C WHERE B.BNO = C.BNO AND C.BCSTATUS = 'N') COMMENTCOUNT
+      FROM BOARD B
       LEFT JOIN B_ATTACHMENT A ON(B.BNO = A.BNO AND A.BFILELEVEL = 0 AND BFILESTATUS= 'N')
-      WHERE BSTATUS = 'N' AND BKIND = 'G'
-      ORDER BY BDATE DESC
+      WHERE BSTATUS = 'N' AND BKIND = 'G' ORDER BY BDATE DESC
 	</select>
 	
 	<insert id="insertGymBoard" parameterType="GymBoard">
@@ -42,7 +43,9 @@
 	</insert>
 	
 	<select id="selectGymBoard" parameterType="_int" resultType="GymBoard">
-      SELECT B.*, M.NICKNAME, M.INTRODUCE , P.PRENAMEDFILENAME,  C.CLAT, C.CLNG FROM BOARD B
+      	SELECT B.*, M.NICKNAME, M.INTRODUCE , P.PRENAMEDFILENAME,  C.CLAT, C.CLNG,
+      	(SELECT COUNT(*) FROM BCOMMENT C WHERE B.BNO = C.BNO AND C.BCSTATUS = 'N') COMMENTCOUNT
+      	FROM BOARD B
 		JOIN MEMBER M ON(B.USERNO = M.USERNO)
 		LEFT JOIN PROFILEPHOTO P ON(B.USERNO = P.USERNO)
 		JOIN COORDINATES C ON(B.CNO = C.CNO)
@@ -81,51 +84,28 @@
 	</update>
 	
 	
-	
-	
-	<!-- 댓글 관련 쿼리 -->
-	<insert id="insertGymBoardComment" parameterType="gbComment">
-		INSERT INTO BCOMMENT VALUES(
-		SEQ_BCNO.NEXTVAL,
-		#{bNo},
-		#{userNo},
-		#{bcContent},
-		SYSDATE,
-		DEFAULT,
-		DEFAULT
-		)
-	</insert>
-	
-	<update id="updateGymBoardComment" parameterType="gbComment">
-	      UPDATE BCOMMENT
-	      SET BCCONTENT = #{bcContent}
-	      WHERE BCNO = #{bcNo}	
-	</update>
-	
-	<update id="deleteGymBoardComment" parameterType="int">
-		UPDATE BCOMMENT SET BCSTATUS= 'Y' WHERE BCNO = #{bcNo}
-	</update>
-	
 	<update id="deleteGymFile" parameterType="int">
-      UPDATE B_ATTACHMENT
-      SET BFILESTATUS= 'Y'
-      WHERE BFILENO = #{attNo}
-   </update>
+	      UPDATE B_ATTACHMENT
+	      SET BFILESTATUS= 'Y'
+	      WHERE BFILENO = #{attNo}
+        </update>
    
-   <select id="selectOne" parameterType="int" resultType="GymAttachment">
-         SELECT * FROM B_ATTACHMENT WHERE BFILENO= #{attNo}
-   </select>
+	<select id="selectOne" parameterType="int" resultType="GymAttachment">
+         	SELECT * FROM B_ATTACHMENT WHERE BFILENO= #{attNo}
+	</select>
    
+
    <update id="updateTitleImage" parameterType="int">
    <![CDATA[
-   	UPDATE B_ATTACHMENT SET BFILELEVEL = 0
-	WHERE BFILENO = (
-		select BFILENO FROM B_ATTACHMENT
-		WHERE BNO = #{bNo}
-		    AND BFILELEVEL = 1
-		    AND ROWNUM < 2)
-	]]>
-   </update>
+      UPDATE B_ATTACHMENT SET BFILELEVEL = 0
+	      WHERE BFILENO = (
+	      select BFILENO FROM B_ATTACHMENT
+	      WHERE BNO = #{bNo}
+      AND BFILELEVEL = 1
+      AND ROWNUM < 2)
+   ]]>
+   </update>   
+   
 </mapper>
 
 

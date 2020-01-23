@@ -53,63 +53,46 @@
             border-radius: .25em; 
          }
 
-      	
-	.filebox input[type="file"] {
-		position: absolute; 
-		width: 1px; 
-		height: 1px; 
-		padding: 0; 
-		margin: -1px; 
-		overflow: hidden;  
-		clip:rect(0,0,0,0); 
-		border: 0; 
-	} 
-       	
-
-/* named upload */
-/* .filebox .upload-name {
-    display: inline-block;
-    padding: .5em .75em;
-    font-size: inherit;
-    font-family: inherit;
-    line-height: normal;
-    vertical-align: middle;
-    background-color: #f5f5f5;
-  border: 1px solid #ebebeb;
-  border-bottom-color: #e2e2e2;
-  border-radius: .25em;
-  -webkit-appearance: none; /* 네이티브 외형 감추기 
-  -moz-appearance: none;
-  appearance: none;
-} */
+         
+    .filebox input[type="file"] {
+              position: absolute; 
+              width: 1px; 
+              height: 1px; 
+              padding: 0; 
+              margin: -1px; 
+            overflow: hidden;  
+              clip:rect(0,0,0,0); 
+              border: 0; 
+          }    
+          
 
 input[type=file]{
-	display: none;
+   display: none;
 }
 
 .my_button{
-	display: inline-block;
-	text-align: center;
-	color: #fff;
-	text-decoration: none;
-	border-radius: 5px;
+   display: inline-block;
+   text-align: center;
+   color: #fff;
+   text-decoration: none;
+   border-radius: 5px;
 }
 
 .imgs_wrap{
-	border: 1px solid lightgrey;
-	margin-top: 30px;
-	margin-bottom: 30px;
-	padding-top: 10px;
-	padding-bottom: 10px
+   border: 1px solid lightgrey;
+   margin-top: 30px;
+   margin-bottom: 30px;
+   padding-top: 10px;
+   padding-bottom: 10px
 }
 
 .imgs_wrap img{
-	max-width: 150px;
-	margin-left: 10px;
-	margin-right: 10px;
+   max-width: 150px;
+   margin-left: 10px;
+   margin-right: 10px;
 }
 
-</style>
+   </style>
 
    
 </head>
@@ -173,11 +156,10 @@ input[type=file]{
               id = "title" name="bTitle" placeholder="제목 입력" required>
       </div>      
 
-      <!-- 태그 입력 칸 -->
-      
+      <!-- 태그 입력 칸 -->    
       <div class="input-group mb-3" style="display: table-cell; text-align: center; vertical-align: middle; width:900px;"><br />
               <input  type="text" class="form-control" aria-label="Text input with dropdown button" 
-              id = "tag" name="bTag" placeholder="최대 5개" required>
+              id = "tag" name="bTag" placeholder="태그를 입력하세요(최대 5개)" required>
       </div>
       
       
@@ -218,7 +200,6 @@ input[type=file]{
        <textarea  id="summernote" name="bContent" placeholder="글 내용" maxlength="1000" rows="7" required></textarea>
       <span class="help-block"><p id="characterLeft" class="help-block ">더 이상 작성할 수 없습니다.</p></span>
       </div>
-
 <!-- 버튼 -->
    <div align="center">
       <a href="${ pageContext.request.contextPath }/showBoard/showBoardList.do">
@@ -320,13 +301,6 @@ function handleImgFileSelect(e) {
    /*-----------------------------------------------------------------------------------------------------------*/
 
    
-   $('#insertForm').on('keyup keypress', function(e) {
-	   var keyCode = e.keyCode || e.which;
-	   if (keyCode === 13) { 
-	     e.preventDefault();
-	     return false;
-	   }
-	 });
 
 
 </script>

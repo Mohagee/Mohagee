@@ -4,11 +4,35 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="search-mapper">
 
-	<select id="indexSearch" resultType="FavoriteBoard">
+	<sql id="commonSearchSql">
 		SELECT B.*, A.BFILENAME TITLEFILENAME, A.BFILETYPE, (SELECT COUNT(*) FROM FAVORITE F WHERE B.BNO = F.BNO AND F.FSTATUS = 'Y') FAVORITECOUNT
 		FROM BOARD B
 		LEFT JOIN B_ATTACHMENT A ON(B.BNO = A.BNO AND A.BFILELEVEL = 0 AND BFILESTATUS= 'N')
+	</sql>
+	
+	<select id="indexSearch" resultType="FavoriteBoard">
+		<include refid="commonSearchSql"/>
 		WHERE B.BSTATUS = 'N' AND (BCONTENT LIKE #{indexSearch} OR B.BTITLE LIKE #{indexSearch})
+	</select>
+	
+	<select id="searchTotal" resultType="FavoriteBoard">
+		<include refid="commonSearchSql"/>
+		WHERE B.BSTATUS = 'N' AND (BCONTENT LIKE #{searchInput} OR B.BTITLE LIKE #{searchInput} OR BTAG LIKE #{searchInput})
+	</select>
+	
+	<select id="searchTitle" resultType="FavoriteBoard">
+		<include refid="commonSearchSql"/>
+		WHERE B.BSTATUS = 'N' AND B.BTITLE LIKE #{searchInput}
+	</select>
+	
+	<select id="searchContent" resultType="FavoriteBoard">
+		<include refid="commonSearchSql"/>
+		WHERE B.BSTATUS = 'N' AND BCONTENT LIKE #{searchInput}
+	</select>
+	
+	<select id="searchTag" resultType="FavoriteBoard">
+		<include refid="commonSearchSql"/>
+		WHERE B.BSTATUS = 'N' AND BTAG LIKE #{searchInput}
 	</select>
 	
 </mapper> 

@@ -5,7 +5,7 @@
 
 	<welcome-file-list>
 		<welcome-file>
-			/WEB-INF/index.jsp
+			/WEB-INF/intro.jsp
 		</welcome-file>
 	</welcome-file-list>
 	
@@ -37,6 +37,7 @@
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
 				/WEB-INF/spring/appServlet/servlet-context.xml
+				/WEB-INF/spring/appServlet/websocket-context.xml
 			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
