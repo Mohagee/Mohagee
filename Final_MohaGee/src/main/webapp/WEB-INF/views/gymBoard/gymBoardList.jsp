@@ -83,6 +83,7 @@
       </c:if>
       
       <!-- 태그 리스트  -->
+      <!-- data-filter로 카테고리를 나눈다  각 카테고리 클릭시 data filter가 같은 값만 화면에 출력-->
       <div class="row">
             <ul class="masonery-filter text-center">
                <li><a class="btn btn-default active" href="#" data-filter="*" style="font-family:cookierun;">All</a></li>

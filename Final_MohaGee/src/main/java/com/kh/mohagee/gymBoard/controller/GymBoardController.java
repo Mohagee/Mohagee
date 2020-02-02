@@ -26,15 +26,17 @@ import com.kh.mohagee.gymBoard.model.vo.GymBoard;
 @Controller
 public class GymBoardController {
 	
+	// 사진, 비디오, 오디오에 들어갈수있을 확장자명 지정
     private String[] imgExt = {"jpg", "png", "PNG", "gif", "GIF", "bmp", "svg", "jpeg", "webp", "jfif"};
     private String[] videoExt = {"mp4", "avi", "mkv", "wmv", "flv", "asf", "ts", "mpg"};
     private String[] audioExt = {"mp3", "ogg", "wav", "flac"};
-
+    
+    // 각각 List로 변수에 담아준다
     public List<String> imgExtList = Arrays.asList(imgExt);
     public List<String> videoExtList = Arrays.asList(videoExt);
     public List<String> audioExtList = Arrays.asList(audioExt);
 	
-	
+	// 자동으로 new GymBoardService를 만들어주는 Autowired
 	@Autowired
 	GymBoardService GymBoardService;
 	
@@ -65,7 +67,8 @@ public class GymBoardController {
 	// 글쓰기 폼에서 등록버튼 눌렀을때 이동할 곳
 	@RequestMapping("gymBoard/gymBoardInsertEnd.do")
 	public String InsertGymBoard(
-			GymBoard board, Model model,
+			GymBoard board, 
+			Model model,
 			@RequestParam(value="upFile", required=false) MultipartFile[] upFiles,
 			HttpServletRequest request) {
 		System.out.println(board);
@@ -146,7 +149,6 @@ public class GymBoardController {
 					System.out.println("파일 삭제 여부 확인 : " + isDelete);
 				}
 			}
-			
 			throw e; // 스프링이 처리할 꺼라서 그냥 던져도 됩니다.
 		}
 		

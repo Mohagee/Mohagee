@@ -112,9 +112,11 @@
 
 <section>
 <div class="mb-2" align="center">
+<!-- 전체 폼에서 submit 버튼 눌렀을때 이동할 controller 지정 -->
    <form id="insertForm" 
          action="${ pageContext.request.contextPath }/gymBoard/gymBoardUpdateEnd.do"  
          method="post" enctype="multipart/form-data">
+      <!-- 수정폼이기 기존에있던 userNo와 bNo를 받아온다 -->
       <input type="hidden" name="userNo"  value="${member.userNo}"/>
       <input type="hidden" name="bNo"  value="${gymBoard.bNo}"/>
 

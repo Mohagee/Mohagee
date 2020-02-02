@@ -14,6 +14,7 @@ import com.kh.mohagee.gymBoard.model.vo.gbComment;
 @Repository
 public class gbCommentDAO {
 	@Autowired
+	// SqlSessionTemplate은 SQL 실행이나 트랜잭션 관리를 한다
 	SqlSessionTemplate sqlSession;
 	
 	

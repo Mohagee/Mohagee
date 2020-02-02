@@ -15,17 +15,23 @@ import com.kh.mohagee.gymBoard.model.dao.gbCommentDAO;
 
 @Service
 public class gbCommentService {
-
+	
 	@Autowired
 	gbCommentDAO gbCommentDAO;
 	
+	// throw new GymBoardException은 게시글 추가 중 에러 발생!이라는 에러메시지를 지정해주는데
+	// 이건 try catch를 사용해야 하지만 미리 throw로 던져두면 try catch할 필요가없다	
 	public int insertgbComment(gbComment gbComment) throws GymBoardException{
 		int result = 0;
 		
 		System.out.println("서비스에gbComment 는 : " + gbComment);
+		// dao에 insertgbComment에 gbComment라고 선언한 gbComment에서 값을 가져와서 result에 담는다
 		result = gbCommentDAO.insertgbComment(gbComment);
+		
+		// result값이 1보다 낮다는건 값이 들어가지않았단 뜻이기때문에 게시글 추가 중 에러 발생이란 메시지 띄우고
 		if(result < 1) throw new GymBoardException("게시글 추가 중 에러 발생!");
 		
+		// result 값이 1보다 작지않으면 result값을 return 해준다
 		return result;
 	}
 

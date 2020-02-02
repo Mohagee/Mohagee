@@ -283,14 +283,16 @@ textarea {
               <c:if test="${status.index == 0}">
                    <div class="item active">
                      <img style="width:100%" class="d-block w-100" src="${ pageContext.request.contextPath }/resources/upload/${att.bFileName}" class="img-responsive" alt="slide${status.index }">
-                </div>
-           </c:if><c:if test="${status.index != 0}">
-               <div class="item">
-               <img style="width:100%" class="d-block w-100" src="${ pageContext.request.contextPath }/resources/upload/${att.bFileName}" class="img-responsive" alt="slide${status.index }">
-        </div>
-      </c:if>
+                   </div>
+              </c:if>
+              
+              <c:if test="${status.index != 0}">
+                  <div class="item">
+                       <img style="width:100%" class="d-block w-100" src="${ pageContext.request.contextPath }/resources/upload/${att.bFileName}" class="img-responsive" alt="slide${status.index }">
+        	  </div>
+              </c:if>
         </c:forEach>
-        </div>  
+       </div>  
         
        
         <!-- Controls -->
@@ -318,6 +320,7 @@ textarea {
                       </c:forEach>
  --%>                     
 		    		<!-- 동영상 버튼 -->	
+		    		<!-- 클릭하면  class가 modal-fade 이고 아이디가 data-tatget에 적혀있는 #modalVM인 창이 모달로 열린다 -->
                                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modalVM">
                                 <i class="fas fa-caret-square-right"></i>&nbsp;&nbsp; PlayVedio</button>
                              	
@@ -329,10 +332,9 @@ textarea {
                                         <ul class="nav navbar-nav post-nav">
                                             <li style="color: #0099AE"><i class="fas fa-clock"></i>&nbsp;&nbsp;${gymBoard.bDate}</li>
              
-			                                <li style="color: #0099AE"><i class="fas fa-tags"></i>&nbsp;&nbsp;<input id="tag" type="text" data-role="tagsinput" value="${gymBoard.bTag}"/></li>
-			                                	
-			                                <li id="favorite" style="color: #0099AE"><i class="fas fa-heart"></i>&nbsp;&nbsp;${ favoriteCount }</li>
-			                                  
+			                                <li style="color: #0099AE"><i class="fas fa-tags"></i>&nbsp;&nbsp;
+			                                	<input id="tag" type="text" data-role="tagsinput" value="${gymBoard.bTag}"/></li>			                                	
+			                                <li id="favorite" style="color: #0099AE"><i class="fas fa-heart"></i>&nbsp;&nbsp;${ favoriteCount }</li>			                                  
 			                                <li style="color: #0099AE"><i class="fas fa-comments"></i>&nbsp;&nbsp;${gymBoard.commentCount}</li>
                                         </ul>
                                     </div>
@@ -341,8 +343,11 @@ textarea {
 					<a href="${ pageContext.request.contextPath }/gymBoard/gymBoardList.do">
 					   <button type="button" class="btn btn-warning" id="rewriteBtn">목록으로</button>
 					</a>&nbsp;
+					<!-- ${member.userNo}를 memberUserNo로 변수지정 -->
 					<c:set value="${member.userNo} " var="memberUserNo"/>
 			                 <c:set value="${gymBoard.userNo} " var="gymBoardUserNo"/>
+			                 
+			                 <!-- 로그인된 유저번호와 글 작성한유저번호가 같을때 수정하기와 삭제하기 버튼 보여주기 -->
 			                 <c:if test="${ memberUserNo eq gymBoardUserNo }">                  
 					<a href="${ pageContext.request.contextPath }/gymBoard/gymBoardUpdateView.do?bNo=${gymBoard.bNo}">
 					   <button type="button" class="btn btn-primary" id="rewriteBtn">수정하기</button>
@@ -354,13 +359,14 @@ textarea {
 				 </div><br />
                                </div>
                                
-                                    <div class="blog-share">                                  
+                               <!-- 누르면 숫자 카운트되는 소셜공유 버튼 -->
+                               <div class="blog-share">                                  
                                         <span class='st_facebook_hcount'></span>
                                         <span class='st_twitter_hcount'></span>
                                         <span class='st_linkedin_hcount'></span>
                                         <span class='st_pinterest_hcount'></span>
                                         <span class='st_email_hcount'></span>                                      
-                                    </div>
+                               </div>
                                     
                                     <div class="author-profile padding">
                  <div class="row">
@@ -375,20 +381,23 @@ textarea {
             </div>                                     
 
 	    <div id="addComment">
-		    <input type="text" placeholder="댓글 달고싶지?" style="font-family:cookierun;"></input>&nbsp;&nbsp;&nbsp;<button id="newCommentButton" onclick="submitNewComment(this)">&nbsp;댓 글&nbsp;</button>
+		    <input type="text" placeholder="댓글 달고싶지?" style="font-family:cookierun;"></input>&nbsp;&nbsp;&nbsp;
+		    <button id="newCommentButton" onclick="submitNewComment(this)">&nbsp;댓 글&nbsp;</button>
 	    </div><br />
 	    
    <!--  <hr id="commentDivider"/> -->
         <div class="response-area">
                <ul class="media-list">
                <c:forEach var="gbc" items="${gbcList }">
+                   <!-- 댓글달때 padding-left가 gbc.level * 7 % 맨큼 왼쪽에 공백을 띄운다 -->
                    <li class="reply${ gbc.bcLevel }" style="padding-left : ${ gbc.bcLevel * 7 }%" for="${ gbc.bbcNo }">
                        <div class="post-comment">
                            <a class="pull-left" href="${pageContext.request.contextPath}/member/myPage.do?userNo=${gbc.userNo }">
                                <img class="media-object" src="${pageContext.request.contextPath }/resources/profile/${gbc.pRenamedFileName}" alt="">
                            </a>
                            <div class="media-body">
-                               <span style="font-family:cookierun;"><a href="${pageContext.request.contextPath}/member/myPage.do?userNo=${gbc.userNo }" style="font-family:cookierun;">${gbc.nickName }이</a>  ${gbc.bcDate }에 작성</span>
+                               <span style="font-family:cookierun;"><a href="${pageContext.request.contextPath}/member/myPage.do?userNo=${gbc.userNo }" 
+                               									   style="font-family:cookierun;">${gbc.nickName }이</a>  ${gbc.bcDate }에 작성</span>
                                <br /><br>
                                <textarea class="contentUpdateForm" id="${ gbc.bcNo }" style="color: black;" readonly>${gbc.bcContent }</textarea>
                                <ul class="nav navbar-nav post-nav">
@@ -398,7 +407,8 @@ textarea {
                            </div>
                        </div>
                        <!-- 대댓글 작성 창 -->
-                       <div id="addComment"><input type="text" placeholder="대댓글 달고싶지?" style="font-family:cookierun;"></input>&nbsp;&nbsp;&nbsp;<button id="newCommentButton" onclick="submitNewReplyComment(this, ${ gbc.bcNo })">댓글</button></div>
+                       <div id="addComment"><input type="text" placeholder="대댓글 달고싶지?" style="font-family:cookierun;"></input>&nbsp;&nbsp;&nbsp;
+                       <button id="newCommentButton" onclick="submitNewReplyComment(this, ${ gbc.bcNo })">댓글</button></div>
                        
                    </li>
                </c:forEach>
@@ -455,14 +465,17 @@ textarea {
  */
 function submitNewComment(obj){
 	$.ajax({
-		url : '${ pageContext.request.contextPath }/gbComment/gbCommentInsert.do',
-		  data : {
-			  bNo : '${gymBoard.bNo}',
+		url : '${ pageContext.request.contextPath }/gbComment/gbCommentInsert.do', // 클릭하면 넘어갈 controller
+		  data : {	
+		// url주소로 넘어갈때 함께 가져갈 data들 
+		// vo에 using field가 만들어져있어야하고 controller에서 @Request Param으로 3개의 값을 모두 받아와야한다
+			  bNo : '${gymBoard.bNo}',  // 가져온값들을 bNo, userNo, bcContent에 담아서 controller로 보낸다
 			  userNo : '${member.userNo}',
-			  bcContent : $(obj).siblings('input').val()
-		  }, success : function(data){
-			  alert("댓글 추가 성공!");
+			  bcContent : $(obj).siblings('input').val() // 클릭된 버튼의 형제중 input 안의 값을 가져온다
+		  }, success : function(data){ // 성공했다면?
+			  alert("댓글 추가 성공!");  // alert로 성공 메시지 띄우고
 			  location.href='${pageContext.request.contextPath}/gymBoard/gymBoardDetail.do?bNo=${gymBoard.bNo}';
+			  // 방금 댓글단 페이지와 같은 페이지를 가져와야 하기 때문에 ${gymBoard.bNo}를 bNo라는 값에 담아서 gymBoardDetail.do로 보낸다 (쿼리스트링)
 		  }
 	});
 }
@@ -486,13 +499,14 @@ function submitNewReplyComment(obj, parentBcNo){
 	});
 }
 
+/* 댓글 수정 ajax */
 $('.fa-wrench').parent().each(function(){
-	$(this).on('click', function(){
-		var textArea = $(this).parent().parent().children('textarea');
-		if(textArea.prop('readonly')){
-			textArea.prop('readonly', false);
+	$(this).on('click', function(){ // 클릭버튼 누르면
+		var textArea = $(this).parent().parent().children('textarea'); // 텍스트 부분을 찾아 textarea라고 변수지정
+		if(textArea.prop('readonly')){			// textarea의 prop가 readonly라면
+			textArea.prop('readonly', false);	// readonly를 false로 바꿔 수정가능하도록 하기
 		} else {
-			textArea.prop('readonly', true);
+			textArea.prop('readonly', true);		// readonly가 true라면
 			$.ajax({
 				url : '${ pageContext.request.contextPath }/gbComment/gbCommentUpdate.do',
 				  data : {
@@ -510,16 +524,16 @@ $('.fa-wrench').parent().each(function(){
 		}
 	});
 });
-
+/* 댓글 삭제버튼 눌렀을때 */
 $('.fa-eraser').parent().each(function(){
-	$(this).on('click', function(){
+	$(this).on('click', function(){	// 해당 버튼에 클릭이 일어나면 실행할 함수
 		var obj =  $(this);
 		var textArea = $(this).parent().parent().children('textarea');
 		
 		$.ajax({
 			url : '${ pageContext.request.contextPath }/gbComment/gbCommentDelete.do',
 			  data : {
-				  bcNo : textArea.attr('id')
+				  bcNo : textArea.attr('id') // textArea안의 요소중 (id)를 bcNo에 담는다
 			  }, success : function(data){
 				  if(data != 0){
 					  alert("댓글 삭제 성공!");		

@@ -27,6 +27,9 @@ public class gbCommentController {
 	// 댓글 등록
 	@RequestMapping("/gbComment/gbCommentInsert.do")
 	@ResponseBody
+	
+	// 댓글 등록시 필요한 값들을 매개변수로 @RequestParam을 사용해 받아온다
+	// 이때 vo에 이 값들로 using field 를 하나 더 만들어준다
 	public int gbCommentInsert (
 																			  @RequestParam int bNo ,
 																			  @RequestParam int userNo,
@@ -37,18 +40,25 @@ public class gbCommentController {
 																			  //@RequestParam String bcStatus,
 																			  ){
 		
+		// 값을 잘 받아왔는지 확인하기위한 syso
 		System.out.println("bNo : " + bNo);
 		System.out.println("userNo :" + userNo);
 		System.out.println("bcCentent : " + bcContent);
 		System.out.println("bbcNo : " + bbcNo);
 		
+		// gbComment는 비워두고
 		gbComment gbComment = null;
 		// insert
+		
+		// bbcNo가 0이거나 0이아닐때 각각 받아오는 값이 다르다
+		// bbcNo는 댓글과 대댓글 구분을 위한 참조하는 댓글에 대한 댓글번호
 		if(bbcNo == 0) {
 			gbComment = new gbComment(bNo, userNo, bcContent);
 		} else {
+			// bbcNo가 0이 아니면 대댓글이기에 bbcNo가 있어야하므로 받아온다
 			gbComment = new gbComment(bNo, userNo, bcContent, bbcNo);
 		}
+		
 		
 		int result = gbCommentService.insertgbComment(gbComment);
 		int data = 0;

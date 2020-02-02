@@ -195,9 +195,8 @@
 
 <c:import url="../common/footer.jsp" />
 
-    <!-- 최대글 작성 한도 스크립트  -->
 <script>
-
+<!-- 태그 관련 스크립트 -->
 $("#tag").tagsinput({
 	maxTags: 5,
 	itemText: function(item) {
@@ -212,28 +211,28 @@ $('#tag').on('itemAddedOnInit', function(event) {
 	  return '#' + event.item.label;
 });
 
+<!-- 최대글 작성 한도 스크립트  -->
    $(document).ready(function(){
-       $('#characterLeft').text('1000 자 작성가능');
-       $('#summernote').keydown(function () {
+       $('#characterLeft').text('1000 자 작성가능'); // id가 characterLeft인 란에 처음 보일 text는 1000자 작성 가능
+       $('#summernote').keydown(function () { // id가 summernote인 곳에서 keydown이 발생하면 실행할 함수
            var max = 1000;
-           var len = $(this).val().length;
-           if (len >= max) {
-               $('#characterLeft').text('더 이상 작성할 수 없습니다.');
-               $('#characterLeft').addClass('red');
-               $('#btnSubmit').addClass('disabled');
+           var len = $(this).val().length; // $(this)의 값의 length가
+           if (len >= max) {			    // max값인 1000보다 크면
+               $('#characterLeft').text('더 이상 작성할 수 없습니다.'); // id가 characterLeft인 란에 보일 text는 더 이상 작성할 수 없습니다.
+               $('#characterLeft').addClass('red'); 				// 글자색깔도 red로 변경시키고
+               $('#btnSubmit').addClass('disabled');				// btnSubmit도 클릭불가능으로 변경
            }
            else {
-               var ch = max - len;
-               $('#characterLeft').text(ch + ' 자 작성가능');
-               $('#btnSubmit').removeClass('disabled');
-               $('#characterLeft').removeClass('red');
+               var ch = max - len; 						     // ch 는 최대값에서 현재 값을 뺀 나머지
+               $('#characterLeft').text(ch + ' 자 작성가능');   // id가 characterLeft인 란에 text로 ch + 자 작성가능이라고 표시
+               $('#btnSubmit').removeClass('disabled');	     // btnSubmit에 적용되었던 disabled도 삭제하여 원상복구
+               $('#characterLeft').removeClass('red');	     // 색깔도 red로 변경됐던걸 원상복구 시키기
            }
        });
    });
    
 
-   
- //이미지 정보들을 담을 배열
+//이미지 정보들을 담을 배열
    var sel_files = [];
 
 

@@ -73,6 +73,7 @@ public class GymBoardService {
       
       int result = 0;
       
+      // List <GymAttachment> 를 originList라고 이름지어주고 거기에 gymBoard의 getbNo를 담는다
       List<GymAttachment> originList
          = GymBoardDAO.selectGymAttachment(gymBoard.getbNo());
       
@@ -86,10 +87,10 @@ public class GymBoardService {
             int i = 0;
             
             for(GymAttachment a : list) {
-
+            	
                if(i == 0) a.setbFileLevel(0); // 대표 이미지로 설정할려고 0을 set함 
                  else a.setbFileLevel(1);  // 서브 이미지로 설정할려고 1을 set함
-      
+               
                result = GymBoardDAO.updateGymAttachment(a);
 
                i++; // i++ 로 대표와 서브 구분                
