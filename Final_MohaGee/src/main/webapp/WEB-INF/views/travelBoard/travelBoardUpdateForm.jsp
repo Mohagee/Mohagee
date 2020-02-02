@@ -151,7 +151,7 @@
          <option value="18">Bali</option>
          <option value="19">Taipei</option>
          <option value="20">Osaka</option>
-	</select>
+	  </select>
 
             <!-- 제목 입력 칸 -->
             <div class="input-group mb-3" style="width: 900px"><br /> 
@@ -181,7 +181,7 @@
 		        </div>
 		    </div> 
 
-            <div style="margin-bottom:3px;">
+        <div style="margin-bottom:3px;">
          <div class="filebox">
             <label id="board_img" for="ex_file_img" name="upFile">
                <a href="javascript:" onclick="fileUploadAction();" class="my_button">
@@ -196,7 +196,7 @@
                <i class="fas fa-headphones"></i>&nbsp;&nbsp;&nbsp;오디오 업로드</label>
             <input type="file" id="ex_file_audio" name="upFile">&nbsp;&nbsp;              
           </div>
-   </div>
+   		</div>
 
             <!-- 내용 입력칸 -->
             <div class="editorArea" style="margin-top: 5px;">

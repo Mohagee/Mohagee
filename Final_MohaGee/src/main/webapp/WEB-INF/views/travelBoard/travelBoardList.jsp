@@ -92,7 +92,6 @@
             </ul>
             
 
-
          <!--  글 목록  -->      
          <div class="masonery-items masonery_area">
          

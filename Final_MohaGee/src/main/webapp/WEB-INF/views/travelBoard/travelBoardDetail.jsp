@@ -12,7 +12,6 @@
     
     <c:import url="../common/commonUtil.jsp"/>
     
-    
     <style>
 	html, body {
 	 height: 100%;
