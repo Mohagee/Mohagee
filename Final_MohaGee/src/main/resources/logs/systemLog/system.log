@@ -215,3 +215,7 @@ INFO :[2020-02-02 16:42:57] Root WebApplicationContext: initialization started
 INFO :[2020-02-02 16:43:05] Root WebApplicationContext initialized in 8250 ms
 INFO :[2020-02-02 16:43:05] Initializing Servlet 'appServlet'
 INFO :[2020-02-02 16:43:22] Completed initialization in 16687 ms
+INFO :[2020-02-02 16:50:44] Root WebApplicationContext: initialization started
+INFO :[2020-02-02 16:50:51] Root WebApplicationContext initialized in 6701 ms
+INFO :[2020-02-02 16:50:51] Initializing Servlet 'appServlet'
+INFO :[2020-02-02 16:51:06] Completed initialization in 14845 ms
