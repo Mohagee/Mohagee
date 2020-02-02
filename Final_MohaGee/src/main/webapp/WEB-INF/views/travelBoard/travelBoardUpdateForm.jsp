@@ -117,7 +117,7 @@
             <input type="hidden" name="userNo" value="${member.userNo}" />
             <input type="hidden" name="bNo" value="${TravelBoard.bNo}" />     
 
-      <!-- 카테고리선택 칸 -->
+      <!-- 카테고리선택 칸 (required를 사용하여 필수조건 달아주기) -->
       <select id = "bCategory" name="bCategory" class="input-group mb-3" style="width:900px; border:1px solid lightblue;" required>
          <option value="" disabled selected >카테고리를 선택해주세요 (필수!)</option>
          <option value="korea" >국내</option>

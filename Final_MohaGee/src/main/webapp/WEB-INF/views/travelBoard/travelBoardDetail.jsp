@@ -319,37 +319,46 @@
 						          <div class="post-content overflow">                                                 
 						         <pre class="form-control" id="board_content" name="bContent"><b>${TravelBoard.bContent }</b></pre><br />
                                     
-                                    <!-- Google Map : The div element for the map -->
+                                <!-- Google Map : 구글맵 사용을 위한 div 설정 -->
 								    <br>
 								    <hr>
 								    <h3>Google Map</h3>
 								    <div id="map"></div>
-                                    <div class="post-bottom overflow">
-                                        <ul class="nav navbar-nav post-nav">
-                                            <li style="color: #0099AE"><i class="fas fa-clock"></i>&nbsp;&nbsp;${TravelBoard.bDate}</li>
-             
-                                  			<li style="color: #0099AE"><i class="fas fa-tags"></i>&nbsp;&nbsp;<input id="tag" type="text" data-role="tagsinput" value="${ TravelBoard.bTag }"/></li>
-                                  			
-                                	
-                                  			<li id="favorite" style="color: #0099AE"><i class="fas fa-heart"></i>&nbsp;&nbsp;${ favoriteCount }</li>
-                                  
-                                  			<li style="color: #0099AE"><i class="fas fa-comments"></i>&nbsp;&nbsp;${TravelBoard.commentCount}</li>
-                                        </ul>
-                                    </div>
+								<!-- -------- Google Map 끝 --------- -->
+								
+                                  <div class="post-bottom overflow">
+                                      <ul class="nav navbar-nav post-nav">
+                                          <li style="color: #0099AE"><i class="fas fa-clock"></i>&nbsp;&nbsp;${TravelBoard.bDate}</li>
+           
+                                			<li style="color: #0099AE"><i class="fas fa-tags"></i>&nbsp;&nbsp;<input id="tag" type="text" data-role="tagsinput" value="${ TravelBoard.bTag }"/></li>
+                                			
+                              	
+                                			<li id="favorite" style="color: #0099AE"><i class="fas fa-heart"></i>&nbsp;&nbsp;${ favoriteCount }</li>
+                                
+                                			<li style="color: #0099AE"><i class="fas fa-comments"></i>&nbsp;&nbsp;${TravelBoard.commentCount}</li>
+                                      </ul>
+                                  </div>
                                     </div>
                                     
-                                    <!-- 게시글 수정 버튼  -->
+                                    <!-- 목록으로 돌아가기 / 게시글 수정 / 게시글 삭제 -->
                                     
+                                    <!-- 로그인한 회원의 회원번호와 게시글 작성한 회원의 회원번호가 같은지 확인하기 위함 -->
                                     <c:set value="${member.userNo} " var="memberUserNo"/>
                                     <c:set value="${TravelBoard.userNo} " var="travelBoardUserNo"/>
+		                            
 		                            <div>
+		                            <!-- 목록으로 돌아가는 버튼 -->
 		                            <a href="${ pageContext.request.contextPath }/travelBoard/travelBoardList.do">
 		                               <button type="button" class="btn btn-warning" id="rewriteBtn">목록으로</button>
-		                            </a>&nbsp;    
+		                            </a>&nbsp;
+		                            
+		                            <!-- 만약에 사용자의 회원번호가 게시글 작성자의 회원번호와 같다면 수정/삭제 가능하게 하기 -->
+		                            <!-- 수정하기 버튼 -->
 		                            <c:if test = "${ memberUserNo eq travelBoardUserNo }">                       
 		                            <a href="${ pageContext.request.contextPath }/travelBoard/travelBoardUpdateView.do?bNo=${TravelBoard.bNo}">
 		                               <button type="button" class="btn btn-primary" id="rewriteBtn">수정하기</button>
 		                            </a>&nbsp;
+		                            <!-- 삭제하기 버튼 -->
 		                            <a href="${ pageContext.request.contextPath }/travelBoard/travelBoardDelete.do?bNo=${TravelBoard.bNo}">
 		                               <button type="button" class="btn btn-danger" id="deleteBtn">삭제하기</button>
 		                            </a>
@@ -528,19 +537,21 @@
 	});
 	
 	/* 댓글만들기 스크립트 끝! */
+	</script>
     
-    	// Google Map
+    <script>
+    // Google Map API
 	    // Initialize and add the map
 		function initMap() {
-		  // The location
+		  // DB에 넣어놓은 위도 경도로 저장해놓은 위치 가져오기 
 		  var location = { lat: parseFloat('${TravelBoard.mapY}'), lng: parseFloat('${TravelBoard.mapX}')};
-		  // The map, center
+		  // 지도의 중심 설정
 		  var map = new google.maps.Map(
 		      document.getElementById('map'), {zoom: 4, center: location});
-		  // The marker, positioned
+		  // 마커찍기
 		  var marker = new google.maps.Marker({position: location, map: map});
 		}
-	 </script>
+    </script>
 	    <!--Load the API from the specified URL
 	    * The async attribute allows the browser to render the page while the API loads
 	    * The key parameter will contain your own API key (which is not needed for this tutorial)
@@ -551,10 +562,10 @@
 	</script>
     
     <script>
-  //태그 관련 스크립트
+    //태그 관련 스크립트
 	$("#tag").tagsinput('items');
-// 좋아요 기능
 	
+    // 좋아요 기능
 	$(function(){
 		
 		var userNo = "${member.userNo}";

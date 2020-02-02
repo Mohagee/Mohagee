@@ -211,3 +211,7 @@ WARN :[2020-01-23 15:31:35] No mapping for GET /mohagee/sbComment/sbCommentSelec
 WARN :[2020-01-23 15:31:38] No mapping for GET /mohagee/sbComment/sbCommentSelectList.do
 WARN :[2020-01-23 15:32:00] No mapping for GET /mohagee/sbComment/sbCommentSelectList.do
 WARN :[2020-01-23 15:32:01] No mapping for GET /mohagee/sbComment/sbCommentSelectList.do
+INFO :[2020-02-02 16:42:57] Root WebApplicationContext: initialization started
+INFO :[2020-02-02 16:43:05] Root WebApplicationContext initialized in 8250 ms
+INFO :[2020-02-02 16:43:05] Initializing Servlet 'appServlet'
+INFO :[2020-02-02 16:43:22] Completed initialization in 16687 ms
