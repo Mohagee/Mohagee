@@ -1,31 +1,13 @@
-INFO :[2020-02-02 13:41:14] Root WebApplicationContext: initialization started
-INFO :[2020-02-02 13:41:21] Root WebApplicationContext initialized in 7164 ms
-INFO :[2020-02-02 13:41:21] Initializing Servlet 'appServlet'
-INFO :[2020-02-02 13:41:38] Completed initialization in 16385 ms
-WARN :[2020-02-02 13:50:09] Resolved [org.springframework.validation.BindException: org.springframework.validation.BeanPropertyBindingResult: 1 errors
-Field error in object 'favorite' on field 'userNo': rejected value []; codes [typeMismatch.favorite.userNo,typeMismatch.userNo,typeMismatch.int,typeMismatch]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [favorite.userNo,userNo]; arguments []; default message [userNo]]; default message [Failed to convert property value of type 'java.lang.String' to required type 'int' for property 'userNo'; nested exception is java.lang.NumberFormatException: For input string: ""]]
-INFO :[2020-02-02 16:04:40] Root WebApplicationContext: initialization started
-INFO :[2020-02-02 16:04:48] Root WebApplicationContext initialized in 7462 ms
-INFO :[2020-02-02 16:04:48] Initializing Servlet 'appServlet'
-INFO :[2020-02-02 16:05:04] Completed initialization in 16407 ms
-INFO :[2020-02-02 16:13:18] Root WebApplicationContext: initialization started
-INFO :[2020-02-02 16:13:25] Root WebApplicationContext initialized in 7381 ms
-INFO :[2020-02-02 16:13:25] Initializing Servlet 'appServlet'
-INFO :[2020-02-02 16:13:42] Completed initialization in 16399 ms
-WARN :[2020-02-02 16:21:37] Origin check enabled but transport 'jsonp' does not support it.
-WARN :[2020-02-02 16:21:37] Origin check enabled but transport 'jsonp' does not support it.
-WARN :[2020-02-02 16:21:44] Origin check enabled but transport 'jsonp' does not support it.
-WARN :[2020-02-02 16:21:47] Origin check enabled but transport 'jsonp' does not support it.
-WARN :[2020-02-02 16:21:51] Origin check enabled but transport 'jsonp' does not support it.
-WARN :[2020-02-02 16:21:56] Origin check enabled but transport 'jsonp' does not support it.
-WARN :[2020-02-02 16:21:59] Origin check enabled but transport 'jsonp' does not support it.
-WARN :[2020-02-02 16:22:01] Origin check enabled but transport 'jsonp' does not support it.
-WARN :[2020-02-02 16:22:03] Origin check enabled but transport 'jsonp' does not support it.
-WARN :[2020-02-02 16:22:05] Origin check enabled but transport 'jsonp' does not support it.
-WARN :[2020-02-02 16:22:11] Origin check enabled but transport 'jsonp' does not support it.
-WARN :[2020-02-02 16:22:16] Origin check enabled but transport 'jsonp' does not support it.
-WARN :[2020-02-02 16:22:21] Origin check enabled but transport 'jsonp' does not support it.
-WARN :[2020-02-02 16:22:25] Origin check enabled but transport 'jsonp' does not support it.
-WARN :[2020-02-02 16:22:29] Origin check enabled but transport 'jsonp' does not support it.
-WARN :[2020-02-02 16:22:33] Origin check enabled but transport 'jsonp' does not support it.
-WARN :[2020-02-02 16:22:38] Origin check enabled but transport 'jsonp' does not support it.
+INFO :[2020-02-25 00:35:28] Root WebApplicationContext: initialization started
+INFO :[2020-02-25 00:35:39] Root WebApplicationContext initialized in 10443 ms
+INFO :[2020-02-25 00:35:39] Initializing Servlet 'appServlet'
+INFO :[2020-02-25 00:36:14] Root WebApplicationContext: initialization started
+INFO :[2020-02-25 00:36:25] Root WebApplicationContext initialized in 10700 ms
+INFO :[2020-02-25 00:36:25] Initializing Servlet 'appServlet'
+INFO :[2020-02-25 00:39:11] Root WebApplicationContext: initialization started
+INFO :[2020-02-25 00:39:21] Root WebApplicationContext initialized in 9958 ms
+INFO :[2020-02-25 00:39:21] Initializing Servlet 'appServlet'
+INFO :[2020-02-25 00:41:42] Root WebApplicationContext: initialization started
+INFO :[2020-02-25 00:41:50] Root WebApplicationContext initialized in 7630 ms
+INFO :[2020-02-25 00:41:50] Initializing Servlet 'appServlet'
+INFO :[2020-02-25 00:42:08] Completed initialization in 17426 ms
